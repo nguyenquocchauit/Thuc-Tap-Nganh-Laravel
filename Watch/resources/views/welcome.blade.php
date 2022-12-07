@@ -30,7 +30,7 @@
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register.</a>
                         @endif
                     @endauth
                 </div>
@@ -57,6 +57,12 @@
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                     Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.
                                 </div>
+                                {{-- <img src="../../storage/app/images/images-product/men/aviator/airacobra-p45-chrono-1.png" alt="">
+                                <img src="{{ asset('storage/airacobra-p45-chrono-1.png') }}" height="30px" width="30px"> --}}
+                                <img src="{{ asset('storage/app/images-product/men/aviator/airacobra-p45-chrono-1.png') }}">
+                                <img src="{{ asset('images/airacobra-p45-chrono-1.png') }}">
+
+                                <img src="{{URL::asset('storage/app/public/images/images-product/men/aviator/airacobra-p45-chrono-1.png')}}" alt="profile Pic" height="200" width="200">
                             </div>
                         </div>
 
