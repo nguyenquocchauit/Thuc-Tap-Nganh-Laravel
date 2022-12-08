@@ -12,10 +12,11 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     {{-- Styles elemnt  --}}
     <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -30,6 +31,8 @@
                             <div class="header-icon col-2">
                                 <a href="#">
                                     <i class="fa-brands fa-facebook-f icons"></i>
+                                    <i class="fab fa-facebook"></i>
+                                    <i class="fab fa-facebook-square"></i>
                                 </a>
                                 <a href="#">
                                     <i class="fa-brands fa-instagram icons"></i>
@@ -192,7 +195,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-sm-12 mt-5">
-                    <img class="logo" src="./img/tcwlogo.png" alt="" srcset="">
+                    <img class="logo" src="{{ asset('images/tcwlogo.png') }}" alt="" srcset="">
+
                     <table>
                         <tr>
                             <td><i class="fa-solid fa-location-dot"></i></td>
