@@ -15,9 +15,22 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     {{-- Styles elemnt  --}}
     <link href="/css/style.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <!-- thư viện sweet aler  -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -49,11 +62,9 @@
                                         <strong>SHOP: </strong>2 Nguyễn Đình Chiểu, Nha Trang, Khánh Hòa
                                     </p>
                                 </a>
-
                             </div>
                         </div>
                         <div class="center col-2">
-
                         </div>
                         <div class="right col-4 ">
                             <input type="hidden" id="currentUserHDSD" value="">
@@ -61,11 +72,9 @@
                             <p class="">
                                 <i id="iconphone" class="fas fa-phone-volume"></i>
                                 <strong>HOTLINE: </strong>038 655 5555 |
-
                                 {{-- <a href="../../Website Watch PHP/customers/Chi-tiet.php"
                                     style="color:white;font-size: 18px;"><i class="fas fa-user-cog"></i></a>
                                 <strong></strong>
-
                                 <button type="button" name="logout" class="btn btn-dark"><a href="?logout=1"
                                         style="color:#f1f1f1"><i class="fas fa-sign-out-alt"></i></a></button> --}}
                                 <button type="button" class="button" data-bs-toggle="modal"
@@ -89,8 +98,6 @@
                                     aria-expanded="false" aria-label="Toggle navigation">
                                     <span class="navbar-toggler-icon"></span>
                                 </button>
-                                <?php
-                                ?>
                                 <button class="btn float-end" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"
                                     role="button" style="margin-bottom: 5px;">
                                     <i class="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas"
@@ -113,7 +120,6 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <!-- duyệt các hãng thuộc giới tính nam, thẻ a có đường dẫn tới file shop chứa brand, giới tính tương tứng -->
-
                                                 <li><a class="dropdown-item" href="shop.php?gender=IDM&brand="></a>
                                                 </li>
                                             </ul>
@@ -125,7 +131,6 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <!-- duyệt các hãng thuộc giới tính nữ, thẻ a có đường dẫn tới file shop chứa brand, giới tính tương tứng -->
-
                                                 <li><a class="dropdown-item" href="shop.php?gender=IDWM&brand="></a>
                                                 </li>
                                             </ul>
@@ -134,7 +139,6 @@
                                             <a class="nav-link"
                                                 href="../../Website Watch PHP/contact/contact.php">LIÊN HỆ</a>
                                         </li>
-
                                     </ul>
                                 </div>
                             </div>
@@ -194,7 +198,6 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-12 mt-5">
                     <img class="logo" src="{{ asset('images/tcwlogo.png') }}" alt="" srcset="">
-
                     <table>
                         <tr>
                             <td><i class="fas fa-map-marker-alt"></i></td>
@@ -304,6 +307,9 @@
             @yield('content')
         </main>
     </div> --}}
+    @include('modal/login_register')
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/slick-carousel.js') }}"></script>
 </body>
 
 </html>

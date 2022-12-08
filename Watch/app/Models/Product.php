@@ -13,23 +13,23 @@ class Product extends Model
     protected $primaryKey = "id";
     protected $guarded = [];
 
-    public function brand()
+    public function productBrand()
     {
         return $this->belongsTo(Brand::class, 'brand', 'id');
     }
-    public function image()
+    public function productImage()
     {
-        return $this->hasOne(Image::class, 'image', 'id');
+        return $this->belongsTo(Image::class, 'image', 'id');
     }
-    public function gender()
+    public function productGender()
     {
         return $this->belongsTo(Gender::class, 'gender', 'id');
     }
-    public function comment()
+    public function productComment()
     {
         return $this->hasMany(Comment::class, 'product', 'id');
     }
-    public function orderDetail()
+    public function productOrderDetail()
     {
         return $this->hasMany(OrderDetail::class, 'product', 'id');
     }

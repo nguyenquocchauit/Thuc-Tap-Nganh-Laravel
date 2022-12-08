@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Front;
-use App\Models\Brand;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-     //return view('home');
-return Brand::all();
+     return view('home');
 });
-// Auth::routes();
-// Route::get('/', [Front\HomeController::class, 'index']);
+Auth::routes();
+Route::get('/', [Front\HomeController::class, 'index']);
