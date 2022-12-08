@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Front;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+     return view('home');
+//return Product::where('brand','Avia')->get();
 });
-
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [Front\HomeController::class, 'index']);

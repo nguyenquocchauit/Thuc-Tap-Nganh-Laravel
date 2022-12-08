@@ -221,7 +221,7 @@ $color7 : #f7b100;
 
 /////////////////////////////////////
 .body {
-    background: linear-gradient(rgba(0, 0, 0, 0.697) 100%, rgba(0, 0, 0, 0.5)100%), url("../img/black_background_metal.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.697) 100%, rgba(0, 0, 0, 0.5)100%), url("/images/black_background_metal.jpg");
 
     .content {
         padding-top: 150px;
@@ -479,7 +479,7 @@ $color7 : #f7b100;
 
 //////////////////////////////////////
 .footer {
-    background: linear-gradient(rgba(0, 0, 0, 0.697) 100%, rgba(0, 0, 0, 0.5)100%), url("../img/footer-background.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.697) 100%, rgba(0, 0, 0, 0.5)100%), url("/images/footer-background.jpg");
     color: $color1;
     padding: 15px;
 

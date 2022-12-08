@@ -8,17 +8,20 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title', 'TC Watch ')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     {{-- Styles elemnt  --}}
     <link href="/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+
 </head>
 
 <body>
@@ -30,21 +33,19 @@
                         <div class="left col-6 row">
                             <div class="header-icon col-2">
                                 <a href="#">
-                                    <i class="fa-brands fa-facebook-f icons"></i>
-                                    <i class="fab fa-facebook"></i>
-                                    <i class="fab fa-facebook-square"></i>
+                                    <i class="fab fa-facebook-f"></i>
                                 </a>
                                 <a href="#">
-                                    <i class="fa-brands fa-instagram icons"></i>
+                                    <i class="fab fa-instagram"></i>
                                 </a>
                                 <a href="#">
-                                    <i class="fa-brands fa-twitter icons"></i>
+                                    <i class="fab fa-twitter"></i>
                                 </a>
                             </div>
                             <div class="header-add col-10">
                                 <a href="../../Website Watch PHP/home.php">
                                     <p class="">
-                                        <i id="iconhouse" class="fa-sharp fa-solid fa-house"></i>
+                                        <i id="iconhouse" class="fas fa-home"></i>
                                         <strong>SHOP: </strong>2 Nguyễn Đình Chiểu, Nha Trang, Khánh Hòa
                                     </p>
                                 </a>
@@ -58,17 +59,15 @@
                             <input type="hidden" id="currentUserHDSD" value="">
                             <input type="hidden" id="currentUserHDSD-home" value="">
                             <p class="">
-                                <i id="iconphone" class="fa-solid fa-phone-volume"></i>
+                                <i id="iconphone" class="fas fa-phone-volume"></i>
                                 <strong>HOTLINE: </strong>038 655 5555 |
 
-                                <a href="../../Website Watch PHP/customers/Chi-tiet.php"
-                                    style="color:white;font-size: 18px;"><i class="fa-solid fa-user"></i></a>
+                                {{-- <a href="../../Website Watch PHP/customers/Chi-tiet.php"
+                                    style="color:white;font-size: 18px;"><i class="fas fa-user-cog"></i></a>
                                 <strong></strong>
 
                                 <button type="button" name="logout" class="btn btn-dark"><a href="?logout=1"
-                                        style="color:#f1f1f1"><i
-                                            class="fa-solid fa-right-from-bracket"></i></a></button>
-                                <!-- <i class="fa-solid fa-right-from-bracket" onclick="logout()"></i> -->
+                                        style="color:#f1f1f1"><i class="fas fa-sign-out-alt"></i></a></button> --}}
                                 <button type="button" class="button" data-bs-toggle="modal"
                                     data-bs-target="#login">Đăng nhập</button> &nbsp;
                                 <button type="button" class="button" data-bs-toggle="modal"
@@ -167,8 +166,7 @@
                                     <a href="../../Website Watch PHP/product and cart/Gio-Hang.php"
                                         id="show_history_cart" class="nav-link">
                                         <span class="header-cart-title">GIỎ HÀNG
-                                            <i style="color: black;"
-                                                class="fa-solid fa-cart-shopping mx-2 shopping-cart"></i>
+                                            <i style="color: black;" class="fas fa-cart-plus mx-2 shopping-cart"></i>
                                             <span style="position: absolute;top: 0%;color:#b31212;">
                                                 <p id="quantity-shopping-cart"></p>
                                             </span>
@@ -188,7 +186,7 @@
             </div>
         </div>
     </div>
-    <main class="py-4">
+    <main class="">
         @yield('content')
     </main>
     <div class="footer ">
@@ -199,15 +197,15 @@
 
                     <table>
                         <tr>
-                            <td><i class="fa-solid fa-location-dot"></i></td>
+                            <td><i class="fas fa-map-marker-alt"></i></td>
                             <td>2 Nguyễn Đình Chiểu, Nha Trang, Khánh Hòa</td>
                         </tr>
                         <tr>
-                            <td><i class="fa-solid fa-phone"></i> </td>
+                            <td><i class="fas fa-phone-volume"></i> </td>
                             <td>038 655 5555 </td>
                         </tr>
                         <tr>
-                            <td><i class="fa-solid fa-envelope"></i></td>
+                            <td><i class="fas fa-envelope"></i></td>
                             <td>tcwatch.nhatrang@gmail.com</td>
                         </tr>
                     </table>
@@ -215,18 +213,18 @@
                 <div class="col-lg-6 col-sm-6 mt-5">
                     <h2>Đăng ký</h2>
                     <p>Đăng ký để nhận được được thông tin mới nhất từ chúng tôi.</p>
-                    <input type="text" placeholder="Email ..."><i class="fa-solid fa-paper-plane"
-                        id="plane"></i>
+                    <input type="text" placeholder="Email ..."><i class="fas fa-paper-plane"
+                        id="plane"></i></i>
                     <h2>Kết nối với chúng tôi</h2>
                     <div>
                         <a href="#" class="iconfaw">
-                            <i class="fa-brands fa-facebook-f icons"></i>
+                            <i class="fab fa-facebook-f"></i>
                         </a>
                         <a href="#" class="iconfaw">
-                            <i class="fa-brands fa-instagram icons"></i>
+                            <i class="fab fa-instagram"></i>
                         </a>
                         <a href="#" class="iconfaw">
-                            <i class="fa-brands fa-twitter icons"></i>
+                            <i class="fab fa-twitter"></i>
                         </a>
                     </div>
                 </div>

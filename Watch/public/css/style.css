@@ -171,7 +171,7 @@
 }
 
 .body {
-  background: linear-gradient(rgba(0, 0, 0, 0.697) 100%, rgba(0, 0, 0, 0.5) 100%), url("../img/black_background_metal.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.697) 100%, rgba(0, 0, 0, 0.5) 100%), url("/images/black_background_metal.jpg");
 }
 .body .content {
   padding-top: 150px;
@@ -376,7 +376,7 @@
 }
 
 .footer {
-  background: linear-gradient(rgba(0, 0, 0, 0.697) 100%, rgba(0, 0, 0, 0.5) 100%), url("../img/footer-background.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.697) 100%, rgba(0, 0, 0, 0.5) 100%), url("/images/footer-background.jpg");
   color: white;
   padding: 15px;
 }
