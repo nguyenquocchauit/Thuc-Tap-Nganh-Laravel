@@ -10,7 +10,7 @@ Step 2: Update composer using command in terminal
         
 Step 3: Install npm
 
-        npm install && npm run dev
+        npm install
 
 Step 4: Install carousel slick
 
@@ -20,7 +20,7 @@ Step 4: Install carousel slick
         
 Step 5: Build package
         
-        npm run build 
+        npm run dev && npm run build 
         
 Step 6: Create key project. Firstly create file .evn and then copy all data file .env.example to file .env
    
