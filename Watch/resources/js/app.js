@@ -1,2 +1,2 @@
 import './bootstrap';
-import './slick-carousel'
+// import './slick-carousel'
