@@ -6,7 +6,7 @@ Step 1: Git clone or download respo.
 
 Step 2: Update composer using command in terminal
 
-        composer intall && composer update
+        composer install && composer update
         
 Step 3: Install npm
 
