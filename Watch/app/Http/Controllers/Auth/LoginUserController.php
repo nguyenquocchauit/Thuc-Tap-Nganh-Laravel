@@ -13,16 +13,34 @@ class LoginUserController extends Controller
     //
     public function login(Request $request)
     {
-        $credentials = Validator::make($request->all(), [
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-        // if (Auth::attempt($request->only('email', 'password'))) {
+        if (auth()->attempt(array('email' => $request->email, 'password' => $request->password))) {
+            return response()->json(array(
+                'status' => '1',
+                'msg' => 'Login success'
+            ), 200);
+        } else {
+            return response()->json(array(
+                'status' => '0',
+                'msg' => 'Login fail'
+            ), 200);
+        }
+
+
+        // $credentials = [
+        //     'email' => $request['email'],
+        //     'password' => $request['password'],
+        // ];
+
+        // if (Auth::attempt($credentials)) {
         //     return response()->json(array(
         //         'status' => '1',
         //         'msg' => 'Login success'
         //     ), 200);
         // }
-        return response($credentials);
+        //return ($request->all());
+        // return response()->json(array(
+        //     'status' => '0',
+        //     'msg' => 'Login fail'
+        // ), 200);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Front;
+use App\Http\Controllers\Front\HomeController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +19,4 @@ Route::get('/', function () {
      return view('home');
 });
 Auth::routes();
-Route::get('/', [Front\HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
