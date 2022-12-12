@@ -36,7 +36,37 @@ $(document).ready(function () {
                     password: _pass,
                 },
                 success: function (response) {
-                    console.log(response);
+                    if (
+                        response.status == 401 &&
+                        response.msg == "Pass is incorrect"
+                    ) {
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Mật khẩu không chính xác!",
+                            timer: 1500,
+                            timerProgressBar: true,
+                        });
+                    } else if (
+                        response.status == 401 &&
+                        response.msg == "Email not found"
+                    ) {
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Email không tồn tại!",
+                            timer: 1500,
+                            timerProgressBar: true,
+                        });
+                    } else if (
+                        response.status == 1 &&
+                        response.msg == "Login success"
+                    ) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Login success!",
+                            timer: 1500,
+                            timerProgressBar: true,
+                        });
+                    }
                 },
                 error: function (response) {},
             });

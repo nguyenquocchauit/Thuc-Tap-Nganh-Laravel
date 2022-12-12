@@ -35,13 +35,13 @@ class LoginUserController extends Controller
                 } else {
                     return response()->json([
                         'status' => 401,
-                        'msg' => 'fail'
+                        'msg' => 'Pass is incorrect'
                     ]);
                 }
             } else {
                 return response()->json([
                     'status' => 401,
-                    'msg' => 'User not found'
+                    'msg' => 'Email not found'
                 ]);
             }
         }
