@@ -44,8 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'timestamp',
     ];
 
-    // public function comment()
-    // {
-    //     return $this->belongsTo(User::class, 'customers', 'id');
-    // }
+    public function comment()
+    {
+        return $this->belongsTo(User::class, 'customers', 'id');
+    }
 }

@@ -29,8 +29,8 @@ class LoginUserController extends Controller
                 if (Hash::check($request->password, $user->password)) {
                     $request->session()->put('loggedInUser', $user->id);
                     return response()->json([
-                        'status' => 1,
-                        'msg' => 'Login success'
+                        'status' => 200,
+                        'msg' => 'Login successfully'
                     ]);
                 } else {
                     return response()->json([
@@ -46,21 +46,5 @@ class LoginUserController extends Controller
             }
         }
 
-        // $credentials = [
-        //     'email' => $request['email'],
-        //     'password' => $request['password'],
-        // ];
-
-        // if (Auth::attempt($credentials)) {
-        //     return response()->json(array(
-        //         'status' => '1',
-        //         'msg' => 'Login success'
-        //     ), 200);
-        // }
-        //return ($request->all());
-        // return response()->json(array(
-        //     'status' => '0',
-        //     'msg' => 'Login fail'
-        // ), 200);
     }
 }

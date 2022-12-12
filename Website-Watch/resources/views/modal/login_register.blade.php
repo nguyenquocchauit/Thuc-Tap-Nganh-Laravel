@@ -65,18 +65,15 @@
                             <label class="form-label">
                                 <h5>Họ và Tên</h5>
                             </label>
-                            <input id="create_at" type="hidden" value="">
-                            <input class="w-100 form-control" type="text" placeholder="Họ và tên" name="name"
-                                id="name" pattern="[A-Za-z]{}">
-                            <p id="validationName" style="color: red;display:block"></p>
+                            <input class="w-100 form-control" type="text" placeholder="Họ và tên" name="nameRegister"
+                                id="nameRegister">
                         </div>
                         <div class="col-6">
                             <label class="form-label">
                                 <h5>Email</h5>
                             </label>
-                            <input class="w-100 form-control" type="text" placeholder="Email" name="email"
-                                id="email">
-                            <p id="validationEmail" style="color: red;display:block"></p>
+                            <input class="w-100 form-control" type="text" placeholder="Email" name="emailRegister"
+                                id="emailRegister">
                         </div>
                     </div>
                     <div class="row">
@@ -85,16 +82,14 @@
                                 <h5>Số di động</h5>
                             </label>
                             <input class="w-100 form-control" type="text" placeholder="Số di động" name="phone"
-                                id="phone">
-                            <p id="validationPhone" style="color: red;display:block"></p>
+                                id="phoneRegister">
                         </div>
                         <div class="col-6">
                             <label class="form-label" style="padding-top: 10px;">
-                                <h5>Tên đăng nhập</h5>
+                                <h5>Địa chỉ</h5>
                             </label>
-                            <input class="w-100 form-control" type="text" placeholder="Tên đăng nhập"
-                                name="username" id="username">
-                            <p id="validationUserName" style="color: red;display:block"></p>
+                            <input class="w-100 form-control" type="text" placeholder="Địa chỉ"
+                                name="address" id="addressRegister">
                         </div>
                     </div>
                     <div class="row">
@@ -102,27 +97,25 @@
                             <label class="form-label" style="padding-top: 10px;">
                                 <h5>Mật khẩu</h5>
                             </label>
-                            <input class="w-100 form-control" type="password" id="password_signup"
-                                placeholder="Mật khẩu" name="pass" id="pass">
+                            <input class="w-100 form-control" type="password"
+                                placeholder="Mật khẩu" name="pass" id="passRegister">
                             <span onclick="show_hidden_password()" class="changePasword_Singup"><i id="icon"
                                     class="fas fa-eye"></i></span>
-                            <p id="validationPass" style="color: red;display:block"></p>
                         </div>
                         <div class="col-6">
                             <label class="form-label" style="padding-top: 10px;">
                                 <h5>Nhập lại mật khẩu</h5>
                             </label>
-                            <input class="w-100 form-control" type="password" id="confirm_password_signup"
-                                placeholder="Nhập lại mật khẩu" name="checkpass" id="checkpass">
+                            <input class="w-100 form-control" type="password"
+                                placeholder="Nhập lại mật khẩu" name="checkPass" id="checkPassRegister">
                             <span onclick="confirm_show_hidden_password()" class="changePasword_Singup"><i
                                     id="icon" class="fas fa-eye"></i></span>
-                            <p id="validationCheckPass" style="color: red;display:none"></p>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button href="#" class="btn btn-primary btn-block mt-3 w-100">Đăng Ký</button>
+                <button href="#" class="btn btn-primary btn-block mt-3 w-100 " id="btn-register-user">Đăng Ký</button>
                 <p>Đã có tài khoản? <a href="#" style="text-decoration: none;" data-bs-target="#login"
                         data-bs-toggle="modal" data-bs-dismiss="modal">Đăng Nhập Ngay</a>
             </div>

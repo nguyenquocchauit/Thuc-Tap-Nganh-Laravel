@@ -1,32 +1,22 @@
 $(document).ready(function () {
-    //Pass Header Token
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-    let _token = $('meta[name="csrf-token"]').attr("content");
     function isEmpty(str) {
         return !str || str.length === 0;
+    }
+    function showMsgWaringLogin(msg) {
+        Swal.fire({
+            icon: "warning",
+            title: msg,
+            timer: 1500,
+            timerProgressBar: true,
+        });
     }
     $("#btn-login-user").on("click", function () {
         var _email = $("#usernameLogin").val();
         var _pass = $("#passwordLogin").val();
-        if (isEmpty(_email)) {
-            Swal.fire({
-                icon: "warning",
-                title: "Email không được để trống!",
-                timer: 1500,
-                timerProgressBar: true,
-            });
-        } else if (isEmpty(_pass)) {
-            Swal.fire({
-                icon: "warning",
-                title: "Mật khẩu không được để trống!",
-                timer: 1500,
-                timerProgressBar: true,
-            });
-        } else {
+        if (isEmpty(_email)) showMsgWaringLogin("Email không được để trống!");
+        else if (isEmpty(_pass))
+            showMsgWaringLogin("Mật khẩu không được để trống!");
+        else {
             $.ajax({
                 type: "POST",
                 url: "/api/login-user",
@@ -39,26 +29,16 @@ $(document).ready(function () {
                     if (
                         response.status == 401 &&
                         response.msg == "Pass is incorrect"
-                    ) {
-                        Swal.fire({
-                            icon: "warning",
-                            title: "Mật khẩu không chính xác!",
-                            timer: 1500,
-                            timerProgressBar: true,
-                        });
-                    } else if (
+                    )
+                        showMsgWaringLogin("Mật khẩu không chính xác!");
+                    else if (
                         response.status == 401 &&
                         response.msg == "Email not found"
-                    ) {
-                        Swal.fire({
-                            icon: "warning",
-                            title: "Email không tồn tại!",
-                            timer: 1500,
-                            timerProgressBar: true,
-                        });
-                    } else if (
-                        response.status == 1 &&
-                        response.msg == "Login success"
+                    )
+                        showMsgWaringLogin("Email không tồn tại!");
+                    else if (
+                        response.status == 200 &&
+                        response.msg == "Login successfully"
                     ) {
                         Swal.fire({
                             icon: "success",
