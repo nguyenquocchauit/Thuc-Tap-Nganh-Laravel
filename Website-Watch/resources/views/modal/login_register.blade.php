@@ -14,7 +14,7 @@
                 <form class="form">
                     <div>
                         <label class="form-label float-start">
-                            <h5>Tên đăng nhập</h5>
+                            <h5>Tên đăng nhập <strong style="color: red">*</strong></h5>
                         </label>
                         <input type="text" placeholder="Email" id="usernameLogin" name="userName"
                             class="input w-100 form-control">
@@ -22,7 +22,7 @@
                     </div>
                     <div>
                         <label class="form-label float-start">
-                            <h5>Mật khẩu</h5>
+                            <h5>Mật khẩu <strong style="color: red">*</strong></h5>
                         </label>
                         <input type="password" placeholder="Mật khẩu" id="passwordLogin" name="passWord"
                             class="input w-100 form-control ">
@@ -63,14 +63,14 @@
                     <div class="row">
                         <div class="col-6">
                             <label class="form-label">
-                                <h5>Họ và Tên</h5>
+                                <h5>Họ và Tên <strong style="color: red">*</strong></h5>
                             </label>
                             <input class="w-100 form-control" type="text" placeholder="Họ và tên" name="nameRegister"
                                 id="nameRegister">
                         </div>
                         <div class="col-6">
                             <label class="form-label">
-                                <h5>Email</h5>
+                                <h5>Email <strong style="color: red">*</strong></h5>
                             </label>
                             <input class="w-100 form-control" type="text" placeholder="Email" name="emailRegister"
                                 id="emailRegister">
@@ -79,7 +79,7 @@
                     <div class="row">
                         <div class="col-6">
                             <label class="form-label" style="padding-top: 10px;">
-                                <h5>Số di động</h5>
+                                <h5>Số di động <strong style="color: red">*</strong></h5>
                             </label>
                             <input class="w-100 form-control" type="text" placeholder="Số di động" name="phone"
                                 id="phoneRegister">
@@ -95,7 +95,7 @@
                     <div class="row">
                         <div class="col-6">
                             <label class="form-label" style="padding-top: 10px;">
-                                <h5>Mật khẩu</h5>
+                                <h5>Mật khẩu <strong style="color: red">*</strong></h5>
                             </label>
                             <input class="w-100 form-control" type="password"
                                 placeholder="Mật khẩu" name="pass" id="passRegister">
@@ -104,7 +104,7 @@
                         </div>
                         <div class="col-6">
                             <label class="form-label" style="padding-top: 10px;">
-                                <h5>Nhập lại mật khẩu</h5>
+                                <h5>Nhập lại mật khẩu <strong style="color: red">*</strong></h5>
                             </label>
                             <input class="w-100 form-control" type="password"
                                 placeholder="Nhập lại mật khẩu" name="checkPass" id="checkPassRegister">

@@ -14,8 +14,10 @@ class RegisterUserController extends Controller
     //
     public function Register(Request $request)
     {
+        // check email and phone, already exist?
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|max:255|unique:users',
+            'phone_number' => 'required|unique:users',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -27,12 +29,15 @@ class RegisterUserController extends Controller
             $currentTime = Carbon::now();
             // get max id
             $maxID = User::query()
-                ->selectRaw('SUM(id) AS ID_Max')
+                ->selectRaw('MAX(id) AS ID_Max')
                 ->get();
-                $maxID = $maxID+1;
+            // get max id from object maxID
+            $ID = $maxID[0]['ID_Max'];
+            $ID = (int)$ID  + 1;
             $user = new User();
-            $user->id = $maxID;
+            $user->id = $ID;
             $user->name = $request->name;
+            $user->phone_number = $request->phone_number;
             $user->address = $request->address;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);

@@ -28,7 +28,7 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-    <!-- thư viện sweet aler  -->
+    {{-- Add Sweetalert library --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         //Pass Header Token
@@ -39,12 +39,14 @@
         });
         let _token = $('meta[name="csrf-token"]').attr("content");
     </script>
-    {{-- Add handle login user  --}}
+    {{-- Add file handling user login  --}}
     <script type="text/javascript" src="{{ asset('js/login-user.js') }}"></script>
-    {{-- Add handle register user  --}}
+    {{-- Add file to handle user registration  --}}
     <script type="text/javascript" src="{{ asset('js/register-user.js') }}"></script>
-    {{-- Add handle hidden or show password --}}
+    {{-- Add a file to hide or show the password --}}
     <script type="text/javascript" src="{{ asset('js/hidden-show-pass.js') }}"></script>
+    {{-- Add product search processing file --}}
+    <script type="text/javascript" src="{{ asset('js/search-product.js') }}"></script>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -165,16 +167,16 @@
                         <div class="col-7">
                             <div class="input-group">
                                 <div id="search-autocomplete" class="form-outline">
-                                    <input onkeyup="search(this.value)" type="search" id="form1"
-                                        class="form-control" placeholder="Tìm kiếm..." />
+                                    <input type="search" id="search-product" class="form-control"
+                                        placeholder="Tìm kiếm..." />
                                 </div>
                                 <button type="button" class="btn"
                                     style="border-bottom-right-radius: 10px;border-top-right-radius: 10px;">
                                     <i class="fa fa-search"></i>
                                 </button>
-                                <div id="searchResult" class="dropdown-content dWSearchResult">
+                                <div id="searchResult" class="dropdown-content dWSearchResult showSearchResult">
                                     <!-- hiển thị kết quả tìm kiếm sản phẩm -->
-                                    <p><span id="searchResult"></span></p>
+
                                 </div>
                             </div>
                         </div>

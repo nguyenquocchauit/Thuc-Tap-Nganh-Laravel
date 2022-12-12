@@ -119,69 +119,73 @@
                     </div>
                 </div>
             </div>
-
-            <div class="product-hot mt-5">
-                <h2 class="tc-title">Sản phẩm nổi bật</h2>
-                <div class="thanh">
-                    <div class="ngang" id="ngang1"></div>
-                    <div class="clock"><i class="far fa-clock"></i></div>
-                    <div class="ngang" id="ngang2"></div>
-                </div>
-                <div class="container mt-5">
-                    <div id="wapper">
-                        <div class="filtering">
-                            <!-- duyệt danh sách  tất cả sản phẩm theo danh sách sp bán chạy nhất top 2: giá được giảm, ảnh, tên, số lượng có sẵn -->
-                            @foreach ($bestSellingProducts as $bestSellingProduct)
-                                <div class="item">
-                                    @if ($bestSellingProduct->discount > 0)
-                                        <div class="sale">
-                                            <!-- đổi số thập phân sang dạng phần trăm -->
-                                            {{ '-' . $bestSellingProduct->discount . '%' }}
-                                        </div>
-                                    @endif
-                                    <div class="wap-items-ss brbox product-item">
-                                        <div class="wap-ss-img product-item-img">
-                                            <!-- Image lưu trữ nhiều ảnh, tách dữ liệu lấy ảnh đầu tiên. Các ảnh được ngăn cách bởi dấu , -->
-                                            <img alt=""
-                                                src="{{ asset('images/image_products_home') . '/' . $bestSellingProduct->productImage['image_1'] }}">
-                                        </div>
-                                        <div class="textleft product-item-desc">
-                                            <div><a href="product and cart/shop.php?gender=&brand="></a></div>
-                                            <div class="price d-flex ">
-                                                <!-- number_format dùng định dạng số theo kiểu đơn vị tiền tệ -->
-                                                <p class="price-pre">{{ number_format($bestSellingProduct->price) }}</p>
-                                                <p>
-                                                    <!-- xử lý in giá bán sau khi áp dụng giảm giá -->
-                                                    {{ number_format($bestSellingProduct->price - $bestSellingProduct->price * ($bestSellingProduct->discount / 100)) }}
-                                                    VNĐ
-                                                </p>
+            {{-- nếu có sản phẩm nổi bật thì hiển thị --}}
+            @if (count($bestSellingProducts))
+                <div class="product-hot mt-5">
+                    <h2 class="tc-title">Sản phẩm nổi bật</h2>
+                    <div class="thanh">
+                        <div class="ngang" id="ngang1"></div>
+                        <div class="clock"><i class="far fa-clock"></i></div>
+                        <div class="ngang" id="ngang2"></div>
+                    </div>
+                    <div class="container mt-5">
+                        <div id="wapper">
+                            <div class="filtering">
+                                <!-- duyệt danh sách  tất cả sản phẩm theo danh sách sp bán chạy nhất top 2: giá được giảm, ảnh, tên, số lượng có sẵn -->
+                                @foreach ($bestSellingProducts as $bestSellingProduct)
+                                    <div class="item">
+                                        @if ($bestSellingProduct->discount > 0)
+                                            <div class="sale">
+                                                <!-- đổi số thập phân sang dạng phần trăm -->
+                                                {{ '-' . $bestSellingProduct->discount . '%' }}
                                             </div>
-                                            <div class="product-item-desc-button-submit">
-                                                <button type="submit" class="btn btn-light add-to-cart"
-                                                    name="add-to-cart"><i
-                                                        class="fas fa-cart-plus mx-2 shopping-cart"></i>Thêm
-                                                    vào
-                                                    giỏ</button>
-                                                <input type="hidden" name="productID" class="productID" value="">
-                                                <input type="hidden" name="productQuantity" class="productQuantity"
-                                                    value="1">
-                                                <input type="hidden" name="productName" class="productName"
-                                                    value="">
-                                                <input type="hidden" name="productPrice" class="productPrice"
-                                                    value="">
-                                                <input type="hidden" name="productImage" class="productImage"
-                                                    value="">
-                                                <input type="hidden" name="actionFrom" class="actionFrom"
-                                                    value="home.php">
+                                        @endif
+                                        <div class="wap-items-ss brbox product-item">
+                                            <div class="wap-ss-img product-item-img">
+                                                <!-- Image lưu trữ nhiều ảnh, tách dữ liệu lấy ảnh đầu tiên. Các ảnh được ngăn cách bởi dấu , -->
+                                                <img alt=""
+                                                    src="{{ asset('images/image_products_home') . '/' . $bestSellingProduct->productImage['image_1'] }}">
+                                            </div>
+                                            <div class="textleft product-item-desc">
+                                                <div><a href="product and cart/shop.php?gender=&brand="></a></div>
+                                                <div class="price d-flex ">
+                                                    <!-- number_format dùng định dạng số theo kiểu đơn vị tiền tệ -->
+                                                    <p class="price-pre">{{ number_format($bestSellingProduct->price) }}
+                                                    </p>
+                                                    <p>
+                                                        <!-- xử lý in giá bán sau khi áp dụng giảm giá -->
+                                                        {{ number_format($bestSellingProduct->price - $bestSellingProduct->price * ($bestSellingProduct->discount / 100)) }}
+                                                        VNĐ
+                                                    </p>
+                                                </div>
+                                                <div class="product-item-desc-button-submit">
+                                                    <button type="submit" class="btn btn-light add-to-cart"
+                                                        name="add-to-cart"><i
+                                                            class="fas fa-cart-plus mx-2 shopping-cart"></i>Thêm
+                                                        vào
+                                                        giỏ</button>
+                                                    <input type="hidden" name="productID" class="productID"
+                                                        value="">
+                                                    <input type="hidden" name="productQuantity" class="productQuantity"
+                                                        value="1">
+                                                    <input type="hidden" name="productName" class="productName"
+                                                        value="">
+                                                    <input type="hidden" name="productPrice" class="productPrice"
+                                                        value="">
+                                                    <input type="hidden" name="productImage" class="productImage"
+                                                        value="">
+                                                    <input type="hidden" name="actionFrom" class="actionFrom"
+                                                        value="home.php">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
             <div class="feedback mt-5">
                 <h2 class="tc-title">Feed back từ khách hàng</h2>
                 <div class="thanh">
@@ -262,4 +266,3 @@
         </div>
     </div>
 @endsection
-
