@@ -12,8 +12,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        $name = $this->getNameUser();
+        // Get all product
         $allProducts = Product::get();
+        // Get the best selling products. 4 products
         $bestSellingProducts = Product::query()
             ->join('order_details', 'order_details.product', '=', 'products.id')
             ->selectRaw('products.*, SUM(order_details.quantity) AS quantity_sold')
@@ -21,17 +22,6 @@ class HomeController extends Controller
             ->orderByDesc('quantity_sold')
             ->take(4) // 4 best-selling products
             ->get();
-        return view('home', compact('allProducts', 'bestSellingProducts', 'name'));
-    }
-
-    public function getNameUser()
-    {
-        $name = null;
-        if (Auth::user() != null) {
-            $name = Auth::user()->name;
-            $name = explode(" ", $name);
-            $name = $name[sizeof($name) - 2] . " " . $name[sizeof($name) - 1];
-        }
-        return $name;
+        return view('home', compact('allProducts', 'bestSellingProducts'));
     }
 }

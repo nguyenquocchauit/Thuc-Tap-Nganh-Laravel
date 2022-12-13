@@ -51,20 +51,6 @@ class LoginUserController extends Controller
             }
         }
     }
-    public function getNameUser()
-    {
-        $name = null;
-        $name = Auth::user();
-        return $name;
-        // $name = null;
-        // if (Auth::user() != null) {
-        //     $name = Auth::user()->name;
-        //     $name = explode(" ", $name);
-        //     $name = $name[sizeof($name) - 2] . " " . $name[sizeof($name) - 1];
-        // }
-        // return $name;
-        //return view('layouts.app', compact('name'));
-    }
     public function logout()
     {
 

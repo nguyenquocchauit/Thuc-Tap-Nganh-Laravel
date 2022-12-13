@@ -41,7 +41,7 @@
                                                 src="{{ asset('images/image_products_home') . '/' . $allProduct->productImage['image_1'] }}">
                                         </div>
                                         <div class="textleft">
-                                            <div><a href="product and cart/shop.php?gender=&brand="></div>
+                                            <div><a href="{{ url('chi-tiet-san-pham/') }}/{{ $allProduct->id }}"></div>
                                             {{ $allProduct->name }}</a>
                                             <div><b>
                                                     @if ($allProduct->quantity == 0)
@@ -82,15 +82,15 @@
                                             </div>
                                             <div class="textleft product-item-desc">
                                                 <div><a
-                                                        href="product and cart/shop.php?gender=&brand=">{{ $allProduct->name }}</a>
+                                                        href="{{ url('chi-tiet-san-pham/') }}/{{ $allProduct->id }}">{{ $allProduct->name }}</a>
                                                 </div>
                                                 <div class="price d-flex ">
                                                     <!-- number_format dùng định dạng số theo kiểu đơn vị tiền tệ -->
                                                     <p class="price-pre">{{ number_format($allProduct->price) }}</p>
                                                     <p>
                                                         <!-- xử lý in giá bán sau khi áp dụng giảm giá -->
-                                                        {{ number_format($allProduct->price - $allProduct->price * ($allProduct->discount / 100)) }}
-                                                        VNĐ
+                                                        {{ number_format($allProduct->price - $allProduct->price * ($allProduct->discount / 100)) . ' VNĐ' }}
+
                                                     </p>
                                                 </div>
                                                 <div class="product-item-desc-button-submit">
@@ -147,7 +147,9 @@
                                                     src="{{ asset('images/image_products_home') . '/' . $bestSellingProduct->productImage['image_1'] }}">
                                             </div>
                                             <div class="textleft product-item-desc">
-                                                <div><a href="product and cart/shop.php?gender=&brand="></a></div>
+                                                <div><a
+                                                        href="{{ url('chi-tiet-san-pham/') }}/{{ $bestSellingProduct->id }}">{{ $bestSellingProduct->name }}</a>
+                                                </div>
                                                 <div class="price d-flex ">
                                                     <!-- number_format dùng định dạng số theo kiểu đơn vị tiền tệ -->
                                                     <p class="price-pre">{{ number_format($bestSellingProduct->price) }}

@@ -20,7 +20,9 @@ $(document).ready(function () {
                     _html += " </div>";
                     _html += '<div class="col-10">';
                     _html +=
-                        '<div class="row rowName"><a href="#">' +
+                        '<div class="row rowName"><a href="chi-tiet-san-pham/' +
+                        pro.id +
+                        '">' +
                         pro.name +
                         "</a></div>";
                     _html += '<div class="row rowPrice">' + _price + "</div>";

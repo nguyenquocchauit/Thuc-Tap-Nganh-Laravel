@@ -72,7 +72,7 @@
                                 </a>
                             </div>
                             <div class="header-add col-10">
-                                <a href="../../Website Watch PHP/home.php">
+                                <a href="{{ url('/') }}">
                                     <p class="">
                                         <i id="iconhouse" class="fas fa-home"></i>
                                         <strong>SHOP: </strong>2 Nguyễn Đình Chiểu, Nha Trang, Khánh Hòa
@@ -103,9 +103,9 @@
                                     <a href="../../Website Watch PHP/customers/Chi-tiet.php"
                                         style="color:white;font-size: 18px;"><i class="fas fa-user-cog"></i></a>
                                     <strong></strong>
-                                    {{ $name }}
+                                    {{ $nameUser }}
                                     <button type="button" name="logout" class="btn btn-dark"><a
-                                            href="{{ url('api/getname-user') }}" style="color:#f1f1f1"><i
+                                            href="{{ url('api/logout-user') }}" style="color:#f1f1f1"><i
                                                 class="fas fa-sign-out-alt"></i></a></button>
                                 @endguest
                             </p>
@@ -114,6 +114,7 @@
                 </div>
             </div>
         </form>
+
         <div class="header-menu " id="header-menu">
             <div class="container">
                 <div class="row">
@@ -134,8 +135,8 @@
                                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                                     <ul class="navbar-nav">
                                         <li class="nav-item">
-                                            <a class="nav-link" aria-current="page"
-                                                href="../../Website Watch PHP/home.php">TRANG CHỦ</a>
+                                            <a class="nav-link" aria-current="page" href="{{ url('/') }}">TRANG
+                                                CHỦ</a>
                                         </li>
                                         <li class="nav-item ">
                                             <a class="nav-link" href="#">TIN TỨC</a>
