@@ -1,4 +1,4 @@
-# Thuc-Tap-Nganh-Laravel
+# Thực tập ngành Laravel
 
 How to build and run project
 
