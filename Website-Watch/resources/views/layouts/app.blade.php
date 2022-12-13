@@ -88,15 +88,26 @@
                             <p class="">
                                 <i id="iconphone" class="fas fa-phone-volume"></i>
                                 <strong>HOTLINE: </strong>038 655 5555 |
-                                {{-- <a href="../../Website Watch PHP/customers/Chi-tiet.php"
+                                @guest
+
+                                    {{-- <a href="../../Website Watch PHP/customers/Chi-tiet.php"
                                     style="color:white;font-size: 18px;"><i class="fas fa-user-cog"></i></a>
                                 <strong></strong>
                                 <button type="button" name="logout" class="btn btn-dark"><a href="?logout=1"
                                         style="color:#f1f1f1"><i class="fas fa-sign-out-alt"></i></a></button> --}}
-                                <button type="button" class="button" data-bs-toggle="modal"
-                                    data-bs-target="#login">Đăng nhập</button> &nbsp;
-                                <button type="button" class="button" data-bs-toggle="modal"
-                                    data-bs-target="#signup">Đăng ký</button>
+                                    <button type="button" class="button" data-bs-toggle="modal"
+                                        data-bs-target="#login">Đăng nhập</button> &nbsp;
+                                    <button type="button" class="button" data-bs-toggle="modal"
+                                        data-bs-target="#signup">Đăng ký</button>
+                                @else
+                                    <a href="../../Website Watch PHP/customers/Chi-tiet.php"
+                                        style="color:white;font-size: 18px;"><i class="fas fa-user-cog"></i></a>
+                                    <strong></strong>
+
+                                    <button type="button" name="logout" class="btn btn-dark"><a
+                                            href="{{ url('api/getname-user') }}" style="color:#f1f1f1"><i
+                                                class="fas fa-sign-out-alt"></i></a></button>
+                                @endguest
                             </p>
                         </div>
                     </div>
@@ -164,7 +175,7 @@
                         <img id="logo" src="{{ asset('images/tcwlogo.png') }}" alt="" srcset="">
                     </div>
                     <div class="col-5 row right searchbtn">
-                        <div class="col-7">
+                        <div class="col-7 search">
                             <div class="input-group">
                                 <div id="search-autocomplete" class="form-outline">
                                     <input type="search" id="search-product" class="form-control"

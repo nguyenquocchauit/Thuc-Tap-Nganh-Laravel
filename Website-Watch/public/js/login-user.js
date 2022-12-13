@@ -26,6 +26,7 @@ $(document).ready(function () {
                     password: _pass,
                 },
                 success: function (response) {
+                    console.log(response);
                     if (
                         response.status == 401 &&
                         response.msg == "Pass is incorrect"
@@ -42,9 +43,32 @@ $(document).ready(function () {
                     ) {
                         Swal.fire({
                             icon: "success",
-                            title: "Login success!",
-                            timer: 1500,
+                            title: "Đăng nhập thành công!",
+                            html: "Đang đăng nhập vào Website <strong></strong> giây.",
+                            imageUrl: "/images/cat.gif",
+                            imageWidth: 315,
+                            imageHeight: 230,
+                            timer: 3000,
                             timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading();
+                                // set the time in seconds, initially in milliseconds
+                                timerInterval = setInterval(() => {
+                                    Swal.getHtmlContainer().querySelector(
+                                        "strong"
+                                    ).textContent = (
+                                        Swal.getTimerLeft() / 1000
+                                    ).toFixed(0);
+                                }, 100);
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval);
+                            },
+                        }).then((result) => {
+                            // done then reload page
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                location.reload();
+                            }
                         });
                     }
                 },

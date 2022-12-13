@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Auth\Guard as AuthGuard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Laravel\Sanctum\Guard;
 
 class LoginUserController extends Controller
 {
     //
+
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -27,7 +31,8 @@ class LoginUserController extends Controller
             $user = User::where('email', $request->email)->first();
             if ($user) {
                 if (Hash::check($request->password, $user->password)) {
-                    $request->session()->put('loggedInUser', $user->id);
+                    $credentials = $request->only('email', 'password');
+                    Auth::attempt($credentials);
                     return response()->json([
                         'status' => 200,
                         'msg' => 'Login successfully'
@@ -45,6 +50,20 @@ class LoginUserController extends Controller
                 ]);
             }
         }
+    }
+    public function getNameUser(Request $request)
+    {
+        dd(Auth::user());
+        // $name = Auth::user()->name;
+        // $name = explode(" ", $name);
+        // $name = $name[sizeof($name) - 2] . " " . $name[sizeof($name) - 1];
+        //return view('layouts.app', compact('name'));
+    }
+    public function logout()
+    {
 
+        // Session::flush();
+        // Auth::logout();
+        // return Redirect('/');
     }
 }

@@ -4,7 +4,6 @@ $(document).ready(function () {
             type: "GET",
             url: "/api/search-product/" + $("#search-product").val(),
             success: function (response) {
-                console.table(response.data);
                 var _html = "";
                 for (var pro of response.data) {
                     var _price = pro.price;
@@ -15,9 +14,9 @@ $(document).ready(function () {
                     _html += '<div class="row">';
                     _html += '   <div class="col-2">';
                     _html +=
-                        '<img class="imgSearch" src="http://localhost:8000/images/image_products_home/' +
+                        "<img class='imgSearch' src='/images/image_products_home/" +
                         pro.image +
-                        '-1.png") }}" alt="">';
+                        "-1.png'>";
                     _html += " </div>";
                     _html += '<div class="col-10">';
                     _html +=
@@ -33,4 +32,8 @@ $(document).ready(function () {
             error: function (response) {},
         });
     });
+    // $("#searchResult").onmouseover(function () {
+    //     alert("");
+    //     //$("#searchResult").removeClass("showSearchResult");
+    // });
 });
