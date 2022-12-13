@@ -103,7 +103,7 @@
                                     <a href="../../Website Watch PHP/customers/Chi-tiet.php"
                                         style="color:white;font-size: 18px;"><i class="fas fa-user-cog"></i></a>
                                     <strong></strong>
-
+                                    {{ $name }}
                                     <button type="button" name="logout" class="btn btn-dark"><a
                                             href="{{ url('api/getname-user') }}" style="color:#f1f1f1"><i
                                                 class="fas fa-sign-out-alt"></i></a></button>

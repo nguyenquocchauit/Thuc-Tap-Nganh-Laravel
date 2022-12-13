@@ -10,7 +10,7 @@ class Image extends Model
     use HasFactory;
 
     protected $table = "images";
-    protected $primaryKey = false;
+    protected $primaryKey = 'id';
     protected $guarded = [];
 
     public function product(){

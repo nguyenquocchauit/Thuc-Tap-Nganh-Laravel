@@ -51,19 +51,25 @@ class LoginUserController extends Controller
             }
         }
     }
-    public function getNameUser(Request $request)
+    public function getNameUser()
     {
-        dd(Auth::user());
-        // $name = Auth::user()->name;
-        // $name = explode(" ", $name);
-        // $name = $name[sizeof($name) - 2] . " " . $name[sizeof($name) - 1];
+        $name = null;
+        $name = Auth::user();
+        return $name;
+        // $name = null;
+        // if (Auth::user() != null) {
+        //     $name = Auth::user()->name;
+        //     $name = explode(" ", $name);
+        //     $name = $name[sizeof($name) - 2] . " " . $name[sizeof($name) - 1];
+        // }
+        // return $name;
         //return view('layouts.app', compact('name'));
     }
     public function logout()
     {
 
-        // Session::flush();
-        // Auth::logout();
-        // return Redirect('/');
+        Session::flush();
+        Auth::logout();
+        return Redirect('/');
     }
 }

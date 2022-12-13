@@ -22,6 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/login-user',[LoginUserController::class,'login'])->name('login-user');
 Route::post('/register-user',[RegisterUserController::class,'register'])->name('register-user');
-Route::get('/logout-user',[LoginUserController::class,'logout'])->name('logout-user');
+Route::get('/logout-user',[LoginUserController::class,'logout'])->name('logout-user')->middleware('auth:sanctum');
 Route::get('/search-product/{search}',[SearchProductController::class,'searchProduct'])->name('search-product');
-Route::get('/getname-user',[LoginUserController::class,'getNameUser'])->name('get-name-user');
+Route::get('/getname-user',[LoginUserController::class,'logout'])->name('get-name-user');
