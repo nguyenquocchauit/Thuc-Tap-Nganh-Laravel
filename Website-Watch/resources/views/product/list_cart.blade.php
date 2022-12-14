@@ -32,31 +32,32 @@
                         {{ $id }}
                     </td>
                     <td style="width: 15%;">
-                        <div class="divimg"><img src="" alt=""
-                                srcset="">
+                        <div class="divimg"><img src="{{ asset('images/image_products_home/') }}/{{ $details['image'] }}"
+                                alt="" srcset="">
                         </div>
                     </td>
                     <td style="width: 26%;"><span>{{ $details['name'] }}</span></td>
                     <td>
-                        <p>{{ number_format($details['price']) . ' VNĐ' }}</p>
+                        <p>{{ number_format($details['priceDiscount']) . ' VNĐ' }}</p>
                     </td>
                     <td>
                         <div class="quantity numbers-row">
-                            <div class="row">
+                            <div class="row quantity-cart">
                                 <div class="col-4 d-flex justify-content-end pt-1 asc"></div>
                                 <div class="col-4 inpqan">
                                     <input type="text" class="form-control inpquantity"
                                         value="{{ $details['quantity'] }}">
-                                    <input type="hidden" name="" class="ID_Quantity" value="">
+                                    <input type="hidden" name="" class="ID_Quantity" value="{{ $id }}">
                                 </div>
                                 <div class="col-4 d-flex justify-content-start pt-1 desc"></div>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <p>{{ number_format($details['priceDiscount']) . ' VNĐ' }}</p>
+                        <p>{{ number_format($details['total']) . ' VNĐ' }}</p>
                     </td>
-                    <td><a href=""><i class="far fa-times-circle"></i></a></td>
+                    <td><a href="{{ url('api/remove-product-by-id/') }}/{{ $id }}"><i
+                                class="far fa-times-circle"></i></a></td>
                 </tr>
             @endforeach
         @endif

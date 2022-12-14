@@ -60,7 +60,7 @@ $(document).ready(function () {
                 },
                 function () {
                     $.ajax({
-                        type: "POST",
+                        type: "GET",
                         url: "api/add-to-cart/" + _productID,
                         success: function (response) {
                             if (
