@@ -20,7 +20,7 @@ $(document).ready(function () {
                     _html += " </div>";
                     _html += '<div class="col-10">';
                     _html +=
-                        '<div class="row rowName"><a href="chi-tiet-san-pham/' +
+                        '<div class="row rowName"><a href="/chi-tiet-san-pham/' +
                         pro.id +
                         '">' +
                         pro.name +
@@ -34,8 +34,4 @@ $(document).ready(function () {
             error: function (response) {},
         });
     });
-    // $("#searchResult").onmouseover(function () {
-    //     alert("");
-    //     //$("#searchResult").removeClass("showSearchResult");
-    // });
 });

@@ -47,6 +47,10 @@
     <script type="text/javascript" src="{{ asset('js/hidden-show-pass.js') }}"></script>
     {{-- Add product search processing file --}}
     <script type="text/javascript" src="{{ asset('js/search-product.js') }}"></script>
+    {{-- Add add to cart processing file --}}
+    <script type="text/javascript" src="{{ asset('js/add-to-cart.js') }}"></script>
+    {{-- Add remove item cart processing file --}}
+    <script type="text/javascript" src="{{ asset('js/remove-pro-cart.js') }}"></script>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -195,12 +199,13 @@
                         <div class="col-5 cartbtn">
                             <ul class="navbar-nav">
                                 <li class="nav-item ">
-                                    <a href="../../Website Watch PHP/product and cart/Gio-Hang.php"
+                                    <a href="{{ url('/gio-hang') }}"
                                         id="show_history_cart" class="nav-link">
                                         <span class="header-cart-title">GIỎ HÀNG
                                             <i style="color: black;" class="fas fa-cart-plus mx-2 shopping-cart"></i>
                                             <span style="position: absolute;top: 0%;color:#b31212;">
-                                                <p id="quantity-shopping-cart"></p>
+                                                <p id="quantity-shopping-cart">{{ count((array) session('cart')) }}
+                                                </p>
                                             </span>
                                         </span>
                                     </a>

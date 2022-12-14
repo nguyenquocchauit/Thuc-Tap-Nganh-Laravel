@@ -33,7 +33,6 @@ class AppServiceProvider extends ServiceProvider
     }
     public function getNameUser()
     {
-
         $name = null;
         if (Auth::check()) {
             $name = Auth::user()->name;

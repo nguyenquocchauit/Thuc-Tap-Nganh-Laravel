@@ -98,17 +98,11 @@
                                                         name="add-to-cart"><i
                                                             class="fas fa-cart-plus mx-2 shopping-cart"></i>Thêm vào
                                                         giỏ</button>
-                                                    <input type="hidden" name="productID" class="productID" value="">
-                                                    <input type="hidden" name="productQuantity" class="productQuantity"
-                                                        value="1">
+                                                    <input type="hidden" name="productID" class="productID" value="{{ $allProduct->id }}">
                                                     <input type="hidden" name="productName" class="productName"
-                                                        value="">
-                                                    <input type="hidden" name="productPrice" class="productPrice"
-                                                        value="">
+                                                        value="{{ $allProduct->name }}">
                                                     <input type="hidden" name="productImage" class="productImage"
-                                                        value="">
-                                                    <input type="hidden" name="actionFrom" class="actionFrom"
-                                                        value="home.php">
+                                                        value="{{ $allProduct->productImage['image_1'] }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -166,18 +160,11 @@
                                                             class="fas fa-cart-plus mx-2 shopping-cart"></i>Thêm
                                                         vào
                                                         giỏ</button>
-                                                    <input type="hidden" name="productID" class="productID"
-                                                        value="">
-                                                    <input type="hidden" name="productQuantity" class="productQuantity"
-                                                        value="1">
-                                                    <input type="hidden" name="productName" class="productName"
-                                                        value="">
-                                                    <input type="hidden" name="productPrice" class="productPrice"
-                                                        value="">
-                                                    <input type="hidden" name="productImage" class="productImage"
-                                                        value="">
-                                                    <input type="hidden" name="actionFrom" class="actionFrom"
-                                                        value="home.php">
+                                                        <input type="hidden" name="productID" class="productID" value="{{ $bestSellingProduct->id }}">
+                                                        <input type="hidden" name="productName" class="productName"
+                                                            value="{{ $bestSellingProduct->name }}">
+                                                        <input type="hidden" name="productImage" class="productImage"
+                                                            value="{{ $bestSellingProduct->productImage['image_1'] }}">
                                                 </div>
                                             </div>
                                         </div>
