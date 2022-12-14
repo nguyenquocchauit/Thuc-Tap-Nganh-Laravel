@@ -23,13 +23,16 @@
         </td>
     </tr>
     <tbody>
-        @php $total = 0 @endphp
+        @php
+            $total = 0;
+            $i = 1;
+        @endphp
         @if (session('cart'))
             @foreach (session('cart') as $id => $details)
                 @php $total += $details['price'] * $details['quantity'] @endphp
                 <tr>
                     <td>
-                        {{ $id }}
+                        {{ $i }}
                     </td>
                     <td style="width: 15%;">
                         <div class="divimg"><img src="{{ asset('images/image_products_home/') }}/{{ $details['image'] }}"
@@ -47,7 +50,8 @@
                                 <div class="col-4 inpqan">
                                     <input type="text" class="form-control inpquantity"
                                         value="{{ $details['quantity'] }}">
-                                    <input type="hidden" name="" class="ID_Quantity" value="{{ $id }}">
+                                    <input type="hidden" name="" class="ID_Quantity"
+                                        value="{{ $id }}">
                                 </div>
                                 <div class="col-4 d-flex justify-content-start pt-1 desc"></div>
                             </div>
@@ -59,6 +63,7 @@
                     <td><a href="{{ url('api/remove-product-by-id/') }}/{{ $id }}"><i
                                 class="far fa-times-circle"></i></a></td>
                 </tr>
+                @php $i++; @endphp
             @endforeach
         @endif
         <tr class="tr1">
@@ -81,7 +86,7 @@
         </tr>
         <td></td>
         <td style="text-align: end;">
-            <a href="shop.php"><button type="button" class="buttonBack"><i class="fas fa-arrow-left"
+            <a href="{{ url('shop/') }}"><button type="button" class="buttonBack"><i class="fas fa-arrow-left"
                         id="iconback"></i> Tiếp tục xem sản phẩm</button></a>
         </td>
         <td style="text-align: center;">

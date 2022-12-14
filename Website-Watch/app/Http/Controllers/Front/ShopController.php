@@ -11,7 +11,8 @@ use App\Models\Brand;
 
 class ShopController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         //Get categories,brand
         $categories = Gender::all();
         $brands = Brand::all();
@@ -24,17 +25,18 @@ class ShopController extends Controller
         $max_price = Product::max('price');
         $min_price_range = $min_price - 260000;
         $max_price_range = $max_price + 140000;
-        $products = Product::where('name','like', '%' . $searchProducts . '%');
+        $products = Product::where('name', 'like', '%' . $searchProducts . '%');
         // if(!empty($searchProducts)) {
         //     $request->session()->flash('error');
         // }
         $products = $this->filter($products, $request);
         $products = $this->sortAndPagination($products, $sortBy, $perPage);
-        
-        return view('front.shop.index',compact('categories','brands','products','min_price_range','max_price_range'));
+
+        return view('product.shop', compact('categories', 'brands', 'products', 'min_price_range', 'max_price_range'));
     }
-    
-    public function category($categoryName,Request $request) {
+
+    public function category($categoryName, Request $request)
+    {
         //Get categories
         $categories = Gender::all();
         //Get brand
@@ -47,15 +49,16 @@ class ShopController extends Controller
         //Get products
         $perPage = $request->show ?? 6;
         $sortBy = $request->sort_by ?? 'latest';
-        $products = Gender::where('name',$categoryName)
-        ->first()->products->toQuery();
+        $products = Gender::where('slug', ucfirst(trans($categoryName)))
+            ->first()->products->toQuery();
         $products = $this->filter($products, $request);
         $products = $this->sortAndPagination($products, $sortBy, $perPage);
-        
-        return view('front.shop.index',compact('categories','brands','products','min_price_range','max_price_range'));
+
+        return view('product.shop', compact('categories', 'brands', 'products', 'min_price_range', 'max_price_range'));
     }
 
-    public function sortAndPagination($products,$sortBy,$perPage) {
+    public function sortAndPagination($products, $sortBy, $perPage)
+    {
         switch ($sortBy) {
             case 'latest':
                 $products = $products->orderBy('name');
@@ -75,7 +78,7 @@ class ShopController extends Controller
                 $products = $products->orderByDesc('price');
                 break;
             default:
-            $products = $products->orderBy('id');
+                $products = $products->orderBy('id');
         }
         $products = $products->paginate($perPage);
 
@@ -83,18 +86,19 @@ class ShopController extends Controller
         return $products;
     }
 
-    public function filter($products, Request $request) {
+    public function filter($products, Request $request)
+    {
         //Brand
         $brands = $request->brand ?? [];
         $brand_ids = array_keys($brands);
-        $products = $brand_ids != null ? $products->whereIn('brand',$brand_ids) : $products;
+        $products = $brand_ids != null ? $products->whereIn('brand', $brand_ids) : $products;
 
         //Price
 
         $priceMin = $request->start_price;
         $priceMax = $request->end_price;
         $products = ($priceMin != null && $priceMin != null) ? $products
-        ->whereBetween('price',[$priceMin,$priceMax]) : $products;
+            ->whereBetween('price', [$priceMin, $priceMax]) : $products;
         return $products;
     }
 }

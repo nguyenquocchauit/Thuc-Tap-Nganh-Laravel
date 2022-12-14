@@ -11,11 +11,11 @@
                         @if (isset($cart))
                             @include('product/list_cart')
                         @else
-                            <img id='imgcart' src='{{ asset('/images/cat.gif') }}' alt=''>
-                            <h4 id='mesag-cart'>
+                            <img id="imgcart" src="{{ asset("/images/cat.gif") }}" alt="">
+                            <h4 id="mesag-cart">
                                 <p>Giỏ hàng hiện tại trống, quay lại trang shop đặt hàng</p>
                             </h4>
-                            <a href='shop.php' id='back-to-shop'><button type='button' class='buttonBack'><i
+                            <a href="{{ url('shop/') }}" id="back-to-shop"><button type="button" class="buttonBack"><i
                                         class="fas fa-arrow-left"></i> Tiếp tục xem sản phẩm</button></a>
                         @endif
                     </div>

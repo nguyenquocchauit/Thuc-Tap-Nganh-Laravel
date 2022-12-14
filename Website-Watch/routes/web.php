@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\Front\ShopController;
@@ -22,9 +23,9 @@ Route::get('/', function () {
 });
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/chi-tiet-san-pham/{id}', [ProductController::class, 'detailProduct'])->name('detail-product');
-Route::get('/gio-hang', [ProductController::class, 'cart'])->name('view-cart');
+Route::get('/gio-hang', [CartController::class, 'cart'])->name('view-cart');
 
-Route::prefix('shop')->group(function() {
-    Route::get('/',[ShopController::class, 'index'])->name('shop-index');
-    Route::get('/{categoryName}',[ShopController::class,'category']);
+Route::prefix('shop')->group(function () {
+    Route::get('/', [ShopController::class, 'index'])->name('shop-index');
+    Route::get('/{categoryName}', [ShopController::class, 'category']);
 });

@@ -3,9 +3,9 @@ $(document).ready(function () {
     $(".add-to-cart").on("click", function () {
         var cart = $(".shopping-cart");
         var imgtodrag = $(this)
-            .parent(".product-item-desc-button-submit")
-            .parent(".product-item-desc")
-            .parent(".product-item")
+            .parent()
+            .parent()
+            .parent()
             .find(".product-item-img")
             .find("img")
             .eq(0);
@@ -22,7 +22,6 @@ $(document).ready(function () {
             .parent(".product-item-desc-button-submit")
             .find(".productImage")
             .val();
-
         if (imgtodrag) {
             // tạo phần tử sao chép giống phần tử cha. Tức là copy ra 1 ảnh như vậy
 
@@ -63,9 +62,10 @@ $(document).ready(function () {
                         type: "GET",
                         url: "api/add-to-cart/" + _productID,
                         success: function (response) {
+                            console.log(response);
                             if (
                                 response.status == 200 &&
-                                response.msg == "Add to cart succes"
+                                response.msg == "Add to cart successfully"
                             ) {
                                 Swal.fire({
                                     position: "top-end",
@@ -95,5 +95,22 @@ $(document).ready(function () {
                 }
             );
         }
+    });
+    // bắt sự kiện click mua hàng
+    $("#order-product").on("click", function () {
+        var _productID = $("#productID").val();
+        $.ajax({
+            type: "GET",
+            url: "/api/add-to-cart/" + _productID,
+            success: function (response) {
+                console.log(response);
+                if (
+                    response.status == 200 &&
+                    response.msg == "Add to cart successfully"
+                ) {
+                    window.location.href = "/gio-hang";
+                }
+            },
+        });
     });
 });

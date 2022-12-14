@@ -3,9 +3,9 @@ $color1: #ffff;
 $color2: #dd3333;
 $color3: #555555;
 $color4: black;
-$color5 : #fdff8f;
-$color6 : #2faad51c;
-$color7 : #f7b100;
+$color5: #fdff8f;
+$color6: #2faad51c;
+$color7: #f7b100;
 
 .slick-prev,
 .slick-next {
@@ -61,7 +61,6 @@ $color7 : #f7b100;
         left: 20px;
         font-size: 24px;
         color: $color1;
-
     }
 }
 
@@ -169,11 +168,11 @@ $color7 : #f7b100;
             padding-left: 10px;
         }
 
-        #searchResult>.row {
+        #searchResult > .row {
             padding: 5px 0px 10px 0px;
         }
 
-        .rowName>a {
+        .rowName > a {
             color: #000000;
             text-decoration: none;
         }
@@ -200,7 +199,6 @@ $color7 : #f7b100;
                 font-size: large;
                 position: relative;
                 top: 10px;
-
             }
         }
 
@@ -221,7 +219,11 @@ $color7 : #f7b100;
 
 /////////////////////////////////////
 .body {
-    background: linear-gradient(rgba(0, 0, 0, 0.697) 100%, rgba(0, 0, 0, 0.5)100%), url("/images/black_background_metal.jpg");
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.697) 100%,
+            rgba(0, 0, 0, 0.5) 100%
+        ),
+        url("/images/black_background_metal.jpg");
 
     .content {
         padding-top: 150px;
@@ -274,13 +276,14 @@ $color7 : #f7b100;
 
                 .sale {
                     position: absolute;
-                    top: 0;
-                    left: 10px;
-                    background-color: $color2;
-                    width: 45px;
-                    height: 40px;
-                    color: $color1;
-                    font-weight: 600;
+                    top: 0px;
+                    left: 0px;
+                    margin: 4px 4px;
+                    background-color: #ff5e57;
+                    padding: 4px 8px;
+                    border-radius: 50%;
+                    font-size: 16px;
+                    color: #fff;
                 }
 
                 a {
@@ -350,7 +353,6 @@ $color7 : #f7b100;
                 }
             }
         }
-
     }
 }
 
@@ -479,7 +481,11 @@ $color7 : #f7b100;
 
 //////////////////////////////////////
 .footer {
-    background: linear-gradient(rgba(0, 0, 0, 0.697) 100%, rgba(0, 0, 0, 0.5)100%), url("/images/footer-background.jpg");
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.697) 100%,
+            rgba(0, 0, 0, 0.5) 100%
+        ),
+        url("/images/footer-background.jpg");
     color: $color1;
     padding: 15px;
 
@@ -585,13 +591,13 @@ $color7 : #f7b100;
             }
 
             .sale {
-                margin-left: 20px;
-                background-color: $color2;
-                width: 45px;
-                height: 40px;
-                color: $color1;
-                font-weight: 600;
-                padding-top: 7px;
+                // margin-left: 20px;
+                // background-color: $color2;
+                // width: 45px;
+                // height: 40px;
+                // color: $color1;
+                // font-weight: 600;
+                // padding-top: 7px;
             }
 
             .price {
@@ -619,7 +625,6 @@ $color7 : #f7b100;
                 }
 
                 .watch-detail {
-
                     border: 1px solid #52507e;
                     padding: 4px 14px;
                     color: #3a322b;
@@ -725,12 +730,13 @@ $color7 : #f7b100;
 
     .sale {
         margin-left: 6px;
-        padding: 7px 3px 0px 3px;
+        padding: 5px 3px 0px 3px;
         height: 30px;
         font-size: 12px;
-        background-color: rgba(221, 51, 51, 0.7411764706);
+        background-color: #ff5e57;
         color: white;
         font-weight: 600;
+        border-radius: 50%;
     }
 
     .detail-add-to-cart {
@@ -753,7 +759,6 @@ $color7 : #f7b100;
             border-radius: 20px;
             background-color: red;
         }
-
     }
 
     .imgdetail {
@@ -856,7 +861,6 @@ $color7 : #f7b100;
             position: relative;
             left: 45%;
             bottom: 40px;
-
         }
 
         .changePasword_Singup {
@@ -879,7 +883,6 @@ $color7 : #f7b100;
             box-shadow: 0px 3px #1bcf4840;
             border: 2px solid red;
         }
-
     }
 
     .modal-footer {
@@ -895,7 +898,6 @@ $color7 : #f7b100;
             font-size: 20px;
         }
     }
-
 }
 
 ////////////////////////body contact ///////////////////
@@ -956,13 +958,12 @@ $color7 : #f7b100;
 
 //////////////body-detail-customer//////////////
 .body-detail-customer {
-
     .input-group-text {
         width: 140px;
         //background-color: #00000057;
         color: #000000;
         font-size: 17px;
-        font-family: 'Oswald', sans-serif;
+        font-family: "Oswald", sans-serif;
     }
 
     .message-title {
@@ -1041,7 +1042,6 @@ $color7 : #f7b100;
         height: 40px;
         margin: auto;
         text-align: center;
-
     }
 
     table {
@@ -1055,7 +1055,6 @@ $color7 : #f7b100;
             height: 70px;
 
             a {
-
                 color: #220101;
             }
         }
@@ -1088,7 +1087,8 @@ $color7 : #f7b100;
 //////////tbcontact
 .body-contact-tb {
     margin: 50px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
 
     h4 {
         color: $color2;
@@ -1114,7 +1114,6 @@ $color7 : #f7b100;
     }
 }
 
-
 /////// list product
 .body-list-products {
     .fa-pen-to-square {
@@ -1137,8 +1136,6 @@ $color7 : #f7b100;
             height: 40px;
             margin: auto;
         }
-
-
     }
 
     table {
@@ -1176,7 +1173,6 @@ $color7 : #f7b100;
             font-size: 15px;
             display: flex;
         }
-
     }
 
     .pagination {
@@ -1194,7 +1190,6 @@ $color7 : #f7b100;
         font-size: 17px;
         font-family: "Oswald", sans-serif;
         background-color: #bebaba47;
-
     }
 
     #brand {
@@ -1216,16 +1211,13 @@ $color7 : #f7b100;
             background-color: red;
         }
     }
-
-
 }
-
 
 //// brand : create new , edit, delete, list
 .listbrand {
-
     table {
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+            sans-serif;
         width: 70%;
         margin: auto;
     }
@@ -1291,7 +1283,7 @@ $color7 : #f7b100;
             padding: 10px;
         }
 
-        ul>li>a {
+        ul > li > a {
             color: white;
         }
     }

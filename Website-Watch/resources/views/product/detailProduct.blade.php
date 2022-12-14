@@ -28,7 +28,6 @@
                                             <div class="carousel-inner">
                                                 @foreach ($nameImages as $key => $nameImage)
                                                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-
                                                         <!-- lấy ảnh đầu tiên trong db đúng đường theo folder sản phẩm, còn lại 5 ảnh khác dùng chung ảnh cat.gif (vì dung lượng ảnh lớn nên cắt bớt) -->
                                                         <img src="{{ asset('images/images-product/') }}/{{ $slugGender }}/{{ $slugBrand }}/{{ $nameImage }}"
                                                             class="d-block w-100" alt="...">
@@ -57,7 +56,7 @@
                     <div class="col-6">
                         <h3>{{ $product->name }}</h3>
                         <div class="price d-flex "
-                            @if ($product->discount == 0) {{ "style =  justify-content: start; margin: 0px; font-size: 20px;" }} @endif
+                            @if ($product->discount == 0) {{ 'style =  justify-content: start; margin: 0px; font-size: 20px;' }} @endif
                             style="font-size: 20px;">
                             @if ($product->discount != 0)
                                 <p class="price-pre">
@@ -69,7 +68,7 @@
                                 <!-- xử lý in giá bán sau khi áp dụng giảm giá -->
                                 {{ number_format($product->price - $product->price * ($product->discount / 100)) . ' VNĐ' }}
                             </p>
-                            <div class="sale" @if ($product->discount == 0) {{ "style=opacity:0" }} @endif>
+                            <div class="sale" @if ($product->discount == 0) {{ 'style=opacity:0' }} @endif>
                                 <!-- đổi số thập phân sang dạng phần trăm -->
                                 {{ '-' . $product->discount . '%' }}
                             </div>
@@ -80,16 +79,11 @@
                         </div>
                         <div class="d-flex ">
                             <div class="">
-                                <form action="Gio-Hang.php" method="post">
-                                    <button type="submit" class="btn btn-light detail-add-to-cart" name="add-to-cart"><i
-                                            class="fas fa-cart-plus mx-2 shopping-cart"></i> Đặt mua</button>
-                                    <input type="hidden" name="action" class="action" value="additems">
-                                    <input type="hidden" name="productID" class="productID" value="">
-                                    <input type="hidden" name="productQuantity" class="productQuantity" value="1">
-                                    <input type="hidden" name="productName" class="productName" value="">
-                                    <input type="hidden" name="productPrice" class="productPrice" value="">
-                                    <input type="hidden" name="productImage" class="productImage" value="">
-                                </form>
+                                <button type="button" class="btn btn-light detail-add-to-cart " id="order-product"
+                                    name="add-to-cart">
+                                    <i class="fas fa-cart-plus mx-2 shopping-cart"></i> Đặt mua
+                                </button>
+                                <input type="hidden" id="productID" value="{{ $product->id }}">
                             </div>
                         </div>
                         <div class="mt-5">
@@ -101,14 +95,14 @@
                                     <td><img class="imgpay" src="{{ asset('images/logo-paypal.jpg') }}" alt=""
                                             srcset="">
                                     </td>
-                                    <td><img class="imgpay" src="{{ asset('images/logo-techcombank.jpg') }}"
-                                            alt="" srcset=""></td>
+                                    <td><img class="imgpay" src="{{ asset('images/logo-techcombank.jpg') }}" alt=""
+                                            srcset=""></td>
                                 </tr>
                                 <tr>
                                     <td><img class="imgpay" src="{{ asset('images/logo-vcb.jpg') }}" alt="">
                                     </td>
-                                    <td><img class="imgpay" src="{{ asset('images/logo-techcombank.jpg') }}"
-                                            alt="" srcset=""></td>
+                                    <td><img class="imgpay" src="{{ asset('images/logo-techcombank.jpg') }}" alt=""
+                                            srcset=""></td>
                                     <td><img class="imgpay" src=" {{ asset('images/logo-mastercard.jpg') }}"
                                             alt=""></td>
                                 </tr>

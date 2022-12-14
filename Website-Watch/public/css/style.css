@@ -15,12 +15,6 @@
   transform: translateY(-50%);
 }
 
-
-.header-menu .nav-item :hover{
-  color: #333;
-  background-color: orange;
-}
-
 .slick-next {
   position: absolute;
   right: 0;
@@ -221,13 +215,14 @@
 }
 .body .productlist .filtering .item .sale {
   position: absolute;
-  top: 0;
-  left: 10px;
-  background-color: #dd3333;
-  width: 45px;
-  height: 40px;
-  color: white;
-  font-weight: 600;
+  top: 0px;
+  left: 0px;
+  margin: 4px 4px;
+  background-color: #ff5e57;
+  padding: 4px 8px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: #fff;
 }
 .body .productlist .filtering .item a {
   color: #fdff8f;
@@ -466,15 +461,6 @@
   text-decoration: none;
   color: black;
 }
-.bodyshop .product-shop .item .sale {
-  margin-left: 20px;
-  background-color: #dd3333;
-  width: 45px;
-  height: 40px;
-  color: white;
-  font-weight: 600;
-  padding-top: 7px;
-}
 .bodyshop .product-shop .item .price {
   padding: 0px 25px 0px 25px;
   justify-content: space-between;
@@ -534,12 +520,13 @@
 }
 .bodydetail .sale {
   margin-left: 6px;
-  padding: 7px 3px 0px 3px;
+  padding: 5px 3px 0px 3px;
   height: 30px;
   font-size: 12px;
-  background-color: rgba(221, 51, 51, 0.7411764706);
+  background-color: #ff5e57;
   color: white;
   font-weight: 600;
+  border-radius: 50%;
 }
 .bodydetail .detail-add-to-cart {
   border: 1px solid #52507e;

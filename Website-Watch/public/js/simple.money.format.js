@@ -2,7 +2,7 @@
 
 	$.fn.simpleMoneyFormat = function() {
 
-		this.each(function(index, el) {		
+		this.each(function(index, el) {
 
 			var elType = null; // input or other
 
@@ -70,7 +70,7 @@
 
 			if(counter > 0){
 
-				resultArray.push(temp);				
+				resultArray.push(temp);
 
 			}
 
