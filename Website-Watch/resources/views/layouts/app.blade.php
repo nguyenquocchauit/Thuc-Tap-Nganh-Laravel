@@ -15,6 +15,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     {{-- Styles elemnt  --}}
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/shop.css" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
         integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
@@ -23,34 +24,16 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">    
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-    {{-- Add Sweetalert library --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.css" integrity="sha512-qveKnGrvOChbSzAdtSs8p69eoLegyh+1hwOMbmpCViIwj7rn4oJjdmMvWOuyQlTOZgTlZA0N2PXA7iA8/2TUYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- thư viện sweet aler  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
-        //Pass Header Token
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-        });
-        let _token = $('meta[name="csrf-token"]').attr("content");
-    </script>
-    {{-- Add file handling user login  --}}
+    {{-- Add handle login user  --}}
     <script type="text/javascript" src="{{ asset('js/login-user.js') }}"></script>
-    {{-- Add file to handle user registration  --}}
-    <script type="text/javascript" src="{{ asset('js/register-user.js') }}"></script>
-    {{-- Add a file to hide or show the password --}}
-    <script type="text/javascript" src="{{ asset('js/hidden-show-pass.js') }}"></script>
-    {{-- Add product search processing file --}}
-    <script type="text/javascript" src="{{ asset('js/search-product.js') }}"></script>
-    {{-- Add add to cart processing file --}}
-    <script type="text/javascript" src="{{ asset('js/add-to-cart.js') }}"></script>
-    {{-- Add remove item cart processing file --}}
-    <script type="text/javascript" src="{{ asset('js/remove-pro-cart.js') }}"></script>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -76,7 +59,7 @@
                                 </a>
                             </div>
                             <div class="header-add col-10">
-                                <a href="{{ url('/') }}">
+                                <a href="../../Website Watch PHP/home.php">
                                     <p class="">
                                         <i id="iconhouse" class="fas fa-home"></i>
                                         <strong>SHOP: </strong>2 Nguyễn Đình Chiểu, Nha Trang, Khánh Hòa
@@ -92,33 +75,21 @@
                             <p class="">
                                 <i id="iconphone" class="fas fa-phone-volume"></i>
                                 <strong>HOTLINE: </strong>038 655 5555 |
-                                @guest
-
-                                    {{-- <a href="../../Website Watch PHP/customers/Chi-tiet.php"
+                                {{-- <a href="../../Website Watch PHP/customers/Chi-tiet.php"
                                     style="color:white;font-size: 18px;"><i class="fas fa-user-cog"></i></a>
                                 <strong></strong>
                                 <button type="button" name="logout" class="btn btn-dark"><a href="?logout=1"
                                         style="color:#f1f1f1"><i class="fas fa-sign-out-alt"></i></a></button> --}}
-                                    <button type="button" class="button" data-bs-toggle="modal"
-                                        data-bs-target="#login">Đăng nhập</button> &nbsp;
-                                    <button type="button" class="button" data-bs-toggle="modal"
-                                        data-bs-target="#signup">Đăng ký</button>
-                                @else
-                                    <a href="../../Website Watch PHP/customers/Chi-tiet.php"
-                                        style="color:white;font-size: 18px;"><i class="fas fa-user-cog"></i></a>
-                                    <strong></strong>
-                                    {{ $nameUser }}
-                                    <button type="button" name="logout" class="btn btn-dark"><a
-                                            href="{{ url('api/logout-user') }}" style="color:#f1f1f1"><i
-                                                class="fas fa-sign-out-alt"></i></a></button>
-                                @endguest
+                                <button type="button" class="button" data-bs-toggle="modal"
+                                    data-bs-target="#login">Đăng nhập</button> &nbsp;
+                                <button type="button" class="button" data-bs-toggle="modal"
+                                    data-bs-target="#signup">Đăng ký</button>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
-
         <div class="header-menu " id="header-menu">
             <div class="container">
                 <div class="row">
@@ -139,9 +110,14 @@
                                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                                     <ul class="navbar-nav">
                                         <li class="nav-item">
-                                            <a class="nav-link" aria-current="page" href="{{ url('/') }}">TRANG
-                                                CHỦ</a>
+                                            <a class="nav-link" aria-current="page"
+                                                href="../../Website Watch PHP/home.php">TRANG CHỦ</a>
                                         </li>
+
+                                        <li class="nav-item ">
+                                            <a class="nav-link" href="{{route('shop-index')}}">SHOP</a>
+                                        </li>
+
                                         <li class="nav-item ">
                                             <a class="nav-link" href="#">TIN TỨC</a>
                                         </li>
@@ -180,32 +156,33 @@
                         <img id="logo" src="{{ asset('images/tcwlogo.png') }}" alt="" srcset="">
                     </div>
                     <div class="col-5 row right searchbtn">
-                        <div class="col-7 search">
+                        <div class="col-7">
+                        <form action="">
                             <div class="input-group">
-                                <div id="search-autocomplete" class="form-outline">
-                                    <input type="search" id="search-product" class="form-control"
-                                        placeholder="Tìm kiếm..." />
-                                </div>
-                                <button type="button" class="btn"
-                                    style="border-bottom-right-radius: 10px;border-top-right-radius: 10px;">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                                <div id="searchResult" class="dropdown-content dWSearchResult showSearchResult">
-                                    <!-- hiển thị kết quả tìm kiếm sản phẩm -->
-
-                                </div>
+                                    <div id="search-autocomplete" class="form-outline">
+                                        <input onkeyup="search(this.value)" name="search" value="{{request('search')}}" type="search" id="form1"
+                                            class="form-control" placeholder="Tìm kiếm..." />
+                                    </div>
+                                    <button type="submit" class="btn"
+                                        style="border-bottom-right-radius: 10px;border-top-right-radius: 10px;">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <div id="searchResult" class="dropdown-content dWSearchResult">
+                                        <!-- hiển thị kết quả tìm kiếm sản phẩm -->
+                                        <p><span id="searchResult"></span></p>
+                                    </div>
                             </div>
+                        </form>
                         </div>
                         <div class="col-5 cartbtn">
                             <ul class="navbar-nav">
                                 <li class="nav-item ">
-                                    <a href="{{ url('/gio-hang') }}"
+                                    <a href="../../Website Watch PHP/product and cart/Gio-Hang.php"
                                         id="show_history_cart" class="nav-link">
                                         <span class="header-cart-title">GIỎ HÀNG
                                             <i style="color: black;" class="fas fa-cart-plus mx-2 shopping-cart"></i>
                                             <span style="position: absolute;top: 0%;color:#b31212;">
-                                                <p id="quantity-shopping-cart">{{ count((array) session('cart')) }}
-                                                </p>
+                                                <p id="quantity-shopping-cart"></p>
                                             </span>
                                         </span>
                                     </a>
@@ -344,6 +321,10 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     {{-- Add js handle carousel slick --}}
     <script type="text/javascript" src="{{ asset('js/slick-carousel.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="/js/shop.js"></script>
+    <script type="text/javascript" src="/js/simple.money.format.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

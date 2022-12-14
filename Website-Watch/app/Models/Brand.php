@@ -11,10 +11,10 @@ class Brand extends Model
 
     protected $table = 'brands';
      protected $primaryKey = false;
-    // protected $guarded = [];
+    protected $guarded = [];
 
-    // public function product(){
-    //     return $this->hasMany(Product::class,'brand','id');
-    // }
+    public function product(){
+        return $this->hasMany(Product::class,'brand','id');
+    }
 
 }

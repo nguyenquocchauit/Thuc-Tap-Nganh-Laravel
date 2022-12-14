@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
+
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
@@ -30,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
             $nameUser = $this->getNameUser();
             $view->with(['nameUser' => $nameUser]);
         });
+        Paginator::useBootstrapFive();
     }
     public function getNameUser()
     {
