@@ -164,6 +164,12 @@
   color: white;
   font-weight: bold;
 }
+
+
+.header-menu .nav-item :hover{
+  color: #333;
+  background-color: orange;
+}
 .header-slide .btnslide {
   width: 10px;
   height: 10px;

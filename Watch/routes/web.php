@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Front;
+use App\Http\Controllers\Front\ShopController;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,8 @@ Route::get('/', function () {
 });
 Auth::routes();
 Route::get('/', [Front\HomeController::class, 'index']);
+
+Route::prefix('shop')->group(function() {
+     Route::get('/',[ShopController::class, 'index'])->name('shop-index');
+     Route::get('/{categoryName}',[ShopController::class,'category']);
+});

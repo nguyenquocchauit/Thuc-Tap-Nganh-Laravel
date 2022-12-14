@@ -15,6 +15,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     {{-- Styles elemnt  --}}
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/shop.css" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
         integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
@@ -23,11 +24,12 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">    
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.css" integrity="sha512-qveKnGrvOChbSzAdtSs8p69eoLegyh+1hwOMbmpCViIwj7rn4oJjdmMvWOuyQlTOZgTlZA0N2PXA7iA8/2TUYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- thư viện sweet aler  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- Add handle login user  --}}
@@ -111,6 +113,11 @@
                                             <a class="nav-link" aria-current="page"
                                                 href="../../Website Watch PHP/home.php">TRANG CHỦ</a>
                                         </li>
+
+                                        <li class="nav-item ">
+                                            <a class="nav-link" href="{{route('shop-index')}}">SHOP</a>
+                                        </li>
+
                                         <li class="nav-item ">
                                             <a class="nav-link" href="#">TIN TỨC</a>
                                         </li>
@@ -150,20 +157,22 @@
                     </div>
                     <div class="col-5 row right searchbtn">
                         <div class="col-7">
+                        <form action="">
                             <div class="input-group">
-                                <div id="search-autocomplete" class="form-outline">
-                                    <input onkeyup="search(this.value)" type="search" id="form1"
-                                        class="form-control" placeholder="Tìm kiếm..." />
-                                </div>
-                                <button type="button" class="btn"
-                                    style="border-bottom-right-radius: 10px;border-top-right-radius: 10px;">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                                <div id="searchResult" class="dropdown-content dWSearchResult">
-                                    <!-- hiển thị kết quả tìm kiếm sản phẩm -->
-                                    <p><span id="searchResult"></span></p>
-                                </div>
+                                    <div id="search-autocomplete" class="form-outline">
+                                        <input onkeyup="search(this.value)" name="search" value="{{request('search')}}" type="search" id="form1"
+                                            class="form-control" placeholder="Tìm kiếm..." />
+                                    </div>
+                                    <button type="submit" class="btn"
+                                        style="border-bottom-right-radius: 10px;border-top-right-radius: 10px;">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <div id="searchResult" class="dropdown-content dWSearchResult">
+                                        <!-- hiển thị kết quả tìm kiếm sản phẩm -->
+                                        <p><span id="searchResult"></span></p>
+                                    </div>
                             </div>
+                        </form>
                         </div>
                         <div class="col-5 cartbtn">
                             <ul class="navbar-nav">
@@ -312,6 +321,10 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     {{-- Add js handle carousel slick --}}
     <script type="text/javascript" src="{{ asset('js/slick-carousel.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="/js/shop.js"></script>
+    <script type="text/javascript" src="/js/simple.money.format.js"></script>
+    @stack('scripts')
 </body>
 
 </html>
