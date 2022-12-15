@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Product;
 use Illuminate\Pagination\Paginator;
 
 use App\Models\User;
@@ -30,7 +31,9 @@ class AppServiceProvider extends ServiceProvider
         // Here * means - in all of your views $nameUser variable is available.
         view()->composer('*', function ($view) {
             $nameUser = $this->getNameUser();
-            $view->with(['nameUser' => $nameUser]);
+            $brand = $this->menuBrandForGender();
+            // $brands = $this->menuBrandForGender();
+            $view->with(['nameUser' => $nameUser, 'brandMenu' => $brand]);
         });
         Paginator::useBootstrapFive();
     }
@@ -43,5 +46,20 @@ class AppServiceProvider extends ServiceProvider
             $name = $name[sizeof($name) - 2] . " " . $name[sizeof($name) - 1];
         }
         return $name;
+    }
+    public function menuBrandForGender()
+    {
+        $women =  Product::query()
+            ->join('brands', 'brands.id', '=', 'products.brand')
+            ->selectRaw('DISTINCT brands.*')
+            ->where('gender', '1')
+            ->get();
+        $men =  Product::query()
+            ->join('brands', 'brands.id', '=', 'products.brand')
+            ->selectRaw('DISTINCT brands.*')
+            ->where('gender', '0')
+            ->get();
+        $brands = ['men' => $men, 'women' => $women];
+        return  $brands;
     }
 }

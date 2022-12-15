@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="body-product-details">
-        <div class="bodydetail mt-5 mb-4">
+        <div class="bodydetail pt-4 mb-4">
             <div class="container">
                 <div class="row">
                     <div class="col-6">
@@ -54,7 +54,7 @@
                         </table>
                     </div>
                     <div class="col-6">
-                        <h3>{{ $product->name }}</h3>
+                        <h3 id="name-product">{{ $product->name }}</h3>
                         <div class="price d-flex "
                             @if ($product->discount == 0) {{ 'style =  justify-content: start; margin: 0px; font-size: 20px;' }} @endif
                             style="font-size: 20px;">
@@ -111,6 +111,110 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="comment-product">
+            <section style="">
+                <div class="container  py-5 text-dark">
+                    <div class="row " style=" color: white;">
+                        <div class="col-md-11 col-lg-9 col-xl-7">
+                            <div class="d-flex flex-start p-1">
+                                <img class="rounded-circle shadow-1-strong me-3"
+                                    src="{{ asset('images/avt-comment.webp') }}" alt="avatar" width="65"
+                                    height="65" />
+                                <div class="card w-100">
+                                    <div class="card-body p-4">
+                                        <div class="w-100">
+                                            <h5>Viết nhận xét</h5>
+                                            <div class="rating">
+                                                <input type="radio" name="rating" value="5"
+                                                    id="5"><label for="5">☆</label>
+                                                <input type="radio" name="rating" value="4"
+                                                    id="4"><label for="4">☆</label>
+                                                <input type="radio" name="rating" value="3"
+                                                    id="3"><label for="3">☆</label>
+                                                <input type="radio" name="rating" value="2"
+                                                    id="2"><label for="2">☆</label>
+                                                <input type="radio" name="rating" value="1"
+                                                    id="1"><label for="1">☆</label>
+                                            </div>
+                                            <div class="form-outline">
+                                                <textarea class="form-control" id="textAreaExample" rows="2"></textarea>
+                                                <label class="form-label" for="textAreaExample">Nội dung</label>
+                                            </div>
+                                            <div class="d-flex justify-content-between mt-3">
+                                                <button type="button" class="btn btn-success">Hủy</button>
+                                                <button type="button" class="btn btn-danger">
+                                                    Gửi <i class="fas fa-long-arrow-alt-right ms-1"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @foreach ($comments as $comment)
+                                <div class="d-flex flex-start p-1">
+                                    <img class="rounded-circle shadow-1-strong me-3"
+                                        src="{{ asset('images/avt-comment.webp') }}" alt="avatar" width="65"
+                                        height="65" />
+                                    <div class="card w-100">
+                                        <div class="card-body p-4">
+                                            <div class="">
+                                                <h5>{{ $comment->user['name'] }}</h5>
+                                                <p class="small">{{$comment->create_at }}</p>
+                                                <p>
+                                                    {{ $comment->content }}
+                                                </p>
+
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex align-items-center">
+                                                        <a href="#!" class="link-muted me-2"><i
+                                                                class="fas fa-thumbs-up me-1"></i>132</a>
+                                                        <a href="#!" class="link-muted"><i
+                                                                class="fas fa-thumbs-down me-1"></i>15</a>
+                                                    </div>
+                                                    <a href="#!" class="link-muted"><i
+                                                            class="fas fa-reply me-1"></i>
+                                                        Trả lời</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                            <div class="d-flex flex-start p-1">
+                                <img class="rounded-circle shadow-1-strong me-3"
+                                    src="{{ asset('images/avt-comment.webp') }}" alt="avatar" width="65"
+                                    height="65" />
+                                <div class="card w-100">
+                                    <div class="card-body p-4">
+                                        <div class="">
+                                            <h5>Mindy Campbell</h5>
+                                            <p class="small">5 hours ago</p>
+                                            <p>
+                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Delectus
+                                                cumque doloribus dolorum dolor repellat nemo animi at iure autem fuga
+                                                cupiditate architecto ut quam provident neque, inventore nisi eos quas?
+                                            </p>
+
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                    <a href="#!" class="link-muted me-2"><i
+                                                            class="fas fa-thumbs-up me-1"></i>158</a>
+                                                    <a href="#!" class="link-muted"><i
+                                                            class="fas fa-thumbs-down me-1"></i>13</a>
+                                                </div>
+                                                <a href="#!" class="link-muted"><i class="fas fa-reply me-1"></i>
+                                                    Trả lời</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 @endsection

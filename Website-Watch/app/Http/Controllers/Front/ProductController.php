@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -10,6 +11,7 @@ class ProductController extends Controller
 {
     public function searchProduct($search)
     {
+        // get product by parameter $search
         $data = Product::where('name', 'like', "$search%")->get();
         if (count($data) > 0) {
             return response()->json([
@@ -38,10 +40,18 @@ class ProductController extends Controller
         $slugBrand = $this->getSlugBrand($product);
         //get gender slug
         $slugGender = $this->getSlugGender($product);
+        //get comment of product
+        $comments = $this->commentOfProduct($id);
         if ($product)
-            return view('product.detailProduct', compact('product', 'nameImages', 'slugBrand', 'slugGender'));
+            return view('product.detailProduct', compact('product', 'nameImages', 'slugBrand', 'slugGender', 'comments'));
         else
             return Redirect('/');
+    }
+    public function commentOfProduct($product)
+    {
+        // get all comment of product
+        $comment = Comment::where('product', $product)->get();
+        return $comment;
     }
     public function getFileImageProduct($image)
     {

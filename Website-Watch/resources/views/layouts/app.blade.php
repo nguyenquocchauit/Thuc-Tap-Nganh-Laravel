@@ -123,7 +123,6 @@
                 </div>
             </div>
         </form>
-
         <div class="header-menu " id="header-menu">
             <div class="container">
                 <div class="row">
@@ -157,8 +156,12 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <!-- duyệt các hãng thuộc giới tính nam, thẻ a có đường dẫn tới file shop chứa brand, giới tính tương tứng -->
-                                                <li><a class="dropdown-item" href="shop.php?gender=IDM&brand="></a>
-                                                </li>
+                                                @foreach ($brandMenu['men'] as $value)
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                            href="#">{{ $value->name }}</a>
+                                                    </li>
+                                                @endforeach
                                             </ul>
                                         </li>
                                         <li class="nav-item dropdown">
@@ -168,8 +171,18 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <!-- duyệt các hãng thuộc giới tính nữ, thẻ a có đường dẫn tới file shop chứa brand, giới tính tương tứng -->
-                                                <li><a class="dropdown-item" href="shop.php?gender=IDWM&brand="></a>
+
+                                                @foreach ($brandMenu['women'] as $value)
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                            href="#">{{ $value->name }}</a>
+                                                    </li>
+                                                @endforeach
+
+                                                <li>
+                                                    <a class="dropdown-item" href="#"></a>
                                                 </li>
+
                                             </ul>
                                         </li>
                                         <li class="nav-item">
@@ -227,6 +240,9 @@
             </div>
         </div>
     </div>
+
+    {{-- add file menu (is header) --}}
+    {{-- @include('layouts.menu') --}}
     <main class="">
         @yield('content')
     </main>

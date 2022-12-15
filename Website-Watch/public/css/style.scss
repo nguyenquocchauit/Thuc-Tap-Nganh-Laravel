@@ -120,7 +120,7 @@ $color7: #f7b100;
     }
 
     &-menu {
-        background-color: #bebaba;
+        background-color: #000000db;
 
         .navbar {
             position: relative;
@@ -297,9 +297,19 @@ $color7: #f7b100;
                     margin-left: 60px;
 
                     .price-pre {
+                        // text-decoration-color: #ff0000d4;
+                        // text-decoration-line: line-through;
+                        // margin-right: 10px;
+                        letter-spacing: 2px;
                         text-decoration-color: #ff0000d4;
+                        -webkit-text-decoration-line: line-through;
                         text-decoration-line: line-through;
-                        margin-right: 10px;
+                        font-size: 14px;
+                        opacity: 0.6;
+                        margin: 0 0 0 8px;
+                    }
+                    .price-sale {
+                        letter-spacing: -1px;
                     }
                 }
 
@@ -740,10 +750,12 @@ $color7: #f7b100;
     }
 
     .detail-add-to-cart {
+        width: 400px;
+        height: 40px;
         border: 1px solid #52507e;
         padding: 4px 14px;
         background-color: #000;
-        color: white;
+        color: #f17502;
         text-transform: uppercase;
         font-weight: bold;
         cursor: pointer;
@@ -953,6 +965,9 @@ $color7: #f7b100;
             text-transform: uppercase;
             border-radius: 1px;
         }
+    }
+    .remove-product {
+        font-size: 20px;
     }
 }
 
@@ -1285,6 +1300,74 @@ $color7: #f7b100;
 
         ul > li > a {
             color: white;
+        }
+    }
+}
+// body product
+.body-product-details {
+    color: white;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.697) 100%,
+            rgba(0, 0, 0, 0.5) 100%
+        ),
+        url("/images/black_background_metal.jpg");
+    .bodydetail {
+        .price-pre {
+            opacity: 0.6;
+        }
+        #name-product {
+            color: wheat;
+        }
+    }
+
+    /// comment product
+    .comment-product {
+        color: white;
+        .card {
+            background-color: #3030304a;
+        }
+        .rating {
+            display: flex;
+            margin-top: -10px;
+            flex-direction: row-reverse;
+            margin-left: -4px;
+            float: left;
+        }
+
+        .rating > input {
+            display: none;
+        }
+
+        .rating > label {
+            position: relative;
+            width: 19px;
+            font-size: 25px;
+            color: #ff0000;
+            cursor: pointer;
+        }
+
+        .rating > label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 0;
+        }
+
+        .rating > label:hover:before,
+        .rating > label:hover ~ label:before {
+            opacity: 1 !important;
+        }
+
+        .rating > input:checked ~ label:before {
+            opacity: 1;
+        }
+
+        .rating:hover > input:checked ~ label:before {
+            opacity: 0.4;
+        }
+        .link-muted{
+            .fa-thumbs-down{
+                color: red;
+            }
         }
     }
 }

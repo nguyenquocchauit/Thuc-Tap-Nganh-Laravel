@@ -41,7 +41,8 @@
                                                 src="{{ asset('images/image_products_home') . '/' . $allProduct->productImage['image_1'] }}">
                                         </div>
                                         <div class="textleft">
-                                            <div><a href="{{ url('chi-tiet-san-pham/') }}/{{ $allProduct->id }}"></div>
+                                            <div style="line-height: 12px;"><a
+                                                    href="{{ url('chi-tiet-san-pham/') }}/{{ $allProduct->id }}"></div>
                                             {{ $allProduct->name }}</a>
                                             <div><b>
                                                     @if ($allProduct->quantity == 0)
@@ -81,24 +82,25 @@
                                                     src="{{ asset('images/image_products_home') . '/' . $allProduct->productImage['image_1'] }}">
                                             </div>
                                             <div class="textleft product-item-desc">
-                                                <div><a
+                                                <div style="line-height: 12px;"><a
                                                         href="{{ url('chi-tiet-san-pham/') }}/{{ $allProduct->id }}">{{ $allProduct->name }}</a>
                                                 </div>
                                                 <div class="price d-flex ">
                                                     <!-- number_format dùng định dạng số theo kiểu đơn vị tiền tệ -->
-                                                    <p class="price-pre">{{ number_format($allProduct->price) }}</p>
-                                                    <p>
-                                                        <!-- xử lý in giá bán sau khi áp dụng giảm giá -->
+                                                    <span
+                                                        class="price-pre">{{ number_format($allProduct->price) . ' VNĐ' }}</span>
+                                                    <!-- xử lý in giá bán sau khi áp dụng giảm giá -->
+                                                    <span class="price-sale">
                                                         {{ number_format($allProduct->price - $allProduct->price * ($allProduct->discount / 100)) . ' VNĐ' }}
-
-                                                    </p>
+                                                    </span>
                                                 </div>
                                                 <div class="product-item-desc-button-submit">
                                                     <button type="submit" class="btn btn-light add-to-cart"
                                                         name="add-to-cart"><i
                                                             class="fas fa-cart-plus mx-2 shopping-cart"></i>Thêm vào
                                                         giỏ</button>
-                                                    <input type="hidden" name="productID" class="productID" value="{{ $allProduct->id }}">
+                                                    <input type="hidden" name="productID" class="productID"
+                                                        value="{{ $allProduct->id }}">
                                                     <input type="hidden" name="productName" class="productName"
                                                         value="{{ $allProduct->name }}">
                                                     <input type="hidden" name="productImage" class="productImage"
@@ -141,7 +143,7 @@
                                                     src="{{ asset('images/image_products_home') . '/' . $bestSellingProduct->productImage['image_1'] }}">
                                             </div>
                                             <div class="textleft product-item-desc">
-                                                <div><a
+                                                <div style="line-height: 12px;"><a
                                                         href="{{ url('chi-tiet-san-pham/') }}/{{ $bestSellingProduct->id }}">{{ $bestSellingProduct->name }}</a>
                                                 </div>
                                                 <div class="price d-flex ">
@@ -160,11 +162,12 @@
                                                             class="fas fa-cart-plus mx-2 shopping-cart"></i>Thêm
                                                         vào
                                                         giỏ</button>
-                                                        <input type="hidden" name="productID" class="productID" value="{{ $bestSellingProduct->id }}">
-                                                        <input type="hidden" name="productName" class="productName"
-                                                            value="{{ $bestSellingProduct->name }}">
-                                                        <input type="hidden" name="productImage" class="productImage"
-                                                            value="{{ $bestSellingProduct->productImage['image_1'] }}">
+                                                    <input type="hidden" name="productID" class="productID"
+                                                        value="{{ $bestSellingProduct->id }}">
+                                                    <input type="hidden" name="productName" class="productName"
+                                                        value="{{ $bestSellingProduct->name }}">
+                                                    <input type="hidden" name="productImage" class="productImage"
+                                                        value="{{ $bestSellingProduct->productImage['image_1'] }}">
                                                 </div>
                                             </div>
                                         </div>

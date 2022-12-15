@@ -41,7 +41,9 @@
                     </td>
                     <td style="width: 26%;"><span>{{ $details['name'] }}</span></td>
                     <td>
-                        <p>{{ number_format($details['priceDiscount']) . ' VNĐ' }}</p>
+                        <p style="letter-spacing: 2px;
+                        opacity: 0.9;">
+                            {{ number_format($details['priceDiscount']) . ' VNĐ' }}</p>
                     </td>
                     <td>
                         <div class="quantity numbers-row">
@@ -58,10 +60,10 @@
                         </div>
                     </td>
                     <td>
-                        <p>{{ number_format($details['total']) . ' VNĐ' }}</p>
+                        <p style="letter-spacing: 2px;">{{ number_format($details['total']) . ' VNĐ' }}</p>
                     </td>
                     <td><a href="{{ url('api/remove-product-by-id/') }}/{{ $id }}"><i
-                                class="far fa-times-circle"></i></a></td>
+                                class="far fa-times-circle remove-product"></i></a></td>
                 </tr>
                 @php $i++; @endphp
             @endforeach

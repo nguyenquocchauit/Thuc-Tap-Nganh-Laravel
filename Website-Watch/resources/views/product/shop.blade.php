@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="quick-view-controller" style="justify-content: center;">
                                         <p class="product-item-desc-button-submit">
-                                            <a  class="btn-cart add-to-cart">
+                                            <a class="btn-cart add-to-cart">
                                                 <i class="fas fa-cart-plus" style="color:black "></i>
                                             </a>
                                             <input type="hidden" name="productID" class="productID"
@@ -167,12 +167,12 @@
                                     </a>
                                     <div class="product-price">
                                         @if ($product->discount != null)
+                                            <span class="price-initial">{{ number_format($product->price) }} VNĐ</span>
                                             <span
                                                 class="price-sale">{{ number_format($product->price - $product->price * ($product->discount / 100)) }}
-                                                đ</span>
-                                            <span class="price-initial">{{ number_format($product->price) }} đ</span>
+                                                VNĐ</span>
                                         @else
-                                            <span>{{ number_format($product->price) }} đ </span>
+                                            <span>{{ number_format($product->price) }} VNĐ </span>
                                         @endif
 
                                     </div>

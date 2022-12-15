@@ -8,7 +8,7 @@
 }
 
 .filter-wiget .fw-title {
-    color:#252525;
+    color: #252525;
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 26px;
@@ -18,7 +18,7 @@
     list-style: none;
 }
 
-.filter-wiget .filter-categories li a{
+.filter-wiget .filter-categories li a {
     display: inline-block;
     color: #636363;
     font-size: 16px;
@@ -26,7 +26,7 @@
     text-decoration: none;
 }
 
-.lb-item{
+.lb-item {
     display: inline-block;
     color: #636363;
     font-size: 16px;
@@ -35,63 +35,63 @@
 }
 
 .alert {
-  margin-top: 50px;
-  margin-left: 200px;
+    margin-top: 50px;
+    margin-left: 200px;
 }
 
 /* Range price begin */
 
 .value {
-  position: absolute;
-  top: 30px;
-  left: 50%;
-  margin: 0 0 0 -20px;
-  width: 40px;
-  text-align: center;
-  display: block;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    margin: 0 0 0 -20px;
+    width: 40px;
+    text-align: center;
+    display: block;
 
-  /* optional */
+    /* optional */
 
-  font-weight: normal;
-  font-family: Verdana,Arial,sans-serif;
-  font-size: 14px;
-  color: #333;
+    font-weight: normal;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
 }
 
 .price-range-both.value {
-  width: 100px;
-  margin: 0 0 0 -50px;
-  top: 26px;
+    width: 100px;
+    margin: 0 0 0 -50px;
+    top: 26px;
 }
 
 .price-range-both {
-  display: none; 
+    display: none;
 }
 
 .value i {
-  font-style: normal;
+    font-style: normal;
 }
 
 /* end */
 
-  .filter-btn {
+.filter-btn {
     text-decoration: none;
-        margin-top: 32px;
-        background: darkgoldenrod;
-        padding: 4px 12px;
-        text-transform: uppercase;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        border: 0;
-        outline: 0;
-        text-align: center;
-        min-width: 50px;
-        display: inline-flex;
-        justify-content: space-between;
-        color: #f5f5f5;
-        cursor: pointer;
-  }
-  .slider-range p {
+    margin-top: 32px;
+    background: darkgoldenrod;
+    padding: 4px 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border: 0;
+    outline: 0;
+    text-align: center;
+    min-width: 50px;
+    display: inline-flex;
+    justify-content: space-between;
+    color: #f5f5f5;
+    cursor: pointer;
+}
+.slider-range p {
     float: left;
     width: 50%;
     text-align: center;
@@ -99,100 +99,94 @@
 
 /* Range price end */
 
-
-
 /* List products */
 .product-show-option .select-option .sorting {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
 .product-show-option .select-option .p-show {
-  padding-right: 30px;
+    padding-right: 30px;
 }
-
 
 .product-list {
-	width: 100%;
-	float: left;
-  list-style: none;
-  margin-top: 20px;
+    width: 100%;
+    float: left;
+    list-style: none;
+    margin-top: 20px;
 }
 
-.product-list li{
-	float: left;
-	margin: 0 20px 20px 0;
-  margin-right: 60px;
+.product-list li {
+    float: left;
+    margin: 0 20px 20px 0;
+    margin-right: 60px;
 }
 
 .product {
-	width: 242px;
-	height: auto;
-	position: relative;
-	overflow: hidden;
-
+    width: 242px;
+    height: auto;
+    position: relative;
+    overflow: hidden;
 }
 
 .product-image {
-	width: 33,33333333%;
-	height: 400px;
-	display: block;
+    width: 33, 33333333%;
+    height: 400px;
+    display: block;
 }
 
 .product img {
-	width: 250px;
+    width: 250px;
 }
 
 .sale {
-  position: absolute;
-  top:0px;
-  left: 0px;
-  margin: 4px 4px;
-  background-color: #ff5e57;
-  padding: 4px 8px;
-  border-radius: 50%;
-  font-size: 16px;
-  color: #fff;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 4px 4px;
+    background-color: #ff5e57;
+    padding: 4px 8px;
+    border-radius: 50%;
+    font-size: 16px;
+    color: #fff;
 }
 
 .icon-heart {
-  position: absolute;
-  top:0px;
-  right: 0px;
-  margin: 4px 4px;
-  font-size: 24px;
-  color: #ff5e57;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 4px 4px;
+    font-size: 24px;
+    color: #ff5e57;
 }
 
 .quick-view-controller {
-	width: 100%;
-	position: absolute;
-	height: 50px;
-	opacity: 0.8;
-	bottom: 0px;
-  display: flex;
-  display: none;
-  margin: 0px 8px;
+    width: 100%;
+    position: absolute;
+    height: 50px;
+    opacity: 0.8;
+    bottom: 0px;
+    display: flex;
+    display: none;
+    margin: 0px 8px;
 }
 
-
-
 .quick-view-controller p a {
-	padding: 10px 16px;
-	background-color: #FFF;
-  font-weight: 700;
-  font-size: 16px;
-	float: left;
-  text-decoration: none;
+    padding: 10px 16px;
+    background-color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    float: left;
+    text-decoration: none;
 }
 
 .btn-view {
-	color: #222;
-  margin: 0px 8px;
+    color: #222;
+    margin: 0px 8px;
 }
 
 .quick-view-controller .btn-cart {
-  background-color: #FFCC00;
-  color: #fff;
+    background-color: #ffcc00;
+    color: #fff;
 }
 
 .product:hover .quick-view-controller {
@@ -200,43 +194,43 @@
 }
 
 .product:hover {
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
 }
 
 .p-text {
-  text-align: center;
+    text-align: center;
 }
 
 .product-name {
-  font-style: normal;
-  font-weight: 400;
-  padding: 0;
-  margin: 12px 0 0;
-  font-size: 12px;
-  line-height: 12px;
-  letter-spacing: 1px;
-  color: #000;
-  text-transform: uppercase;
-  text-decoration: none;
+    font-style: normal;
+    font-weight: 400;
+    padding: 0;
+    margin: 12px 0 0;
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: 1px;
+    color: #000;
+    text-transform: uppercase;
+    text-decoration: none;
 }
 
 .product-price {
-  color: #161a21;
-  line-height: 14px;
-  font-size: 14px;
-  font-weight: 700;
+    color: #161a21;
+    line-height: 14px;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .price-sale {
     letter-spacing: -1px;
-
 }
 
 .price-initial {
-  letter-spacing: 2px;
+    text-decoration-color: #ff0000d4;
+    letter-spacing: 2px;
     -webkit-text-decoration-line: line-through;
     text-decoration-line: line-through;
     font-size: 14px;
-    opacity: .6;
+    opacity: 0.6;
     margin: 0 0 0 8px;
 }
