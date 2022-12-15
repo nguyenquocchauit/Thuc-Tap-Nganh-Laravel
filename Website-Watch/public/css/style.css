@@ -217,7 +217,7 @@
 .body .productlist .filtering .item .sale {
   position: absolute;
   top: 0px;
-  left: 0px;
+  left: 30px;
   margin: 4px 4px;
   background-color: #ff5e57;
   padding: 4px 8px;
@@ -225,15 +225,27 @@
   font-size: 16px;
   color: #fff;
 }
+.body .productlist .filtering .item .like-product {
+  position: absolute;
+  top: 0px;
+  right: 50px;
+  margin: 4px 4px;
+  font-size: 24px;
+  color: rgba(255, 255, 254, 0.5294117647);
+}
+.body .productlist .filtering .item .liked {
+  color: red;
+}
 .body .productlist .filtering .item a {
   color: #fdff8f;
   text-decoration: none;
   margin-top: 20px;
 }
 .body .productlist .filtering .item .price {
-  margin-left: 60px;
+  justify-content: center;
 }
 .body .productlist .filtering .item .price .price-pre {
+  padding: 1px 5px 0px 0px;
   letter-spacing: 2px;
   -webkit-text-decoration-color: rgba(255, 0, 0, 0.831372549);
           text-decoration-color: rgba(255, 0, 0, 0.831372549);
@@ -244,6 +256,7 @@
   margin: 0 0 0 8px;
 }
 .body .productlist .filtering .item .price .price-sale {
+  padding: 0px 0px 0px 5px;
   letter-spacing: -1px;
 }
 .body .productlist .filtering .item .btn {
@@ -1035,4 +1048,11 @@
 }
 .body-product-details .comment-product .link-muted .fa-thumbs-down {
   color: red;
+}
+.body-product-details .comment-product .color_red {
+  color: red;
+  font-size: 20px;
+}
+.body-product-details .comment-product .small {
+  opacity: 0.6;
 }/*# sourceMappingURL=style.css.map */

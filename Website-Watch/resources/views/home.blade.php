@@ -76,6 +76,15 @@
                                         <div class="sale">
                                             -{{ $allProduct->discount }} %
                                         </div>
+                                        {{-- get liked product by user logined --}}
+                                        <div
+                                            class="icon-heart like-product product-{{ $allProduct->id }}  @foreach ($liked as $like)
+                                        @if ($like->product == $allProduct->id && $like->customers == Auth::user()->id && $like->status == 'like')
+                                            {{ 'liked' }}
+                                        @endif @endforeach ">
+                                            <i class="fa fa-heart"></i>
+                                            <input type="hidden" class="idProduct" value="{{ $allProduct->id }}">
+                                        </div>
                                         <div class="wap-items-ss brbox product-item ">
                                             <div class="wap-ss-img product-item-img">
                                                 <img alt=""
@@ -90,9 +99,8 @@
                                                     <span
                                                         class="price-pre">{{ number_format($allProduct->price) . ' VNĐ' }}</span>
                                                     <!-- xử lý in giá bán sau khi áp dụng giảm giá -->
-                                                    <span class="price-sale">
-                                                        {{ number_format($allProduct->price - $allProduct->price * ($allProduct->discount / 100)) . ' VNĐ' }}
-                                                    </span>
+                                                    <span
+                                                        class="price-sale">{{ number_format($allProduct->price - $allProduct->price * ($allProduct->discount / 100)) . ' VNĐ' }}</span>
                                                 </div>
                                                 <div class="product-item-desc-button-submit">
                                                     <button type="submit" class="btn btn-light add-to-cart"
@@ -136,6 +144,16 @@
                                                 {{ '-' . $bestSellingProduct->discount . '%' }}
                                             </div>
                                         @endif
+                                        {{-- get liked product by user logined --}}
+                                        <div
+                                            class="icon-heart like-product product-{{ $bestSellingProduct->id }}  @foreach ($liked as $like)
+                                        @if ($like->product == $bestSellingProduct->id && $like->customers == Auth::user()->id && $like->status == 'like')
+                                            {{ 'liked' }}
+                                        @endif @endforeach ">
+                                            <i class="fa fa-heart"></i>
+                                            <input type="hidden" class="idProduct" value="{{ $bestSellingProduct->id }}"
+                                                data-id="product-{{ $bestSellingProduct->id }}">
+                                        </div>
                                         <div class="wap-items-ss brbox product-item">
                                             <div class="wap-ss-img product-item-img">
                                                 <!-- Image lưu trữ nhiều ảnh, tách dữ liệu lấy ảnh đầu tiên. Các ảnh được ngăn cách bởi dấu , -->

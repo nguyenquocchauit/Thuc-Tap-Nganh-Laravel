@@ -30,3 +30,6 @@ Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add
 Route::post('/remove-all-cart', [CartController::class, 'removeAllCart'])->name('remove-all-cart');
 Route::get('/remove-product-by-id/{id}', [CartController::class, 'removeProductCart'])->name('remove-product-by-id');
 Route::post('/update-quantity-cart', [CartController::class, 'updateQuantityCart'])->name('update-quantity-cart');
+Route::post('/comment-product', [ProductController::class, 'writeComment'])->name('comment-product');
+Route::post('/delete-comment', [ProductController::class, 'deleteComment'])->name('delete-comment');
+Route::post('/like-product', [ProductController::class, 'likeProduct'])->name('like-product');

@@ -56,6 +56,10 @@
     <script type="text/javascript" src="{{ asset('js/add-to-cart.js') }}"></script>
     {{-- Add remove item cart processing file --}}
     <script type="text/javascript" src="{{ asset('js/remove-pro-cart.js') }}"></script>
+    {{-- Add comment product processing file --}}
+    <script type="text/javascript" src="{{ asset('js/comment-product.js') }}"></script>
+     {{-- Add like product processing file --}}
+     <script type="text/javascript" src="{{ asset('js/like-product.js') }}"></script>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -92,8 +96,6 @@
                         <div class="center col-2">
                         </div>
                         <div class="right col-4 ">
-                            <input type="hidden" id="currentUserHDSD" value="">
-                            <input type="hidden" id="currentUserHDSD-home" value="">
                             <p class="">
                                 <i id="iconphone" class="fas fa-phone-volume"></i>
                                 <strong>HOTLINE: </strong>038 655 5555 |
@@ -113,6 +115,7 @@
                                         style="color:white;font-size: 18px;"><i class="fas fa-user-cog"></i></a>
                                     <strong></strong>
                                     {{ $nameUser }}
+                                    <input type="hidden" id="ID-User" value="{{ Auth::user()->id }}">
                                     <button type="button" name="logout" class="btn btn-dark"><a
                                             href="{{ url('api/logout-user') }}" style="color:#f1f1f1"><i
                                                 class="fas fa-sign-out-alt"></i></a></button>
@@ -219,8 +222,8 @@
                                 <li class="nav-item ">
                                     <a href="{{ url('/gio-hang') }}" id="show_history_cart" class="nav-link">
                                         <span class="header-cart-title">GIỎ HÀNG
-                                            <i style="color: black;" class="fas fa-cart-plus mx-2 shopping-cart"></i>
-                                            <span style="position: absolute;top: 0%;color:#b31212;">
+                                            <i style="" class="fas fa-cart-plus mx-2 shopping-cart"></i>
+                                            <span style="position: absolute;top: 0%;color:white;">
                                                 <p id="quantity-shopping-cart">{{ count((array) session('cart')) }}
                                                 </p>
                                             </span>

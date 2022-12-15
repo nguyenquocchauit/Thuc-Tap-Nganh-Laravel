@@ -55,9 +55,7 @@
                     </div>
                     <div class="col-6">
                         <h3 id="name-product">{{ $product->name }}</h3>
-                        <div class="price d-flex "
-                            @if ($product->discount == 0) {{ 'style =  justify-content: start; margin: 0px; font-size: 20px;' }} @endif
-                            style="font-size: 20px;">
+                        <div class="price d-flex " style="font-size: 20px;">
                             @if ($product->discount != 0)
                                 <p class="price-pre">
                                     <!-- number_format dùng định dạng số theo kiểu đơn vị tiền tệ -->
@@ -127,30 +125,32 @@
                                         <div class="w-100">
                                             <h5>Viết nhận xét</h5>
                                             <div class="rating">
-                                                <input type="radio" name="rating" value="5"
+                                                <input type="radio" name="rating-product" value="5"
                                                     id="5"><label for="5">☆</label>
-                                                <input type="radio" name="rating" value="4"
+                                                <input type="radio" name="rating-product" value="4"
                                                     id="4"><label for="4">☆</label>
-                                                <input type="radio" name="rating" value="3"
+                                                <input type="radio" name="rating-product" value="3"
                                                     id="3"><label for="3">☆</label>
-                                                <input type="radio" name="rating" value="2"
+                                                <input type="radio" name="rating-product" value="2"
                                                     id="2"><label for="2">☆</label>
-                                                <input type="radio" name="rating" value="1"
+                                                <input type="radio" name="rating-product" value="1"
                                                     id="1"><label for="1">☆</label>
                                             </div>
                                             <div class="form-outline">
-                                                <textarea class="form-control" id="textAreaExample" rows="2"></textarea>
-                                                <label class="form-label" for="textAreaExample">Nội dung</label>
+                                                <textarea class="form-control" id="text-comment" rows="2"></textarea>
+                                                <label class="form-label" for="text-comment">Nội dung</label>
                                             </div>
                                             <div class="d-flex justify-content-between mt-3">
                                                 <button type="button" class="btn btn-success">Hủy</button>
-                                                <button type="button" class="btn btn-danger">
+                                                <button type="button" class="btn btn-danger write-comment-product">
                                                     Gửi <i class="fas fa-long-arrow-alt-right ms-1"></i>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="show-comment-ajax">
                             </div>
                             @foreach ($comments as $comment)
                                 <div class="d-flex flex-start p-1">
@@ -160,12 +160,32 @@
                                     <div class="card w-100">
                                         <div class="card-body p-4">
                                             <div class="">
-                                                <h5>{{ $comment->user['name'] }}</h5>
-                                                <p class="small">{{$comment->create_at }}</p>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <h5 class="d-flex justify-content-start">
+                                                            <strong>{{ $comment->user['name'] }}</strong>
+                                                        </h5>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="hidden" value="{{ $comment->id }}" id="IDComment">
+                                                        @if ($comment->customers == Auth::user()->id)
+                                                            <span class="d-flex justify-content-end delete-comment-product"><i
+                                                                    class="fas fa-trash-alt"></i></span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <p>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <span
+                                                            class="@if ($i <= $comment->star) {{ 'color_red' }} @endif">☆</span>
+                                                    @endfor
+                                                </p>
+                                                <p class="small">
+                                                    {{ date('d-m-Y H:i:s', strtotime($comment->created_at)) }}
+                                                </p>
                                                 <p>
                                                     {{ $comment->content }}
                                                 </p>
-
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="d-flex align-items-center">
                                                         <a href="#!" class="link-muted me-2"><i
@@ -182,35 +202,6 @@
                                     </div>
                                 </div>
                             @endforeach
-                            <div class="d-flex flex-start p-1">
-                                <img class="rounded-circle shadow-1-strong me-3"
-                                    src="{{ asset('images/avt-comment.webp') }}" alt="avatar" width="65"
-                                    height="65" />
-                                <div class="card w-100">
-                                    <div class="card-body p-4">
-                                        <div class="">
-                                            <h5>Mindy Campbell</h5>
-                                            <p class="small">5 hours ago</p>
-                                            <p>
-                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Delectus
-                                                cumque doloribus dolorum dolor repellat nemo animi at iure autem fuga
-                                                cupiditate architecto ut quam provident neque, inventore nisi eos quas?
-                                            </p>
-
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="d-flex align-items-center">
-                                                    <a href="#!" class="link-muted me-2"><i
-                                                            class="fas fa-thumbs-up me-1"></i>158</a>
-                                                    <a href="#!" class="link-muted"><i
-                                                            class="fas fa-thumbs-down me-1"></i>13</a>
-                                                </div>
-                                                <a href="#!" class="link-muted"><i class="fas fa-reply me-1"></i>
-                                                    Trả lời</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

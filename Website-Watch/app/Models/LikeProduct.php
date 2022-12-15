@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class LikeProduct extends Model
 {
     use HasFactory;
 
-    protected $table = "comment";
+    protected $table = 'likes';
     protected $primaryKey = "id";
     protected $guarded = [];
     public $timestamps = false;

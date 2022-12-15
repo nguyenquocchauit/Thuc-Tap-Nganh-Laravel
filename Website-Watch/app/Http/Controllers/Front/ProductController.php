@@ -4,11 +4,16 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\LikeProduct;
 use App\Models\Product;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Laravel\Ui\Presets\React;
 
 class ProductController extends Controller
 {
+
     public function searchProduct($search)
     {
         // get product by parameter $search
@@ -47,12 +52,135 @@ class ProductController extends Controller
         else
             return Redirect('/');
     }
+
     public function commentOfProduct($product)
     {
         // get all comment of product
-        $comment = Comment::where('product', $product)->get();
+        $comment = Comment::query()
+            ->where('product', $product)
+            ->orderByDesc('created_at')
+            ->get();
         return $comment;
     }
+
+    public function writeComment(Request $request)
+    {
+        if ($request->action == "Write comment product") {
+            // get time now
+            $currentTime = Carbon::now();
+            // get max id
+            $maxID = Comment::query()
+                ->selectRaw('MAX(id) AS ID_Max')
+                ->get();
+            // get max id from object maxID
+            $ID = $maxID[0]['ID_Max'];
+            $ID = (int)$ID  + 1;
+            $comment = new Comment();
+            $comment->id  = $ID;
+            $comment->customers  = $request->user;
+            $comment->product  = $request->product;
+            $comment->content = $request->textComment;
+            $comment->star = $request->rating;
+            $comment->created_at = $currentTime->toDateTimeString();
+            $comment->save();
+            $name = User::find($request->user);
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Write comment successfully',
+                'data' =>  $comment,
+                'author' => $name,
+            ]);
+        } else
+            return response()->json([
+                'status' => 500,
+                'msg' => 'Write comment error',
+            ]);
+    }
+    public function deleteComment(Request $request)
+    {
+        if ($request->action == "Delete comment product") {
+            $comment = Comment::find($request->IDComment);
+            if ($comment != null) {
+                $comment->delete();
+                return response()->json([
+                    'status' => 200,
+                    'msg' => 'Delete comment successfully',
+                ]);
+            } else {
+                if ($comment == null) {
+                    return response()->json([
+                        'status' => 500,
+                        'msg' => 'Delete comment error',
+                    ]);
+                }
+            }
+        } else
+            return response()->json([
+                'status' => 500,
+                'msg' => 'Delete comment error',
+            ]);
+    }
+
+
+    public function likeProduct(Request $request)
+    {
+        if ($request->action == "Like comment product") {
+            $like = LikeProduct::where('customers', $request->user)->where('product', $request->product)->get();
+            // >0 is customer have been liked product , else none like product
+            if (count($like) > 0) {
+                if ($like[0]->status == 'like') {
+                    LikeProduct::where('id', $like[0]->id)->update(array(
+                        'status' => 'none',
+                    ));
+                    return response()->json([
+                        'status' => 200,
+                        'msg' => 'Unlike product successfully',
+                        'data' => $like,
+                    ]);
+                } else {
+                    if ($like[0]->status == 'none') {
+                        LikeProduct::where('id', $like[0]->id)->update(array(
+                            'status' => 'like',
+                        ));
+                        return response()->json([
+                            'status' => 200,
+                            'msg' => 'Like product successfully',
+                            'data' => $like,
+                        ]);
+                    }
+                }
+            } else {
+                // get time now
+                $currentTime = Carbon::now();
+                // get max id
+                $maxID = likeProduct::query()
+                    ->selectRaw('MAX(id) AS ID_Max')
+                    ->get();
+                // get max id from object maxID
+                $ID = $maxID[0]['ID_Max'];
+                $ID = (int)$ID  + 1;
+                $like = new likeProduct();
+                $like->id  = $ID;
+                $like->customers = $request->user;
+                $like->product = $request->product;
+                $like->status = 'like';
+                $like->created_at = $currentTime->toDateTimeString();
+                $like->save();
+                return response()->json([
+                    'status' => 200,
+                    'msg' => 'Like product successfully',
+                    'data' => $like,
+                ]);
+            }
+        } else
+            return response()->json([
+                'status' => 500,
+                'msg' => 'Like comment error',
+            ]);
+    }
+
+
+
     public function getFileImageProduct($image)
     {
         $nameImage = [];

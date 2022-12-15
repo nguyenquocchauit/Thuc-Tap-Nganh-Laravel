@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\LikeProduct;
 use App\Models\Product;
 use Illuminate\Pagination\Paginator;
 
@@ -32,8 +33,8 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $nameUser = $this->getNameUser();
             $brand = $this->menuBrandForGender();
-            // $brands = $this->menuBrandForGender();
-            $view->with(['nameUser' => $nameUser, 'brandMenu' => $brand]);
+            $liked = $this->getLikeProduct();
+            $view->with(['nameUser' => $nameUser, 'brandMenu' => $brand, 'liked' => $liked]);
         });
         Paginator::useBootstrapFive();
     }
@@ -61,5 +62,10 @@ class AppServiceProvider extends ServiceProvider
             ->get();
         $brands = ['men' => $men, 'women' => $women];
         return  $brands;
+    }
+    public function getLikeProduct()
+    {
+        $liked = LikeProduct::get();
+        return $liked;
     }
 }

@@ -277,7 +277,7 @@ $color7: #f7b100;
                 .sale {
                     position: absolute;
                     top: 0px;
-                    left: 0px;
+                    left: 30px;
                     margin: 4px 4px;
                     background-color: #ff5e57;
                     padding: 4px 8px;
@@ -285,7 +285,17 @@ $color7: #f7b100;
                     font-size: 16px;
                     color: #fff;
                 }
-
+                .like-product {
+                    position: absolute;
+                    top: 0px;
+                    right: 50px;
+                    margin: 4px 4px;
+                    font-size: 24px;
+                    color: #fffffe87;
+                }
+                .liked{
+                    color: red;
+                }
                 a {
                     color: $color5;
                     text-decoration: none;
@@ -294,12 +304,10 @@ $color7: #f7b100;
 
                 .price {
                     //margin: 10px;
-                    margin-left: 60px;
+                    justify-content: center;
 
                     .price-pre {
-                        // text-decoration-color: #ff0000d4;
-                        // text-decoration-line: line-through;
-                        // margin-right: 10px;
+                        padding: 1px 5px 0px 0px;
                         letter-spacing: 2px;
                         text-decoration-color: #ff0000d4;
                         -webkit-text-decoration-line: line-through;
@@ -309,6 +317,7 @@ $color7: #f7b100;
                         margin: 0 0 0 8px;
                     }
                     .price-sale {
+                        padding: 0px 0px 0px 5px;
                         letter-spacing: -1px;
                     }
                 }
@@ -600,15 +609,15 @@ $color7: #f7b100;
                 color: black;
             }
 
-            .sale {
-                // margin-left: 20px;
-                // background-color: $color2;
-                // width: 45px;
-                // height: 40px;
-                // color: $color1;
-                // font-weight: 600;
-                // padding-top: 7px;
-            }
+            // .sale {
+            //     // margin-left: 20px;
+            //     // background-color: $color2;
+            //     // width: 45px;
+            //     // height: 40px;
+            //     // color: $color1;
+            //     // font-weight: 600;
+            //     // padding-top: 7px;
+            // }
 
             .price {
                 padding: 0px 25px 0px 25px;
@@ -1364,10 +1373,17 @@ $color7: #f7b100;
         .rating:hover > input:checked ~ label:before {
             opacity: 0.4;
         }
-        .link-muted{
-            .fa-thumbs-down{
+        .link-muted {
+            .fa-thumbs-down {
                 color: red;
             }
+        }
+        .color_red {
+            color: red;
+            font-size: 20px;
+        }
+        .small {
+            opacity: 0.6;
         }
     }
 }
