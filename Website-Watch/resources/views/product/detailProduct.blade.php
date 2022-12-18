@@ -137,11 +137,11 @@
                                                     id="1"><label for="1">☆</label>
                                             </div>
                                             <div class="form-outline">
-                                                <textarea class="form-control" id="text-comment" rows="2"></textarea>
+                                                <textarea class="form-control" id="text-comment" rows="2" placeholder="Nhận xét"></textarea>
                                                 <label class="form-label" for="text-comment">Nội dung</label>
                                             </div>
                                             <div class="d-flex justify-content-between mt-3">
-                                                <button type="button" class="btn btn-success">Hủy</button>
+                                                <button type="button" class="btn btn-success cancel-comment-product">Hủy</button>
                                                 <button type="button" class="btn btn-danger write-comment-product">
                                                     Gửi <i class="fas fa-long-arrow-alt-right ms-1"></i>
                                                 </button>

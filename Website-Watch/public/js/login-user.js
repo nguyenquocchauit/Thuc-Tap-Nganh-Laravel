@@ -26,7 +26,6 @@ $(document).ready(function () {
                     password: _pass,
                 },
                 success: function (response) {
-                    console.log(response);
                     if (
                         response.status == 401 &&
                         response.msg == "Pass is incorrect"

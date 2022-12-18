@@ -97,7 +97,7 @@
         </td>
         <td colspan="4" style="text-align: end;">
             <form action="" method="post">
-                <button type="button" class="buttonBuy" name="buttonBuy"><i class="fa-solid fa-pen-to-square"></i> Đặt
+                <button type="button" class="buttonBuy" id="buy-product" name="buttonBuy"><i class="fa-solid fa-pen-to-square"></i> Đặt
                     hàng</button>
                 <input type="hidden" class="CurrentUser" value="' . ($CurrentUser) . '">
                 <input type="hidden" class="IDUser" value="' . ($IDUser) . '">

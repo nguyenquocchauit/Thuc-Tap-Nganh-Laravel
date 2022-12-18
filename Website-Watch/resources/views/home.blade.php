@@ -78,10 +78,9 @@
                                         </div>
                                         {{-- get liked product by user logined --}}
                                         <div
-                                            class="icon-heart like-product product-{{ $allProduct->id }}  @foreach ($liked as $like)
+                                            class="icon-heart like-product product-{{ $allProduct->id }} @if (Auth::check()) @foreach ($liked as $like)
                                         @if ($like->product == $allProduct->id && $like->customers == Auth::user()->id && $like->status == 'like')
-                                            {{ 'liked' }}
-                                        @endif @endforeach ">
+                                            {{ 'liked' }} @endif @endforeach   @endif">
                                             <i class="fa fa-heart"></i>
                                             <input type="hidden" class="idProduct" value="{{ $allProduct->id }}">
                                         </div>
@@ -146,10 +145,9 @@
                                         @endif
                                         {{-- get liked product by user logined --}}
                                         <div
-                                            class="icon-heart like-product product-{{ $bestSellingProduct->id }}  @foreach ($liked as $like)
+                                            class="icon-heart like-product product-{{ $bestSellingProduct->id }} @if (Auth::check()) @foreach ($liked as $like)
                                         @if ($like->product == $bestSellingProduct->id && $like->customers == Auth::user()->id && $like->status == 'like')
-                                            {{ 'liked' }}
-                                        @endif @endforeach ">
+                                            {{ 'liked' }} @endif @endforeach @endif ">
                                             <i class="fa fa-heart"></i>
                                             <input type="hidden" class="idProduct" value="{{ $bestSellingProduct->id }}"
                                                 data-id="product-{{ $bestSellingProduct->id }}">

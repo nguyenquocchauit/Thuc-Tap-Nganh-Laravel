@@ -58,8 +58,10 @@
     <script type="text/javascript" src="{{ asset('js/remove-pro-cart.js') }}"></script>
     {{-- Add comment product processing file --}}
     <script type="text/javascript" src="{{ asset('js/comment-product.js') }}"></script>
-     {{-- Add like product processing file --}}
-     <script type="text/javascript" src="{{ asset('js/like-product.js') }}"></script>
+    {{-- Add like product processing file --}}
+    <script type="text/javascript" src="{{ asset('js/like-product.js') }}"></script>
+    {{-- Add buy product processing file --}}
+    <script type="text/javascript" src="{{ asset('js/buy-product.js') }}"></script>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -100,12 +102,6 @@
                                 <i id="iconphone" class="fas fa-phone-volume"></i>
                                 <strong>HOTLINE: </strong>038 655 5555 |
                                 @guest
-
-                                    {{-- <a href="../../Website Watch PHP/customers/Chi-tiet.php"
-                                    style="color:white;font-size: 18px;"><i class="fas fa-user-cog"></i></a>
-                                <strong></strong>
-                                <button type="button" name="logout" class="btn btn-dark"><a href="?logout=1"
-                                        style="color:#f1f1f1"><i class="fas fa-sign-out-alt"></i></a></button> --}}
                                     <button type="button" class="button" data-bs-toggle="modal"
                                         data-bs-target="#login">Đăng nhập</button> &nbsp;
                                     <button type="button" class="button" data-bs-toggle="modal"
@@ -115,7 +111,8 @@
                                         style="color:white;font-size: 18px;"><i class="fas fa-user-cog"></i></a>
                                     <strong></strong>
                                     {{ $nameUser }}
-                                    <input type="hidden" id="ID-User" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" id="ID-User"
+                                        value="{{ Auth::user()->id }}">
                                     <button type="button" name="logout" class="btn btn-dark"><a
                                             href="{{ url('api/logout-user') }}" style="color:#f1f1f1"><i
                                                 class="fas fa-sign-out-alt"></i></a></button>
