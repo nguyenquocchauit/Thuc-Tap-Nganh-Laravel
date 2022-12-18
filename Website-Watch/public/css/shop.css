@@ -4,15 +4,17 @@
 }
 
 .filter-wiget {
-    margin-bottom: 45px;
+    margin-bottom: 20px;
 }
 
-.filter-wiget .fw-title {
+.filter-wiget .fw-title,.brand-title {
     color: #252525;
     font-size: 22px;
     font-weight: 700;
-    margin-bottom: 26px;
+
 }
+
+
 
 .filter-wiget .filter-categories li {
     list-style: none;
@@ -76,7 +78,7 @@
 
 .filter-btn {
     text-decoration: none;
-    margin-top: 32px;
+    margin-top: 8px;
     background: darkgoldenrod;
     padding: 4px 12px;
     text-transform: uppercase;
@@ -91,6 +93,15 @@
     color: #f5f5f5;
     cursor: pointer;
 }
+
+.delete_wishlist {
+    margin-left: 5px;
+}
+
+.info_wishlist {
+    height: 100px;
+}
+
 .slider-range p {
     float: left;
     width: 50%;
@@ -150,12 +161,19 @@
     color: #fff;
 }
 
-.icon-heart {
+.btn-wishlist {
     position: absolute;
     top: 0px;
     right: 0px;
     margin: 4px 4px;
     font-size: 24px;
+    color: #ccc;
+    background-color: #fff;
+    border: none;
+
+}
+
+.btn-wishlist:hover {
     color: #ff5e57;
 }
 
@@ -208,7 +226,6 @@
     margin: 12px 0 0;
     font-size: 12px;
     line-height: 12px;
-    letter-spacing: 1px;
     color: #000;
     text-transform: uppercase;
     text-decoration: none;
