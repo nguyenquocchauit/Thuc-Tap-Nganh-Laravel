@@ -62,6 +62,8 @@
     <script type="text/javascript" src="{{ asset('js/like-product.js') }}"></script>
     {{-- Add buy product processing file --}}
     <script type="text/javascript" src="{{ asset('js/buy-product.js') }}"></script>
+    {{-- Add setting profile user processing file --}}
+    <script type="text/javascript" src="{{ asset('js/setting-profile-user.js') }}"></script>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 

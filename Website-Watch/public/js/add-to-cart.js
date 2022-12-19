@@ -159,6 +159,5 @@ $(document).ready(function () {
         if (check =idArr.length) {
             window.location.href = "/gio-hang";
         }
-
     });
 });

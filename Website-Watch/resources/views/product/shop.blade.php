@@ -235,109 +235,11 @@
         </div>
     </section>
     {{-- Product Shop Section End --}}
+
 @endsection
 
 @push('scripts')
-    {{-- <script>
-        function view() {
-            if (localStorage.getItem('data') != null) {
-                var data = JSON.parse(localStorage.getItem('data'));
-                data.reverse();
 
-                document.getElementById('row_wishlist').style.overflow = 'scroll';
-                document.getElementById('row_wishlist').style.height = '500px';
-
-                for (i = 0; i < data.length; i++) {
-                    var id = data[i].id;
-                    var name = data[i].name;
-                    var price = data[i].price;
-                    var image = data[i].image;
-                    var url = data[i].url;
-                    $("#row_wishlist").append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="' +
-                        image + '" width="100%"></div><div class="col-md-8" info_wishlist><p>' + name +
-                        '</p><p style="color:#fe980f">' + price + '</p><a class="btn btn-success"  href="' + url +
-                        '">Đặt hàng</a><a class="btn btn-danger btn-xs delete_wishlist" data-id="' + id +
-                        '" style="margin-top:0">Xóa</a></div></div>');
-                }
-            }
-            $(document).on('click', '.delete_wishlist', function(event) {
-                event.preventDefault(); // những hành động mặc định của sự kiện sẽ k xảy ra
-                var id = $(this).data('id');
-
-                // console.log(localStorage.getItem('data'));
-                if (localStorage.getItem('data') != null) {
-                    var data = JSON.parse(localStorage.getItem('data'));
-                    if (data.length) {
-                        for (i = 0; i < data.length; i++) {
-                            if (data[i].id == id) {
-                                data.splice(i, 1); //xóa phần tử khỏi mảng, tham số thứ 2 là 1 phần tử
-                            }
-                        }
-                    }
-
-                    localStorage.setItem('data', JSON.stringify(data)); //chuyển obj->string
-                    alert('Xóa thành công');
-                    window.location.reload();
-                }
-            });
-        }
-        view();
-
-        function add_wishlist(clicked_id) {
-            var id = clicked_id;
-            var name = document.getElementById('product_name' + id).value;
-            var price = document.getElementById('product_price' + id).value;
-            var image = document.getElementById('product_image' + id).src;
-            var url = document.getElementById('product_url' + id).href;
-            var newItem = {
-                'url': url,
-                'id': id,
-                'name': name,
-                'price': price,
-                'image': image
-            }
-            if (localStorage.getItem('data') == null) {
-                localStorage.setItem('data', '[]');
-            }
-            var old_data = JSON.parse(localStorage.getItem('data'));
-
-
-
-            var matches = $.grep(old_data, function(obj) {
-                return obj.id == id;
-            })
-
-            if (matches.length) {
-                alert('Sản phẩm đã thêm vào yêu thích, nên không thể thêm nữa');
-            } else {
-                old_data.push(newItem);
-                $("#row_wishlist").append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="' +
-                    newItem.image + '" width="100%"></div><div class="col-md-8" info_wishlist><p>' + newItem.name +
-                    '</p><p style="color:#fe980f">' + newItem.price + '</p><a class="btn btn-success"  href="' + newItem
-                    .url + '">Đặt hàng</a><a class="btn btn-danger btn-xs delete_wishlist" data-id="' + newItem.id +
-                    '" style="margin-top:0">Xóa</a></div></div>');
-            }
-            $(document).on('click', '.delete_wishlist', function(event) {
-                event.preventDefault(); // những hành động mặc định của sự kiện sẽ k xảy ra
-                var id = $(this).data('id');
-
-                // console.log(localStorage.getItem('data'));
-                if (localStorage.getItem('data') != null) {
-                    var data = JSON.parse(localStorage.getItem('data'));
-                    if (data.length) {
-                        if (data[i].id == id) {
-                            data.splice(i, 1); //xóa phần tử khỏi mảng, tham số thứ 2 là 1 phần tử
-                        }
-                    }
-
-                    localStorage.setItem('data', JSON.stringify(data)); //chuyển obj->string
-                    // alert('Xóa thành công');
-                    window.location.reload();
-                }
-            });
-            localStorage.setItem('data', JSON.stringify(old_data));
-        }
-    </script> --}}
     <script>
         $(function() {
             $("#slider-range").slider({

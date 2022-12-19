@@ -825,7 +825,13 @@ $color7: #f7b100;
         height: 50px;
     }
 }
-
+.body-profile {
+    .changePasword_Profile {
+        position: relative;
+        left: 93%;
+        bottom: 30px;
+    }
+}
 ///////////////////////////////modal login and singup ////////////////
 .modal-content {
     background-color: #d5d5d5;
@@ -1318,6 +1324,7 @@ $color7: #f7b100;
         }
     }
 }
+
 // body product
 .body-product-details {
     color: white;

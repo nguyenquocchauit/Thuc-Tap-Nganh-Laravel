@@ -605,6 +605,12 @@
   height: 50px;
 }
 
+.body-profile .changePasword_Profile {
+  position: relative;
+  left: 93%;
+  bottom: 30px;
+}
+
 .modal-content {
   background-color: #d5d5d5;
   box-shadow: 0 0 2px #000;
