@@ -17,8 +17,8 @@ class ProductController extends Controller
     {
         $title = 'Danh sách sản phẩm';
 
-        $products = Product::paginate(5);
-        return view('admin.product.index',compact('title','products'));
+        $products = Product::first('id')->paginate(10);
+        return view('admin.product.index', compact('title', 'products'));
     }
 
     /**
@@ -29,7 +29,7 @@ class ProductController extends Controller
     public function create()
     {
         $title = 'Thêm sản phẩm';
-        return view('admin.product.create',compact('title'));
+        return view('admin.product.create', compact('title'));
     }
 
     /**
@@ -52,7 +52,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $title = 'Chi tiết sản phẩm';
-        return view('admin.product.show',compact('title'));
+        return view('admin.product.show', compact('title'));
     }
 
     /**
@@ -64,7 +64,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $title = 'Cập nhật sản phẩm';
-        return view('admin.product.edit',compact('title'));
+        return view('admin.product.edit', compact('title'));
     }
 
     /**

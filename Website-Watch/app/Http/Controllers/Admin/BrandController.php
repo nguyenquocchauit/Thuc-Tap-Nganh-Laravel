@@ -16,7 +16,7 @@ class BrandController extends Controller
     public function index()
     {
         $title = 'Danh sách hãng';
-        $brands = Brand::all();
+        $brands = Brand::first('id')->paginate(10);
         return view('admin.brand.index',compact('title','brands'));
     }
 

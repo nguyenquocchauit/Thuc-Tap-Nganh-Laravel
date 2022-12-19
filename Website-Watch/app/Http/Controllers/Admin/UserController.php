@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $title = 'Danh sách người dùng';
-        $users = User::all();
+        $users = User::first('id')->paginate(10);
         return view('admin.user.index',compact('title','users'));
     }
 
@@ -39,7 +39,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-    
+
     }
 
     /**
@@ -86,6 +86,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        
+
     }
 }

@@ -33,3 +33,4 @@ Route::post('/update-quantity-cart', [CartController::class, 'updateQuantityCart
 Route::post('/comment-product', [ProductController::class, 'writeComment'])->name('comment-product');
 Route::post('/delete-comment', [ProductController::class, 'deleteComment'])->name('delete-comment');
 Route::post('/like-product', [ProductController::class, 'likeProduct'])->name('like-product');
+Route::post('/clear-like', [ProductController::class, 'removeLikeProduct'])->name('clear-like');

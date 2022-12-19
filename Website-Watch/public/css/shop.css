@@ -7,14 +7,12 @@
     margin-bottom: 20px;
 }
 
-.filter-wiget .fw-title,.brand-title {
+.filter-wiget .fw-title,
+.brand-title {
     color: #252525;
     font-size: 22px;
     font-weight: 700;
-
 }
-
-
 
 .filter-wiget .filter-categories li {
     list-style: none;
@@ -163,18 +161,35 @@
 
 .btn-wishlist {
     position: absolute;
+    color: #ababab;
     top: 0px;
     right: 0px;
     margin: 4px 4px;
     font-size: 24px;
-    color: #ccc;
-    background-color: #fff;
-    border: none;
-
 }
-
-.btn-wishlist:hover {
-    color: #ff5e57;
+.liked {
+    color: red;
+}
+#clear-like-product{
+    padding-bottom: 20px;
+    border: none;
+    color: black;
+    background-color: #f8fafc;
+}
+#buy-all-like-product{
+    width: 400px;
+    height: 40px;
+    border: 1px solid #52507e;
+    padding: 4px 14px;
+    background-color: #000;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}
+#row_wishlist {
+    height: 500px;
+    overflow: scroll;
 }
 
 .quick-view-controller {

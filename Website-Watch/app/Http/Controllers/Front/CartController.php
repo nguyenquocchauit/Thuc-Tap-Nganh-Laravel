@@ -21,10 +21,20 @@ class CartController extends Controller
         // price process when there is a discount
         $priceDiscount = $product->price - ($product->price * ($product->discount / 100));
         if (isset($cart[$request->id])) {
-            // if price or discount of product changed then add new cart else update quantity
-            if ($cart[$request->id]['price'] == $product->price && $cart[$request->id]['discount'] == $product->discount) {
-                $cart[$request->id]['quantity']++;
-                $cart[$request->id]['total'] = $priceDiscount + $cart[$request->id]['priceDiscount'];
+            // check if quantity of id >5 then break
+            if ($cart[$request->id]['quantity'] >= 5) {
+                return response()->json([
+                    'status' => 500,
+                    'msg' => 'Passed the number above 5',
+                    'quantity_cart' => count($cart),
+                    'cart' => $cart,
+                ]);
+            } else {
+                // if price or discount of product changed then add new cart else update quantity
+                if ($cart[$request->id]['price'] == $product->price && $cart[$request->id]['discount'] == $product->discount) {
+                    $cart[$request->id]['quantity']++;
+                    $cart[$request->id]['total'] = $priceDiscount + $cart[$request->id]['priceDiscount'];
+                }
             }
         } else {
             $cart[$request->id] = [

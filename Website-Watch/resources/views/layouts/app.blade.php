@@ -159,7 +159,7 @@
                                                 @foreach ($brandMenu['men'] as $value)
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ $value->name }}</a>
+                                                            href="/shop/Men?brand%5B{{ $value->brand }}%5D">{{ $value->name }}</a>
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -175,7 +175,7 @@
                                                 @foreach ($brandMenu['women'] as $value)
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="#">{{ $value->name }}</a>
+                                                            href="/shop/Women?brand%5B{{ $value->brand }}%5D">{{ $value->name }}</a>
                                                     </li>
                                                 @endforeach
 

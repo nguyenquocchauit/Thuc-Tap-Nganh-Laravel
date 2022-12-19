@@ -66,8 +66,7 @@
                                             style="border:0; color:#f6931f; font-weight:bold;width: 100px;background-color: #f8fafc;">
                                     </p>
                                 </div>
-                                <input type="hidden" name="start_price" id="start_price"
-                                    value="{{ old('start_price') }}">
+                                <input type="hidden" name="start_price" id="start_price" value="{{ old('start_price') }}">
                                 <input type="hidden" name="end_price" id="end_price" value="{{ old('end_price') }}">
 
                                 <input type="submit" name="filter_price" class="filter-btn" value="Lọc">
@@ -75,12 +74,51 @@
                         </div>
                     </form>
                     <div class="brands-wishlist">
-                        <h4 class="brand-title">Sản phẩm yêu thích</h4>
-                        <div class="brands-name"></div>
+                        {{-- kiểm tra người dùng đã đăng nhập chưa --}}
+                        @guest
+                            <h4 class="brand-title">Đăng nhập để xem sản phẩm yêu thích</h4>
+                        @else
+                            {{-- duyệt danh sách thích có trong db  tương ứng với user đang đăng nhập --}}
 
-                        <div id="row_wishlist" class="row">
+                            <div class="row">
+                                <div class="col-8 d-flex justify-content-start">
+                                    <h4 class="brand-title">Sản phẩm yêu thích </h4>
+                                </div>
+                                <div class="col-4 d-flex justify-content-end">
+                                    <button type="button " id="clear-like-product"><strong>xóa tất cả</strong></button>
+                                </div>
+                            </div>
 
-                        </div>
+                            <div id="row_wishlist" class="row">
+                                @foreach ($liked as $like)
+                                    @if ($like->status == 'like' && $like->customers == Auth::user()->id)
+                                        <div class="row list-like-product product--{{ $like->product }}" style="margin: 10px 0" data-id="{{ $like->product }}">
+                                            @php
+                                                $nameImage = $like->products->productImage['image_1'];
+                                            @endphp
+                                            <div class="col-md-4"><img
+                                                    src="{{ asset('images/image_products_home') . '/' . $nameImage }}"
+                                                    width="100%"></div>
+                                            <div class="col-md-8">
+                                                <p>{{ $like->products['name'] }}</p>
+                                                <p style="color:#fe980f">@php $price = $like->products['price']-($like->products['price'] * ($like->products['discount']/100)) @endphp {{ number_format($price) . ' VNĐ' }}
+                                                </p>
+                                                <a class="btn btn-success" href="/chi-tiet-san-pham/{{ $like->product }}">Chi tiết</a>
+                                                <a class="btn btn-danger btn-xs delete_wishlist remove-like-product"
+                                                    style="margin-top:0">Xóa</a>
+                                                <input type="hidden" class="idProduct" value="{{ $like->product }}">
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-4 d-flex justify-content-end ">
+                                    <button type="button" class="btn btn-success mb-1" id="buy-all-like-product">Đặt mua tất cả</button>
+                                </div>
+                            </div>
+                        @endguest
+
                     </div>
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2">
@@ -113,7 +151,8 @@
                                         </option>
                                         <option value="9" {{ request('show') == '9' ? 'selected' : '' }}>Hiển thị: 9
                                         </option>
-                                        <option value="15" {{ request('show') == '15' ? 'selected' : '' }}>Hiển thị: 15
+                                        <option value="15" {{ request('show') == '15' ? 'selected' : '' }}>Hiển thị:
+                                            15
                                         </option>
                                     </select>
                                 </div>
@@ -137,30 +176,36 @@
                                     @if ($product->discount != null)
                                         <div class="sale pp-sale">{{ $product->discount }}%</div>
                                     @endif
+                                    <div
+                                        class="btn-wishlist like-product product-{{ $product->id }}  @if (Auth::check()) @foreach ($liked as $like)
+                                        @if ($like->product == $product->id && $like->customers == Auth::user()->id && $like->status == 'like')
+                                            {{ 'liked' }} @endif @endforeach   @endif">
+                                        <i class="fa fa-heart"></i>
+                                    </div>
+                                    <input type="hidden" class="idProduct" value="{{ $product->id }}">
 
-                                        <button class="btn-wishlist"  id="{{$product->id}}" onclick="add_wishlist(this.id);">
-                                            <i class="fa fa-heart"></i>
-                                        </button>
-                                        
                                     <div class="quick-view-controller" style="justify-content: center;">
                                         <p class="product-item-desc-button-submit">
                                             <a class="btn-cart add-to-cart">
                                                 <i class="fas fa-cart-plus" style="color:black "></i>
                                             </a>
-                                            <input type="hidden"  name="productID" class="productID"
+                                            <input type="hidden" name="productID" class="productID"
                                                 value="{{ $product->id }}">
-                                            <input type="hidden" id="product_name{{$product->id}}" name="productName" class="productName"
-                                                value="{{ $product->name }}">
-                                            <input type="hidden" id="product_price{{$product->id}}" name="productName" class="productName"
-                                                value="{{($product->discount != null) ? number_format($product->price - $product->price * ($product->discount / 100)) : number_format($product->price) }} VNĐ">    
-                                            <input type="hidden" id="product_image{{$product->id}}" 
-                                            src="{{URL::to('/images/image_products_home/'.$product->productImage['image_1'])}}" name="productImage" class="productImage"
+                                            <input type="hidden" id="product_name{{ $product->id }}"
+                                                name="productName" class="productName" value="{{ $product->name }}">
+                                            <input type="hidden" id="product_price{{ $product->id }}"
+                                                name="productName" class="productName"
+                                                value="{{ $product->discount != null ? number_format($product->price - $product->price * ($product->discount / 100)) : number_format($product->price) }} VNĐ">
+                                            <input type="hidden" id="product_image{{ $product->id }}"
+                                                src="{{ URL::to('/images/image_products_home/' . $product->productImage['image_1']) }}"
+                                                name="productImage" class="productImage"
                                                 value="{{ $product->productImage['image_1'] }}">
                                         </p>
-                                        <p><a id="product_url{{$product->id}}" href="/chi-tiet-san-pham/{{ $product->id }}" class="btn-view">Xem <i
+                                        <p><a id="product_url{{ $product->id }}"
+                                                href="/chi-tiet-san-pham/{{ $product->id }}" class="btn-view">Xem <i
                                                     class="fas fa-eye"></i></a></p>
 
-                                                    
+
 
                                     </div>
                                 </div>
@@ -177,8 +222,8 @@
                                         @else
                                             <span>{{ number_format($product->price) }} VNĐ </span>
                                         @endif
-                                        
-                                      
+
+
                                     </div>
                                 </div>
                             </li>
@@ -193,98 +238,106 @@
 @endsection
 
 @push('scripts')
-<script>
-    function view() {
-        if(localStorage.getItem('data')!= null) {
-            var data = JSON.parse(localStorage.getItem('data'));
-            data.reverse();
+    {{-- <script>
+        function view() {
+            if (localStorage.getItem('data') != null) {
+                var data = JSON.parse(localStorage.getItem('data'));
+                data.reverse();
 
-            document.getElementById('row_wishlist').style.overflow = 'scroll';
-            document.getElementById('row_wishlist').style.height = '500px';
+                document.getElementById('row_wishlist').style.overflow = 'scroll';
+                document.getElementById('row_wishlist').style.height = '500px';
 
-            for(i=0; i<data.length; i++) {
-                var id = data[i].id;
-                var name = data[i].name;
-                var price = data[i].price;
-                var image = data[i].image;
-                var url = data[i].url;
-                $("#row_wishlist").append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="'+image+'" width="100%"></div><div class="col-md-8" info_wishlist><p>'+name+'</p><p style="color:#fe980f">'+price+'</p><a class="btn btn-success"  href="'+url+'">Đặt hàng</a><a class="btn btn-danger btn-xs delete_wishlist" data-id="'+id+'" style="margin-top:0">Xóa</a></div></div>');
+                for (i = 0; i < data.length; i++) {
+                    var id = data[i].id;
+                    var name = data[i].name;
+                    var price = data[i].price;
+                    var image = data[i].image;
+                    var url = data[i].url;
+                    $("#row_wishlist").append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="' +
+                        image + '" width="100%"></div><div class="col-md-8" info_wishlist><p>' + name +
+                        '</p><p style="color:#fe980f">' + price + '</p><a class="btn btn-success"  href="' + url +
+                        '">Đặt hàng</a><a class="btn btn-danger btn-xs delete_wishlist" data-id="' + id +
+                        '" style="margin-top:0">Xóa</a></div></div>');
+                }
             }
-        }
-        $(document).on('click','.delete_wishlist',function(event){
+            $(document).on('click', '.delete_wishlist', function(event) {
                 event.preventDefault(); // những hành động mặc định của sự kiện sẽ k xảy ra
                 var id = $(this).data('id');
-                
+
                 // console.log(localStorage.getItem('data'));
                 if (localStorage.getItem('data') != null) {
                     var data = JSON.parse(localStorage.getItem('data'));
                     if (data.length) {
-                            for (i = 0; i < data.length; i++) {
-                                if (data[i].id == id) {
-                                data.splice(i,1); //xóa phần tử khỏi mảng, tham số thứ 2 là 1 phần tử
+                        for (i = 0; i < data.length; i++) {
+                            if (data[i].id == id) {
+                                data.splice(i, 1); //xóa phần tử khỏi mảng, tham số thứ 2 là 1 phần tử
                             }
                         }
                     }
-                    
-                    localStorage.setItem('data',JSON.stringify(data));  //chuyển obj->string
+
+                    localStorage.setItem('data', JSON.stringify(data)); //chuyển obj->string
                     alert('Xóa thành công');
                     window.location.reload();
                 }
-            });   
-    }
-    view();
-    
-    function add_wishlist(clicked_id) {
-        var id = clicked_id;
-        var name = document.getElementById('product_name'+id).value;
-        var price = document.getElementById('product_price'+id).value;
-        var image = document.getElementById('product_image'+id).src;
-        var url = document.getElementById('product_url'+id).href;
-        var newItem = {
-            'url' : url,
-            'id' : id,
-            'name' : name,
-            'price' : price,
-            'image' : image
+            });
         }
-        if(localStorage.getItem('data') == null ) {
-            localStorage.setItem('data', '[]');
-        }
-        var old_data = JSON.parse(localStorage.getItem('data'));
+        view();
 
-        
+        function add_wishlist(clicked_id) {
+            var id = clicked_id;
+            var name = document.getElementById('product_name' + id).value;
+            var price = document.getElementById('product_price' + id).value;
+            var image = document.getElementById('product_image' + id).src;
+            var url = document.getElementById('product_url' + id).href;
+            var newItem = {
+                'url': url,
+                'id': id,
+                'name': name,
+                'price': price,
+                'image': image
+            }
+            if (localStorage.getItem('data') == null) {
+                localStorage.setItem('data', '[]');
+            }
+            var old_data = JSON.parse(localStorage.getItem('data'));
 
-        var matches = $.grep(old_data, function(obj) {
-            return obj.id == id;
-        })
 
-        if(matches.length) {
-            alert('Sản phẩm đã thêm vào yêu thích, nên không thể thêm nữa');
-        } else {
-            old_data.push(newItem);
-            $("#row_wishlist").append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="'+newItem.image+'" width="100%"></div><div class="col-md-8" info_wishlist><p>'+newItem.name+'</p><p style="color:#fe980f">'+newItem.price+'</p><a class="btn btn-success"  href="'+newItem.url+'">Đặt hàng</a><a class="btn btn-danger btn-xs delete_wishlist" data-id="'+newItem.id+'" style="margin-top:0">Xóa</a></div></div>');
-        }
-        $(document).on('click','.delete_wishlist',function(event){
+
+            var matches = $.grep(old_data, function(obj) {
+                return obj.id == id;
+            })
+
+            if (matches.length) {
+                alert('Sản phẩm đã thêm vào yêu thích, nên không thể thêm nữa');
+            } else {
+                old_data.push(newItem);
+                $("#row_wishlist").append('<div class="row" style="margin: 10px 0"><div class="col-md-4"><img src="' +
+                    newItem.image + '" width="100%"></div><div class="col-md-8" info_wishlist><p>' + newItem.name +
+                    '</p><p style="color:#fe980f">' + newItem.price + '</p><a class="btn btn-success"  href="' + newItem
+                    .url + '">Đặt hàng</a><a class="btn btn-danger btn-xs delete_wishlist" data-id="' + newItem.id +
+                    '" style="margin-top:0">Xóa</a></div></div>');
+            }
+            $(document).on('click', '.delete_wishlist', function(event) {
                 event.preventDefault(); // những hành động mặc định của sự kiện sẽ k xảy ra
                 var id = $(this).data('id');
-                
+
                 // console.log(localStorage.getItem('data'));
                 if (localStorage.getItem('data') != null) {
                     var data = JSON.parse(localStorage.getItem('data'));
                     if (data.length) {
-                                if (data[i].id == id) {
-                                data.splice(i,1); //xóa phần tử khỏi mảng, tham số thứ 2 là 1 phần tử
-                            }
+                        if (data[i].id == id) {
+                            data.splice(i, 1); //xóa phần tử khỏi mảng, tham số thứ 2 là 1 phần tử
+                        }
                     }
-                    
-                    localStorage.setItem('data',JSON.stringify(data));  //chuyển obj->string
+
+                    localStorage.setItem('data', JSON.stringify(data)); //chuyển obj->string
                     // alert('Xóa thành công');
                     window.location.reload();
                 }
             });
-        localStorage.setItem('data', JSON.stringify(old_data));
-    }    
-</script>
+            localStorage.setItem('data', JSON.stringify(old_data));
+        }
+    </script> --}}
     <script>
         $(function() {
             $("#slider-range").slider({

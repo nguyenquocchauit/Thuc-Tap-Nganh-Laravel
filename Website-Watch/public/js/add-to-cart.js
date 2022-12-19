@@ -87,6 +87,16 @@ $(document).ready(function () {
                                         "quantity-shopping-cart"
                                     ).innerHTML = response.quantity_cart;
                                 });
+                            } else if (
+                                response.status == 500 &&
+                                response.msg == "Passed the number above 5"
+                            ) {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Thông báo",
+                                    text: "Khách hàng đặt trên 5 sản phẩm vui lòng trao đổi trực tiếp với tư vấn viên. Cảm ơn!",
+                                    footer: '<a href="">Liên hệ</a>',
+                                });
                             }
                         },
                     });
@@ -109,8 +119,46 @@ $(document).ready(function () {
                     response.msg == "Add to cart successfully"
                 ) {
                     window.location.href = "/gio-hang";
+                } else if (
+                    response.status == 500 &&
+                    response.msg == "Passed the number above 5"
+                ) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Thông báo",
+                        text: "Khách hàng đặt trên 5 sản phẩm vui lòng trao đổi trực tiếp với tư vấn viên. Cảm ơn!",
+                        footer: '<a href="">Liên hệ</a>',
+                    });
                 }
             },
         });
+    });
+    $("#buy-all-like-product").on("click", function () {
+        var idArr = [];
+        // get id produc form list like product
+        $(".list-like-product").each(function () {
+            idArr.push($(this).data("id"));
+        });
+        // if check < idArr.length means the user bought the product in excess of the allowed quantity
+        var check = 0;
+        for (let index = 0; index < idArr.length; index++) {
+            $.ajax({
+                type: "GET",
+                url: "/api/add-to-cart/" + idArr[index],
+                success: function (response) {
+                    if (
+                        response.status == 500 &&
+                        response.msg == "Passed the number above 5"
+                    ) {
+
+                    }
+                },
+            });
+            check ++;
+        }
+        if (check =idArr.length) {
+            window.location.href = "/gio-hang";
+        }
+
     });
 });

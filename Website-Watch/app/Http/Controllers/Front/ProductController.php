@@ -35,6 +35,7 @@ class ProductController extends Controller
 
     public function detailProduct($id)
     {
+
         //get value product by id request
         $product = Product::find($id);
         //get name image from product retrieve
@@ -124,7 +125,7 @@ class ProductController extends Controller
 
     public function likeProduct(Request $request)
     {
-        if ($request->action == "Like comment product") {
+        if ($request->action == "Like product") {
             $like = LikeProduct::where('customers', $request->user)->where('product', $request->product)->get();
             // >0 is customer have been liked product , else none like product
             if (count($like) > 0) {
@@ -145,7 +146,8 @@ class ProductController extends Controller
                         return response()->json([
                             'status' => 200,
                             'msg' => 'Like product successfully',
-                            'data' => $like,
+                            'data' =>  $like[0]->products,
+                            'image' => $like[0]->products->productImage['image_1'],
                         ]);
                     }
                 }
@@ -169,7 +171,8 @@ class ProductController extends Controller
                 return response()->json([
                     'status' => 200,
                     'msg' => 'Like product successfully',
-                    'data' => $like,
+                    'data' =>  $like->products,
+                    'image' => $like->products->productImage['image_1'],
                 ]);
             }
         } else
@@ -178,7 +181,25 @@ class ProductController extends Controller
                 'msg' => 'Like comment error',
             ]);
     }
+    public function removeLikeProduct(Request $request)
+    {
+        if ($request->action == "Clear like product") {
+            $liked = LikeProduct::query()
+                ->where('customers', $request->user)
+                ->where('status', '=','like')
+                ->selectRaw('likes.product')
+                ->get();
+            LikeProduct::where('customers', $request->user)->update(array(
+                'status' => 'none',
+            ));
 
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Clear like successfully',
+                'product' => $liked,
+            ]);
+        }
+    }
 
 
     public function getFileImageProduct($image)

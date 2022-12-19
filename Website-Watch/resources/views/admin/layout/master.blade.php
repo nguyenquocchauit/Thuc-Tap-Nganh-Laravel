@@ -598,29 +598,29 @@
 
                             <li class="mm-active">
                                 <a href="#">
-                                    <i class="metismenu-icon pe-7s-plugin"></i>Applications
+                                    <i class="metismenu-icon pe-7s-plugin"></i>Danh sách
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
                                     <li>
                                         <a href="./admin/user" class="{{ (request()->segment(2) == 'user') ? 'mm-active' : '' }}">
-                                            <i class="metismenu-icon"></i>User
+                                            <i class="metismenu-icon"></i>Người dùng
                                         </a>
                                     </li>
                                     <li>
                                         <a href="./admin/product" class="{{ (request()->segment(2) == 'product') ? 'mm-active' : '' }}">
                                             <i class="metismenu-icon" >
-                                            </i>Product
+                                            </i>Sản phẩm
                                         </a>
                                     </li>
                                     <li>
                                         <a href="./admin/category">
-                                            <i class="metismenu-icon" class="{{ (request()->segment(2) == 'category') ? 'mm-active' : '' }}"></i>Category
+                                            <i class="metismenu-icon" class="{{ (request()->segment(2) == 'category') ? 'mm-active' : '' }}"></i>Loại
                                         </a>
                                     </li>
                                     <li>
                                         <a href="./admin/brand" class="{{ (request()->segment(2) == 'brand') ? 'mm-active' : '' }}">
-                                            <i class="metismenu-icon"></i>Brand
+                                            <i class="metismenu-icon"></i>Hãng
                                         </a>
                                     </li>
                                 </ul>
@@ -636,7 +636,7 @@
                 {{-- Main --}}
 
                 @yield('body')
-                
+
                 <div class="app-wrapper-footer">
                     <div class="app-footer">
                         <div class="app-footer__inner">
@@ -1733,7 +1733,7 @@
         </div>
     </div>
     <div class="app-drawer-overlay d-none animated fadeIn"></div>
-    
+
     <script src="./dashboard/assets/scripts/jquery-3.2.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 

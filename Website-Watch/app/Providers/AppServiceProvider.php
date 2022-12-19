@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrapFive();
         // Here * means - in all of your views $nameUser variable is available.
         view()->composer('*', function ($view) {
             $nameUser = $this->getNameUser();
@@ -36,7 +37,6 @@ class AppServiceProvider extends ServiceProvider
             $liked = $this->getLikeProduct();
             $view->with(['nameUser' => $nameUser, 'brandMenu' => $brand, 'liked' => $liked]);
         });
-        Paginator::useBootstrapFive();
     }
     public function getNameUser()
     {
@@ -52,12 +52,12 @@ class AppServiceProvider extends ServiceProvider
     {
         $women =  Product::query()
             ->join('brands', 'brands.id', '=', 'products.brand')
-            ->selectRaw('DISTINCT brands.*')
+            ->selectRaw('DISTINCT brands.*, products.brand')
             ->where('gender', '1')
             ->get();
         $men =  Product::query()
             ->join('brands', 'brands.id', '=', 'products.brand')
-            ->selectRaw('DISTINCT brands.*')
+            ->selectRaw('DISTINCT brands.*, products.brand')
             ->where('gender', '0')
             ->get();
         $brands = ['men' => $men, 'women' => $women];

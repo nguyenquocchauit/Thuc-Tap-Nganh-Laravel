@@ -10,11 +10,14 @@ class Brand extends Model
     use HasFactory;
 
     protected $table = 'brands';
-     protected $primaryKey = false;
+    //protected $primaryKey = false;
+    protected $primaryKey = false;
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $guarded = [];
 
-    public function product(){
-        return $this->hasMany(Product::class,'brand','id');
+    public function product()
+    {
+        return $this->hasMany(Product::class, 'brand', 'id');
     }
-
 }

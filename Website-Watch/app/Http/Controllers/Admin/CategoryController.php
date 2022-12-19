@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $title = 'Danh sách loại';
-        $categories = Gender::all();
+        $categories = Gender::first('id')->paginate(10);
         return view('admin.category.index',compact('title','categories'));
     }
 

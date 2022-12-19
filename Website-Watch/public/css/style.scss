@@ -216,7 +216,12 @@ $color7: #f7b100;
         }
     }
 }
-
+///menu
+.header-menu {
+    .nav-link:hover {
+        color: orange;
+    }
+}
 /////////////////////////////////////
 .body {
     background: linear-gradient(
@@ -293,13 +298,14 @@ $color7: #f7b100;
                     font-size: 24px;
                     color: #fffffe87;
                 }
-                .liked{
+                .liked {
                     color: red;
                 }
                 a {
                     color: $color5;
                     text-decoration: none;
                     margin-top: 20px;
+                    font-size: 14px;
                 }
 
                 .price {

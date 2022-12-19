@@ -171,6 +171,10 @@
   border-radius: 100%;
 }
 
+.header-menu .nav-link:hover {
+  color: orange;
+}
+
 .body {
   background: linear-gradient(rgba(0, 0, 0, 0.697) 100%, rgba(0, 0, 0, 0.5) 100%), url("/images/black_background_metal.jpg");
 }
@@ -240,6 +244,7 @@
   color: #fdff8f;
   text-decoration: none;
   margin-top: 20px;
+  font-size: 14px;
 }
 .body .productlist .filtering .item .price {
   justify-content: center;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2022 at 06:56 PM
+-- Generation Time: Dec 19, 2022 at 06:42 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -190,8 +190,23 @@ CREATE TABLE `likes` (
 --
 
 INSERT INTO `likes` (`id`, `customers`, `product`, `status`, `created_at`) VALUES
-(1, 2, 3, 'none', '2022-12-15 16:26:27'),
-(2, 2, 1, 'like', '2022-12-15 17:21:08');
+(1, 1, 3, 'like', '2022-12-15 16:26:27'),
+(5, 2, 31, 'none', '2022-12-18 16:00:12'),
+(6, 2, 26, 'none', '2022-12-18 16:00:13'),
+(7, 2, 19, 'none', '2022-12-18 16:00:14'),
+(8, 2, 22, 'none', '2022-12-18 16:14:04'),
+(9, 2, 32, 'none', '2022-12-18 16:21:02'),
+(10, 2, 27, 'none', '2022-12-18 16:25:53'),
+(11, 2, 2, 'none', '2022-12-18 17:16:18'),
+(12, 2, 4, 'none', '2022-12-18 17:16:19'),
+(13, 2, 37, 'none', '2022-12-18 17:20:58'),
+(14, 2, 38, 'none', '2022-12-18 17:20:58'),
+(15, 2, 7, 'none', '2022-12-18 17:25:00'),
+(16, 2, 8, 'none', '2022-12-18 17:25:01'),
+(17, 2, 1, 'none', '2022-12-19 03:42:49'),
+(18, 2, 35, 'none', '2022-12-19 03:42:54'),
+(19, 2, 36, 'none', '2022-12-19 03:42:56'),
+(20, 2, 3, 'like', '2022-12-19 03:43:11');
 
 -- --------------------------------------------------------
 
@@ -296,7 +311,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `image`, `quantity`, `price`, `discount`, `create_at`, `updated_at`, `gender`, `brand`) VALUES
-(1, 'DOUGLAS DAY-DATE 41', 'Cách mạng hóa hoạt động du lịch, Douglas DC-3 vận chuyển hành khách với phong cách Hạng Nhất và trở thành công cụ trong Thời kỳ Vàng của ngành hàng không. Bằng cách pha trộn sự tinh tế của chuyến du lịch sang trọng với công nghệ tiên tiến và tay nghề thủ công, chiếc đồng hồ AVIATOR Douglas Day Date 41 vinh danh chiếc máy bay vĩ đại nhất thời đại.', 'douglas-day-date-41', 0, 18000000, 50, '2022-12-05 18:22:40', '2022-12-05 18:22:40', 0, 'Avia'),
+(1, 'DOUGLAS DAY-DATE 41', 'Cách mạng hóa hoạt động du lịch, Douglas DC-3 vận chuyển hành khách với phong cách Hạng Nhất và trở thành công cụ trong Thời kỳ Vàng của ngành hàng không. Bằng cách pha trộn sự tinh tế của chuyến du lịch sang trọng với công nghệ tiên tiến và tay nghề thủ công, chiếc đồng hồ AVIATOR Douglas Day Date 41 vinh danh chiếc máy bay vĩ đại nhất thời đại.', 'douglas-day-date-41', 1, 18000000, 50, '2022-12-05 18:22:40', '2022-12-05 18:22:40', 0, 'Avia'),
 (2, 'DOUGLAS MOONFLIGHT', 'Vào những năm 1930, các nhà thiết kế thời trang cao cấp đã mang đến sự quyến rũ cho đường băng và lên chiếc Douglas DC-3, chiếc máy bay đã thiết kế lại hành trình bằng cách mang đến sự sang trọng cho mỗi chuyến bay. Kết hợp các tính năng Art Deco cổ điển được đặt theo các giai đoạn của mặt trăng, AVIATOR MoonFlight cho phép bạn hạ cánh giữa các ngôi sao và tín đồ thời trang với phong cách cao cấp nhằm tôn vinh chiếc máy bay vĩ đại nhất của thời đại đó.', 'douglas-moonflight', 100, 18000000, 0, '2022-12-06 11:08:57', '2022-12-06 11:08:57', 1, 'Avia'),
 (3, 'AIRACOBRA P45 CHRONO 1', 'Tận dụng chiến lược tầm nhìn chim của mình trong suốt Thế chiến II, Airacobra là một máy bay chiến đấu ổn định mà Đồng minh có thể dựa vào để hỗ trợ quân đội trên mặt đất. Bằng cách kết hợp tinh thần đáng tin cậy của nó đã chứng tỏ là công cụ trong mọi nhiệm vụ, đồng hồ AVIATOR Airacobra P45 Chrono mang đến một vẻ ngoài giống như một công cụ xứng đáng được đề cập đến.', 'airacobra-p45-chrono-1', 1000, 10000000, 10, '2022-12-06 11:08:57', '2022-12-06 11:08:57', 0, 'Avia'),
 (4, 'AIRACOBRA P45 CHRONO', 'Tận dụng chiến lược tầm nhìn chim của mình trong suốt Thế chiến II, Airacobra là một máy bay chiến đấu ổn định mà Đồng minh có thể dựa vào để hỗ trợ quân đội trên mặt đất. Bằng cách kết hợp tinh thần đáng tin cậy của nó đã chứng tỏ là công cụ trong mọi nhiệm vụ, đồng hồ AVIATOR Airacobra P45 Chrono mang đến một vẻ ngoài giống như một công cụ xứng đáng được đề cập đến.', 'airacobra-p45-chrono', 100, 11000000, 20, '2022-12-06 11:13:51', '2022-12-06 11:13:51', 1, 'Avia'),
@@ -395,7 +410,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `phone_number`, `address`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
-(1, 'Nguyễn Quốc Châu', '', NULL, 'chau.nq.61cntt@ntu.edu.vn', NULL, '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', NULL, '2022-12-05 18:15:54', '2022-12-05 18:15:54', 0),
+(1, 'Nguyễn Quốc Châu', '0386818829', NULL, 'chau.nq.61cntt@ntu.edu.vn', NULL, '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', NULL, '2022-12-05 18:15:54', '2022-12-05 18:15:54', 0),
 (2, 'Nguyen Quoc Chau', '0926383006', '20 Nha Trang Khanh Hoa', 'mallie69@example.org', NULL, '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', NULL, '2022-12-12 16:36:59', '2022-12-12 16:36:59', 0),
 (3, 'Nguyen Quoc Chau', '0926383076', '20 Nha Trang Khanh Hoa', 'mallie6@example.org', NULL, '$2y$10$huFy/caUfNuL2S52nYiwJu6s/ob2L0V5mQcdcreo986vsmEhJKV2.', NULL, '2022-12-12 17:23:17', '2022-12-12 17:23:17', 0);
 

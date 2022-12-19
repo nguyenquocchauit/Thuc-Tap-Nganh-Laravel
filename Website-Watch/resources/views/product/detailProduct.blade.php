@@ -189,9 +189,9 @@
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="d-flex align-items-center">
                                                         <a href="#!" class="link-muted me-2"><i
-                                                                class="fas fa-thumbs-up me-1"></i>132</a>
+                                                                class="fas fa-thumbs-up me-1"></i></a>
                                                         <a href="#!" class="link-muted"><i
-                                                                class="fas fa-thumbs-down me-1"></i>15</a>
+                                                                class="fas fa-thumbs-down me-1"></i></a>
                                                     </div>
                                                     <a href="#!" class="link-muted"><i
                                                             class="fas fa-reply me-1"></i>

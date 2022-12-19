@@ -91,7 +91,7 @@ $(document).ready(function () {
                         _html += " </div>";
                         _html += " </div>";
                         _html += "  </div>";
-                        $(".show-comment-ajax").html(_html);
+                        $(".show-comment-ajax").append(_html);
                     }
                 },
             });

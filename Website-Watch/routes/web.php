@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Administrator;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Models\Product;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,5 +39,5 @@ Route::prefix('admin')->group(function() {
     Route::resource('user',UserController::class);
     Route::resource('brand',BrandController::class);
     Route::resource('category',CategoryController::class);
-    Route::resource('product',\App\Http\Controllers\Admin\ProductController::class);
+    Route::resource('product',AdminProductController::class);
 });

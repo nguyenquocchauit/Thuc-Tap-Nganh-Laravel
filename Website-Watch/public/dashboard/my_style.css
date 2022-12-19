@@ -1,5 +1,9 @@
+.image-list-product{
+    width: 10%;
+}
 /* image */
 img {
+    width: 15%;
     display: inline;
 }
 
