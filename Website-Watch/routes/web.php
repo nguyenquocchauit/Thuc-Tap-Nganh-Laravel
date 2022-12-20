@@ -45,4 +45,4 @@ Route::prefix('admin')->group(function() {
      Route::resource('login',AuthLoginAdminController::class);
 });
 // user
-Route::get('/cai-dat-ca-nhan', [UserUserController::class, 'index'])->name('profile');
+Route::get('/thong-tin-ca-nhan', [UserUserController::class, 'index'])->name('profile');

@@ -401,6 +401,16 @@
   margin: 0 auto;
 }
 
+#buy-product {
+  border: 1px solid #52507e;
+  padding: 4px 14px;
+  background-color: #000;
+  color: orange;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .footer {
   background: linear-gradient(rgba(0, 0, 0, 0.697) 100%, rgba(0, 0, 0, 0.5) 100%), url("/images/footer-background.jpg");
   color: white;

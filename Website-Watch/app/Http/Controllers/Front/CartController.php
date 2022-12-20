@@ -39,6 +39,8 @@ class CartController extends Controller
         } else {
             $cart[$request->id] = [
                 "name" => $product->name,
+                "brand" => $product->productBrand['name'],
+                "gender" => $product->productGender['name'],
                 "quantity" => 1,
                 "price" => $product->price,
                 "discount" => $product->discount,

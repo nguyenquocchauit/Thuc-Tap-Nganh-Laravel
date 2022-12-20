@@ -67,6 +67,14 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
+    <style type="text/css">
+        #btn-back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+        }
+    </style>
 
 </head>
 
@@ -109,12 +117,11 @@
                                     <button type="button" class="button" data-bs-toggle="modal"
                                         data-bs-target="#signup">Đăng ký</button>
                                 @else
-                                    <a href="../../Website Watch PHP/customers/Chi-tiet.php"
-                                        style="color:white;font-size: 18px;"><i class="fas fa-user-cog"></i></a>
+                                    <a href="/thong-tin-ca-nhan" style="color:white;font-size: 18px;"><i
+                                            class="fas fa-user-cog"></i></a>
                                     <strong></strong>
                                     {{ $nameUser }}
-                                    <input type="hidden" id="ID-User"
-                                        value="{{ Auth::user()->id }}">
+                                    <input type="hidden" id="ID-User" value="{{ Auth::user()->id }}">
                                     <button type="button" name="logout" class="btn btn-dark"><a
                                             href="{{ url('api/logout-user') }}" style="color:#f1f1f1"><i
                                                 class="fas fa-sign-out-alt"></i></a></button>
@@ -189,7 +196,7 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link"
-                                                href="../../Website Watch PHP/contact/contact.php">LIÊN HỆ</a>
+                                                href="">LIÊN HỆ</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -300,6 +307,9 @@
             </div>
         </div>
     </div>
+    <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
+        <i class="fas fa-arrow-up"></i> Trở lên
+    </button>
     {{-- <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -369,6 +379,33 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script type="text/javascript" src="/js/simple.money.format.js"></script>
     @stack('scripts')
+    <script type="text/javascript">
+        let mybutton = document.getElementById("btn-back-to-top");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (
+                document.body.scrollTop > 20 ||
+                document.documentElement.scrollTop > 20
+            ) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        // When the user clicks on the button, scroll to the top of the document
+        mybutton.addEventListener("click", backToTop);
+
+        function backToTop() {
+            console.log(mybutton);
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
 </body>
 
 </html>

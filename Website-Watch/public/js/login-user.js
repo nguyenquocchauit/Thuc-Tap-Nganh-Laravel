@@ -2,21 +2,26 @@ $(document).ready(function () {
     function isEmpty(str) {
         return !str || str.length === 0;
     }
-    function showMsgWaringLogin(msg) {
+    function showMsgWaringLogin(msg, vali) {
         Swal.fire({
             icon: "warning",
             title: msg,
             timer: 1500,
             timerProgressBar: true,
         });
+        $(vali).addClass("is-invalid");
     }
     $("#btn-login-user").on("click", function () {
         var _email = $("#usernameLogin").val();
         var _pass = $("#passwordLogin").val();
-        if (isEmpty(_email)) showMsgWaringLogin("Email không được để trống!");
-        else if (isEmpty(_pass))
-            showMsgWaringLogin("Mật khẩu không được để trống!");
-        else {
+        if (isEmpty(_email)) {
+            showMsgWaringLogin("Email không được để trống!", "#usernameLogin");
+        } else if (isEmpty(_pass)) {
+            showMsgWaringLogin(
+                "Mật khẩu không được để trống!",
+                "#passwordLogin"
+            );
+        } else {
             $.ajax({
                 type: "POST",
                 url: "/api/login-user",

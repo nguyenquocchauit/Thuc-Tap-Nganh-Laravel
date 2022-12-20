@@ -2,13 +2,14 @@ $(document).ready(function () {
     function isEmpty(str) {
         return !str || str.length === 0;
     }
-    function showMsgWaringRegister(msg) {
+    function showMsgWaring(msg, vali) {
         Swal.fire({
             icon: "warning",
             title: msg,
             timer: 1500,
             timerProgressBar: true,
         });
+        $(vali).addClass("is-invalid");
     }
     $("#save-profile-button").on("click", function () {
         var _action = "Save profile";
@@ -21,25 +22,44 @@ $(document).ready(function () {
         var _checkPass = $("#checkPass-Profile").val();
         if (_checkPass.length > 0 && _checkPass != null) {
             if (_checkPass == _phone) {
-                showMsgWaringRegister(
+                showMsgWaring(
                     "Mật khẩu không được là số điện thoại đăng ký"
                 );
             } else if (_checkPass == _email) {
-                showMsgWaringRegister("Mật khẩu không được là Email đăng ký");
+                showMsgWaring("Mật khẩu không được là Email đăng ký");
+            } else if (_pass == _checkPass) {
+                showMsgWaring(
+                    "Mật khẩu mới không được giống mật khẩu hiện tại"
+                );
             }
         }
         if (isEmpty(_name)) {
-            showMsgWaringRegister("Tên không được để trống!");
+            showMsgWaring("Tên không được để trống!", "#name-Profile");
         } else if (isEmpty(_email)) {
-            showMsgWaringRegister("Email không được để trống!");
+            showMsgWaring(
+                "Email không được để trống!",
+                "#email-Profile"
+            );
         } else if (isEmpty(_phone)) {
-            showMsgWaringRegister("Số điện thoại không được để trống!");
+            showMsgWaring(
+                "Số điện thoại không được để trống!",
+                "#phone-Profile"
+            );
         } else if (_phone.length <= 9 || _phone.length >= 11) {
-            showMsgWaringRegister("Số điện thoại không chính xác!");
+            showMsgWaring(
+                "Số điện thoại không chính xác!",
+                "#phone-Profile"
+            );
         } else if (isEmpty(_pass)) {
-            showMsgWaringRegister("Mật khẩu không được để trống!");
+            showMsgWaring(
+                "Mật khẩu không được để trống!",
+                "#pass-Profile"
+            );
         } else if (_pass.length < 6) {
-            showMsgWaringRegister("Mật khẩu tối thiểu 6 ký tự!");
+            showMsgWaring(
+                "Mật khẩu tối thiểu 6 ký tự!",
+                "#pass-Profile"
+            );
         } else {
             $.ajax({
                 type: "POST",
@@ -58,23 +78,46 @@ $(document).ready(function () {
                 success: function (response) {
                     console.log(response);
                     if (
-                        response.data.email ==
-                            "The email has already been taken." &&
+                        response.email == "The email has already been taken." &&
                         response.status == 500
                     ) {
-                        showMsgWaringRegister(
-                            "Email bạn vừa điền đã tồn tại với tài khoản khác!"
+                        showMsgWaring(
+                            "Email bạn vừa điền đã tồn tại với tài khoản khác!",
+                            "#email-Profile"
                         );
                     } else if (
-                        response.data.phone_number ==
+                        response.phone ==
                             "The phone number has already been taken." &&
                         response.status == 500
                     ) {
-                        showMsgWaringRegister(
-                            "Số điện thoại bạn vừa điền đã tồn tại với tài khoản khác!"
+                        showMsgWaring(
+                            "Số điện thoại bạn vừa điền đã tồn tại với tài khoản khác!",
+                            "#phone-Profile"
                         );
+                    } else if (
+                        response.msg == "Cofirm password incorrect" &&
+                        response.status == 500
+                    ) {
+                        showMsgWaring(
+                            "Xác nhận mật khẩu không chính xác!",
+                            "#pass-Profile"
+                        );
+                    } else if (
+                        response.msg == "Update information successfully" &&
+                        response.status == 200
+                    ) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Cập nhật thành công!",
+                            timer: 1500,
+                            timerProgressBar: true,
+                        }).then((result) => {
+                            // done then reload page
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                location.reload();
+                            }
+                        });
                     }
-
                 },
             });
         }

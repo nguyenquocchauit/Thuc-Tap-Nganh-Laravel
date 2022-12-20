@@ -12,7 +12,7 @@
             <div class="col-md-7 border-right">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Cài đặt thông tin cá nhân</h4>
+                        <h3 class="text-right"><strong>Cài đặt thông tin cá nhân</strong></h3>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-12"><label class="labels">Họ và tên <span

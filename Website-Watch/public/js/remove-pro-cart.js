@@ -30,28 +30,19 @@ $(document).ready(function () {
             }
         });
     });
-    // thêm nút tăng giảm vào trước và sau input số lượng
-    $(".numbers-row")
-        .find(".desc")
-        .append('<button class="btnquantity buttonn">+</button>');
-    $(".numbers-row")
-        .find(".asc")
-        .append('<button class="btnquantity buttonn">-</button>');
-    // bắt sự kiện click vào nút tăng giảm số lượng trong giỏ hàng
-    $(".buttonn").on("click", function () {
+
+    $(".btn-quantity-cart").on("click", function () {
         var $button = $(this);
         // lấy giá trị của thẻ input hiển thị
         var oldValue = $button
             .parent()
-            .parent()
-            .find(".inpqan")
-            .find(".inpquantity")
+            .find(".inp-quantity-cart")
+            .find(".quantity-cart")
             .val();
         // lấy vị trí. tức là id sản phẩm theo value của input
         var ID_quantity = $button
             .parent()
-            .parent()
-            .find(".inpqan")
+            .find(".inp-quantity-cart")
             .find(".ID_Quantity")
             .val();
         // kiểm tra số lượng trên 5 thì không được đặt hàng phải liên hệ tư vấn viên
@@ -89,9 +80,9 @@ $(document).ready(function () {
                     if (
                         response.status == 200 &&
                         response.msg == "Update quantity successfully"
-                    )
+                    ) {
                         location.reload();
-                    else {
+                    } else {
                         Swal.fire({
                             icon: "error",
                             title: "Thông báo",
