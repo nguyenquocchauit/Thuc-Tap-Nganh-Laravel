@@ -10,7 +10,7 @@
                                     <i class="pe-7s-ticket icon-gradient bg-mean-fruit"></i>
                                 </div>
                                 <div>
-                                    Người dùng
+                                    Loại
                                     <div class="page-title-subheading">
                                         Xem, tạo, sửa, xóa và quản lý.
                                     </div>
@@ -22,7 +22,7 @@
 
                     <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
                         <li class="nav-item">
-                            <a href="./admin/user/{{$user->id}}/edit" class="nav-link">
+                            <a href="./admin/category/{{$category->id}}/edit" class="nav-link">
                                 <span class="btn-icon-wrapper pr-2 opacity-8">
                                     <i class="fa fa-edit fa-w-20"></i>
                                 </span>
@@ -31,7 +31,7 @@
                         </li>
 
                         <li class="nav-item delete">
-                            <form action="./admin/user/ {{ $user->id }}" method="post">
+                            <form action="./admin/category/ {{ $category->id }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="nav-link btn" type="submit"
@@ -55,7 +55,7 @@
                                             Id
                                         </label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>{{$user->id}}</p>
+                                            <p>{{$category->id}}</p>
                                         </div>
                                     </div>
 
@@ -64,47 +64,21 @@
                                             Tên
                                         </label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>{{$user->name}}</p>
+                                            <p>{{$category->name}}</p>
                                         </div>
                                     </div>
 
                                     <div class="position-relative row form-group">
-                                        <label for="email" class="col-md-3 text-md-right col-form-label">Số điện thoại</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p>{{$user->phone_number}}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-relative row form-group">
-                                        <label for="company_name" class="col-md-3 text-md-right col-form-label">
-                                            Địa chỉ
+                                        <label for="slug" class="col-md-3 text-md-right col-form-label">
+                                            Slug
                                         </label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>{{$user->address}}</p>
+                                            <p>{{$category->slug}}</p>
                                         </div>
                                     </div>
 
-                                    <div class="position-relative row form-group">
-                                        <label for="country"
-                                            class="col-md-3 text-md-right col-form-label">Email</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p>{{$user->email}}</p>
-                                        </div>
-                                    </div>
 
-                                    <div class="position-relative row form-group">
-                                        <label for="country"
-                                            class="col-md-3 text-md-right col-form-label">Vai trò</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            @if ($user->role == 0)
-                                                user
-                                            @else
-                                                admin
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <a href="./admin/user" class="btn btn-link">
+                                    <a href="./admin/category" class="btn btn-link">
                                         <span>Quay lại</span>
                                     </a>
 

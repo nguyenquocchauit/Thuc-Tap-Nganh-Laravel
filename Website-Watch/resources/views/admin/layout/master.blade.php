@@ -26,7 +26,9 @@
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
-                <div class="logo-src"></div>
+                <div class="logo-src">
+                    <img src="dashboard/assets/images/tcwlogo.png" alt="">
+                </div>
                 <div class="header__pane ml-auto">
                     <div>
                         <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
@@ -67,7 +69,7 @@
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                             class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="./dashboard/assets/images/avatars/1.jpg"
+                                            <img width="42" class="rounded-circle" src="./dashboard/assets/images/_default-user.png"
                                                 alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
@@ -105,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading"> Alina Mclourd </div>
+                                    <div class="widget-heading-admin"> Alina Mclourd </div>
                                     <div class="widget-subheading"> VP People Manager </div>
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">
@@ -1661,7 +1663,7 @@
                                             <div class="avatar-wrapper mt-2 avatar-wrapper-overlap">
                                                 <div class="avatar-icon-wrapper avatar-icon-sm">
                                                     <div class="avatar-icon">
-                                                        <img src="./dashboard/assets/images/avatars/1.jpg" alt="">
+                                                        <img src="./dashboard/assets/images/_default-user.png" alt="">
                                                     </div>
                                                 </div>
                                                 <div class="avatar-icon-wrapper avatar-icon-sm">

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -27,8 +31,10 @@ class UserController extends Controller
      */
     public function create()
     {
+
         $title = 'Thêm  người dùng';
-        return view('admin.user.create',compact('title'));
+        $roles = Role::all();
+        return view('admin.user.create',compact('title','roles'));
     }
 
     /**
@@ -37,9 +43,29 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
 
+        if($request->get('password') != $request->get('password_confirmation')) {
+            return back()->with('error','Bạn nhập  mật khẩu không khớp, vui lòng nhập lại');
+        }
+        // $data = $request->all();
+        $user = new User();
+        $maxID = $user->maxID();
+        $maxID = $maxID[0]->ID_Max;
+        $maxID += 1;
+        $data = [
+            "id" => $maxID,
+            "name" => $request->name,
+            "phone_number" => $request->phone_number,
+            "address" => $request->address,
+            "email" => $request->email,
+            "password" => Hash::make($request->password),
+
+        ];
+        // $data['password'] = bcrypt($request->get('password'));
+        User::create($data);
+        return redirect('admin/user')->with('success', 'Thêm người dùng thành công');
     }
 
     /**
@@ -60,10 +86,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
+        
         $title = 'Cập nhật người dùng';
-        return view('admin.user.edit',compact('title'));
+        $roles = Role::all();
+        return view('admin.user.edit',compact('title','user','roles'));
     }
 
     /**
@@ -73,9 +101,23 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
-        //
+        //Xu ly password
+  
+        // $data['password'] = bcrypt($request->get('password'));
+        $users = User::find($id);
+        // $input = $request->all();
+        $data = [
+            "name" => $request->name,
+            "phone_number" => $request->phone_number,
+            "address" => $request->address,
+            "email" => $request->email,
+            "password" => Hash::make($request->password),
+
+        ];
+        $users->update($data);
+        return redirect('/admin/user')->with('success', 'Cập nhật người dùng thành công');
     }
 
     /**
@@ -84,8 +126,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-
+        User::destroy($user->id);
+        return redirect('/admin/user')->with('success', 'Xóa người dùng thành công');
     }
 }

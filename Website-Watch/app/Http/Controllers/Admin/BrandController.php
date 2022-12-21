@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BrandRequest;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 
@@ -37,9 +38,11 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BrandRequest $request)
     {
-        //
+        $data = $request->all();
+        Brand::create($data);
+        return redirect('admin/brand')->with('success', 'Thêm hãng thành công');
     }
 
     /**
@@ -50,7 +53,9 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-        //
+        $title = 'Chi tiết hãng';
+        $brand = Brand::where('id', $id)->first();
+        return view('admin.brand.show',compact('title','brand'));
     }
 
     /**
@@ -61,8 +66,9 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
+        $brand = Brand::where('id', $id)->first();
         $title = 'Cập nhật hãng';
-        return view('admin.brand.edit',compact('title'));
+        return view('admin.brand.edit',compact('title','brand'));
     }
 
     /**
@@ -72,9 +78,15 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BrandRequest $request, $id)
     {
-        //
+         Brand::where('id', $id)
+        ->update([
+            "id" => $request->id,
+            "name" => $request->name,
+            "slug" => $request->slug
+        ]);
+        return redirect('/admin/brand')->with('success', 'Cập nhật hãng thành công');
     }
 
     /**
@@ -85,6 +97,7 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Brand::where('id', $id)->delete();
+        return redirect('/admin/brand')->with('success', 'Xóa hãng thành công');
     }
 }

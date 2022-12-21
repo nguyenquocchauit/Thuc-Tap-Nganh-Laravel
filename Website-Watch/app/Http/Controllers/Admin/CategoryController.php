@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
+use App\Models\Brand;
 use App\Models\Gender;
 use Illuminate\Http\Request;
 
@@ -27,7 +29,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Thêm loại';
+        return view('admin.category.create',compact('title'));
     }
 
     /**
@@ -36,9 +39,19 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $category = new Gender();
+        $maxID = $category->maxID();
+        $maxID = $maxID[0]->ID_Max;
+        $maxID += 1;
+        $data = [
+            "id" => $maxID,
+            "name" => $request->name,
+            "slug" => $request->slug
+        ];
+        Gender::create($data);
+        return redirect('admin/category');
     }
 
     /**
@@ -47,9 +60,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Gender $category)
     {
-        //
+        $title = 'Chi tiết loại';
+        return view('admin.category.show',compact('title','category'));
     }
 
     /**
@@ -58,9 +72,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Gender $category)
     {
-        //
+        $title = 'Cập nhật loại';
+        return view('admin.category.edit',compact('title','category'));
     }
 
     /**
@@ -70,9 +85,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $categories = Gender::find($id);
+        $data = [
+            "name" => $request->name,
+            "slug" => $request->slug
+        ];
+        $categories->update($data);
+        return redirect('/admin/category')->with('success', 'Cập nhật loại thành công');
     }
 
     /**
@@ -83,6 +104,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Gender::destroy($id);
+        return redirect('/admin/category')->with('success', 'Xóa loại thành công');
     }
 }

@@ -11,9 +11,9 @@
                                     <i class="pe-7s-ticket icon-gradient bg-mean-fruit"></i>
                                 </div>
                                 <div>
-                                    User
+                                    Người dùng
                                     <div class="page-title-subheading">
-                                        View, create, update, delete and manage.
+                                        Xem, tạo, sửa, xóa và quản lý.
                                     </div>
                                 </div>
                             </div>
@@ -27,25 +27,18 @@
                                     <form method="post" action="admin/user" enctype="multipart/form-data">
                                         @csrf
 
-                                        @if (session('mes'))
-                                        <div class="alert alert-warning" role="alert">
-                                            {{session('mes')}}
-                                        </div>
-                                        @endif
-
-                                        <div class="position-relative row form-group">
-                                            <label for="id" class="col-md-3 text-md-right col-form-label">Id</label>
-                                            <div class="col-md-9 col-xl-8">
-                                                <input required name="id" id="id" placeholder="Nhập id" type="text"
-                                                    class="form-control" value="">
-                                            </div>
-                                        </div>
-
+                                        @include('admin.alert')
+                           
                                         <div class="position-relative row form-group">
                                             <label for="name" class="col-md-3 text-md-right col-form-label">Tên</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input required name="name" id="name" placeholder="Nhập tên" type="text"
-                                                    class="form-control" value="">
+                                                <input  name="name" id="name" placeholder="Nhập tên" type="text"
+                                                    class="form-control" value="{{old('name')}}">
+                                                    <span style="color: red">
+                                                        @error('name')
+                                                            {{$message}}
+                                                        @enderror
+                                                    </span>
                                             </div>
                                         </div>
 
@@ -53,8 +46,13 @@
                                             <label for="phone"
                                                 class="col-md-3 text-md-right col-form-label">Số điện thoại</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input required name="phone_number" id="phone" placeholder="Nhập số điện thoại" type="tel" 
-                                                    class="form-control" value="">
+                                                <input  name="phone_number" id="phone" placeholder="Nhập số điện thoại" type="tel" 
+                                                    class="form-control" value="{{old('phone_number')}}">
+                                                    <span style="color: red">
+                                                        @error('phone_number')
+                                                            {{$message}}
+                                                        @enderror
+                                                    </span>
                                             </div>
                                         </div>
 
@@ -62,8 +60,8 @@
                                             <label for="address"
                                                 class="col-md-3 text-md-right col-form-label">Địa chỉ</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input required name="address" id="address" placeholder="Nhập địa chỉ" type="text"
-                                                    class="form-control" value="">
+                                                <input  name="address" id="address" placeholder="Nhập địa chỉ" type="text"
+                                                    class="form-control" value="{{old('address')}}">
                                             </div>
                                         </div>
 
@@ -71,8 +69,13 @@
                                             <label for="email"
                                                 class="col-md-3 text-md-right col-form-label">Email</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input required name="email" id="email" placeholder="Nhập Email" type="email"
-                                                    class="form-control" value="">
+                                                <input  name="email" id="email" placeholder="Nhập Email" type="email"
+                                                    class="form-control" value="{{old('email')}}">
+                                                    <span style="color: red">
+                                                        @error('email')
+                                                            {{$message}}
+                                                        @enderror
+                                                    </span>
                                             </div>
                                         </div>
 
@@ -82,6 +85,11 @@
                                             <div class="col-md-9 col-xl-8">
                                                 <input name="password" id="password" placeholder="Nhập mật khẩu" type="password"
                                                     class="form-control" value="">
+                                                    <span style="color: red">
+                                                        @error('password')
+                                                            {{$message}}
+                                                        @enderror
+                                                    </span>
                                             </div>
                                         </div>
 
@@ -91,6 +99,35 @@
                                             <div class="col-md-9 col-xl-8">
                                                 <input name="password_confirmation" id="password_confirmation" placeholder="Nhập lại mật khẩu" type="password"
                                                     class="form-control" value="">
+                                                    <span style="color: red">
+                                                        @error('password_confirmation')
+                                                            {{$message}}
+                                                        @enderror
+                                                    </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="position-relative row form-group">
+                                            <label for="role_user"
+                                                class="col-md-3 text-md-right col-form-label">Vai trò</label>
+                                            <div class="col-md-9 col-xl-8">
+                                                <select name="role" id="role_user" class="form-control">
+                                                    <option value="">-- Vai trò --</option>
+                                                    @foreach ($roles as $role)
+                                                        <option value="{{$role->id}}">
+                                                            @if ($role->type == 0)
+                                                                <span>user</span>
+                                                            @else
+                                                                <span>admin</span>
+                                                            @endif
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <span style="color: red">
+                                                    @error('role')
+                                                        {{$message}}
+                                                    @enderror
+                                                </span>
                                             </div>
                                         </div>
 
