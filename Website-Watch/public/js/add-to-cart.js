@@ -60,7 +60,7 @@ $(document).ready(function () {
                 function () {
                     $.ajax({
                         type: "GET",
-                        url: "api/add-to-cart/" + _productID,
+                        url: "/api/add-to-cart/" + _productID,
                         success: function (response) {
                             console.log(response);
                             if (
@@ -150,15 +150,13 @@ $(document).ready(function () {
                         response.status == 500 &&
                         response.msg == "Passed the number above 5"
                     ) {
-
                     }
                 },
             });
-            check ++;
+            check++;
         }
-        if (check =idArr.length) {
+        if ((check = idArr.length)) {
             window.location.href = "/gio-hang";
         }
-
     });
 });

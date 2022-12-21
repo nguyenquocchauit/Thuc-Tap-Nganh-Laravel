@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Auth\Guard as AuthGuard;
+use App\Models\Administrator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use Laravel\Sanctum\Guard;
+use Illuminate\Support\Facades\Validator;
 
-class LoginUserController extends Controller
+class LoginAdminController extends Controller
 {
     //
-
+    public function index()
+    {
+        return view(('admin.login.login'));
+    }
     public function login(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required'
@@ -29,11 +29,12 @@ class LoginUserController extends Controller
                 'msg' => $validator->getMessageBag(),
             ]);
         } else {
-            $user = User::where('email', $request->email)->first();
+            $user = Administrator::where('email', $request->email)->first();
             if ($user) {
                 if (Hash::check($request->password, $user->password)) {
                     $credentials = $request->only('email', 'password');
                     Auth::attempt($credentials);
+
                     return response()->json([
                         'status' => 200,
                         'msg' => 'Login successfully'
@@ -54,8 +55,10 @@ class LoginUserController extends Controller
     }
     public function logout()
     {
+
         Session::flush();
         Auth::logout();
+
         return Redirect('/');
     }
 }

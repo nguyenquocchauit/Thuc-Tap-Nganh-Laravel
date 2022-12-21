@@ -2,13 +2,14 @@ $(document).ready(function () {
     function isEmpty(str) {
         return !str || str.length === 0;
     }
-    function showMsgWaringRegister(msg) {
+    function showMsgWaringRegister(msg, vali) {
         Swal.fire({
             icon: "warning",
             title: msg,
             timer: 1500,
             timerProgressBar: true,
         });
+        $(vali).addClass("is-invalid");
     }
     $("#btn-register-user").on("click", function () {
         var _name = $("#nameRegister").val();
@@ -18,22 +19,41 @@ $(document).ready(function () {
         var _pass = $("#passRegister").val();
         var _checkPass = $("#checkPassRegister").val();
         if (isEmpty(_name)) {
-            showMsgWaringRegister("Tên không được để trống!");
+            showMsgWaringRegister("Tên không được để trống!", "#nameRegister");
         } else if (isEmpty(_email)) {
-            showMsgWaringRegister("Email không được để trống!");
+            showMsgWaringRegister(
+                "Email không được để trống!",
+                "#emailRegister"
+            );
         } else if (isEmpty(_phone)) {
-            showMsgWaringRegister("Số điện thoại không được để trống!");
-        } else if (_phone.length <=9 || _phone.length >= 11) {
-            showMsgWaringRegister("Số điện thoại không chính xác!");
+            showMsgWaringRegister(
+                "Số điện thoại không được để trống!",
+                "#phoneRegister"
+            );
+        } else if (_phone.length <= 9 || _phone.length >= 11) {
+            showMsgWaringRegister(
+                "Số điện thoại không chính xác!",
+                "#phoneRegister"
+            );
         } else if (isEmpty(_pass)) {
-            showMsgWaringRegister("Mật khẩu không được để trống!");
+            showMsgWaringRegister(
+                "Mật khẩu không được để trống!",
+                "#passRegister"
+            );
         } else if (_pass.length < 6) {
-            showMsgWaringRegister("Mật khẩu tối thiểu 6 ký tự!");
+            showMsgWaringRegister(
+                "Mật khẩu tối thiểu 6 ký tự!",
+                "#passRegister"
+            );
         } else if (isEmpty(_checkPass)) {
-            showMsgWaringRegister("Vui lòng xác minh lại mật khẩu!");
+            showMsgWaringRegister(
+                "Vui lòng xác minh lại mật khẩu!",
+                "#checkPassRegister"
+            );
         } else if (_pass != _checkPass) {
             showMsgWaringRegister(
-                "Xác nhận mật khẩu không chính xác, vui lòng kiểm tra lại!"
+                "Xác nhận mật khẩu không chính xác, vui lòng kiểm tra lại!",
+                "#passRegister"
             );
         } else if (_pass == _phone) {
             showMsgWaringRegister(
@@ -60,13 +80,19 @@ $(document).ready(function () {
                         response.msg.phone_number ==
                             "The phone number has already been taken."
                     )
-                        showMsgWaringRegister("Số điện thoại đã tồn tại!");
+                        showMsgWaringRegister(
+                            "Số điện thoại đã tồn tại!",
+                            "#phoneRegister"
+                        );
                     else if (
                         response.status == 400 &&
                         response.msg.email ==
                             "The email has already been taken."
                     )
-                        showMsgWaringRegister("Email đã tồn tại!");
+                        showMsgWaringRegister(
+                            "Email đã tồn tại!",
+                            "#emailRegister"
+                        );
                     else if (
                         response.status == 200 &&
                         response.msg == "Registered successfully"

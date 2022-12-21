@@ -18,7 +18,6 @@
                         </label>
                         <input type="text" placeholder="Email" id="usernameLogin" name="userName"
                             class="input w-100 form-control">
-                        <p id="validationUserName" style="color: red;display:block"></p>
                     </div>
                     <div>
                         <label class="form-label float-start">
@@ -26,9 +25,8 @@
                         </label>
                         <input type="password" placeholder="Mật khẩu" id="passwordLogin" name="passWord"
                             class="input w-100 form-control ">
-                        <span onclick="show_hidden_password_login()" class="changePasword"><i id="icon"
+                        <span onclick="show_hidden_password_login()" class="changePasword"><i id="iconLogin"
                                 class="fas fa-eye"></i></span>
-                        <p id="validationPassWord" style="color: red;display:block"></p>
                     </div>
                     <div class="forgetPass">
                         <a href="#" data-bs-target="#myModal_Forgotten_password" data-bs-toggle="modal"
@@ -99,7 +97,7 @@
                             </label>
                             <input class="w-100 form-control" type="password"
                                 placeholder="Mật khẩu" name="pass" id="passRegister">
-                            <span onclick="show_hidden_password()" class="changePasword_Singup"><i id="icon"
+                            <span onclick="show_hidden_password()" class="changePasword_Singup"><i id="iconRegister"
                                     class="fas fa-eye"></i></span>
                         </div>
                         <div class="col-6">
@@ -109,7 +107,7 @@
                             <input class="w-100 form-control" type="password"
                                 placeholder="Nhập lại mật khẩu" name="checkPass" id="checkPassRegister">
                             <span onclick="confirm_show_hidden_password()" class="changePasword_Singup"><i
-                                    id="icon" class="fas fa-eye"></i></span>
+                                    id="iconCRegister" class="fas fa-eye"></i></span>
                         </div>
                     </div>
                 </form>
@@ -160,3 +158,4 @@
         </div>
     </div>
 </div>
+

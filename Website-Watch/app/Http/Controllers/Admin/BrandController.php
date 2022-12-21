@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BrandRequest;
 use App\Models\Brand;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -18,7 +19,7 @@ class BrandController extends Controller
     {
         $title = 'Danh sách hãng';
         $brands = Brand::first('id')->paginate(10);
-        return view('admin.brand.index',compact('title','brands'));
+        return view('admin.brand.index', compact('title', 'brands'));
     }
 
     /**
@@ -29,7 +30,7 @@ class BrandController extends Controller
     public function create()
     {
         $title = 'Thêm hãng';
-        return view('admin.brand.create',compact('title'));
+        return view('admin.brand.create', compact('title'));
     }
 
     /**
@@ -56,6 +57,7 @@ class BrandController extends Controller
         $title = 'Chi tiết hãng';
         $brand = Brand::where('id', $id)->first();
         return view('admin.brand.show',compact('title','brand'));
+
     }
 
     /**
@@ -67,8 +69,9 @@ class BrandController extends Controller
     public function edit($id)
     {
         $brand = Brand::where('id', $id)->first();
+
         $title = 'Cập nhật hãng';
-        return view('admin.brand.edit',compact('title','brand'));
+        return view('admin.brand.edit', compact('title','brand', 'brand'));
     }
 
     /**

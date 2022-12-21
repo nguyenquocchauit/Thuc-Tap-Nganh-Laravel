@@ -58,7 +58,9 @@ $(document).ready(function () {
                                     response.data.name +
                                     '</p><p style="color:#fe980f">' +
                                     _price +
-                                    '</p><a class="btn btn-success"  href="">Đặt hàng</a><a class="btn btn-danger btn-xs delete_wishlist remove-like-product"style="margin-top:0">Xóa</a><input type="hidden" class="idProduct" value="' +
+                                    '</p><a class="btn btn-success"  href="/chi-tiet-san-pham/' +
+                                    response.data.id +
+                                    '">Chi tiết</a><a class="btn btn-danger btn-xs delete_wishlist remove-like-product"style="margin-top:0">Xóa</a><input type="hidden" class="idProduct" value="' +
                                     response.data.id +
                                     '"></div></div>'
                             );
@@ -82,10 +84,12 @@ $(document).ready(function () {
             },
             success: function (response) {
                 var remove = ".product--" + _idProduct;
+                var x = ".product-" + _idProduct;
                 if (
                     response.status == 200 &&
                     response.msg == "Unlike product successfully"
                 ) {
+                    $(x).removeClass("liked");
                     $(remove).remove();
                 }
             },
