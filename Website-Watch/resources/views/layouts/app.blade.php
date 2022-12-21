@@ -195,8 +195,7 @@
                                             </ul>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link"
-                                                href="">LIÊN HỆ</a>
+                                            <a class="nav-link" href="">LIÊN HỆ</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -225,7 +224,7 @@
                         </div>
                         <div class="col-5 cartbtn">
                             <ul class="navbar-nav">
-                                <li class="nav-item ">
+                                <li class="nav-item show_history_cart">
                                     <a href="{{ url('/gio-hang') }}" id="show_history_cart" class="nav-link">
                                         <span class="header-cart-title">GIỎ HÀNG
                                             <i style="" class="fas fa-cart-plus mx-2 shopping-cart"></i>
@@ -235,12 +234,12 @@
                                             </span>
                                         </span>
                                     </a>
-                                    <ul class="dropdown-menu " id="dropdown_cart"
-                                        style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 42px);">
-                                        <li class="dropdown_hidden"><a class="dropdown-item "
-                                                href="../../Website Watch PHP/product and cart/Lich-su-dat-hang.php">Lịch
-                                                sử đặt hàng</a></li>
-                                    </ul>
+                                    <div class="dropdown">
+                                        <div class="dropdown-content">
+                                            <a class="dropdown-item" href="">Lịch
+                                                sử đặt hàng</a>
+                                        </div>
+                                    </div>
                                 </li>
                             </ul>
                         </div>

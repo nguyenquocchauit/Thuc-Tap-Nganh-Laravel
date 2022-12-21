@@ -10,7 +10,6 @@ class Brand extends Model
     use HasFactory;
 
     protected $table = 'brands';
-    //protected $primaryKey = false;
     protected $primaryKey = false;
     public $incrementing = false;
     protected $keyType = 'string';

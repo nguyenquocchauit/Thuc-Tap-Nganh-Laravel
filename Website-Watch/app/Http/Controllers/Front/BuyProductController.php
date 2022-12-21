@@ -14,6 +14,7 @@ class BuyProductController extends Controller
     //
     public function buyProductCart(Request $request)
     {
+
         $total = 0;
         $user = User::find($request->user);
         $orderDetail = new OrderDetail();
@@ -44,7 +45,6 @@ class BuyProductController extends Controller
                                 "price" => $cart[$id]['priceDiscount'] * $cart[$id]['quantity'],
                                 "created_at" => $orderDetail->currentTime(),
                             ));
-
                         }
                         // insert value to table order
                         $order->id = $IDOrder;

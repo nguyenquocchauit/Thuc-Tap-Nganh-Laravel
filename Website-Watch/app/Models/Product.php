@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -32,5 +33,11 @@ class Product extends Model
     public function productOrderDetail()
     {
         return $this->hasMany(OrderDetail::class, 'product', 'id');
+    }
+    public function maxID()
+    {
+        return DB::table('products')
+            ->select(DB::raw("MAX(id) AS ID_Max "))
+            ->get();
     }
 }

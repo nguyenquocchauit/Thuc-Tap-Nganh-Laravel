@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{{$title}}</title>
+    <title>{{ $title }}</title>
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description"
@@ -15,11 +15,15 @@
 
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
     <link href="./dashboard/main.css" rel="stylesheet">
     <link href="./dashboard/my_style.css" rel="stylesheet">
+    {{-- Add create product processing file --}}
+    <script type="text/javascript" src="{{ asset('js/create-product.js') }}"></script>
 </head>
 
 <body>
@@ -67,8 +71,8 @@
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                             class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="./dashboard/assets/images/avatars/1.jpg"
-                                                alt="">
+                                            <img width="42" class="rounded-circle"
+                                                src="" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true"
@@ -83,7 +87,8 @@
                                                             <div class="widget-content-wrapper">
                                                                 <div class="widget-content-left mr-3">
                                                                     <img width="42" class="rounded-circle"
-                                                                        src="assets/images/avatars/1.jpg" alt="">
+                                                                        src=""
+                                                                        alt="">
                                                                 </div>
                                                                 <div class="widget-content-left">
                                                                     <div class="widget-heading">Alina Mcloughlin</div>
@@ -105,7 +110,7 @@
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading"> {{ Auth::user() }}</div>
+                                    <div class="widget-heading"> {{ Auth::user()->name }}</div>
                                     <div class="widget-subheading"> VP People Manager </div>
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">
@@ -188,7 +193,8 @@
                                             </div>
                                             <div class="widget-content-left">
                                                 <div class="widget-heading">Fixed Footer</div>
-                                                <div class="widget-subheading">Makes the app footer bottom fixed, always
+                                                <div class="widget-subheading">Makes the app footer bottom fixed,
+                                                    always
                                                     visible!</div>
                                             </div>
                                         </div>
@@ -603,23 +609,27 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="./admin/user" class="{{ (request()->segment(2) == 'user') ? 'mm-active' : '' }}">
+                                        <a href="./admin/user"
+                                            class="{{ request()->segment(2) == 'user' ? 'mm-active' : '' }}">
                                             <i class="metismenu-icon"></i>Người dùng
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="./admin/product" class="{{ (request()->segment(2) == 'product') ? 'mm-active' : '' }}">
-                                            <i class="metismenu-icon" >
+                                        <a href="./admin/product"
+                                            class="{{ request()->segment(2) == 'product' ? 'mm-active' : '' }}">
+                                            <i class="metismenu-icon">
                                             </i>Sản phẩm
                                         </a>
                                     </li>
                                     <li>
                                         <a href="./admin/category">
-                                            <i class="metismenu-icon" class="{{ (request()->segment(2) == 'category') ? 'mm-active' : '' }}"></i>Loại
+                                            <i class="metismenu-icon"
+                                                class="{{ request()->segment(2) == 'category' ? 'mm-active' : '' }}"></i>Loại
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="./admin/brand" class="{{ (request()->segment(2) == 'brand') ? 'mm-active' : '' }}">
+                                        <a href="./admin/brand"
+                                            class="{{ request()->segment(2) == 'brand' ? 'mm-active' : '' }}">
                                             <i class="metismenu-icon"></i>Hãng
                                         </a>
                                     </li>
@@ -685,7 +695,8 @@
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
-                                                <div class="tab-pane active" id="tab-messages-header1" role="tabpanel">
+                                                <div class="tab-pane active" id="tab-messages-header1"
+                                                    role="tabpanel">
                                                     <div class="scroll-area-sm">
                                                         <div class="scrollbar-container">
                                                             <div class="p-3">
@@ -699,7 +710,8 @@
                                                                                     class="vertical-timeline-element-icon bounce-in"></span>
                                                                                 <div
                                                                                     class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title">All Hands
+                                                                                    <h4 class="timeline-title">All
+                                                                                        Hands
                                                                                         Meeting</h4>
                                                                                     <span
                                                                                         class="vertical-timeline-element-date"></span>
@@ -714,7 +726,8 @@
                                                                                 <div
                                                                                     class="vertical-timeline-element-content bounce-in">
                                                                                     <p>Yet another one, at
-                                                                                        <span class="text-success">15:00
+                                                                                        <span
+                                                                                            class="text-success">15:00
                                                                                             PM</span>
                                                                                     </p>
                                                                                     <span
@@ -729,7 +742,8 @@
                                                                                     class="vertical-timeline-element-icon bounce-in"></span>
                                                                                 <div
                                                                                     class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title">Build the
+                                                                                    <h4 class="timeline-title">Build
+                                                                                        the
                                                                                         production release
                                                                                         <span
                                                                                             class="badge badge-danger ml-2">NEW</span>
@@ -746,7 +760,8 @@
                                                                                     class="vertical-timeline-element-icon bounce-in"></span>
                                                                                 <div
                                                                                     class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title">Something
+                                                                                    <h4 class="timeline-title">
+                                                                                        Something
                                                                                         not important
                                                                                         <div
                                                                                             class="avatar-wrapper mt-2 avatar-wrapper-overlap">
@@ -754,7 +769,7 @@
                                                                                                 class="avatar-icon-wrapper avatar-icon-sm">
                                                                                                 <div
                                                                                                     class="avatar-icon">
-                                                                                                    <img src="assets/images/avatars/1.jpg"
+                                                                                                    <img src=""
                                                                                                         alt="">
                                                                                                 </div>
                                                                                             </div>
@@ -762,7 +777,7 @@
                                                                                                 class="avatar-icon-wrapper avatar-icon-sm">
                                                                                                 <div
                                                                                                     class="avatar-icon">
-                                                                                                    <img src="assets/images/avatars/2.jpg"
+                                                                                                    <img src=""
                                                                                                         alt="">
                                                                                                 </div>
                                                                                             </div>
@@ -770,7 +785,7 @@
                                                                                                 class="avatar-icon-wrapper avatar-icon-sm">
                                                                                                 <div
                                                                                                     class="avatar-icon">
-                                                                                                    <img src="assets/images/avatars/3.jpg"
+                                                                                                    <img src=""
                                                                                                         alt="">
                                                                                                 </div>
                                                                                             </div>
@@ -778,7 +793,7 @@
                                                                                                 class="avatar-icon-wrapper avatar-icon-sm">
                                                                                                 <div
                                                                                                     class="avatar-icon">
-                                                                                                    <img src="assets/images/avatars/4.jpg"
+                                                                                                    <img src=""
                                                                                                         alt="">
                                                                                                 </div>
                                                                                             </div>
@@ -786,7 +801,7 @@
                                                                                                 class="avatar-icon-wrapper avatar-icon-sm">
                                                                                                 <div
                                                                                                     class="avatar-icon">
-                                                                                                    <img src="assets/images/avatars/5.jpg"
+                                                                                                    <img src=""
                                                                                                         alt="">
                                                                                                 </div>
                                                                                             </div>
@@ -794,7 +809,7 @@
                                                                                                 class="avatar-icon-wrapper avatar-icon-sm">
                                                                                                 <div
                                                                                                     class="avatar-icon">
-                                                                                                    <img src="assets/images/avatars/9.jpg"
+                                                                                                    <img src=""
                                                                                                         alt="">
                                                                                                 </div>
                                                                                             </div>
@@ -802,7 +817,7 @@
                                                                                                 class="avatar-icon-wrapper avatar-icon-sm">
                                                                                                 <div
                                                                                                     class="avatar-icon">
-                                                                                                    <img src="assets/images/avatars/7.jpg"
+                                                                                                    <img src=""
                                                                                                         alt="">
                                                                                                 </div>
                                                                                             </div>
@@ -810,7 +825,7 @@
                                                                                                 class="avatar-icon-wrapper avatar-icon-sm">
                                                                                                 <div
                                                                                                     class="avatar-icon">
-                                                                                                    <img src="assets/images/avatars/8.jpg"
+                                                                                                    <img src=""
                                                                                                         alt="">
                                                                                                 </div>
                                                                                             </div>
@@ -849,7 +864,8 @@
                                                                                     class="vertical-timeline-element-icon bounce-in"></span>
                                                                                 <div
                                                                                     class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title">All Hands
+                                                                                    <h4 class="timeline-title">All
+                                                                                        Hands
                                                                                         Meeting</h4>
                                                                                     <span
                                                                                         class="vertical-timeline-element-date"></span>
@@ -864,7 +880,8 @@
                                                                                 <div
                                                                                     class="vertical-timeline-element-content bounce-in">
                                                                                     <p>Yet another one, at
-                                                                                        <span class="text-success">15:00
+                                                                                        <span
+                                                                                            class="text-success">15:00
                                                                                             PM</span>
                                                                                     </p>
                                                                                     <span
@@ -879,7 +896,8 @@
                                                                                     class="vertical-timeline-element-icon bounce-in"></span>
                                                                                 <div
                                                                                     class="vertical-timeline-element-content bounce-in">
-                                                                                    <h4 class="timeline-title">Build the
+                                                                                    <h4 class="timeline-title">Build
+                                                                                        the
                                                                                         production release
                                                                                         <span
                                                                                             class="badge badge-danger ml-2">NEW</span>
@@ -990,7 +1008,8 @@
                                                                             </span>
                                                                             <div
                                                                                 class="vertical-timeline-element-content bounce-in">
-                                                                                <h4 class="timeline-title text-success">
+                                                                                <h4
+                                                                                    class="timeline-title text-success">
                                                                                     Something not important</h4>
                                                                                 <p>Lorem ipsum dolor sit
                                                                                     amit,consectetur elit enim at
@@ -1075,7 +1094,8 @@
                                                                             </span>
                                                                             <div
                                                                                 class="vertical-timeline-element-content bounce-in">
-                                                                                <h4 class="timeline-title text-success">
+                                                                                <h4
+                                                                                    class="timeline-title text-success">
                                                                                     Something not important</h4>
                                                                                 <p>Lorem ipsum dolor sit
                                                                                     amit,consectetur elit enim at
@@ -1250,7 +1270,8 @@
                                                         </div>
                                                         <div class="menu-header-content text-dark">
                                                             <h5 class="menu-header-title">Two Column Grid</h5>
-                                                            <h6 class="menu-header-subtitle">Easy grid navigation inside
+                                                            <h6 class="menu-header-subtitle">Easy grid navigation
+                                                                inside
                                                                 popovers</h6>
                                                         </div>
                                                     </div>
@@ -1415,7 +1436,8 @@
                             <li class="pt-2 pb-2 pr-2 list-group-item">
                                 <div class="widget-content p-0">
                                     <div class="widget-content-wrapper">
-                                        <div class="widget-content-left opacity-6 fsize-2 mr-3 text-danger center-elem">
+                                        <div
+                                            class="widget-content-left opacity-6 fsize-2 mr-3 text-danger center-elem">
                                             <i class="fa fa-file-pdf"></i>
                                         </div>
                                         <div class="widget-content-left">
@@ -1507,7 +1529,8 @@
                                         <div class="widget-content-right widget-content-actions">
                                             <div class="d-inline-block dropdown">
                                                 <button type="button" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false" class="border-0 btn-transition btn btn-link">
+                                                    aria-expanded="false"
+                                                    class="border-0 btn-transition btn btn-link">
                                                     <i class="fa fa-ellipsis-h"></i>
                                                 </button>
                                                 <div tabindex="-1" role="menu" aria-hidden="true"
@@ -1515,10 +1538,12 @@
                                                     <h6 tabindex="-1" class="dropdown-header">Header</h6>
                                                     <button type="button" disabled="" tabindex="-1"
                                                         class="disabled dropdown-item">Action</button>
-                                                    <button type="button" tabindex="0" class="dropdown-item">Another
+                                                    <button type="button" tabindex="0"
+                                                        class="dropdown-item">Another
                                                         Action</button>
                                                     <div tabindex="-1" class="dropdown-divider"></div>
-                                                    <button type="button" tabindex="0" class="dropdown-item">Another
+                                                    <button type="button" tabindex="0"
+                                                        class="dropdown-item">Another
                                                         Action</button>
                                                 </div>
                                             </div>
@@ -1567,7 +1592,7 @@
                                         </div>
                                         <div class="widget-content-left mr-3">
                                             <div class="widget-content-left">
-                                                <img width="42" class="rounded" src="assets/images/avatars/1.jpg"
+                                                <img width="42" class="rounded" src=""
                                                     alt="" />
                                             </div>
                                         </div>
@@ -1661,42 +1686,50 @@
                                             <div class="avatar-wrapper mt-2 avatar-wrapper-overlap">
                                                 <div class="avatar-icon-wrapper avatar-icon-sm">
                                                     <div class="avatar-icon">
-                                                        <img src="./dashboard/assets/images/avatars/1.jpg" alt="">
+                                                        <img src=""
+                                                            alt="">
                                                     </div>
                                                 </div>
                                                 <div class="avatar-icon-wrapper avatar-icon-sm">
                                                     <div class="avatar-icon">
-                                                        <img src="./dashboard/assets/images/avatars/2.jpg" alt="">
+                                                        <img src=""
+                                                            alt="">
                                                     </div>
                                                 </div>
                                                 <div class="avatar-icon-wrapper avatar-icon-sm">
                                                     <div class="avatar-icon">
-                                                        <img src="./dashboard/assets/images/avatars/3.jpg" alt="">
+                                                        <img src=""
+                                                            alt="">
                                                     </div>
                                                 </div>
                                                 <div class="avatar-icon-wrapper avatar-icon-sm">
                                                     <div class="avatar-icon">
-                                                        <img src="./dashboard/assets/images/avatars/4.jpg" alt="">
+                                                        <img src=""
+                                                            alt="">
                                                     </div>
                                                 </div>
                                                 <div class="avatar-icon-wrapper avatar-icon-sm">
                                                     <div class="avatar-icon">
-                                                        <img src="./dashboard/assets/images/avatars/5.jpg" alt="">
+                                                        <img src=""
+                                                            alt="">
                                                     </div>
                                                 </div>
                                                 <div class="avatar-icon-wrapper avatar-icon-sm">
                                                     <div class="avatar-icon">
-                                                        <img src="./dashboard/assets/images/avatars/6.jpg" alt="">
+                                                        <img src=""
+                                                            alt="">
                                                     </div>
                                                 </div>
                                                 <div class="avatar-icon-wrapper avatar-icon-sm">
                                                     <div class="avatar-icon">
-                                                        <img src="./dashboard/assets/images/avatars/7.jpg" alt="">
+                                                        <img src=""
+                                                            alt="">
                                                     </div>
                                                 </div>
                                                 <div class="avatar-icon-wrapper avatar-icon-sm">
                                                     <div class="avatar-icon">
-                                                        <img src="./dashboard/assets/images/avatars/8.jpg" alt="">
+                                                        <img src=""
+                                                            alt="">
                                                     </div>
                                                 </div>
                                                 <div class="avatar-icon-wrapper avatar-icon-sm avatar-icon-add">

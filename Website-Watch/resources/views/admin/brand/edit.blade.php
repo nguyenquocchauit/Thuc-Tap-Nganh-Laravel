@@ -28,7 +28,7 @@
                                             <label for="name" class="col-md-3 text-md-right col-form-label">Name</label>
                                             <div class="col-md-9 col-xl-8">
                                                 <input required name="name" id="name" placeholder="Name" type="text"
-                                                    class="form-control" value="Calvin Klein">
+                                                    class="form-control" value="{{ $brand->name  }}">
                                             </div>
                                         </div>
 
