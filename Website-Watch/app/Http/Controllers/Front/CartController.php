@@ -39,6 +39,8 @@ class CartController extends Controller
         } else {
             $cart[$request->id] = [
                 "name" => $product->name,
+                "brand" => $product->productBrand['name'],
+                "gender" => $product->productGender['name'],
                 "quantity" => 1,
                 "price" => $product->price,
                 "discount" => $product->discount,
@@ -85,7 +87,7 @@ class CartController extends Controller
                     session()->put('cart', $cart);
                 } else {
                     $request->session()->forget('cart');
-                    $request->session()->flush();
+                    //$request->session()->flush();
                 }
             }
             // session()->flash('success', 'Product removed successfully');
@@ -96,7 +98,7 @@ class CartController extends Controller
     {
         if ($request->action = "Remove all cart") {
             $request->session()->forget('cart');
-            $request->session()->flush();
+            // $request->session()->flush();
             return response()->json([
                 'status' => 200,
                 'msg' => 'Remove successfully',

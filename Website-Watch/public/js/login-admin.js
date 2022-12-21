@@ -2,29 +2,24 @@ $(document).ready(function () {
     function isEmpty(str) {
         return !str || str.length === 0;
     }
-    function showMsgWaringLogin(msg, vali) {
+    function showMsgWaringLogin(msg) {
         Swal.fire({
             icon: "warning",
             title: msg,
             timer: 1500,
             timerProgressBar: true,
         });
-        $(vali).addClass("is-invalid");
     }
-    $("#btn-login-user").on("click", function () {
-        var _email = $("#usernameLogin").val();
-        var _pass = $("#passwordLogin").val();
-        if (isEmpty(_email)) {
-            showMsgWaringLogin("Email không được để trống!", "#usernameLogin");
-        } else if (isEmpty(_pass)) {
-            showMsgWaringLogin(
-                "Mật khẩu không được để trống!",
-                "#passwordLogin"
-            );
-        } else {
+    $("#login-admin").on("click", function () {
+        var _email = $("#email-login-admin").val();
+        var _pass = $("#password-login-admin").val();
+        if (isEmpty(_email)) showMsgWaringLogin("Email không được để trống!");
+        else if (isEmpty(_pass))
+            showMsgWaringLogin("Mật khẩu không được để trống!");
+        else {
             $.ajax({
                 type: "POST",
-                url: "/api/login-user",
+                url: "/api/login-admin",
                 data: {
                     token: _token,
                     email: _email,
@@ -71,12 +66,11 @@ $(document).ready(function () {
                         }).then((result) => {
                             // done then reload page
                             if (result.dismiss === Swal.DismissReason.timer) {
-                                location.reload();
+                                window.location.href = "/admin/user";
                             }
                         });
                     }
                 },
-                error: function (response) {},
             });
         }
     });

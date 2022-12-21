@@ -1,111 +1,143 @@
-<table>
-    <tr class="tr1">
-        <td>
-            <p>STT</p>
-        </td>
-        <td>
-            <p>Sản phẩm</p>
-        </td>
-        <td>
-            <p>Tên sản phẩm</p>
-        </td>
-        <td>
-            <p>Giá</p>
-        </td>
-        <td>
-            <p>Số lượng</p>
-        </td>
-        <td>
-            <p>Tổng</p>
-        </td>
-        <td>
-            <p>Xóa</p>
-        </td>
-    </tr>
-    <tbody>
-        @php
-            $total = 0;
-            $i = 1;
-        @endphp
-        @if (session('cart'))
-            @foreach (session('cart') as $id => $details)
-                @php $total += $details['price'] * $details['quantity'] @endphp
-                <tr>
-                    <td>
-                        {{ $i }}
-                    </td>
-                    <td style="width: 15%;">
-                        <div class="divimg"><img src="{{ asset('images/image_products_home/') }}/{{ $details['image'] }}"
-                                alt="" srcset="">
-                        </div>
-                    </td>
-                    <td style="width: 26%;"><span>{{ $details['name'] }}</span></td>
-                    <td>
-                        <p style="letter-spacing: 2px;
-                        opacity: 0.9;">
-                            {{ number_format($details['priceDiscount']) . ' VNĐ' }}</p>
-                    </td>
-                    <td>
-                        <div class="quantity numbers-row">
-                            <div class="row quantity-cart">
-                                <div class="col-4 d-flex justify-content-end pt-1 asc"></div>
-                                <div class="col-4 inpqan">
-                                    <input type="text" class="form-control inpquantity"
-                                        value="{{ $details['quantity'] }}">
-                                    <input type="hidden" name="" class="ID_Quantity"
-                                        value="{{ $id }}">
-                                </div>
-                                <div class="col-4 d-flex justify-content-start pt-1 desc"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p style="letter-spacing: 2px;">{{ number_format($details['total']) . ' VNĐ' }}</p>
-                    </td>
-                    <td><a href="{{ url('api/remove-product-by-id/') }}/{{ $id }}"><i
-                                class="far fa-times-circle remove-product"></i></a></td>
-                </tr>
-                @php $i++; @endphp
-            @endforeach
-        @endif
-        <tr class="tr1">
-            <td></td>
-            <td colspan="1">
-                <p>Tổng tiền</p>
-            </td>
-            <td colspan="5" style="text-align: end;color: red;">
-                <p>{{ number_format($total) . ' VNĐ' }}</p>
-            </td>
-        </tr>
-        <tr class="tr1">
-            <td></td>
-            <td colspan="1">
-                <p>Giao hàng</p>
-            </td>
-            <td colspan="5" style="text-align: end;">
-                <p>Giao hàng miễn phí</p>
-            </td>
-        </tr>
-        <td></td>
-        <td style="text-align: end;">
-            <a href="{{ url('shop/') }}"><button type="button" class="buttonBack"><i class="fas fa-arrow-left"
-                        id="iconback"></i> Tiếp tục xem sản phẩm</button></a>
-        </td>
-        <td style="text-align: center;">
-            <button type="button" class="buttonDelete" id="remove-all-cart"><i class="fas fa-trash"></i> Xóa giỏ
-                hàng</button>
-        </td>
-        <td colspan="4" style="text-align: end;">
-            <form action="" method="post">
-                <button type="button" class="buttonBuy" id="buy-product" name="buttonBuy"><i class="fa-solid fa-pen-to-square"></i> Đặt
-                    hàng</button>
-                <input type="hidden" class="CurrentUser" value="' . ($CurrentUser) . '">
-                <input type="hidden" class="IDUser" value="' . ($IDUser) . '">
-                <input type="hidden" class="timeNow" value="' . ($timeNow) . '">
-                <input type="hidden" class="sum" value="' . ($sum) . '">
-            </form>
-        </td>
-        </tr>
 
-    </tbody>
-</table>
+<section class="h-100 gradient-custom">
+    <div class="container ">
+        <div class="row d-flex justify-content-center my-4">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header py-3">
+                        <div class="row">
+                            <div class="col-6 d-flex justify-content-start">
+                                <h5 class="mb-0"><a href="/shop"><i class="fas fa-long-arrow-alt-left"></i></a> Giỏ hàng - 2 sản phẩm</h5>
+                            </div>
+                            <div class="col-6 d-flex justify-content-end"><button type="button" id="remove-all-cart"
+                                    style="border: none; background-color: #f7f7f7;">xóa giỏ hàng <i style="color: red;" class="far fa-trash-alt"></i></button></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @php
+                            $total = 0;
+                            $i = 1;
+                        @endphp
+                        @if (session('cart'))
+                            @foreach (session('cart') as $id => $details)
+                                @php $total += $details['priceDiscount'] * $details['quantity'] @endphp
+                                <!-- Single item -->
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                                        <!-- Image -->
+                                        <div class="bg-image hover-overlay hover-zoom ripple rounded text-center"
+                                            data-mdb-ripple-color="light">
+                                            <img src="{{ asset('images/image_products_home/') }}/{{ $details['image'] }}"
+                                                class="w-50" alt="Watch" style="" />
+                                        </div>
+                                        <!-- Image -->
+                                    </div>
+                                    <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                                        <!-- Data -->
+                                        <p><strong>{{ $details['name'] }}</strong></p>
+                                        <p>Loại: {{ $details['gender'] }}</p>
+                                        <p>Hãng: {{ $details['brand'] }}</p>
+                                        <a href="{{ url('api/remove-product-by-id/') }}/{{ $id }}">
+                                            <button type="button" class="btn btn-danger btn-sm me-1 mb-2"
+                                                data-mdb-toggle="tooltip" title="Xóa khỏi giỏ hàng">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </a>
+                                        <a href="/chi-tiet-san-pham/{{ $id }}">
+                                            <button type="button" class="btn btn-success btn-sm mb-2"
+                                                data-mdb-toggle="tooltip" title="Xem chi tiết sản phẩm">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </a>
+                                        <!-- Data -->
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                        <!-- Quantity -->
+                                        <div class="d-flex mb-4 justify-content-center product-quantity"
+                                            style="max-width: 300px">
+                                            <button class="btn btn-primary px-3 me-2 btn-quantity-cart">-</button>
+
+                                            <div class="form-outline inp-quantity-cart" style="width:20%">
+                                                <input class="form-control quantity-cart" type="text"
+                                                    name="quantity-cart" value="{{ $details['quantity'] }}"
+                                                    style="text-align: center;" />
+                                                <input type="hidden" name="" class="ID_Quantity"
+                                                    value="{{ $id }}">
+                                            </div>
+
+                                            <button class="btn btn-primary px-3 ms-2 btn-quantity-cart">+</button>
+                                        </div>
+                                        <!-- Quantity -->
+                                        <!-- Price -->
+                                        <p class="text-start text-md-center">
+                                            <strong>{{ number_format($details['total']) . ' VNĐ' }}</strong>
+                                        </p>
+                                        <!-- Price -->
+                                    </div>
+                                </div>
+                                <!-- Single item -->
+                                <hr class="my-4" />
+                                @php $i++; @endphp
+                            @endforeach
+                        @endif
+
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <p><strong>Giao hàng dự kiến</strong></p>
+                        <p class="mb-0">25.12.2022 - 29.12.2022</p>
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+                    <div class="card-body">
+                        <p><strong>Phương thức thanh toán trực tuyến</strong></p>
+                        <img class="me-2" width="45px"
+                            src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                            alt="Visa" />
+                        <img class="me-2" width="45px"
+                            src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                            alt="American Express" />
+                        <img class="me-2" width="45px"
+                            src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                            alt="Mastercard" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header py-3">
+                        <h5 class="mb-0">Tổng quan</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li
+                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                Sản phẩm
+                                <span>{{ number_format($total) . ' VNĐ' }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                Vận chuyển
+                                <span>Miễn phí</span>
+                            </li>
+                            <li
+                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                <div>
+                                    <strong>Tổng thanh toán</strong>
+                                    <strong>
+                                        <p class="mb-0">(bao gồm VAT)</p>
+                                    </strong>
+                                </div>
+                                <span><strong>@php $totalVAT = $total + ($total * 0.08);   @endphp {{ number_format($totalVAT) . ' VNĐ' }}</strong></span>
+                            </li>
+                        </ul>
+
+                        <button type="button" class="btn btn-primary btn-lg btn-block " id="buy-product">
+                            Thanh toán
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
