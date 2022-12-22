@@ -188,10 +188,6 @@
                                                     </li>
                                                 @endforeach
 
-                                                <li>
-                                                    <a class="dropdown-item" href="#"></a>
-                                                </li>
-
                                             </ul>
                                         </li>
                                         <li class="nav-item">

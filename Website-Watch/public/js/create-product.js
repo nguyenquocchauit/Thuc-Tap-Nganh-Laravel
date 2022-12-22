@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $("#btn-create-product").on("click", function () {});
 
-    $(".image-product").change(function () {
+    $(".image_product").change(function () {
         let reader = new FileReader();
         let img = $(this).data("id");
         reader.onload = (e) => {
@@ -12,21 +12,21 @@ $(document).ready(function () {
     });
 
     // input quantity >0 quantity <10000
-    $(document).on("keypress , paste", "#quantity-product", function (e) {
+    $(document).on("keypress , paste", "#quantity_product", function (e) {
         if (/^-?\d*[,.]?(\d{0,3},)*(\d{3},)?\d{0,3}$/.test(e.key)) {
-            let num = $("#quantity-product").val();
+            let num = $("#quantity_product").val();
             if (num < 0 || num =="-") {
-                $("#quantity-product").val(1);
+                $("#quantity_product").val(1);
             }
         } else {
             e.preventDefault();
             return false;
         }
     });
-    //% of input discount-product
-    $(document).on("keypress , paste", "#discount-product", function (e) {
+    //% of input discount_product
+    $(document).on("keypress , paste", "#discount_product", function (e) {
         if (/^-?\d*[,.]?(\d{0,3},)*(\d{3},)?\d{0,3}$/.test(e.key)) {
-            $("#discount-product").on("input", function () {
+            $("#discount_product").on("input", function () {
                 let num = $(this).val();
                 num = num.replace("%", "");
                 if (num <= 100) {
@@ -67,9 +67,9 @@ $(document).ready(function () {
     }
 
     // Set Currency Separator to input fields
-    $(document).on("keypress , paste", "#price-product", function (e) {
+    $(document).on("keypress , paste", "#price_product", function (e) {
         if (/^-?\d*[,.]?(\d{0,3},)*(\d{3},)?\d{0,3}$/.test(e.key)) {
-            $("#price-product").on("input", function () {
+            $("#price_product").on("input", function () {
                 e.target.value =
                     numberSeparator(e.target.value).replace(" VNĐ", "") +
                     " VNĐ";

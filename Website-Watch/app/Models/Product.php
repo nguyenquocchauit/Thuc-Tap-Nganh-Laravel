@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,7 @@ class Product extends Model
     protected $table = "products";
     protected $primaryKey = "id";
     protected $guarded = [];
+    public $timestamps = false;
 
     public function productBrand()
     {
@@ -39,5 +41,10 @@ class Product extends Model
         return DB::table('products')
             ->select(DB::raw("MAX(id) AS ID_Max "))
             ->get();
+    }
+    public function currentTime()
+    {
+        $currentTime = Carbon::now();
+        return $currentTime->toDateTimeString();
     }
 }

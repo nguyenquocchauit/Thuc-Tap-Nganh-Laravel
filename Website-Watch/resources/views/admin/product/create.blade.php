@@ -92,7 +92,7 @@
                                                 <img class="w-100" src="{{ 'images/default-image.jpg' }}" alt=""
                                                     id="img-1">
                                             </label>
-                                            <input class="image_product" type="file" id="image_1" data-id="img-1"
+                                            <input class="image_product" type="file" id="image_1" name="image_1" data-id="img-1"
                                                 style="display:none;">
                                         </div>
                                         <div class="col-2">
@@ -100,7 +100,7 @@
                                                 <img class="w-100" src="{{ 'images/default-image.jpg' }}" alt=""
                                                     id="img-2">
                                             </label>
-                                            <input class="image_product" type="file" id="image_2" data-id="img-2"
+                                            <input class="image_product" type="file" id="image_2" name="image_2" data-id="img-2"
                                                 style="display:none;">
                                         </div>
                                         <div class="col-2">
@@ -108,7 +108,7 @@
                                                 <img class="w-100" src="{{ 'images/default-image.jpg' }}" alt=""
                                                     id="img-3">
                                             </label>
-                                            <input class="image_product" type="file" id="image_3" data-id="img-3"
+                                            <input class="image_product" type="file" id="image_3" name="image_3" data-id="img-3"
                                                 style="display:none;">
                                         </div>
                                         <div class="col-2">
@@ -116,7 +116,7 @@
                                                 <img class="w-100" src="{{ 'images/default-image.jpg' }}" alt=""
                                                     id="img-4">
                                             </label>
-                                            <input class="image_product" type="file" id="image_4" data-id="img-4"
+                                            <input class="image_product" type="file" id="image_4" name="image_4" data-id="img-4"
                                                 style="display:none;">
                                         </div>
                                         <div class="col-2">
@@ -124,7 +124,7 @@
                                                 <img class="w-100" src="{{ 'images/default-image.jpg' }}" alt=""
                                                     id="img-5">
                                             </label>
-                                            <input class="image_product" type="file" id="image_5" data-id="img-5"
+                                            <input class="image_product" type="file" id="image_5" name="image_5" data-id="img-5"
                                                 style="display:none;">
                                         </div>
                                         <div class="col-2">
@@ -132,7 +132,7 @@
                                                 <img class="w-100" src="{{ 'images/default-image.jpg' }}" alt=""
                                                     id="img-6">
                                             </label>
-                                            <input class="image_product" type="file" id="image_6" data-id="img-6"
+                                            <input class="image_product" type="file" id="image_6" name="image_6" data-id="img-6"
                                                 style="display:none;">
                                         </div>
 
