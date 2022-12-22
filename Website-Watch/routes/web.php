@@ -37,12 +37,12 @@ Route::prefix('shop')->group(function () {
 });
 
 //Admin
-Route::prefix('admin')->group(function() {
-    Route::resource('user',UserController::class);
-    Route::resource('brand',BrandController::class);
-    Route::resource('category',CategoryController::class);
-    Route::resource('product',AdminProductController::class);
-     Route::resource('login',AuthLoginAdminController::class);
+Route::prefix('admin')->group(function () {
+    Route::resource('user', UserController::class);
+    Route::resource('brand', BrandController::class);
+    Route::resource('category', CategoryController::class);
+    Route::resource('product', AdminProductController::class);
+    Route::resource('login', AuthLoginAdminController::class);
 });
 // user
 Route::get('/thong-tin-ca-nhan', [UserUserController::class, 'index'])->name('profile');

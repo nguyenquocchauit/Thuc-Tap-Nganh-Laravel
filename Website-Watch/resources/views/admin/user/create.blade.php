@@ -28,7 +28,7 @@
                                         @csrf
 
                                         @include('admin.alert')
-                           
+
                                         <div class="position-relative row form-group">
                                             <label for="name" class="col-md-3 text-md-right col-form-label">Tên</label>
                                             <div class="col-md-9 col-xl-8">
@@ -46,7 +46,7 @@
                                             <label for="phone"
                                                 class="col-md-3 text-md-right col-form-label">Số điện thoại</label>
                                             <div class="col-md-9 col-xl-8">
-                                                <input  name="phone_number" id="phone" placeholder="Nhập số điện thoại" type="tel" 
+                                                <input  name="phone_number" id="phone" placeholder="Nhập số điện thoại" type="tel"
                                                     class="form-control" value="{{old('phone_number')}}">
                                                     <span style="color: red">
                                                         @error('phone_number')

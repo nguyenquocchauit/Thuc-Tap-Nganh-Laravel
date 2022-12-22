@@ -66,6 +66,7 @@
 .header-contact .left .header-icon a {
   text-decoration: none;
   color: white;
+  padding: 4px;
 }
 .header-contact .left .header-add a {
   text-decoration: none;
@@ -1105,4 +1106,8 @@
 
 .show_history_cart:hover .dropdown-content {
   display: block;
+}
+
+.like-product {
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

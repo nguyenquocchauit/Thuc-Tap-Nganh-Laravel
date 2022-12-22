@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Gender;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -28,8 +31,11 @@ class ProductController extends Controller
      */
     public function create()
     {
+        // get list of brand and gender
+        $brands = Brand::get();
+        $genders = Gender::get();
         $title = 'Thêm sản phẩm';
-        return view('admin.product.create', compact('title'));
+        return view('admin.product.create', compact('title', 'brands', 'genders'));
     }
 
     /**
@@ -40,7 +46,24 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name_product = strtolower($request->name_product);
+        $name_product = explode(" ", $name_product);
+        $name_product = implode("-", $name_product);
+        $image = Image::where("id", "=", $name_product)->get();
+        if (count($image) > 0) {
+            $name_product =  $name_product . "-v2";
+        }
+        $dataImage = [
+            "id" => $name_product,
+            "image_1" => $name_product . "-1.png",
+            "image_2" => $name_product . "-2.png",
+            "image_3" => $name_product . "-3.png",
+            "image_4" => $name_product . "-4.png",
+            "image_5" => $name_product . "-5.png",
+            "image_6" => $name_product . "-6.png",
+
+        ];
+        return response()->json($dataImage);
     }
 
     /**

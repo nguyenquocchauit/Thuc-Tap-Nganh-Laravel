@@ -170,13 +170,13 @@
 .liked {
     color: red;
 }
-#clear-like-product{
+#clear-like-product {
     padding-bottom: 20px;
     border: none;
     color: black;
     background-color: #f8fafc;
 }
-#buy-all-like-product{
+#buy-all-like-product {
     width: 400px;
     height: 40px;
     border: 1px solid #52507e;
@@ -265,4 +265,10 @@
     font-size: 14px;
     opacity: 0.6;
     margin: 0 0 0 8px;
+}
+.like-product {
+    cursor: pointer;
+}
+.add-to-cart {
+    cursor: pointer;
 }

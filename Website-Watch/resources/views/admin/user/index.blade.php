@@ -65,7 +65,7 @@
                                     <th class="text-center">Email</th>
                                     <th class="text-center">Vai trò</th>
                                     <th class="text-center">Hành động</th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,9 +91,9 @@
 
                                         <td class="text-center">
                                             @if ($user->role == 0)
-                                                <p>user</p>
+                                                <p>Người dùng</p>
                                             @else
-                                            <p>admin</p>
+                                            <p>Quản trị viên</p>
                                             @endif
                                         </td>
 

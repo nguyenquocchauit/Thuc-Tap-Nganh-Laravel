@@ -11,7 +11,7 @@
                     <div>
                         Sản phẩm
                         <div class="page-title-subheading">
-                            Xem, tạo, sửa, xóa và quản lý.
+                            <strong>Xem</strong>, tạo, sửa, xóa và quản lý.
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                             </div>
                         </div> --}}
                     </div>
-                    
+
                     <div class="table-responsive">
                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
@@ -75,8 +75,8 @@
                                     <tr>
                                         <td class="text-center text-muted">{{ $product->id }}</td>
                                         <td class="text-center image-list-product"><img
-                                                src="{{ asset('images/image_products_home/') }}/{{ $product->productImage['image_1'] }}"
-                                                alt=""></td>
+                                            src="{{ asset('images/image_products_home/') }}/{{ $product->productImage['image_1'] }}"
+                                            alt=""></td>
                                         <td class="text-center">{{ $product->name }}</td>
                                         <td class="text-center">{{ number_format($product->price) . ' VNĐ' }}</td>
                                         <td class="text-center">{{ $product->discount . '%' }}</td>

@@ -23,6 +23,7 @@
     <link href="./dashboard/main.css" rel="stylesheet">
     <link href="./dashboard/my_style.css" rel="stylesheet">
     {{-- Add create product processing file --}}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/create-product.js') }}"></script>
 </head>
 

@@ -10,9 +10,9 @@
                                     <i class="pe-7s-ticket icon-gradient bg-mean-fruit"></i>
                                 </div>
                                 <div>
-                                    Product
+                                    Sản phẩm
                                     <div class="page-title-subheading">
-                                        View, create, update, delete and manage.
+                                        Xem, tạo, <strong>sửa</strong>, xóa và quản lý.
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    
+
                                         <div class="position-relative row form-group">
                                             <label for="name" class="col-md-3 text-md-right col-form-label">Name</label>
                                             <div class="col-md-9 col-xl-8">
@@ -105,7 +105,7 @@
                                                     placeholder="Weight" type="text" class="form-control" value="">
                                             </div>
                                         </div>
-                                        
+
                                         <div class="position-relative row form-group">
                                             <label for="sku"
                                                 class="col-md-3 text-md-right col-form-label">SKU</label>

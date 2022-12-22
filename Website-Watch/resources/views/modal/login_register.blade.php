@@ -39,7 +39,7 @@
                 <p>Chưa có tài khoản? <a href="#" style="text-decoration: none;" data-bs-target="#signup"
                         data-bs-toggle="modal" data-bs-dismiss="modal">Đăng Ký Ngay</a></p>
                 <button type="button" class="btn btn-block mt-3 w-100" style="background: gray;"
-                    onclick="location.href='../../Website Watch PHP/access/admin.php';">Đăng nhập quản trị
+                    onclick="location.href='/admin/login';">Đăng nhập quản trị
                     viên</button>
             </div>
         </div>

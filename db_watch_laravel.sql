@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2022 at 06:42 AM
+-- Generation Time: Dec 22, 2022 at 06:43 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -41,7 +41,7 @@ CREATE TABLE `administrator` (
 --
 
 INSERT INTO `administrator` (`id`, `name`, `email`, `password`, `create_at`, `role`) VALUES
-(1, 'Nguyễn Quốc Châu', 'chauquocnguyen.cun1@gmail.com', 'chauit', '2022-12-05 17:58:39', 1);
+(1, 'Nguyễn Quốc Châu', 'chauquocnguyen.cun1@gmail.com', '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', '2022-12-05 17:58:39', 1);
 
 -- --------------------------------------------------------
 
@@ -190,7 +190,7 @@ CREATE TABLE `likes` (
 --
 
 INSERT INTO `likes` (`id`, `customers`, `product`, `status`, `created_at`) VALUES
-(1, 1, 3, 'like', '2022-12-15 16:26:27'),
+(1, 1, 3, 'none', '2022-12-15 16:26:27'),
 (5, 2, 31, 'none', '2022-12-18 16:00:12'),
 (6, 2, 26, 'none', '2022-12-18 16:00:13'),
 (7, 2, 19, 'none', '2022-12-18 16:00:14'),
@@ -206,7 +206,11 @@ INSERT INTO `likes` (`id`, `customers`, `product`, `status`, `created_at`) VALUE
 (17, 2, 1, 'none', '2022-12-19 03:42:49'),
 (18, 2, 35, 'none', '2022-12-19 03:42:54'),
 (19, 2, 36, 'none', '2022-12-19 03:42:56'),
-(20, 2, 3, 'like', '2022-12-19 03:43:11');
+(20, 2, 3, 'like', '2022-12-19 03:43:11'),
+(21, 1, 8, 'none', '2022-12-20 03:33:46'),
+(22, 1, 7, 'none', '2022-12-20 03:33:47'),
+(23, 1, 4, 'none', '2022-12-20 03:34:19'),
+(24, 1, 2, 'like', '2022-12-20 03:34:20');
 
 -- --------------------------------------------------------
 
@@ -251,7 +255,7 @@ CREATE TABLE `migrations` (
 CREATE TABLE `orders` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `customers` bigint(20) UNSIGNED NOT NULL,
-  `create_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
   `total` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -259,8 +263,10 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `customers`, `create_at`, `total`) VALUES
-(1, 1, '2022-12-08 18:57:31', '63000000');
+INSERT INTO `orders` (`id`, `customers`, `created_at`, `total`) VALUES
+(1, 1, '2022-12-08 18:57:31', '63000000'),
+(2, 1, '2022-12-20 06:03:30', '78216840'),
+(3, 2, '2022-12-21 15:57:17', '87052320');
 
 -- --------------------------------------------------------
 
@@ -274,17 +280,23 @@ CREATE TABLE `order_details` (
   `product` bigint(20) UNSIGNED NOT NULL,
   `quantity` smallint(20) NOT NULL,
   `price` float NOT NULL,
-  `create_at` datetime NOT NULL
+  `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `order_details`
 --
 
-INSERT INTO `order_details` (`id`, `orders`, `product`, `quantity`, `price`, `create_at`) VALUES
+INSERT INTO `order_details` (`id`, `orders`, `product`, `quantity`, `price`, `created_at`) VALUES
 (1, 1, 1, 2, 18000000, '2022-12-08 18:58:40'),
 (2, 1, 2, 1, 18000000, '2022-12-08 18:59:54'),
-(3, 1, 3, 2, 10000000, '2022-12-08 19:00:19');
+(3, 1, 3, 2, 10000000, '2022-12-08 19:00:19'),
+(4, 2, 33, 1, 53604000, '2022-12-20 06:03:30'),
+(5, 2, 34, 1, 819000, '2022-12-20 06:03:30'),
+(6, 2, 2, 1, 18000000, '2022-12-20 06:03:30'),
+(7, 3, 33, 1, 53604000, '2022-12-21 15:57:17'),
+(8, 3, 3, 1, 9000000, '2022-12-21 15:57:17'),
+(9, 3, 2, 1, 18000000, '2022-12-21 15:57:17');
 
 -- --------------------------------------------------------
 
@@ -410,8 +422,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `phone_number`, `address`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
-(1, 'Nguyễn Quốc Châu', '0386818829', NULL, 'chau.nq.61cntt@ntu.edu.vn', NULL, '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', NULL, '2022-12-05 18:15:54', '2022-12-05 18:15:54', 0),
-(2, 'Nguyen Quoc Chau', '0926383006', '20 Nha Trang Khanh Hoa', 'mallie69@example.org', NULL, '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', NULL, '2022-12-12 16:36:59', '2022-12-12 16:36:59', 0),
+(1, 'Nguyễn Quốc Châu', '0386888829', 'Nha Trang', 'chau.nq.61cntt@ntu.edu.vn', NULL, '$2y$10$/FJjyDThVu2Z9pDn6gEaf.YmgH3Tas8/6wYuWosYDva3U6Tt608e6', NULL, '2022-12-05 18:15:54', '2022-12-20 03:51:10', 0),
+(2, 'Nguyen Quoc Chau', '0926383006', 'Nha Trang', 'mallie69@example.org', NULL, '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', NULL, '2022-12-12 16:36:59', '2022-12-21 15:57:51', 0),
 (3, 'Nguyen Quoc Chau', '0926383076', '20 Nha Trang Khanh Hoa', 'mallie6@example.org', NULL, '$2y$10$huFy/caUfNuL2S52nYiwJu6s/ob2L0V5mQcdcreo986vsmEhJKV2.', NULL, '2022-12-12 17:23:17', '2022-12-12 17:23:17', 0);
 
 --
