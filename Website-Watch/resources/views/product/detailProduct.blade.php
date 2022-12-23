@@ -28,7 +28,6 @@
                                             <div class="carousel-inner">
                                                 @foreach ($nameImages as $key => $nameImage)
                                                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                                        <!-- lấy ảnh đầu tiên trong db đúng đường theo folder sản phẩm, còn lại 5 ảnh khác dùng chung ảnh cat.gif (vì dung lượng ảnh lớn nên cắt bớt) -->
                                                         <img src="{{ asset('images/images-product/') }}/{{ $slugGender }}/{{ $slugBrand }}/{{ $nameImage }}"
                                                             class="d-block w-100" alt="...">
                                                     </div>
@@ -141,7 +140,8 @@
                                                 <label class="form-label" for="text-comment">Nội dung</label>
                                             </div>
                                             <div class="d-flex justify-content-between mt-3">
-                                                <button type="button" class="btn btn-success cancel-comment-product">Hủy</button>
+                                                <button type="button"
+                                                    class="btn btn-success cancel-comment-product">Hủy</button>
                                                 <button type="button" class="btn btn-danger write-comment-product">
                                                     Gửi <i class="fas fa-long-arrow-alt-right ms-1"></i>
                                                 </button>
@@ -167,10 +167,14 @@
                                                         </h5>
                                                     </div>
                                                     <div class="col-6">
-                                                        <input type="hidden" value="{{ $comment->id }}" id="IDComment">
-                                                        @if ($comment->customers == Auth::user()->id)
-                                                            <span class="d-flex justify-content-end delete-comment-product"><i
-                                                                    class="fas fa-trash-alt"></i></span>
+                                                        <input type="hidden" value="{{ $comment->id }}"
+                                                            id="IDComment">
+                                                        @if (Auth::check())
+                                                            @if ($comment->customers == Auth::user()->id)
+                                                                <span
+                                                                    class="d-flex justify-content-end delete-comment-product"><i
+                                                                        class="fas fa-trash-alt"></i></span>
+                                                            @endif
                                                         @endif
                                                     </div>
                                                 </div>

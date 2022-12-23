@@ -33,11 +33,11 @@ class ProductController extends Controller
         }
     }
 
-    public function detailProduct($id)
+    public function detailProduct(Request $request)
     {
 
         //get value product by id request
-        $product = Product::find($id);
+        $product = Product::find($request->id);
         //get name image from product retrieve
         $image = $product->productImage;
         //get a list of product image names
@@ -47,7 +47,7 @@ class ProductController extends Controller
         //get gender slug
         $slugGender = $this->getSlugGender($product);
         //get comment of product
-        $comments = $this->commentOfProduct($id);
+        $comments = $this->commentOfProduct($request->id);
         if ($product)
             return view('product.detailProduct', compact('product', 'nameImages', 'slugBrand', 'slugGender', 'comments'));
         else
