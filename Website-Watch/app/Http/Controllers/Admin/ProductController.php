@@ -132,14 +132,12 @@ class ProductController extends Controller
             ->get();
         // add image for list image of product
         $destinationPath = 'images/images-product' . "/" . $slugGender[0]->slug . "/" . $slugBrand[0]->slug . "/";
-        $fileHome = null;
         for ($i = 0; $i < count($file); $i++) {
             $file[$i]->move(public_path($destinationPath), $name[$i]);
         }
         //add image preview of font web such as: page hom, shop, cart,...
         $filecpy = $destinationPath . $name[0];
         $destinationPathHome = 'images/image_products_home/' . $name[0];
-
         File::copy(public_path($filecpy), public_path($destinationPathHome));
     }
     /**
@@ -162,8 +160,15 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $title = 'Cập nhật sản phẩm';
-        return view('admin.product.edit', compact('title'));
+        $product = Product::find($id);
+        if ($product) {
+            $brands = Brand::get();
+            $genders = Gender::get();
+            $title = 'Cập nhật sản phẩm';
+            return view('admin.product.edit', compact('title', 'product', 'brands', 'genders'));
+        } else {
+            return redirect('/admin/product');
+        }
     }
 
     /**

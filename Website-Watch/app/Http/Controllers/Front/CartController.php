@@ -10,7 +10,10 @@ class CartController extends Controller
 {
     public function cart()
     {
-        return view('product.cart');
+        // add estimated delivery time (+3 days from current date)
+        $time = new Product();
+        $time = $time->currentTime();
+        return view('product.cart', compact('time'));
     }
     public function addToCart(Request $request)
     {

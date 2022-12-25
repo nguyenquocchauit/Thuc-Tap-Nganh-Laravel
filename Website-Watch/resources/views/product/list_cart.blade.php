@@ -1,4 +1,3 @@
-
 <section class="h-100 gradient-custom">
     <div class="container ">
         <div class="row d-flex justify-content-center my-4">
@@ -7,10 +6,12 @@
                     <div class="card-header py-3">
                         <div class="row">
                             <div class="col-6 d-flex justify-content-start">
-                                <h5 class="mb-0"><a href="/shop"><i class="fas fa-long-arrow-alt-left"></i></a> Giỏ hàng - 2 sản phẩm</h5>
+                                <h5 class="mb-0"><a href="/shop"><i class="fas fa-long-arrow-alt-left"></i></a> Giỏ
+                                    hàng - 2 sản phẩm</h5>
                             </div>
                             <div class="col-6 d-flex justify-content-end"><button type="button" id="remove-all-cart"
-                                    style="border: none; background-color: #f7f7f7;">xóa giỏ hàng <i style="color: red;" class="far fa-trash-alt"></i></button></div>
+                                    style="border: none; background-color: #f7f7f7;">xóa giỏ hàng <i style="color: red;"
+                                        class="far fa-trash-alt"></i></button></div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -86,7 +87,10 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <p><strong>Giao hàng dự kiến</strong></p>
-                        <p class="mb-0">25.12.2022 - 29.12.2022</p>
+                        {{-- giao hàng trong vòng 4 ngày  --}}
+                        <p class="mb-0">
+                            {{ date('d/m/Y', strtotime($time)) . ' - ' . date('d/m/Y', strtotime($time . ' +4 days')) }}
+                        </p>
                     </div>
                 </div>
                 <div class="card mb-4 mb-lg-0">
