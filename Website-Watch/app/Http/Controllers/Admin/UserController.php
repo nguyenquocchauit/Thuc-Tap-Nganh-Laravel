@@ -12,15 +12,25 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    private $users;
+    public function __construct()
+    {
+        $this->users = new User();
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Danh sách người dùng';
-        $users = User::first('id')->paginate(10);
+        //search 
+        $search = null;
+        if(!empty($request->search)) {
+            $search = $request->search;
+        }
+        $users = $this->users->getAllUsers($search);     
         return view('admin.user.index',compact('title','users'));
     }
 
@@ -61,6 +71,7 @@ class UserController extends Controller
             "address" => $request->address,
             "email" => $request->email,
             "password" => Hash::make($request->password),
+            "role" => $request->role
 
         ];
         // $data['password'] = bcrypt($request->get('password'));
@@ -104,10 +115,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
         //Xu ly password
-  
-        // $data['password'] = bcrypt($request->get('password'));
         $users = User::find($id);
-        // $input = $request->all();
         $data = [
             "name" => $request->name,
             "phone_number" => $request->phone_number,

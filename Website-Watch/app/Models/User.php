@@ -58,4 +58,16 @@ class User extends Authenticatable
             ->select(DB::raw("MAX(id) AS ID_Max "))
             ->get();
     }
+    public function getAllUsers($search = null) {
+        $users = User::first('id');
+        if(!empty($search)) {
+            $users = $users->where(function($query) use ($search) {
+                $query->orWhere('users.name','like','%'.$search.'%');
+                $query->orWhere('users.email','like','%'.$search.'%');
+                $query->orWhere('users.address','like','%'.$search.'%');
+            });
+        }
+        $users = $users->paginate(10);
+        return $users;
+    }
 }

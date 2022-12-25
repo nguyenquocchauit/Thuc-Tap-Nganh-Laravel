@@ -15,17 +15,63 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
+    private $products;
+    public function __construct()
+    {
+        $this->products = new Product();
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Danh sách sản phẩm';
+        //filter brand, categories, 
+       $filters = [];
+       $search = null;
+        if(!empty($request->category)) {
+            $category = $request->category;
+            $filters[] = ['products.gender','=', $category];
+        }
 
-        $products = Product::first('id')->paginate(10);
-        return view('admin.product.index', compact('title', 'products'));
+        if(!empty($request->brand)) {
+            $brand = $request->brand;
+            $filters[] = ['products.brand','=', $brand];
+        }
+
+        //search name products
+
+        if(!empty($request->search)) {
+            $search = $request->search;
+        }
+
+        //Sort price,discount and quantity 
+        $sortBy = $request->input('sort-by');
+        $sortType = $request->input('sort-type');
+
+        $allowSort = ['asc', 'desc'];
+        if(!empty($sortType) && in_array($sortType,$allowSort)) {
+            if($sortType == 'desc') {
+                $sortType = 'asc';
+            } else {
+                $sortType = 'desc';
+            }
+        } else {
+            $sortType = 'asc';
+        }
+        $sortArr = [
+            'sortBy' => $sortBy,
+            'sortType' => $sortType,
+        ];
+        $brands = Brand::orderBy('name','ASC')->get();
+        $categories = Gender::orderBy('name','ASC')->get();
+
+        $products = $this->products->getAllProducts($filters, $search, $sortArr);
+
+        
+        return view('admin.product.index', compact('title', 'products','brands','categories','sortType'));
     }
 
     /**

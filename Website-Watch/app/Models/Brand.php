@@ -33,4 +33,14 @@ class Brand extends Model
             ->select(DB::raw("MAX(id) AS ID_Max "))
             ->get();
     }
+    public function getAllBrands($search = null) { 
+        $brands = Brand::first('id');
+        if(!empty($search)) {
+            $brands = $brands->where(function($query) use ($search) {
+                $query->orWhere('name','like','%'.$search.'%');
+            });
+        }
+        $brands = $brands->paginate(10);
+        return $brands;
+    }
 }

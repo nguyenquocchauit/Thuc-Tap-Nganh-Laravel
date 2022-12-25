@@ -34,8 +34,9 @@
                     <div class="card-header">
 
                         <form>
+
                             <div class="input-group">
-                                <input type="search" name="search" id="search" placeholder="Tên, sdt, email"
+                                <input type="search" name="search" id="search" placeholder="Nhập tên, email, địa chỉ"
                                     class="form-control">
                                 <span class="input-group-append">
                                     <button type="submit" class="btn btn-primary">
@@ -44,6 +45,8 @@
                                     </button>
                                 </span>
                             </div>
+
+                            
                         </form>
 
                         {{-- <div class="btn-actions-pane-right">
@@ -77,7 +80,7 @@
                                         <td class="text-center">
                                             @if ($user->address == null)
                                                 <div class="badge badge-warning mt-2">
-                                                    <span>chưa điền địa chỉ</span>
+                                                    <span>Chưa điền địa chỉ</span>
                                                 </div>
                                             @else
                                                 {{ $user->address }}

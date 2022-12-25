@@ -35,8 +35,8 @@
 
                         <form>
                             <div class="input-group">
-                                <input type="search" name="search" id="search" placeholder="Tên loại"
-                                    class="form-control">
+                                <input type="search" name="search" id="search" placeholder="Nhập tên loại"
+                                    class="form-control" value="{{request()->search}}">
                                 <span class="input-group-append">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-search"></i>&nbsp;

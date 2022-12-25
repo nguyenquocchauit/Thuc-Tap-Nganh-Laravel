@@ -116,9 +116,9 @@
                                                     @foreach ($roles as $role)
                                                         <option value="{{$role->id}}">
                                                             @if ($role->type == 0)
-                                                                <span>user</span>
+                                                                <span>Người dùng</span>
                                                             @else
-                                                                <span>admin</span>
+                                                                <span>Quản trị viên</span>
                                                             @endif
                                                         </option>
                                                     @endforeach

@@ -10,15 +10,25 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    private $categories;
+    public function __construct()
+    {
+        $this->categories = new Gender();
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Danh sách loại';
-        $categories = Gender::first('id')->paginate(10);
+        $search = null;
+        if(!empty($request->search)) {
+            $search = $request->search;
+        }
+        $categories = $this->categories->getAllCategories($search);
+        
         return view('admin.category.index',compact('title','categories'));
     }
 

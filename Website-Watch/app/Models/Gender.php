@@ -29,4 +29,14 @@ class Gender extends Model
             ->select(DB::raw("MAX(id) AS ID_Max "))
             ->get();
     }
+    public function getAllCategories($search = null) {
+        $categories = Gender::first('id');
+        if(!empty($search)) {
+            $categories = $categories->where(function($query) use ($search) {
+                $query->orWhere('name','like','%'.$search.'%');
+            });
+        }
+        $categories = $categories->paginate(10);
+        return $categories;
+    }
 }

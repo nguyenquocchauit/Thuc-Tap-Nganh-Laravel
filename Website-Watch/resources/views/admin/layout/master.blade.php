@@ -19,6 +19,7 @@
         integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
     <link href="./dashboard/main.css" rel="stylesheet">
     <link href="./dashboard/my_style.css" rel="stylesheet">
@@ -625,9 +626,9 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="./admin/category">
+                                        <a href="./admin/category" class="{{ request()->segment(2) == 'category' ? 'mm-active' : '' }}">
                                             <i class="metismenu-icon"
-                                                class="{{ request()->segment(2) == 'category' ? 'mm-active' : '' }}"></i>Loại
+                                                ></i>Loại
                                         </a>
                                     </li>
                                     <li>

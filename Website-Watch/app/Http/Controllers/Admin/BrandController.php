@@ -10,15 +10,24 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
+    private $brands;
+    public function __construct()
+    {
+        $this->brands = new Brand();
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Danh sách hãng';
-        $brands = Brand::first('id')->paginate(10);
+        $search = null;
+        if(!empty($request->search)) {
+            $search = $request->search;
+        }
+        $brands = $this->brands->getAllBrands($search);
         return view('admin.brand.index', compact('title', 'brands'));
     }
 

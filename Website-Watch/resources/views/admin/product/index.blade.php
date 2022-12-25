@@ -34,16 +34,42 @@
                     <div class="card-header">
                         
                         <form>
-                            <div class="input-group">
-                                <input type="search" name="search" id="search" placeholder="Tên sp, hãng, loại"
-                                    class="form-control">
-                                <span class="input-group-append">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-search"></i>&nbsp;
-                                        Tìm
-                                    </button>
-                                </span>
-                            </div>
+                            
+                                <div class="row">
+
+                                    <div class="col-3">
+                                        <select name="brand" class="form-control">
+                                            <option value="0">Tất cả hãng</option>
+                                            @foreach ($brands as $brand)
+                                                <option value="{{$brand->id}}" {{request()->brand==$brand->id?'selected':false}}>{{$brand->id}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="col-3">
+                                        <select name="category" class="form-control">
+                                            <option value="0">Tất cả loại</option>
+                                            @foreach ($categories as $categories)
+                                                <option value="{{$categories->id}}" {{request()->category==$categories->id?'selected':false}}>{{$categories->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                    
+                                    <div class="col-4">
+                                        <input type="search" name="search" id="search" placeholder="Tên sản phẩm"
+                                            class="form-control" value="{{request()->search}}">
+                                    </div>
+                        
+                                    <div class="col-2">
+                                        <span class="input-group-append">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fa fa-search"></i>&nbsp;
+                                                Tìm
+                                            </button>
+                                        </span>
+                                    </div>   
+                        
+                                </div>
                         </form>
 
                         {{-- <div class="btn-actions-pane-right">
@@ -61,9 +87,21 @@
                                     <th class="text-center">ID</th>
                                     <th class="text-center">Ảnh</th>
                                     <th class="text-center">Tên</th>
-                                    <th class="text-center">Giá</th>
-                                    <th class="text-center">Giảm giá</th>
-                                    <th class="text-center">Số lượng</th>
+                                    <th class="text-center">Giá
+                                        <a href="./admin/product?sort-by=price&sort-type={{$sortType}}">
+                                            <i class="fas fa-sort"></i>
+                                            </a> 
+                                    </th>
+                                    <th class="text-center">Giảm giá
+                                        <a href="./admin/product?sort-by=discount&sort-type={{$sortType}}">
+                                            <i class="fas fa-sort"></i>
+                                            </a> 
+                                    </th>
+                                    <th class="text-center">Số lượng
+                                        <a href="./admin/product?sort-by=quantity&sort-type={{$sortType}}">
+                                            <i class="fas fa-sort"></i>
+                                            </a> 
+                                    </th>
                                     <th class="text-center">Loại</th>
                                     <th class="text-center">Hãng</th>
                                     <th class="text-center">Thao tác</th>
@@ -74,7 +112,7 @@
                                 @foreach ($products as $product)
                                     <tr>
                                         <td class="text-center text-muted">{{ $product->id }}</td>
-                                        <td class="text-center image-list-product"><img
+                                        <td class="text-center image-list-product"><img width="100px" height="100px"
                                             src="{{ asset('images/image_products_home/') }}/{{ $product->productImage['image_1'] }}"
                                             alt=""></td>
                                         <td class="text-center">{{ $product->name }}</td>

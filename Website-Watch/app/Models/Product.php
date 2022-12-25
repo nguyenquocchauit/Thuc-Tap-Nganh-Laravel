@@ -47,4 +47,31 @@ class Product extends Model
         $currentTime = Carbon::now();
         return $currentTime->toDateTimeString();
     }
+
+    public function getAllProducts($filters = [],$search = null, $sortbyArr = null) {
+         $products = Product::first('id')
+        ->select('products.*','gender.name as gender_name')
+        ->join('gender','products.gender','=','gender.id');
+        $orderBy = 'price';
+        $orderType = 'asc';
+        if(!empty($sortbyArr) && is_array($sortbyArr)) {
+            if(!empty($sortbyArr['sortBy']) && !empty($sortbyArr['sortType'])) {
+                $orderBy = trim($sortbyArr['sortBy']);
+                $orderType = trim($sortbyArr['sortType']);
+            }
+        }
+        $products = $products->orderBy($orderBy, $orderType);
+
+        if(!empty($filters)) {
+            $products->where($filters);
+        }
+
+        if(!empty($search)) {
+            $products = $products->where(function($query) use ($search) {
+                $query->orWhere('products.name','like','%'.$search.'%');
+            });
+        }
+        $products = $products->paginate(10);
+        return $products;
+    }
 }
