@@ -32,7 +32,7 @@
                 <div class="main-card mb-3 card">
 
                     <div class="card-header">
-
+                        
                         <form>
                             <div class="input-group">
                                 <input type="search" name="search" id="search" placeholder="Tên sp, hãng, loại"
@@ -53,7 +53,7 @@
                             </div>
                         </div> --}}
                     </div>
-
+                    @include('admin.alert')
                     <div class="table-responsive">
                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
@@ -102,13 +102,18 @@
                                                     <i class="fa fa-edit fa-w-20"></i>
                                                 </span>
                                             </a>
-                                            <a href="" data-toggle="tooltip"
-                                                title="Xóa" data-placement="bottom"
-                                                class="btn btn-outline-danger border-0 btn-sm">
-                                                <span class="btn-icon-wrapper opacity-8">
-                                                    <i class="fa fa-trash fa-w-20"></i>
-                                                </span>
-                                            </a>
+                                            <form class="d-inline" action="./admin/product/ {{$product->id}}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-hover-shine btn-outline-danger border-0 btn-sm"
+                                                    type="submit" data-toggle="tooltip" title="Delete"
+                                                    data-placement="bottom"
+                                                    onclick="return confirm('Bạn có thực sự muốn xóa sản phẩm này?')">
+                                                    <span class="btn-icon-wrapper opacity-8">
+                                                        <i class="fa fa-trash fa-w-20"></i>
+                                                    </span>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

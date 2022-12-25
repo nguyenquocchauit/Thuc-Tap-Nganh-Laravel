@@ -24,126 +24,81 @@
                             <div class="main-card mb-3 card">
                                 <div class="card-body display_data">
 
+                                    
+
                                     <div class="position-relative row form-group">
-                                        <label for="" class="col-md-3 text-md-right col-form-label">Images</label>
+                                        <label for="name" class="col-md-3 text-md-right col-form-label">Tên sản phẩm</label>
+                                        <div class="col-md-9 col-xl-8">
+                                           <p>{{$product->name}}</p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="position-relative row form-group">
+                                        <label for="brand_id"
+                                            class="col-md-3 text-md-right col-form-label">Hãng</label>
+                                        <div class="col-md-9 col-xl-8">
+                                            <p>{{$product->brand}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="position-relative row form-group">
+                                        <label for="product_category_id"
+                                            class="col-md-3 text-md-right col-form-label">Loại</label>
+                                        <div class="col-md-9 col-xl-8">
+                                            @if ($product->gender == 0)
+                                            <p>Nam</p>
+                                            @else
+                                            <p>Nữ</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                        
+
+
+                                    <div class="position-relative row form-group">
+                                        <label for="price"
+                                            class="col-md-3 text-md-right col-form-label">Giá</label>
+                                        <div class="col-md-9 col-xl-8">
+                                            <p>{{number_format($product->price)}} VNĐ</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="position-relative row form-group">
+                                        <label for="discount"
+                                            class="col-md-3 text-md-right col-form-label">Giảm giá</label>
+                                        <div class="col-md-9 col-xl-8">
+                                            <p>{{$product->discount}}%</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="position-relative row form-group">
+                                        <label for="qty"
+                                            class="col-md-3 text-md-right col-form-label">Số lượng kho</label>
+                                        <div class="col-md-9 col-xl-8">
+                                            <p>{{$product->quantity}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="position-relative row form-group">
+                                        <label for="" class="col-md-3 text-md-right col-form-label">Ảnh</label>
                                         <div class="col-md-9 col-xl-8">
                                             <ul class="text-nowrap overflow-auto" id="images">
                                                 <li class="d-inline-block mr-1" style="position: relative;">
-                                                    <img style="height: 150px;" src="assets/images/_default-product.jpg"
+                                                    <img style="height: 150px;" 
+                                                    src="{{ asset('images/image_products_home/') }}/{{ $product->productImage['image_1'] }}"
                                                         alt="Image">
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
 
-                                    <div class="position-relative row form-group">
-                                        <label for="brand_id"
-                                            class="col-md-3 text-md-right col-form-label">Product Images</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p><a href="./product-image.html">Manage images</a></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-relative row form-group">
-                                        <label for="brand_id"
-                                            class="col-md-3 text-md-right col-form-label">Product Details</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p><a href="./product-detail.html">Manage details</a></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-relative row form-group">
-                                        <label for="brand_id"
-                                            class="col-md-3 text-md-right col-form-label">Brand</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p>Calvin Klein</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-relative row form-group">
-                                        <label for="product_category_id"
-                                            class="col-md-3 text-md-right col-form-label">Category</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p>Men</p>
-                                        </div>
-                                    </div>
-                                
-                                    <div class="position-relative row form-group">
-                                        <label for="name" class="col-md-3 text-md-right col-form-label">Name</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p>Pure Pineapple</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-relative row form-group">
-                                        <label for="content"
-                                            class="col-md-3 text-md-right col-form-label">Content</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p>High quality fabric, modern and youthful design</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-relative row form-group">
-                                        <label for="price"
-                                            class="col-md-3 text-md-right col-form-label">Price</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p>$629.99</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-relative row form-group">
-                                        <label for="discount"
-                                            class="col-md-3 text-md-right col-form-label">Discount</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p>$495.00</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-relative row form-group">
-                                        <label for="qty"
-                                            class="col-md-3 text-md-right col-form-label">Qty</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p>20</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-relative row form-group">
-                                        <label for="weight"
-                                            class="col-md-3 text-md-right col-form-label">Weight</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p>1.3</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="position-relative row form-group">
-                                        <label for="sku"
-                                            class="col-md-3 text-md-right col-form-label">SKU</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p>00012</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-relative row form-group">
-                                        <label for="tag"
-                                            class="col-md-3 text-md-right col-form-label">Tag</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p>Clothing</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="position-relative row form-group">
-                                        <label for="featured"
-                                            class="col-md-3 text-md-right col-form-label">Featured</label>
-                                        <div class="col-md-9 col-xl-8">
-                                            <p>Yes</p>
-                                        </div>
-                                    </div>
 
                                     <div class="position-relative row form-group">
                                         <label for="description"
-                                            class="col-md-3 text-md-right col-form-label">Description</label>
+                                            class="col-md-3 text-md-right col-form-label">Mô tả</label>
                                         <div class="col-md-9 col-xl-8">
-                                            <p>Product description</p>
+                                            <p>{{$product->description}}</p>
                                         </div>
                                     </div>
                                 </div>

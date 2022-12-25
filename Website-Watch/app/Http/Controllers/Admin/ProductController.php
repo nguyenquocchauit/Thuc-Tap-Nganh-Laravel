@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
 use App\Models\Gender;
 use App\Models\Image;
@@ -10,6 +11,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -46,13 +48,13 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         /** Kiểm tra tất cả dữ liệu đầu vào của $request
          * Required tất cả dữ liệu bắt buộc phải nhập
          * Image 6 ảnh chỉ chấp nhận 3 loại file: png, jpg, webp
          */
-
+    
 
         $name = $request->name_product;
         $id_image = strtolower($name);
@@ -117,6 +119,7 @@ class ProductController extends Controller
         $file = [$request->image_1, $request->image_2, $request->image_3, $request->image_4, $request->image_5, $request->image_6];
         $nameImage = [$image_1, $image_2, $image_3, $image_4, $image_5, $image_6];
         $this->moveImageProduct($request->brand_id, $request->product_category_id, $file, $nameImage);
+        return redirect('admin/product')->with('success', 'Thêm sản phẩm thành công');
     }
     public function moveImageProduct($brand, $gender, $file, $name)
     {
@@ -145,10 +148,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
         $title = 'Chi tiết sản phẩm';
-        return view('admin.product.show', compact('title'));
+        return view('admin.product.show', compact('title','product'));
     }
 
     /**
@@ -181,9 +184,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        Product::destroy($product->id);
+        return redirect('/admin/product')->with('success', 'Xóa sản phẩm thành công');
     }
 
     public function stripVN($str)
