@@ -12,7 +12,7 @@
                                 <div>
                                     Hãng
                                     <div class="page-title-subheading">
-                                        Xem, tạo, sửa, xóa và quản lý.
+                                        <strong>Xem</strong>, tạo, sửa, xóa và quản lý. 
                                     </div>
                                 </div>
                             </div>

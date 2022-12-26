@@ -12,7 +12,7 @@
                                 <div>
                                     Loại
                                     <div class="page-title-subheading">
-                                        Xem, tạo, sửa, xóa và quản lý.
+                                        Xem, <strong>tạo</strong>, sửa, xóa và quản lý.
                                     </div>
                                 </div>
                             </div>

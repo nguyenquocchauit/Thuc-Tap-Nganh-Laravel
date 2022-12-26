@@ -11,7 +11,7 @@
                     <div>
                         Người dùng
                         <div class="page-title-subheading">
-                            Xem, tạo, sửa, xóa và quản lý.
+                            Xem, tạo, sửa, xóa và <strong>quản lý.</strong>
                         </div>
                     </div>
                 </div>

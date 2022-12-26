@@ -11,7 +11,7 @@
                     <div>
                         Sản phẩm
                         <div class="page-title-subheading">
-                            <strong>Xem</strong>, tạo, sửa, xóa và quản lý.
+                            Xem, tạo, sửa, xóa và <strong>quản lý.</strong> 
                         </div>
                     </div>
                 </div>

@@ -12,7 +12,7 @@
                                 <div>
                                     Người dùng
                                     <div class="page-title-subheading">
-                                        Xem, tạo, sửa, xóa và quản lý.
+                                        <strong>Xem</strong>, tạo, sửa, xóa và quản lý. 
                                     </div>
                                 </div>
                             </div>
@@ -97,9 +97,9 @@
                                             class="col-md-3 text-md-right col-form-label">Vai trò</label>
                                         <div class="col-md-9 col-xl-8">
                                             @if ($user->role == 0)
-                                                user
+                                                người dùng
                                             @else
-                                                admin
+                                                quản trị viên
                                             @endif
                                         </div>
                                     </div>
