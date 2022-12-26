@@ -28,7 +28,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $title = 'Danh sách sản phẩm';
-        //filter brand, categories, 
+        //filter brand, categories,
        $filters = [];
        $search = null;
         if(!empty($request->category)) {
@@ -47,7 +47,7 @@ class ProductController extends Controller
             $search = $request->search;
         }
 
-        //Sort price,discount and quantity 
+        //Sort price,discount and quantity
         $sortBy = $request->input('sort-by');
         $sortType = $request->input('sort-type');
 
@@ -70,7 +70,7 @@ class ProductController extends Controller
 
         $products = $this->products->getAllProducts($filters, $search, $sortArr);
 
-        
+
         return view('admin.product.index', compact('title', 'products','brands','categories','sortType'));
     }
 
@@ -100,7 +100,7 @@ class ProductController extends Controller
          * Required tất cả dữ liệu bắt buộc phải nhập
          * Image 6 ảnh chỉ chấp nhận 3 loại file: png, jpg, webp
          */
-    
+
 
         $name = $request->name_product;
         $id_image = strtolower($name);
@@ -227,6 +227,42 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $product = new Product();
+        // processing to remove VNĐ and commas
+        $price = explode(" ", $request->price_product);
+        $price = explode(",", $price[0]);
+        $price = implode("", $price);
+        // processing to remove %
+        $discount = explode("%", $request->discount_product);
+        // insert data of product
+        $dataProduct = [
+            "name" => $request->name_product,
+            "description" => $request->description_product,
+            "quantity" => $request->quantity_product,
+            "price" => $price,
+            "discount" => $discount[0],
+            "gender" => $request->product_category_id,
+            "brand" => $request->brand_id,
+            "updated_at" => $product->currentTime(),
+        ];
+        $data = null;
+        //If there is a change to the array image, then proceed to edit the image
+        if ($request->image) {
+            $files = $request->file('image');
+            foreach ($files as $key => $file) {
+                $image = "images/images-product/men/aviator/test.png";
+                if (File::exists($image)) {
+                    File::delete($image);
+                }
+                $data[$key] =  $file->getClientOriginalName();
+                $files[$key]->move(public_path("/images/images-product/men/aviator/"), "test" . $key . "100.png");
+            };
+
+            return response()->json([
+                "data" => dd($data),
+                "image" => $request->image[0],
+            ]);
+        }
     }
 
     /**

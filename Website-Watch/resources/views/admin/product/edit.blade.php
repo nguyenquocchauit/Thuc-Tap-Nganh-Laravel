@@ -22,8 +22,9 @@
             <div class="col-md-12">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
-                        <form method="post" action="admin/product" enctype="multipart/form-data">@csrf
-
+                        <form method="post" action="admin/product" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
                             <div class="position-relative row form-group">
                                 <label for="name_product" class="col-md-3 text-md-right col-form-label">Tên sản phẩm</label>
                                 <div class="col-md-9 col-xl-8">
