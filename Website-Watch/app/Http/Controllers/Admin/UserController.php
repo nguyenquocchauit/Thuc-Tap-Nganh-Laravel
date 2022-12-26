@@ -25,12 +25,12 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $title = 'Danh sách người dùng';
-        //search 
+        //search
         $search = null;
         if(!empty($request->search)) {
             $search = $request->search;
         }
-        $users = $this->users->getAllUsers($search);     
+        $users = $this->users->getAllUsers($search);
         return view('admin.user.index',compact('title','users'));
     }
 
@@ -99,7 +99,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        
+
         $title = 'Cập nhật người dùng';
         $roles = Role::all();
         return view('admin.user.edit',compact('title','user','roles'));

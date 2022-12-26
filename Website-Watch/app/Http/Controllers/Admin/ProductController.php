@@ -29,21 +29,21 @@ class ProductController extends Controller
     {
         $title = 'Danh sách sản phẩm';
         //filter brand, categories,
-       $filters = [];
-       $search = null;
-        if(!empty($request->category)) {
+        $filters = [];
+        $search = null;
+        if (!empty($request->category)) {
             $category = $request->category;
-            $filters[] = ['products.gender','=', $category];
+            $filters[] = ['products.gender', '=', $category];
         }
 
-        if(!empty($request->brand)) {
+        if (!empty($request->brand)) {
             $brand = $request->brand;
-            $filters[] = ['products.brand','=', $brand];
+            $filters[] = ['products.brand', '=', $brand];
         }
 
         //search name products
 
-        if(!empty($request->search)) {
+        if (!empty($request->search)) {
             $search = $request->search;
         }
 
@@ -52,8 +52,8 @@ class ProductController extends Controller
         $sortType = $request->input('sort-type');
 
         $allowSort = ['asc', 'desc'];
-        if(!empty($sortType) && in_array($sortType,$allowSort)) {
-            if($sortType == 'desc') {
+        if (!empty($sortType) && in_array($sortType, $allowSort)) {
+            if ($sortType == 'desc') {
                 $sortType = 'asc';
             } else {
                 $sortType = 'desc';
@@ -65,13 +65,13 @@ class ProductController extends Controller
             'sortBy' => $sortBy,
             'sortType' => $sortType,
         ];
-        $brands = Brand::orderBy('name','ASC')->get();
-        $categories = Gender::orderBy('name','ASC')->get();
+        $brands = Brand::orderBy('name', 'ASC')->get();
+        $categories = Gender::orderBy('name', 'ASC')->get();
 
         $products = $this->products->getAllProducts($filters, $search, $sortArr);
 
 
-        return view('admin.product.index', compact('title', 'products','brands','categories','sortType'));
+        return view('admin.product.index', compact('title', 'products', 'brands', 'categories', 'sortType'));
     }
 
     /**
@@ -195,7 +195,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $title = 'Chi tiết sản phẩm';
-        return view('admin.product.show', compact('title','product'));
+        return view('admin.product.show', compact('title', 'product'));
     }
 
     /**
@@ -227,7 +227,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $product = new Product();
+        $product = Product::find($id);
         // processing to remove VNĐ and commas
         $price = explode(" ", $request->price_product);
         $price = explode(",", $price[0]);
@@ -243,26 +243,33 @@ class ProductController extends Controller
             "discount" => $discount[0],
             "gender" => $request->product_category_id,
             "brand" => $request->brand_id,
-            "updated_at" => $product->currentTime(),
+            "updated_at" => $this->products->currentTime(),
         ];
+        $product->update($dataProduct);
         $data = null;
         //If there is a change to the array image, then proceed to edit the image
         if ($request->image) {
             $files = $request->file('image');
-            foreach ($files as $key => $file) {
-                $image = "images/images-product/men/aviator/test.png";
-                if (File::exists($image)) {
-                    File::delete($image);
-                }
-                $data[$key] =  $file->getClientOriginalName();
-                $files[$key]->move(public_path("/images/images-product/men/aviator/"), "test" . $key . "100.png");
-            };
 
-            return response()->json([
-                "data" => dd($data),
-                "image" => $request->image[0],
-            ]);
+            foreach ($files as $key => $file) {
+                $image = "image_" . strval($key + 1);
+                $imageProduct = $product->productImage["" . $image . ""];
+                // get path image of product by slug brand and gender
+                $images = "images/images-product/" . $product->productGender["slug"] . "/" . $product->productBrand["slug"] . "/" . $imageProduct;
+                if (File::exists($images)) {
+                    File::delete($images);
+                }
+                $files[$key]->move(public_path("/images/images-product/" . $product->productGender["slug"] . "/" . $product->productBrand["slug"] . "/"), $imageProduct);
+                if ($key == 0) {
+                    $destinationPathHome = "images/image_products_home/" . $imageProduct;
+                    if (File::exists($destinationPathHome)) {
+                        File::delete($destinationPathHome);
+                        File::copy(public_path($images), public_path($destinationPathHome));
+                    }
+                }
+            };
         }
+        return redirect('/admin/product')->with('success', 'Cập nhật sản phẩm thành công');;
     }
 
     /**

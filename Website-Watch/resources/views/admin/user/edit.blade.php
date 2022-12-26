@@ -38,11 +38,11 @@
                                                                 {{$message}}
                                                             @enderror
                                                         </span>
-                                                </div>     
+                                                </div>
                                             </div>
-    
-                                      
-                                        
+
+
+
                                             <div class="position-relative row form-group">
                                                 <label for="name" class="col-md-3 text-md-right col-form-label">Tên</label>
                                                 <div class="col-md-9 col-xl-8">
@@ -55,12 +55,12 @@
                                                         </span>
                                                 </div>
                                             </div>
-    
+
                                             <div class="position-relative row form-group">
                                                 <label for="phone"
                                                     class="col-md-3 text-md-right col-form-label">Số điện thoại</label>
                                                 <div class="col-md-9 col-xl-8">
-                                                    <input  name="phone_number" id="phone" placeholder="Nhập số điện thoại" type="tel" 
+                                                    <input  name="phone_number" id="phone" placeholder="Nhập số điện thoại" type="tel"
                                                         class="form-control" value="{{$user->phone_number}}">
                                                         <span style="color: red">
                                                             @error('phone_number')
@@ -69,7 +69,7 @@
                                                         </span>
                                                 </div>
                                             </div>
-    
+
                                             <div class="position-relative row form-group">
                                                 <label for="address"
                                                     class="col-md-3 text-md-right col-form-label">Địa chỉ</label>
@@ -78,7 +78,7 @@
                                                         class="form-control" value="{{$user->address}}">
                                                 </div>
                                             </div>
-    
+
                                             <div class="position-relative row form-group">
                                                 <label for="email"
                                                     class="col-md-3 text-md-right col-form-label">Email</label>
@@ -92,7 +92,7 @@
                                                         </span>
                                                 </div>
                                             </div>
-    
+
                                             <div class="position-relative row form-group">
                                                 <label for="password"
                                                     class="col-md-3 text-md-right col-form-label">Mật khẩu</label>
@@ -106,8 +106,8 @@
                                                         </span>
                                                 </div>
                                             </div>
-    
-    
+
+
                                             <div class="position-relative row form-group">
                                                 <label for="role_user"
                                                     class="col-md-3 text-md-right col-form-label">Vai trò</label>
@@ -117,10 +117,10 @@
                                                         @foreach ($roles as $role)
                                                              <option
                                                                     value="{{$role->id}}" @selected(old('role') == $role->id) >
-                                                                @if ($user->role == 0)
-                                                                    <span>user</span>
+                                                                @if ($role->type == 0)
+                                                                    <span>người dùng</span>
                                                                 @else
-                                                                    <span>admin</span>
+                                                                    <span>quản trị viên</span>
                                                                 @endif
                                                             </option>
                                                         @endforeach

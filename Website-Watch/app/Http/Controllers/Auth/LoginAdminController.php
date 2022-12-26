@@ -34,7 +34,6 @@ class LoginAdminController extends Controller
                 if (Hash::check($request->password, $user->password)) {
                     $credentials = $request->only('email', 'password');
                     Auth::attempt($credentials);
-
                     return response()->json([
                         'status' => 200,
                         'msg' => 'Login successfully'
@@ -58,7 +57,6 @@ class LoginAdminController extends Controller
 
         Session::flush();
         Auth::logout();
-
         return Redirect('/');
     }
 }
