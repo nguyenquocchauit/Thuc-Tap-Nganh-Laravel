@@ -5,12 +5,13 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\Front\ShopController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\Administrator;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Auth\LoginAdminController as AuthLoginAdminController;
 use App\Http\Controllers\User\UserController as UserUserController;
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,12 +38,13 @@ Route::prefix('shop')->group(function () {
 });
 
 //Admin
-Route::prefix('admin')->group(function () {
+Route::middleware([Admin::class])->prefix('admin')->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('brand', BrandController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('product', AdminProductController::class);
-    Route::resource('login', AuthLoginAdminController::class);
+
 });
+Route::get('/admin/login', [AuthLoginAdminController::class, 'index'])->name('login-admin');
 // user
-Route::get('/thong-tin-ca-nhan', [UserUserController::class, 'index'])->name('profile');
+Route::get('/thong-tin-ca-nhan', [UserUserController::class, 'index'])->name('profile')->middleware([User::class]);

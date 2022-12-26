@@ -22,7 +22,7 @@
             <div class="col-md-12">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
-                        <form method="post" action="admin/product" enctype="multipart/form-data">
+                        <form method="post" action="/admin/product/{{ $product->id }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="position-relative row form-group">
@@ -97,7 +97,7 @@
                                                     src="{{ 'images/images-product/' . $product->productGender['slug'] . '/' . $product->productBrand['slug'] . '/' . $product->productImage['image_1'] }}"
                                                     alt="" id="img-1">
                                             </label>
-                                            <input class="image_product" type="file" id="image_1" name="image_1"
+                                            <input class="image_product" type="file" id="image_1" name="image[]"
                                                 data-id="img-1" style="display:none;">
                                         </div>
                                         <div class="col-2">
@@ -106,7 +106,7 @@
                                                     src="{{ 'images/images-product/' . $product->productGender['slug'] . '/' . $product->productBrand['slug'] . '/' . $product->productImage['image_2'] }}"
                                                     alt="" id="img-2">
                                             </label>
-                                            <input class="image_product" type="file" id="image_2" name="image_2"
+                                            <input class="image_product" type="file" id="image_2" name="image[]"
                                                 data-id="img-2" style="display:none;">
                                         </div>
                                         <div class="col-2">
@@ -115,7 +115,7 @@
                                                     src="{{ 'images/images-product/' . $product->productGender['slug'] . '/' . $product->productBrand['slug'] . '/' . $product->productImage['image_3'] }}"
                                                     alt="" id="img-3">
                                             </label>
-                                            <input class="image_product" type="file" id="image_3" name="image_3"
+                                            <input class="image_product" type="file" id="image_3" name="image[]"
                                                 data-id="img-3" style="display:none;">
                                         </div>
                                         <div class="col-2">
@@ -124,7 +124,7 @@
                                                     src="{{ 'images/images-product/' . $product->productGender['slug'] . '/' . $product->productBrand['slug'] . '/' . $product->productImage['image_4'] }}"
                                                     alt="" id="img-4">
                                             </label>
-                                            <input class="image_product" type="file" id="image_4" name="image_4"
+                                            <input class="image_product" type="file" id="image_4" name="image[]"
                                                 data-id="img-4" style="display:none;">
                                         </div>
                                         <div class="col-2">
@@ -133,7 +133,7 @@
                                                     src="{{ 'images/images-product/' . $product->productGender['slug'] . '/' . $product->productBrand['slug'] . '/' . $product->productImage['image_5'] }}"
                                                     alt="" id="img-5">
                                             </label>
-                                            <input class="image_product" type="file" id="image_5" name="image_5"
+                                            <input class="image_product" type="file" id="image_5" name="image[]"
                                                 data-id="img-5" style="display:none;">
                                         </div>
                                         <div class="col-2">
@@ -142,7 +142,7 @@
                                                     src="{{ 'images/images-product/' . $product->productGender['slug'] . '/' . $product->productBrand['slug'] . '/' . $product->productImage['image_6'] }}"
                                                     alt="" id="img-6">
                                             </label>
-                                            <input class="image_product" type="file" id="image_6" name="image_6"
+                                            <input class="image_product" type="file" id="image_6" name="image[]"
                                                 data-id="img-6" style="display:none;">
                                         </div>
                                     </div>
