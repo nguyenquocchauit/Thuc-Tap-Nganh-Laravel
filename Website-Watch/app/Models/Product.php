@@ -52,7 +52,7 @@ class Product extends Model
          $products = Product::first('id')
         ->select('products.*','gender.name as gender_name')
         ->join('gender','products.gender','=','gender.id');
-        $orderBy = 'price';
+        $orderBy = 'id';
         $orderType = 'asc';
         if(!empty($sortbyArr) && is_array($sortbyArr)) {
             if(!empty($sortbyArr['sortBy']) && !empty($sortbyArr['sortType'])) {

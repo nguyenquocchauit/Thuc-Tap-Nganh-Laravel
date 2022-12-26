@@ -26,7 +26,7 @@
                                 <span class="btn-icon-wrapper pr-2 opacity-8">
                                     <i class="fa fa-edit fa-w-20"></i>
                                 </span>
-                                <span>Edit</span>
+                                <span>Chỉnh sửa</span>
                             </a>
                         </li>
 
@@ -35,11 +35,11 @@
                                 @csrf
                                 @method('DELETE')
                                 <button class="nav-link btn" type="submit"
-                                    onclick="return confirm('Bạn có thực sự muốn xóa mục này?')">
+                                    onclick="return confirm('Bạn có thực sự muốn xóa người dùng này?')">
                                     <span class="btn-icon-wrapper pr-2 opacity-8">
                                         <i class="fa fa-trash fa-w-20"></i>
                                     </span>
-                                    <span>Delete</span>
+                                    <span>Xóa</span>
                                 </button>
                             </form>
                         </li>

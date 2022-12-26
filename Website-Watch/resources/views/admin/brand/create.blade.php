@@ -72,7 +72,7 @@
                                                     <span class="btn-icon-wrapper pr-1 opacity-8">
                                                         <i class="fa fa-times fa-w-20"></i>
                                                     </span>
-                                                    <span>Cancel</span>
+                                                    <span>Hủy</span>
                                                 </a>
 
                                                 <button type="submit"
@@ -80,7 +80,7 @@
                                                     <span class="btn-icon-wrapper pr-2 opacity-8">
                                                         <i class="fa fa-download fa-w-20"></i>
                                                     </span>
-                                                    <span>Save</span>
+                                                    <span>Tạo</span>
                                                 </button>
                                             </div>
                                         </div>
