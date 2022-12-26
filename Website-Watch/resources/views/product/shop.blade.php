@@ -1,25 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <link rel="stylesheet" href="{{ URL::asset('css/shop.css') }}" />
-    {{-- Breadcrumb Section Begin --}}
-    {{-- <div class="breadcrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item "><a href="/">Trang chủ</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Shop</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    {{-- Breadcrumb Section End --}}
+
 
     {{-- Product Shop Section Begin --}}
-    <section class="product-shop spad">
+    <section class="product-shop spad mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 products-sidebar-filter">

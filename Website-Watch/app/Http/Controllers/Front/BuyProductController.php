@@ -42,7 +42,8 @@ class BuyProductController extends Controller
                                 "orders" => $IDOrder,
                                 "product" => $id,
                                 "quantity" => $cart[$id]['quantity'],
-                                "price" => $cart[$id]['priceDiscount'] * $cart[$id]['quantity'],
+                                "price" => $cart[$id]['priceDiscount'],
+                                "total" => ($cart[$id]['priceDiscount'] * $cart[$id]['quantity']) + ($cart[$id]['priceDiscount'] * $cart[$id]['quantity']) * 0.08,
                                 "created_at" => $orderDetail->currentTime(),
                             ));
                         }

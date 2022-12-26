@@ -280,7 +280,26 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        Product::destroy($product->id);
+        // delete image in table images of product
+        $pro = Product::find($product->id);
+        // delete product
+        $image = Image::query()->where("id", $pro->image)->selectRaw("*")->get();
+        $pathHome = "images/image_products_home/";
+        for ($i = 1; $i <= 6; $i++) {
+            $path = "images/images-product/" . $product->productGender["slug"] . "/" . $product->productBrand["slug"] . "/";
+            $name = "image_" . $i;
+            $path = $path . $image[0]->$name;
+            if ($i == 1) {
+                $pathHome = $pathHome . $image[0]->$name;
+                if (File::exists($pathHome)) {
+                    File::delete($pathHome);
+                }
+            }
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+        }
+        Image::query()->where("id", $pro->image)->delete();
         return redirect('/admin/product')->with('success', 'Xóa sản phẩm thành công');
     }
 

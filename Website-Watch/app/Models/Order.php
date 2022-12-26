@@ -15,6 +15,11 @@ class Order extends Model
     protected $primaryKey = "id";
     protected $guarded = [];
     public $timestamps = false;
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class, 'orders', 'id');
+    }
     public function maxID()
     {
         return DB::table('orders')

@@ -50,9 +50,11 @@ $(document).ready(function () {
                             });
                             $(x).addClass("liked");
                             $("#row_wishlist").append(
-                                '<div class="row product--' +
+                                '<div class="row list-like-product product--' +
                                     response.data.id +
-                                    '" style="margin: 10px 0"><div class="col-md-4"><img src="/images/image_products_home/' +
+                                    '" style="margin: 10px 0" data-id="' +
+                                    response.data.id +
+                                    '"><div class="col-md-4"><img src="/images/image_products_home/' +
                                     _image +
                                     '" width="100%"></div><div class="col-md-8" info_wishlist><p>' +
                                     response.data.name +
@@ -70,7 +72,7 @@ $(document).ready(function () {
             });
         }
     });
-    $(".remove-like-product").on("click", function () {
+    $("body").on("click", ".remove-like-product", function () {
         var _idProduct = $(this).parent().find(".idProduct").val();
         console.log(_idProduct);
         $.ajax({

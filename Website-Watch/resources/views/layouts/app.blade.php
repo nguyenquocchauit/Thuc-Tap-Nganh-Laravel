@@ -232,7 +232,7 @@
                                     </a>
                                     <div class="dropdown">
                                         <div class="dropdown-content">
-                                            <a class="dropdown-item" href="">Lịch
+                                            <a class="dropdown-item" href="/lich-su-dat-hang">Lịch
                                                 sử đặt hàng</a>
                                         </div>
                                     </div>

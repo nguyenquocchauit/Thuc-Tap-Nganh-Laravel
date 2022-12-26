@@ -1108,4 +1108,29 @@
 
 .like-product {
   cursor: pointer;
+}
+
+.intro {
+  height: 100%;
+}
+
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card {
+  border-radius: 0.5rem;
+}
+
+.table-scroll {
+  border-radius: 0.5rem;
+}
+
+thead {
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
 }/*# sourceMappingURL=style.css.map */

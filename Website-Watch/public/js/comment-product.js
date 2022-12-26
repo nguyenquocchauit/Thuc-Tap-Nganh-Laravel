@@ -58,9 +58,12 @@ $(document).ready(function () {
                             response.author["name"] +
                             "</strong></h5>";
                         _html += "</div>";
-                        _html += '<div class="col-6">';
                         _html +=
-                            '<span class="d-flex justify-content-end"><i class="fas fa-trash-alt"></i></span>';
+                            '<div class="col-6"> <input type="hidden" value="' +
+                            response.id +
+                            '"id="IDComment">';
+                        _html +=
+                            '<span class="d-flex justify-content-end "><i class="fas fa-trash-alt delete-comment-product delete-comments"></i></span>';
                         _html += "</div>";
                         _html += " <p> ";
                         for (let i = 1; i <= 5; i++) {
@@ -98,8 +101,8 @@ $(document).ready(function () {
         }
     });
     // xóa bình luận
-    $(".delete-comment-product").on("click", function () {
-        var _idComment = $(this).parent().find("#IDComment").val();
+    $("body").on("click", ".delete-comment-product", function () {
+        var _idComment = $(this).parent().parent().find("#IDComment").val();
         Swal.fire({
             title: "Bạn có chắc muốn xóa bình luận?",
             text: "Xóa rồi không thể hoàn tác!",

@@ -75,7 +75,7 @@
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                             class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="./dashboard/assets/images/avatars/1.jpg"
+                                            <img width="42" class="rounded-circle" src="{{ asset("/images/avt-comment.webp") }}"
                                                 alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
@@ -95,13 +95,13 @@
                                                                         alt="">
                                                                 </div>
                                                                 <div class="widget-content-left">
-                                                                    <div class="widget-heading">Alina Mcloughlin</div>
-                                                                    <div class="widget-subheading opacity-8">A short
-                                                                        profile description</div>
+                                                                    <div class="widget-heading" >{{  auth()->guard("admin")->user()->name }}</div>
+                                                                    {{-- <div class="widget-subheading opacity-8">A short
+                                                                        profile description</div> --}}
                                                                 </div>
                                                                 <div class="widget-content-right mr-2">
                                                                     <button
-                                                                        class="btn-pill btn-shadow btn-shine btn btn-focus">Logout</button>
+                                                                        class="btn-pill btn-shadow btn-shine btn btn-focus"><a href="{{ url('api/logout-admin') }}" style="color: white">Đăng xuất</a></button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -114,8 +114,8 @@
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading"> Alina Mclourd </div>
-                                    <div class="widget-subheading"> VP People Manager </div>
+                                    <div class="widget-heading" style="color:white">{{  auth()->guard("admin")->user()->name }}</div>
+                                    <div class="widget-subheading"> VIP People Manager </div>
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">
                                 </div>

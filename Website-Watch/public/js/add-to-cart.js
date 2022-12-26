@@ -133,7 +133,7 @@ $(document).ready(function () {
             },
         });
     });
-    $("#buy-all-like-product").on("click", function () {
+    $("body").on("click","#buy-all-like-product", function () {
         var idArr = [];
         // get id produc form list like product
         $(".list-like-product").each(function () {

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -12,10 +14,11 @@ use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
     //
-    public function index()
+    public function profile()
     {
         return view('user.profile');
     }
+
     public function updateProfile(Request $request)
     {
         $profile = User::find($request->id);
@@ -68,5 +71,17 @@ class UserController extends Controller
                 'msg' => 'Cofirm password incorrect',
             ]);
         }
+    }
+    public function purchaseHistory()
+    {
+
+        $orders = OrderDetail::query()
+            ->selectRaw('products.*,order_details.created_at as bought, order_details.quantity as quantity,
+            order_details.price as priceOrderDetail,order_details.total as totalOrderDetail')
+            ->join('products', 'order_details.product', '=', 'products.id')
+            ->join('orders', 'order_details.orders', '=', 'orders.id')
+            ->where("orders.customers", auth()->user()->id)
+            ->get();
+        return view('user.purchaseHistory', compact('orders'));
     }
 }

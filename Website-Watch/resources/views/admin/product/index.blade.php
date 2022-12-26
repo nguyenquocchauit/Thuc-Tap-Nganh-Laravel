@@ -11,7 +11,7 @@
                     <div>
                         Sản phẩm
                         <div class="page-title-subheading">
-                            Xem, tạo, sửa, xóa và <strong>quản lý.</strong> 
+                            Xem, tạo, sửa, xóa và <strong>quản lý.</strong>
                         </div>
                     </div>
                 </div>
@@ -32,44 +32,48 @@
                 <div class="main-card mb-3 card">
 
                     <div class="card-header">
-                        
-                        <form>
-                            
-                                <div class="row">
 
-                                    <div class="col-3">
-                                        <select name="brand" class="form-control">
-                                            <option value="0">Tất cả hãng</option>
-                                            @foreach ($brands as $brand)
-                                                <option value="{{$brand->id}}" {{request()->brand==$brand->id?'selected':false}}>{{$brand->id}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="col-3">
-                                        <select name="category" class="form-control">
-                                            <option value="0">Tất cả loại</option>
-                                            @foreach ($categories as $categories)
-                                                <option value="{{$categories->id}}" {{request()->category==$categories->id?'selected':false}}>{{$categories->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                    
-                                    <div class="col-4">
-                                        <input type="search" name="search" id="search" placeholder="Tên sản phẩm"
-                                            class="form-control" value="{{request()->search}}">
-                                    </div>
-                        
-                                    <div class="col-2">
-                                        <span class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fa fa-search"></i>&nbsp;
-                                                Tìm
-                                            </button>
-                                        </span>
-                                    </div>   
-                        
+                        <form>
+
+                            <div class="row">
+
+                                <div class="col-3">
+                                    <select name="brand" class="form-control">
+                                        <option value="0">Tất cả hãng</option>
+                                        @foreach ($brands as $brand)
+                                            <option value="{{ $brand->id }}"
+                                                {{ request()->brand == $brand->id ? 'selected' : false }}>{{ $brand->id }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
+
+                                <div class="col-3">
+                                    <select name="category" class="form-control">
+                                        <option value="0">Tất cả loại</option>
+                                        @foreach ($categories as $categories)
+                                            <option value="{{ $categories->id }}"
+                                                {{ request()->category == $categories->id ? 'selected' : false }}>
+                                                {{ $categories->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="search" name="search" id="search" placeholder="Tên sản phẩm"
+                                        class="form-control" value="{{ request()->search }}">
+                                </div>
+
+                                <div class="col-2">
+                                    <span class="input-group-append">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fa fa-search"></i>&nbsp;
+                                            Tìm
+                                        </button>
+                                    </span>
+                                </div>
+
+                            </div>
                         </form>
 
                         {{-- <div class="btn-actions-pane-right">
@@ -88,19 +92,19 @@
                                     <th class="text-center">Ảnh</th>
                                     <th class="text-center">Tên</th>
                                     <th class="text-center">Giá
-                                        <a href="./admin/product?sort-by=price&sort-type={{$sortType}}">
+                                        <a href="./admin/product?sort-by=price&sort-type={{ $sortType }}">
                                             <i class="fas fa-sort"></i>
-                                            </a> 
+                                        </a>
                                     </th>
                                     <th class="text-center">Giảm giá
-                                        <a href="./admin/product?sort-by=discount&sort-type={{$sortType}}">
+                                        <a href="./admin/product?sort-by=discount&sort-type={{ $sortType }}">
                                             <i class="fas fa-sort"></i>
-                                            </a> 
+                                        </a>
                                     </th>
                                     <th class="text-center">Số lượng
-                                        <a href="./admin/product?sort-by=quantity&sort-type={{$sortType}}">
+                                        <a href="./admin/product?sort-by=quantity&sort-type={{ $sortType }}">
                                             <i class="fas fa-sort"></i>
-                                            </a> 
+                                        </a>
                                     </th>
                                     <th class="text-center">Loại</th>
                                     <th class="text-center">Hãng</th>
@@ -113,15 +117,22 @@
                                     <tr>
                                         <td class="text-center text-muted">{{ $product->id }}</td>
                                         <td class="text-center image-list-product"><img width="100px" height="100px"
-                                            src="{{ asset('images/image_products_home/') }}/{{ $product->productImage['image_1'] }}"
-                                            alt=""></td>
+                                                src="{{ asset('images/image_products_home/') }}/{{ $product->productImage['image_1'] }}"
+                                                alt=""></td>
                                         <td class="text-center">{{ $product->name }}</td>
                                         <td class="text-center">{{ number_format($product->price) . ' VNĐ' }}</td>
                                         <td class="text-center">{{ $product->discount . '%' }}</td>
                                         <td class="text-center">
-                                            <div class="badge badge-success mt-2">
-                                                {{ $product->quantity }}
-                                            </div>
+                                            @if ($product->quantity > 0)
+                                                <div class="badge badge-success mt-2">
+                                                    {{ $product->quantity }}
+                                                </div>
+                                            @else
+                                                <div class="badge badge-danger mt-2">
+                                                    {{ $product->quantity }}
+                                                </div>
+                                            @endif
+
                                         </td>
                                         <td class="text-center">{{ $product->productGender['name'] }}</td>
                                         <td class="text-center">{{ $product->productBrand['name'] }}</td>
@@ -140,7 +151,8 @@
                                                     <i class="fa fa-edit fa-w-20"></i>
                                                 </span>
                                             </a>
-                                            <form class="d-inline" action="./admin/product/ {{$product->id}}" method="post">
+                                            <form class="d-inline" action="./admin/product/ {{ $product->id }}"
+                                                method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-hover-shine btn-outline-danger border-0 btn-sm"

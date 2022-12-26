@@ -38,19 +38,19 @@ class ProductController extends Controller
 
         //get value product by id request
         $product = Product::find($request->id);
-        //get name image from product retrieve
-        $image = $product->productImage;
-        //get a list of product image names
-        $nameImages = $this->getFileImageProduct($image);
-        //get brand slug
-        $slugBrand = $this->getSlugBrand($product);
-        //get gender slug
-        $slugGender = $this->getSlugGender($product);
-        //get comment of product
-        $comments = $this->commentOfProduct($request->id);
-        if ($product)
+        if ($product) {
+            //get name image from product retrieve
+            $image = $product->productImage;
+            //get a list of product image names
+            $nameImages = $this->getFileImageProduct($image);
+            //get brand slug
+            $slugBrand = $this->getSlugBrand($product);
+            //get gender slug
+            $slugGender = $this->getSlugGender($product);
+            //get comment of product
+            $comments = $this->commentOfProduct($request->id);
             return view('product.detailProduct', compact('product', 'nameImages', 'slugBrand', 'slugGender', 'comments'));
-        else
+        } else
             return Redirect('/');
     }
 
@@ -70,14 +70,11 @@ class ProductController extends Controller
             // get time now
             $currentTime = Carbon::now();
             // get max id
-            $maxID = Comment::query()
-                ->selectRaw('MAX(id) AS ID_Max')
-                ->get();
-            // get max id from object maxID
-            $ID = $maxID[0]['ID_Max'];
-            $ID = (int)$ID  + 1;
             $comment = new Comment();
-            $comment->id  = $ID;
+            $IDComment = $comment->maxID();
+            $IDComment = $IDComment[0]->ID_Max;
+            $IDComment += 1;
+            $comment->id  = $IDComment;
             $comment->customers  = $request->user;
             $comment->product  = $request->product;
             $comment->content = $request->textComment;
@@ -88,6 +85,7 @@ class ProductController extends Controller
             return response()->json([
                 'status' => 200,
                 'msg' => 'Write comment successfully',
+                'id' => $IDComment,
                 'data' =>  $comment,
                 'author' => $name,
             ]);
@@ -155,14 +153,12 @@ class ProductController extends Controller
                 // get time now
                 $currentTime = Carbon::now();
                 // get max id
-                $maxID = likeProduct::query()
-                    ->selectRaw('MAX(id) AS ID_Max')
-                    ->get();
-                // get max id from object maxID
-                $ID = $maxID[0]['ID_Max'];
-                $ID = (int)$ID  + 1;
+
                 $like = new likeProduct();
-                $like->id  = $ID;
+                $IDLike = $like->maxID();
+                $IDLike = $IDLike[0]->ID_Max;
+                $IDLike += 1;
+                $like->id  = $IDLike;
                 $like->customers = $request->user;
                 $like->product = $request->product;
                 $like->status = 'like';
@@ -186,7 +182,7 @@ class ProductController extends Controller
         if ($request->action == "Clear like product") {
             $liked = LikeProduct::query()
                 ->where('customers', $request->user)
-                ->where('status', '=','like')
+                ->where('status', '=', 'like')
                 ->selectRaw('likes.product')
                 ->get();
             LikeProduct::where('customers', $request->user)->update(array(

@@ -15,10 +15,6 @@ class OrderDetail extends Model
     protected $primaryKey = "id";
     protected $guarded = [];
     public $timestamps = false;
-    public function product()
-    {
-        return $this->belongsTo(OrderDetail::class, 'product', 'id');
-    }
     public function maxID()
     {
         return DB::table('order_details')

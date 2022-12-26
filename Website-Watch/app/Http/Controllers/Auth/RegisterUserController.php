@@ -28,14 +28,11 @@ class RegisterUserController extends Controller
             // get time now
             $currentTime = Carbon::now();
             // get max id
-            $maxID = User::query()
-                ->selectRaw('MAX(id) AS ID_Max')
-                ->get();
-            // get max id from object maxID
-            $ID = $maxID[0]['ID_Max'];
-            $ID = (int)$ID  + 1;
             $user = new User();
-            $user->id = $ID;
+            $IDUser = $user->maxID();
+            $IDUser = $IDUser[0]->ID_Max;
+            $IDUser += 1;
+            $user->id =  $IDUser;
             $user->name = $request->name;
             $user->phone_number = $request->phone_number;
             $user->address = $request->address;

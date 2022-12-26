@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Validator;
 
 class LoginAdminController extends Controller
 {
-    //
     public function index()
     {
         return view(('admin.login.login'));
@@ -32,12 +31,12 @@ class LoginAdminController extends Controller
             $user = Administrator::where('email', $request->email)->first();
             if ($user) {
                 if (Hash::check($request->password, $user->password)) {
-                    $credentials = $request->only('email', 'password');
-                    Auth::attempt($credentials);
-                    return response()->json([
-                        'status' => 200,
-                        'msg' => 'Login successfully'
-                    ]);
+                    if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
+                        return response()->json([
+                            'status' => 200,
+                            'msg' => 'Login successfully'
+                        ]);
+                    }
                 } else {
                     return response()->json([
                         'status' => 401,
@@ -57,6 +56,6 @@ class LoginAdminController extends Controller
 
         Session::flush();
         Auth::logout();
-        return Redirect('/');
+        return Redirect('/admin/login');
     }
 }

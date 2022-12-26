@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
-use App\Http\Controllers\Auth\LoginAdminController as AuthLoginAdminController;
+use App\Http\Controllers\Auth\LoginAdminController;
 use App\Http\Controllers\User\UserController as UserUserController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\User;
@@ -31,6 +31,7 @@ Route::get('/', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/chi-tiet-san-pham/{id}', [ProductController::class, 'detailProduct'])->name('detail-product');
 Route::get('/gio-hang', [CartController::class, 'cart'])->name('view-cart');
+Route::get('/admin/login', [LoginAdminController::class, 'index'])->name('login-admin');
 
 Route::prefix('shop')->group(function () {
     Route::get('/', [ShopController::class, 'index'])->name('shop-index');
@@ -43,8 +44,9 @@ Route::middleware([Admin::class])->prefix('admin')->group(function () {
     Route::resource('brand', BrandController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('product', AdminProductController::class);
-
 });
-Route::get('/admin/login', [AuthLoginAdminController::class, 'index'])->name('login-admin');
-// user
-Route::get('/thong-tin-ca-nhan', [UserUserController::class, 'index'])->name('profile')->middleware([User::class]);
+// User
+Route::middleware([User::class])->group(function () {
+    Route::get('/thong-tin-ca-nhan', [UserUserController::class, 'profile'])->name('profile');
+    Route::get('/lich-su-dat-hang', [UserUserController::class, 'purchaseHistory'])->name('purchaseHistory');
+});

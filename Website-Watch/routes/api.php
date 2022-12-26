@@ -8,6 +8,7 @@ use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\Front\SearchProductController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Middleware\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,18 +26,27 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::middleware([User::class])->group(function () {
+    Route::post('/setting-profile', [UserController::class, 'updateProfile'])->name('setting-profile');
+    Route::post('/buy-product-from-cart', [BuyProductController::class, 'buyProductCart'])->name('buy-product-from-cart');
+    Route::post('/comment-product', [ProductController::class, 'writeComment'])->name('comment-product');
+    Route::post('/delete-comment', [ProductController::class, 'deleteComment'])->name('delete-comment');
+    Route::post('/like-product', [ProductController::class, 'likeProduct'])->name('like-product');
+    Route::post('/clear-like', [ProductController::class, 'removeLikeProduct'])->name('clear-like');
+});
+// login and register of user
 Route::post('/login-user', [LoginUserController::class, 'login'])->name('login-user');
-Route::post('/register-user', [RegisterUserController::class, 'register'])->name('register-user');
-Route::post('/setting-profile', [UserController::class, 'updateProfile'])->name('setting-profile');
 Route::get('/logout-user', [LoginUserController::class, 'logout'])->name('logout-user');
+Route::post('/register-user', [RegisterUserController::class, 'register'])->name('register-user');
+// login of admin
+Route::post('/login-admin', [LoginAdminController::class, 'login'])->name('login-admin');
+Route::get('/logout-admin', [LoginAdminController::class, 'logout'])->name('logout-admin');
+
+
 Route::get('/search-product/{search}', [ProductController::class, 'searchProduct'])->name('search-product');
 Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add-to-cart');
 Route::post('/remove-all-cart', [CartController::class, 'removeAllCart'])->name('remove-all-cart');
 Route::get('/remove-product-by-id/{id}', [CartController::class, 'removeProductCart'])->name('remove-product-by-id');
 Route::post('/update-quantity-cart', [CartController::class, 'updateQuantityCart'])->name('update-quantity-cart');
-Route::post('/buy-product-from-cart', [BuyProductController::class, 'buyProductCart'])->name('buy-product-from-cart');
-Route::post('/comment-product', [ProductController::class, 'writeComment'])->name('comment-product');
-Route::post('/delete-comment', [ProductController::class, 'deleteComment'])->name('delete-comment');
-Route::post('/like-product', [ProductController::class, 'likeProduct'])->name('like-product');
-Route::post('/clear-like', [ProductController::class, 'removeLikeProduct'])->name('clear-like');
-Route::post('/login-admin', [LoginAdminController::class, 'login'])->name('login-admin');
+
+
