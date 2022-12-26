@@ -117,10 +117,10 @@
                                                         @foreach ($roles as $role)
                                                              <option
                                                                     value="{{$role->id}}" @selected(old('role') == $role->id) >
-                                                                @if ($user->role == 0)
-                                                                    <span>user</span>
+                                                                @if ($role->type == 0)
+                                                                    <span>người dùng</span>
                                                                 @else
-                                                                    <span>admin</span>
+                                                                    <span>quản trị viên</span>
                                                                 @endif
                                                             </option>
                                                         @endforeach
@@ -141,7 +141,7 @@
                                                     <span class="btn-icon-wrapper pr-1 opacity-8">
                                                         <i class="fa fa-times fa-w-20"></i>
                                                     </span>
-                                                    <span>Cancel</span>
+                                                    <span>Hủy</span>
                                                 </a>
 
                                                 <button type="submit"
@@ -149,7 +149,7 @@
                                                     <span class="btn-icon-wrapper pr-2 opacity-8">
                                                         <i class="fa fa-download fa-w-20"></i>
                                                     </span>
-                                                    <span>Save</span>
+                                                    <span>Lưu</span>
                                                 </button>
                                             </div>
                                         </div>

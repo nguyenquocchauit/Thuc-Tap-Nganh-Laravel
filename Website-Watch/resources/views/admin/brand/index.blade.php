@@ -91,7 +91,7 @@
                                                 <button class="btn btn-hover-shine btn-outline-danger border-0 btn-sm"
                                                     type="submit" data-toggle="tooltip" title="Delete"
                                                     data-placement="bottom"
-                                                    onclick="return confirm('Bạn có thực sự muốn xóa mục này?')">
+                                                    onclick="return confirm('Bạn có thực sự muốn xóa hãng này?')">
                                                     <span class="btn-icon-wrapper opacity-8">
                                                         <i class="fa fa-trash fa-w-20"></i>
                                                     </span>

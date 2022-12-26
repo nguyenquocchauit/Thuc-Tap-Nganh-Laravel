@@ -122,7 +122,7 @@ class UserController extends Controller
             "address" => $request->address,
             "email" => $request->email,
             "password" => Hash::make($request->password),
-
+            "role" => $request->role
         ];
         $users->update($data);
         return redirect('/admin/user')->with('success', 'Cập nhật người dùng thành công');
