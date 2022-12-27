@@ -25,18 +25,23 @@
                         <form method="post" action="/admin/product/{{ $product->id }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
+                            @include('admin.alert')
                             <div class="position-relative row form-group">
                                 <label for="name_product" class="col-md-3 text-md-right col-form-label">Tên sản phẩm</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="name_product" id="name_product" placeholder="Tên sản phẩm" type="text"
                                         class="form-control" value="{{ $product->name }}">
+                                        <span style="color: red">
+                                            @error('name_product')
+                                                {{$message}}
+                                            @enderror
+                                        </span>
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
                                 <label for="brand_id" class="col-md-3 text-md-right col-form-label">Hãng</label>
                                 <div class="col-md-9 col-xl-8">
                                     <select name="brand_id" id="brand_id" class="form-control">
-                                        <option value="null">-- Hãng --</option>
                                         @foreach ($brands as $brand)
                                             <option value="{{ $brand->id }}"
                                                 @if ($brand->id == $product->brand) {{ 'selected' }} @endif>
@@ -44,6 +49,11 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    <span style="color: red">
+                                        @error('brand_id')
+                                            {{$message}}
+                                        @enderror
+                                    </span>
                                 </div>
                             </div>
 
@@ -51,7 +61,6 @@
                                 <label for="product_category_id" class="col-md-3 text-md-right col-form-label">Loại</label>
                                 <div class="col-md-9 col-xl-8">
                                     <select name="product_category_id" id="product_category_id" class="form-control">
-                                        <option value="null">-- Loại --</option>
                                         @foreach ($genders as $gender)
                                             <option value="{{ $gender->id }}"
                                                 @if ($gender->id == $product->gender) {{ 'selected' }} @endif>
@@ -59,6 +68,11 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    <span style="color: red">
+                                        @error('product_category_id')
+                                            {{$message}}
+                                        @enderror
+                                    </span>
                                 </div>
                             </div>
 
@@ -67,6 +81,11 @@
                                 <div class="col-md-9 col-xl-8">
                                     <input name="price_product" id="price_product" placeholder="Giá" type="text"
                                         class="form-control" value="{{ number_format($product->price) . ' VNĐ' }}">
+                                        <span style="color: red">
+                                            @error('price_product')
+                                                {{$message}}
+                                            @enderror
+                                        </span>
                                 </div>
                             </div>
 
@@ -75,6 +94,11 @@
                                 <div class="col-md-9 col-xl-8">
                                     <input name="discount_product" id="discount_product" placeholder="Giảm giá"
                                         type="text" class="form-control" value="{{ $product->discount . '%' }}">
+                                        <span style="color: red">
+                                            @error('discount_product')
+                                                {{$message}}
+                                            @enderror
+                                        </span>
                                 </div>
                             </div>
 
@@ -84,6 +108,11 @@
                                 <div class="col-md-9 col-xl-8">
                                     <input name="quantity_product" id="quantity_product" placeholder="Số lượng kho"
                                         type="text" class="form-control" value="{{ $product->quantity }}">
+                                        <span style="color: red">
+                                            @error('quantity_product')
+                                                {{$message}}
+                                            @enderror
+                                        </span>
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
@@ -146,6 +175,11 @@
                                                 data-id="img-6" style="display:none;">
                                         </div>
                                     </div>
+                                    <p style="color: red; text-align:center">
+                                        @error('image.*')
+                                            {{$message}}
+                                        @enderror
+                                    </p>
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
