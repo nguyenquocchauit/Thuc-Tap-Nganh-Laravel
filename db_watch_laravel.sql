@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2022 at 06:43 AM
+-- Generation Time: Dec 27, 2022 at 07:37 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -89,7 +89,8 @@ CREATE TABLE `comment` (
 INSERT INTO `comment` (`id`, `customers`, `product`, `content`, `star`, `created_at`) VALUES
 (1, 1, 4, 'Sản phẩm tốt, đẹp. Mình đánh giá 4 sao nha', 4, '2022-12-08 10:03:41'),
 (2, 1, 4, 'Sản phẩm ok lắm nha. Ưng lắm', 5, '2022-12-15 11:53:14'),
-(3, 1, 1, 'dẹp lắm ', 5, '2022-12-15 12:31:23');
+(3, 1, 1, 'Đẹp lắm ', 5, '2022-12-15 12:31:23'),
+(4, 2, 1, 'ddd', 4, '2022-12-25 05:10:34');
 
 -- --------------------------------------------------------
 
@@ -152,6 +153,7 @@ INSERT INTO `images` (`id`, `image_1`, `image_2`, `image_3`, `image_4`, `image_5
 ('g-shock-gma-s110cw-7a2', 'g-shock-gma-s110cw-7a2-1.png', 'g-shock-gma-s110cw-7a2-2.png', 'g-shock-gma-s110cw-7a2-3.png', 'g-shock-gma-s110cw-7a2-4.png', 'g-shock-gma-s110cw-7a2-5.png', 'g-shock-gma-s110cw-7a2-6.png'),
 ('g-shock-gma-s120sr-7a', 'g-shock-gma-s120sr-7a-1.png', 'g-shock-gma-s120sr-7a-2.png', 'g-shock-gma-s120sr-7a-3.png', 'g-shock-gma-s120sr-7a-4.png', 'g-shock-gma-s120sr-7a-5.png', 'g-shock-gma-s120sr-7a-6.png'),
 ('g-shock-gma-s2100sk-2a', 'g-shock-gma-s2100sk-2a-1.png', 'g-shock-gma-s2100sk-2a-2.png', 'g-shock-gma-s2100sk-2a-3.png', 'g-shock-gma-s2100sk-2a-4.png', 'g-shock-gma-s2100sk-2a-5.png', 'g-shock-gma-s2100sk-2a-6.png'),
+('nguyen-quoc-chau', 'nguyen-quoc-chau-1.png', 'nguyen-quoc-chau-2.png', 'nguyen-quoc-chau-3.png', 'nguyen-quoc-chau-4.png', 'nguyen-quoc-chau-5.png', 'nguyen-quoc-chau-6.png'),
 ('olym-pianus-899833g1b', 'olym-pianus-899833g1b-1.png', 'olym-pianus-899833g1b-2.png', 'olym-pianus-899833g1b-3.png', 'olym-pianus-899833g1b-4.png', 'olym-pianus-899833g1b-5.png', 'olym-pianus-899833g1b-6.png'),
 ('olym-pianus-9946-1ags', 'olym-pianus-9946-1ags-1.png', 'olym-pianus-9946-1ags-2.png', 'olym-pianus-9946-1ags-3.png', 'olym-pianus-9946-1ags-4.png', 'olym-pianus-9946-1ags-5.png', 'olym-pianus-9946-1ags-6.png'),
 ('olym-pianus-fusion-op990-45addgr-x', 'olym-pianus-fusion-op990-45addgr-x-1.png', 'olym-pianus-fusion-op990-45addgr-x-2.png', 'olym-pianus-fusion-op990-45addgr-x-3.png', 'olym-pianus-fusion-op990-45addgr-x-4.png', 'olym-pianus-fusion-op990-45addgr-x-5.png', 'olym-pianus-fusion-op990-45addgr-x-6.png'),
@@ -210,29 +212,11 @@ INSERT INTO `likes` (`id`, `customers`, `product`, `status`, `created_at`) VALUE
 (21, 1, 8, 'none', '2022-12-20 03:33:46'),
 (22, 1, 7, 'none', '2022-12-20 03:33:47'),
 (23, 1, 4, 'none', '2022-12-20 03:34:19'),
-(24, 1, 2, 'like', '2022-12-20 03:34:20');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `method`
---
-
-CREATE TABLE `method` (
-  `id` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `method`
---
-
-INSERT INTO `method` (`id`, `name`) VALUES
-('Card', 'Debit/Credit Card'),
-('Cod', 'Cash On Delivery'),
-('Ebp', 'E-Banking Payment'),
-('Momo', 'Momo E-Wallet'),
-('Zalo', 'Zalo Pay');
+(24, 1, 2, 'none', '2022-12-20 03:34:20'),
+(25, 4, 16, 'none', '2022-12-26 16:26:02'),
+(26, 4, 15, 'none', '2022-12-26 16:26:03'),
+(27, 4, 2, 'like', '2022-12-26 16:28:48'),
+(28, 4, 4, 'none', '2022-12-26 16:29:17');
 
 -- --------------------------------------------------------
 
@@ -264,9 +248,10 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `customers`, `created_at`, `total`) VALUES
-(1, 1, '2022-12-08 18:57:31', '63000000'),
-(2, 1, '2022-12-20 06:03:30', '78216840'),
-(3, 2, '2022-12-21 15:57:17', '87052320');
+(1, 1, '2022-12-08 18:57:31', '18000000'),
+(2, 1, '2022-12-26 18:01:04', '37665000'),
+(3, 1, '2022-12-26 18:01:26', '137332044'),
+(4, 1, '2022-12-26 18:01:48', '327007692');
 
 -- --------------------------------------------------------
 
@@ -280,6 +265,7 @@ CREATE TABLE `order_details` (
   `product` bigint(20) UNSIGNED NOT NULL,
   `quantity` smallint(20) NOT NULL,
   `price` float NOT NULL,
+  `total` float NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -287,16 +273,28 @@ CREATE TABLE `order_details` (
 -- Dumping data for table `order_details`
 --
 
-INSERT INTO `order_details` (`id`, `orders`, `product`, `quantity`, `price`, `created_at`) VALUES
-(1, 1, 1, 2, 18000000, '2022-12-08 18:58:40'),
-(2, 1, 2, 1, 18000000, '2022-12-08 18:59:54'),
-(3, 1, 3, 2, 10000000, '2022-12-08 19:00:19'),
-(4, 2, 33, 1, 53604000, '2022-12-20 06:03:30'),
-(5, 2, 34, 1, 819000, '2022-12-20 06:03:30'),
-(6, 2, 2, 1, 18000000, '2022-12-20 06:03:30'),
-(7, 3, 33, 1, 53604000, '2022-12-21 15:57:17'),
-(8, 3, 3, 1, 9000000, '2022-12-21 15:57:17'),
-(9, 3, 2, 1, 18000000, '2022-12-21 15:57:17');
+INSERT INTO `order_details` (`id`, `orders`, `product`, `quantity`, `price`, `total`, `created_at`) VALUES
+(1, 1, 1, 2, 9000000, 19440000, '2022-12-08 18:58:40'),
+(2, 2, 5, 1, 8075000, 8721000, '2022-12-26 18:01:04'),
+(3, 2, 4, 1, 8800000, 9504000, '2022-12-26 18:01:04'),
+(4, 2, 3, 1, 9000000, 9720000, '2022-12-26 18:01:04'),
+(5, 2, 1, 1, 9000000, 9720000, '2022-12-26 18:01:04'),
+(6, 3, 16, 1, 7125000, 7695000, '2022-12-26 18:01:26'),
+(7, 3, 15, 2, 38250000, 82620000, '2022-12-26 18:01:26'),
+(8, 3, 14, 2, 2728000, 5892480, '2022-12-26 18:01:26'),
+(9, 3, 11, 1, 17564800, 18970000, '2022-12-26 18:01:26'),
+(10, 3, 21, 1, 7280000, 7862400, '2022-12-26 18:01:26'),
+(11, 3, 20, 1, 8417000, 9090360, '2022-12-26 18:01:26'),
+(12, 3, 18, 1, 4816500, 5201820, '2022-12-26 18:01:26'),
+(13, 4, 17, 1, 8661500, 9354420, '2022-12-26 18:01:48'),
+(14, 4, 25, 1, 89910000, 97102800, '2022-12-26 18:01:48'),
+(15, 4, 24, 1, 8964000, 9681120, '2022-12-26 18:01:48'),
+(16, 4, 23, 1, 44700000, 48276000, '2022-12-26 18:01:48'),
+(17, 4, 22, 1, 5580000, 6026400, '2022-12-26 18:01:48'),
+(18, 4, 29, 1, 79929000, 86323300, '2022-12-26 18:01:48'),
+(19, 4, 28, 1, 7650000, 8262000, '2022-12-26 18:01:48'),
+(20, 4, 27, 1, 52164000, 56337100, '2022-12-26 18:01:48'),
+(21, 4, 26, 1, 5226400, 5644510, '2022-12-26 18:01:48');
 
 -- --------------------------------------------------------
 
@@ -323,7 +321,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `image`, `quantity`, `price`, `discount`, `create_at`, `updated_at`, `gender`, `brand`) VALUES
-(1, 'DOUGLAS DAY-DATE 41', 'Cách mạng hóa hoạt động du lịch, Douglas DC-3 vận chuyển hành khách với phong cách Hạng Nhất và trở thành công cụ trong Thời kỳ Vàng của ngành hàng không. Bằng cách pha trộn sự tinh tế của chuyến du lịch sang trọng với công nghệ tiên tiến và tay nghề thủ công, chiếc đồng hồ AVIATOR Douglas Day Date 41 vinh danh chiếc máy bay vĩ đại nhất thời đại.', 'douglas-day-date-41', 1, 18000000, 50, '2022-12-05 18:22:40', '2022-12-05 18:22:40', 0, 'Avia'),
+(1, 'DOUGLAS DAY-DATE 41', 'Cách mạng hóa hoạt động du lịch, Douglas DC-3 vận chuyển hành khách với phong cách Hạng Nhất và trở thành công cụ trong Thời kỳ Vàng của ngành hàng không. Bằng cách pha trộn sự tinh tế của chuyến du lịch sang trọng với công nghệ tiên tiến và tay nghề thủ công, chiếc đồng hồ AVIATOR Douglas Day Date 41 vinh danh chiếc máy bay vĩ đại nhất thời đại.', 'douglas-day-date-41', 0, 18000000, 50, '2022-12-05 18:22:40', '2022-12-26 16:45:41', 0, 'Avia'),
 (2, 'DOUGLAS MOONFLIGHT', 'Vào những năm 1930, các nhà thiết kế thời trang cao cấp đã mang đến sự quyến rũ cho đường băng và lên chiếc Douglas DC-3, chiếc máy bay đã thiết kế lại hành trình bằng cách mang đến sự sang trọng cho mỗi chuyến bay. Kết hợp các tính năng Art Deco cổ điển được đặt theo các giai đoạn của mặt trăng, AVIATOR MoonFlight cho phép bạn hạ cánh giữa các ngôi sao và tín đồ thời trang với phong cách cao cấp nhằm tôn vinh chiếc máy bay vĩ đại nhất của thời đại đó.', 'douglas-moonflight', 100, 18000000, 0, '2022-12-06 11:08:57', '2022-12-06 11:08:57', 1, 'Avia'),
 (3, 'AIRACOBRA P45 CHRONO 1', 'Tận dụng chiến lược tầm nhìn chim của mình trong suốt Thế chiến II, Airacobra là một máy bay chiến đấu ổn định mà Đồng minh có thể dựa vào để hỗ trợ quân đội trên mặt đất. Bằng cách kết hợp tinh thần đáng tin cậy của nó đã chứng tỏ là công cụ trong mọi nhiệm vụ, đồng hồ AVIATOR Airacobra P45 Chrono mang đến một vẻ ngoài giống như một công cụ xứng đáng được đề cập đến.', 'airacobra-p45-chrono-1', 1000, 10000000, 10, '2022-12-06 11:08:57', '2022-12-06 11:08:57', 0, 'Avia'),
 (4, 'AIRACOBRA P45 CHRONO', 'Tận dụng chiến lược tầm nhìn chim của mình trong suốt Thế chiến II, Airacobra là một máy bay chiến đấu ổn định mà Đồng minh có thể dựa vào để hỗ trợ quân đội trên mặt đất. Bằng cách kết hợp tinh thần đáng tin cậy của nó đã chứng tỏ là công cụ trong mọi nhiệm vụ, đồng hồ AVIATOR Airacobra P45 Chrono mang đến một vẻ ngoài giống như một công cụ xứng đáng được đề cập đến.', 'airacobra-p45-chrono', 100, 11000000, 20, '2022-12-06 11:13:51', '2022-12-06 11:13:51', 1, 'Avia'),
@@ -360,7 +358,8 @@ INSERT INTO `products` (`id`, `name`, `description`, `image`, `quantity`, `price
 (35, 'G-SHOCK GM-S5600GB-1', 'Chiếc đồng hồ G-SHOCK màu vàng kim trên nền đen phủ kim loại sở hữu thiết kế nhỏ và gọn hơn. Đường gờ kim loại phủ lớp ion màu vàng kim làm tôn lên vẻ ngoài trang nhã, sang trọng. Nút bấm và chốt cũng được phủ ion màu vàng kim tương phản với phần nền đen tạo nên lớp kim loại thực sự tỏa sáng. Sự kết hợp giữa màu vàng kim sang trọng và màu đen mạnh mẽ làm tôn lên vẻ đẹp lung linh độc đáo của riêng bạn.', 'g-shock-gm-s5600gb-1', 444, 19990000, 46, '2022-12-07 02:54:23', '2022-12-07 02:54:23', 0, 'GShock'),
 (36, 'G-SHOCK GMA-S2100SK-2A', 'Hãy đeo lên tay chiếc đồng hồ GA-2100 kết hợp kim-số, phủ kim loại trong suốt, vốn được ưa chuộng nay càng trở nên thu hút với thiết kế thanh mảnh và nhỏ gọn hơn. Chiếc đồng hồ sở hữu thiết kế kim loại trong suốt với nhiều màu cho bạn lựa chọn là phụ kiện linh hoạt, phù hợp với mọi loại trang phục trong suốt cả năm. Các vạch chỉ giờ được xử lý bằng phương pháp lắng đọng hơi bán mờ tạo nên vẻ ngoài bằng kim loại trong suốt sống động như thật.', 'g-shock-gma-s2100sk-2a', 741, 18500000, 0, '2022-12-07 02:54:23', '2022-12-07 02:54:23', 0, 'GShock'),
 (37, 'G-SHOCK GMA-S120SR-7A', 'Xin trân trọng giới thiệu mẫu G-SHOCK . Xuất hiện từ những năm 1990, phong cách trong suốt từng rất phổ biến và trở thành một phần không thể thiếu trong lịch sử của G-SHOCK .\r\nPhần mặt được dát lớp vỏ kim loại màu vàng hồng kết hợp cùng thiết kế chắc chắn đã tạo nên một mẫu đồng hồ đeo tay phù hợp với mọi hoàn cảnh, từ thời trang hiện đại cho đến thời trang đường phố và thường nhật.', 'g-shock-gma-s120sr-7a', 999, 18000000, 11, '2022-12-07 02:56:07', '2022-12-07 02:56:07', 1, 'GShock'),
-(38, 'G-SHOCK GMA-S110CW-7A2', 'Xin trân trọng giới thiệu mẫu G-SHOCK . Xuất hiện từ những năm 1990, phong cách trong suốt từng rất phổ biến và trở thành một phần không thể thiếu trong lịch sử của G-SHOCK .\r\nPhần mặt được dát lớp vỏ kim loại màu vàng hồng kết hợp cùng thiết kế chắc chắn đã tạo nên một mẫu đồng hồ đeo tay phù hợp với mọi hoàn cảnh, từ thời trang hiện đại cho đến thời trang đường phố và thường nhật.', 'g-shock-gma-s110cw-7a2', 362, 7500000, 5, '2022-12-07 02:56:07', '2022-12-07 02:56:07', 1, 'GShock');
+(38, 'G-SHOCK GMA-S110CW-7A2', 'Xin trân trọng giới thiệu mẫu G-SHOCK . Xuất hiện từ những năm 1990, phong cách trong suốt từng rất phổ biến và trở thành một phần không thể thiếu trong lịch sử của G-SHOCK .\r\nPhần mặt được dát lớp vỏ kim loại màu vàng hồng kết hợp cùng thiết kế chắc chắn đã tạo nên một mẫu đồng hồ đeo tay phù hợp với mọi hoàn cảnh, từ thời trang hiện đại cho đến thời trang đường phố và thường nhật.', 'g-shock-gma-s110cw-7a2', 362, 7500000, 5, '2022-12-07 02:56:07', '2022-12-07 02:56:07', 1, 'GShock'),
+(39, 'Nguyễn Quốc Châu', 'istockphoto-1018493446-170667a-PhotoRoom.png-PhotoRoom', 'nguyen-quoc-chau', 100, 100000000, 55, '2022-12-27 06:25:34', '2022-12-27 06:25:42', 1, 'Baby');
 
 -- --------------------------------------------------------
 
@@ -380,22 +379,6 @@ CREATE TABLE `role` (
 INSERT INTO `role` (`id`, `type`) VALUES
 (0, 0),
 (1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `transaction`
---
-
-CREATE TABLE `transaction` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `orders` bigint(20) UNSIGNED NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `status` varchar(255) NOT NULL,
-  `create_at` datetime NOT NULL,
-  `update_at` datetime NOT NULL,
-  `method` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -422,9 +405,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `phone_number`, `address`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
-(1, 'Nguyễn Quốc Châu', '0386888829', 'Nha Trang', 'chau.nq.61cntt@ntu.edu.vn', NULL, '$2y$10$/FJjyDThVu2Z9pDn6gEaf.YmgH3Tas8/6wYuWosYDva3U6Tt608e6', NULL, '2022-12-05 18:15:54', '2022-12-20 03:51:10', 0),
+(1, 'Nguyễn Quốc Châu', '0386888889', 'Nha Trang', 'chau.nq.61cntt@ntu.edu.vn', NULL, '$2y$10$/FJjyDThVu2Z9pDn6gEaf.YmgH3Tas8/6wYuWosYDva3U6Tt608e6', NULL, '2022-12-05 18:15:54', '2022-12-26 15:12:46', 0),
 (2, 'Nguyen Quoc Chau', '0926383006', 'Nha Trang', 'mallie69@example.org', NULL, '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', NULL, '2022-12-12 16:36:59', '2022-12-21 15:57:51', 0),
-(3, 'Nguyen Quoc Chau', '0926383076', '20 Nha Trang Khanh Hoa', 'mallie6@example.org', NULL, '$2y$10$huFy/caUfNuL2S52nYiwJu6s/ob2L0V5mQcdcreo986vsmEhJKV2.', NULL, '2022-12-12 17:23:17', '2022-12-12 17:23:17', 0);
+(3, 'Nguyen Quoc Chau', '0926383076', '20 Nha Trang Khanh Hoa', 'mallie6@example.org', NULL, '$2y$10$huFy/caUfNuL2S52nYiwJu6s/ob2L0V5mQcdcreo986vsmEhJKV2.', NULL, '2022-12-12 17:23:17', '2022-12-12 17:23:17', 0),
+(4, 'Phan Thị Huyền Trâm', '0926553006', NULL, 'phanthihuyentram@gmail.com', NULL, '$2y$10$D3HhiIKE5nd9ZkoPtbyrhu6IzFAGTbnwFUkrdsrZ9Z1twHgEjPkQi', NULL, '2022-12-26 16:01:25', '2022-12-26 16:40:56', 0);
 
 --
 -- Indexes for dumped tables
@@ -475,12 +459,6 @@ ALTER TABLE `likes`
   ADD KEY `product` (`product`);
 
 --
--- Indexes for table `method`
---
-ALTER TABLE `method`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -515,14 +493,6 @@ ALTER TABLE `products`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `transaction`
---
-ALTER TABLE `transaction`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `orders` (`orders`),
-  ADD KEY `method` (`method`);
 
 --
 -- Indexes for table `users`
@@ -585,13 +555,6 @@ ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_4` FOREIGN KEY (`gender`) REFERENCES `gender` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `products_ibfk_5` FOREIGN KEY (`brand`) REFERENCES `brands` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `products_ibfk_6` FOREIGN KEY (`image`) REFERENCES `images` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `transaction`
---
-ALTER TABLE `transaction`
-  ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`orders`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `transaction_ibfk_3` FOREIGN KEY (`method`) REFERENCES `method` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`

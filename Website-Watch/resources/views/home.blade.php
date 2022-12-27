@@ -149,8 +149,7 @@
                                         @if ($like->product == $bestSellingProduct->id && $like->customers == Auth::user()->id && $like->status == 'like')
                                             {{ 'liked' }} @endif @endforeach @endif ">
                                             <i class="fa fa-heart"></i>
-                                            <input type="hidden" class="idProduct"
-                                                value="{{ $bestSellingProduct->id }}"
+                                            <input type="hidden" class="idProduct" value="{{ $bestSellingProduct->id }}"
                                                 data-id="product-{{ $bestSellingProduct->id }}">
                                         </div>
                                         <div class="wap-items-ss brbox product-item">
