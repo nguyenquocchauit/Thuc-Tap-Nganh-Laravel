@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ProductUpdateRequest;
+use App\Http\Requests\ProductStoreRequest;
 use App\Models\Brand;
 use App\Models\Gender;
 use App\Models\Image;
@@ -94,7 +95,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(ProductStoreRequest $request)
     {
         /** Kiểm tra tất cả dữ liệu đầu vào của $request
          * Required tất cả dữ liệu bắt buộc phải nhập
@@ -224,7 +225,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductUpdateRequest $request, $id)
     {
         //
         $product = Product::find($id);
