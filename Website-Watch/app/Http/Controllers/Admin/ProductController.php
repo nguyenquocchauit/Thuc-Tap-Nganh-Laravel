@@ -245,9 +245,20 @@ class ProductController extends Controller
             "brand" => $request->brand_id,
             "updated_at" => $this->products->currentTime(),
         ];
+        // check if gender or brand changes then move image in folder to folder corresponding to gender and brand
+        if (($product->brand != $request->brand_id) && ($product->gender != $request->product_category_id)) {
+            $this->copyImageUpdate($id, $request->product_category_id, $request->brand_id);
+        } else if ($product->brand != $request->brand_id) {
+            $this->copyImageUpdate($id, $product->gender, $request->brand_id);
+        } else if ($product->gender != $request->product_category_id) {
+            $this->copyImageUpdate($id, $request->product_category_id, $product->brand);
+        }
         $product->update($dataProduct);
-        $data = null;
         //If there is a change to the array image, then proceed to edit the image
+        /**
+         * because we have performed the operation to replace the image position corresponding to the slug of gender and brand
+         * After the update is completed, the slug of gender and brand has been updated. So the image change event (if any) still runs normally
+         */
         if ($request->image) {
             $files = $request->file('image');
 
@@ -269,7 +280,7 @@ class ProductController extends Controller
                 }
             };
         }
-        return redirect('/admin/product')->with('success', 'Cập nhật sản phẩm thành công');;
+        return redirect('/admin/product')->with('success', 'Cập nhật sản phẩm thành công');
     }
 
     /**
@@ -321,5 +332,24 @@ class ProductController extends Controller
         $str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $str);
         $str = preg_replace("/(Đ)/", 'D', $str);
         return $str;
+    }
+    public function copyImageUpdate($id, $idGender, $idBrand)
+    {
+        $product = Product::find($id);
+        // get slug of brand and gender when it changes
+        $slugBrand = Brand::query()->selectRaw("brands.*")->where("id", $idBrand)->get();
+        $slugGender = Gender::query()->selectRaw("gender.*")->where("id", $idGender)->get();
+        $slugBrand = $slugBrand[0]->slug;
+        $slugGender = $slugGender[0]->slug;
+        for ($i = 1; $i <= 6; $i++) {
+            $image = "image_" . $i;
+            $imageProduct = $product->productImage["" . $image . ""];
+            $oldImage = "images/images-product/" . $product->productGender["slug"] . "/" . $product->productBrand["slug"] . "/" . $imageProduct;
+            $destinationNewFolder = "images/images-product/" . $slugGender . "/" .  $slugBrand . "/" . $imageProduct;
+            if (File::exists($oldImage)) {
+                File::copy(public_path($oldImage), public_path($destinationNewFolder));
+                File::delete($oldImage);
+            }
+        }
     }
 }
