@@ -86,8 +86,7 @@ $(document).ready(function () {
                                 timer: 2000,
                                 timerProgressBar: true,
                             }).then((result) => {
-                                window.location.href =
-                                    "/admin/product/" + response.id + "/edit";
+                                window.location.href = "/admin/customer";
                             });
                         } else if (
                             response.status == 422 &&
@@ -116,6 +115,14 @@ $(document).ready(function () {
                         ) {
                             showMsgWaring("Email không hợp lệ!", "#email");
                         }
+                    },
+                    error: function (response) {
+                        var errors = response.responseJSON.errors;
+                        console.log(errors.name);
+                        if ( errors.email[0] == "Email đã tồn tại")
+                            showMsgWaring("Email đã tồn tại!", "#email");
+                        else if (errors.name[0] == "Incorrect name format")
+                            showMsgWaring("Tên không hợp lệ!", "#name");
                     },
                 });
             }

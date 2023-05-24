@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Role;
@@ -54,53 +55,57 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $valiName = Validator::make(['name' => $request->name], [
-            'name' => ['required', 'regex:/^[a-zA-ZÀ-ỹ ]*$/'],
-        ]);
-        if ($valiName->fails()) return response()->json([
-            'status' => 422,
-            'msg' => 'Incorrect name format',
-        ]);
-        $valiPhone = Validator::make(['phone_number' => $request->phone_number], [
-            'phone_number' => ['required', 'regex:/(09|03|07|08|05)+([0-9]{8})\b/'],
-        ]);
-        if ($valiPhone->fails()) return response()->json([
-            'status' => 422,
-            'msg' => 'Incorrect phone format',
-        ]);
-        $valiEmail = Validator::make(['email' => $request->email], [
-            'email' => ['required', 'regex:/^[^ ]+@[^ ]+\.[a-z]{2,3}$/'],
-        ]);
-        if ($valiEmail->fails()) return response()->json([
-            'status' => 422,
-            'msg' => 'Incorrect email format',
-        ]);
-        if ($request->password != $request->password_confirmation) {
-            return response()->json([
-                'status' => 422,
-                'msg' => 'Password incorrect'
-            ]);
-        }
-        // $data = $request->all();
-        $user = new User();
-        $maxID = $user->maxID();
-        $maxID = $maxID[0]->ID_Max;
-        $maxID += 1;
-        $data = [
-            "id" => $maxID,
-            "name" => $request->name,
-            "phone_number" => $request->phone_number,
-            "address" => $request->address,
-            "email" => $request->email,
-            "password" => Hash::make($request->password),
-            "role" => 0,
 
-        ];
-        // $data['password'] = bcrypt($request->get('password'));
-        User::create($data);
-        return redirect('admin/user')->with('success', 'Thêm người dùng thành công');
+        // $valiName = Validator::make(['name' => $request->name], [
+        //     'name' => ['required', 'regex:/^[a-zA-ZÀ-ỹ ]*$/'],
+        // ]);
+        // if ($valiName->fails()) return response()->json([
+        //     'status' => 422,
+        //     'msg' => 'Incorrect name format',
+        // ]);
+        // $valiPhone = Validator::make(['phone_number' => $request->phone_number], [
+        //     'phone_number' => ['required', 'regex:/(09|03|07|08|05)+([0-9]{8})\b/'],
+        // ]);
+        // if ($valiPhone->fails()) return response()->json([
+        //     'status' => 422,
+        //     'msg' => 'Incorrect phone format',
+        // ]);
+        // $valiEmail = Validator::make(['email' => $request->email], [
+        //     'email' => ['required', 'unique:users,email', 'regex:/^[^ ]+@[^ ]+\.[a-z]{2,3}$/'],
+        // ]);
+        // if ($valiEmail->fails()) return response()->json([
+        //     'status' => 422,
+        //     'msg' => 'Incorrect email format',
+        // ]);
+        // if ($request->password != $request->password_confirmation) {
+        //     return response()->json([
+        //         'status' => 422,
+        //         'msg' => 'Password incorrect'
+        //     ]);
+        // }
+        // // $data = $request->all();
+        // $user = new User();
+        // $maxID = $user->maxID();
+        // $maxID = $maxID[0]->ID_Max;
+        // $maxID += 1;
+        // $data = [
+        //     "id" => $maxID,
+        //     "name" => $request->name,
+        //     "phone_number" => $request->phone_number,
+        //     "address" => $request->address,
+        //     "email" => $request->email,
+        //     "password" => Hash::make($request->password),
+        //     "role" => 0,
+
+        // ];
+        // // $data['password'] = bcrypt($request->get('password'));
+        // User::create($data);
+        return response()->json([
+            'status' => 200,
+            'msg' => "Create customer successfully",
+        ]);
     }
 
     /**
