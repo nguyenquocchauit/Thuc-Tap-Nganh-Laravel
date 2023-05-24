@@ -10,7 +10,37 @@ $(document).ready(function () {
             timerProgressBar: true,
         });
     }
-    $("#login-admin").on("click", function () {
+    $(".change-pasword-login").on("click", function () {
+        var passwordField = $("#password-login-admin");
+        var passwordFieldType = passwordField.attr("type");
+        if (passwordFieldType === "password") {
+            passwordField.attr("type", "text");
+            $(this).find("i").removeClass("fa-eye").addClass("fa-eye-slash");
+        } else {
+            passwordField.attr("type", "password");
+            $(this).find("i").removeClass("fa-eye-slash").addClass("fa-eye");
+        }
+    });
+    // login dashboard admin
+    const loginButton = document.getElementById("login-admin") ;
+
+    loginButton.addEventListener("click", function () {
+        handleLogin();
+    });
+
+    $("#email-login-admin").on("keydown", function (event) {
+        if (event.key === "Enter") {
+            handleLogin();
+        }
+    });
+
+    $("#password-login-admin").on("keydown", function (event) {
+        if (event.key === "Enter") {
+            handleLogin();
+        }
+    });
+
+    function handleLogin() {
         var _email = $("#email-login-admin").val();
         var _pass = $("#password-login-admin").val();
         if (isEmpty(_email)) showMsgWaringLogin("Email không được để trống!");
@@ -27,12 +57,12 @@ $(document).ready(function () {
                 },
                 success: function (response) {
                     if (
-                        response.status == 401 &&
+                        response.status == 422 &&
                         response.msg == "Pass is incorrect"
                     )
                         showMsgWaringLogin("Mật khẩu không chính xác!");
                     else if (
-                        response.status == 401 &&
+                        response.status == 422 &&
                         response.msg == "Email not found"
                     )
                         showMsgWaringLogin("Email không tồn tại!");
@@ -73,5 +103,5 @@ $(document).ready(function () {
                 },
             });
         }
-    });
+    }
 });

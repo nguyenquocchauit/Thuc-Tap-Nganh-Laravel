@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\File;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BrandRequest;
 use App\Models\Brand;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -24,7 +27,7 @@ class BrandController extends Controller
     {
         $title = 'Danh sách hãng';
         $search = null;
-        if(!empty($request->search)) {
+        if (!empty($request->search)) {
             $search = $request->search;
         }
         $brands = $this->brands->getAllBrands($search);
@@ -50,9 +53,43 @@ class BrandController extends Controller
      */
     public function store(BrandRequest $request)
     {
-        $data = $request->all();
-        Brand::create($data);
-        return redirect('admin/brand')->with('success', 'Thêm hãng thành công');
+        $slug = null;
+        $id = null;
+        $string = $request->name;
+        if (!$request->slug) {
+            $slug = Str::slug($string);
+        } else {
+            $slug = Str::slug($request->slug);
+        }
+        if (strlen($string) > 10) {
+            $words = explode(' ', $string);
+            foreach ($words as $word) {
+                $id .= substr($word, 0, 1);
+            }
+        } else {
+            $id = Str::slug($string);
+            $id = str_replace('-', '', $id);
+        }
+        $id = strtolower($id);
+        $id = ucfirst($id);
+
+        $checkId = Brand::where('id', $id)->exists();
+        if ($checkId) {
+            // Thông báo rằng giá trị của biến $id đã tồn tại trong cơ sở dữ liệu.
+            $randomString = Str::random(4); // Tạo một chuỗi ngẫu nhiên có độ dài là 5 ký tự.
+            $id .= $randomString;
+        }
+
+        Brand::create([
+            'name' => $request->name,
+            'slug' => $slug,
+            'id' => $id,
+        ]);
+
+        return response()->json([
+            'status' => 200,
+            'msg' => 'Create brand successfully',
+        ]);
     }
 
     /**
@@ -65,8 +102,7 @@ class BrandController extends Controller
     {
         $title = 'Chi tiết hãng';
         $brand = Brand::where('id', $id)->first();
-        return view('admin.brand.show',compact('title','brand'));
-
+        return view('admin.brand.show', compact('title', 'brand'));
     }
 
     /**
@@ -80,7 +116,7 @@ class BrandController extends Controller
         $brand = Brand::where('id', $id)->first();
 
         $title = 'Cập nhật hãng';
-        return view('admin.brand.edit', compact('title','brand', 'brand'));
+        return view('admin.brand.edit', compact('title', 'brand', 'brand'));
     }
 
     /**
@@ -92,12 +128,12 @@ class BrandController extends Controller
      */
     public function update(BrandRequest $request, $id)
     {
-         Brand::where('id', $id)
-        ->update([
-            "id" => $request->id,
-            "name" => $request->name,
-            "slug" => $request->slug
-        ]);
+        Brand::where('id', $id)
+            ->update([
+                "id" => $request->id,
+                "name" => $request->name,
+                "slug" => $request->slug
+            ]);
         return redirect('/admin/brand')->with('success', 'Cập nhật hãng thành công');
     }
 
@@ -107,9 +143,41 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        Brand::where('id', $id)->delete();
-        return redirect('/admin/brand')->with('success', 'Xóa hãng thành công');
+        $slug = Brand::where('id', $request->id)->pluck('slug')->first();
+        Brand::where('id', $request->id)->delete();
+
+        $pathMen = 'images/images-product/men/  ' . $slug . '"/"';
+        $pathWomen = 'images/images-product/women/  ' . $slug . '"/"';
+        if (!File::exists($pathMen)) {
+            $this->deleteDirectory($pathMen);
+        }
+        if (!File::exists($pathWomen)) {
+            $this->deleteDirectory($pathWomen);
+        }
+        return response()->json([
+            'status' => 200,
+            'msg' => 'Delete brand successfully'
+        ]);
     }
+    public function deleteDirectory($dir)
+    {
+        if (!file_exists($dir)) {
+            return true;
+        }
+        if (!is_dir($dir)) {
+            return unlink($dir);
+        }
+        foreach (scandir($dir) as $item) {
+            if ($item == '.' || $item == '..') {
+                continue;
+            }
+            if (!$this->deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)) {
+                return false;
+            }
+        }
+        return rmdir($dir);
+    }
+
 }

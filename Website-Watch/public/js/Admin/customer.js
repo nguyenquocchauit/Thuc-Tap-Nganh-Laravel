@@ -48,98 +48,19 @@ $(document).ready(function () {
     }
     //create customer
     $("#btn-create-customer").on("click", function () {
-        let address = $("#address").val();
-        let password = $("#password").val();
-        let confirmPassword = $("#password_confirmation").val();
-        var formData = new FormData($("#create-customer")[0]);
-        if (mandatoryTest("#create-customer")) {
-            if (isEmpty(address))
-                showMsgWaring("Vui lòng nhập địa chỉ!!!", "#address");
-            else if (isEmpty(password))
-                showMsgWaring("Vui lòng nhập mật khẩu!!!", "#password");
-            else if (isEmpty(confirmPassword))
-                showMsgWaring(
-                    "Vui lòng nhập xác nhận mật khẩu",
-                    "#password_confirmation"
-                );
-            else {
-                $.ajax({
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                            "content"
-                        ),
-                    },
-                    type: "POST",
-                    url: "/api/admin/customer/create",
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function (response) {
-                        console.log(response);
-                        if (
-                            response.status == 200 &&
-                            response.msg == "Create customer successfully"
-                        ) {
-                            Swal.fire({
-                                icon: "success",
-                                title: "Thêm khách hàng thành công!",
-                                timer: 2000,
-                                timerProgressBar: true,
-                            }).then((result) => {
-                                window.location.href = "/admin/customer";
-                            });
-                        } else if (
-                            response.status == 422 &&
-                            response.msg == "Password incorrect"
-                        ) {
-                            showMsgWaring(
-                                "Mật khẩu xác nhận không chính xác!!!",
-                                "#password_confirmation"
-                            );
-                        } else if (
-                            response.status == 422 &&
-                            response.msg == "Incorrect name format"
-                        ) {
-                            showMsgWaring("Tên không hợp lệ!", "#name");
-                        } else if (
-                            response.status == 422 &&
-                            response.msg == "Incorrect phone format"
-                        ) {
-                            showMsgWaring(
-                                "Số điện thoại không hợp lệ!",
-                                "#phone_number"
-                            );
-                        } else if (
-                            response.status == 422 &&
-                            response.msg == "Incorrect email format"
-                        ) {
-                            showMsgWaring("Email không hợp lệ!", "#email");
-                        }
-                    },
-                    error: function (response) {
-                        var errors = response.responseJSON.errors;
-                        console.log(errors.name);
-                        if ( errors.email[0] == "Email đã tồn tại")
-                            showMsgWaring("Email đã tồn tại!", "#email");
-                        else if (errors.name[0] == "Incorrect name format")
-                            showMsgWaring("Tên không hợp lệ!", "#name");
-                    },
-                });
-            }
-        }
-    });
-    //update customer
-    $("#btn-update-customer").on("click", function () {
-        if (mandatoryTest("#update-customer")) {
-            // content will contain the content of the selected <option> element
-            var city = $("#city option:selected").html();
-            var district = $("#district option:selected").html();
-            var ward = $("#ward option:selected").html();
-            var address = $("#address").val();
+        // content will contain the content of the selected <option> element
+        var city = $("#city option:selected").html();
+        var district = $("#district option:selected").html();
+        var ward = $("#ward option:selected").html();
+        var address = $("#address").val();
+        if (!city || !district || !ward || !address) {
+            // At least one of the variables is null or has no value
+            showMsgWaring("Địa chỉ không được để trống!", "#address");
+        } else {
             // connecting the chain of province + city + district/commune
             content = address + ", " + ward + ", " + district + ", " + city;
             // form initialization
-            var formData = new FormData($("#update-customer")[0]);
+            var formData = new FormData($("#create-customer")[0]);
             // change the key address to the new value content
             formData.set("address", content);
             $.ajax({
@@ -149,7 +70,7 @@ $(document).ready(function () {
                     ),
                 },
                 type: "POST",
-                url: "/api/admin/customer/update/" + $("#id-customer").val(),
+                url: "/api/admin/customer/create",
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -157,65 +78,215 @@ $(document).ready(function () {
                     console.log(response);
                     if (
                         response.status == 200 &&
-                        response.msg == "Update customer successfully"
+                        response.msg == "Create customer successfully"
                     ) {
                         Swal.fire({
                             icon: "success",
-                            title: "Cập nhật thành công!",
+                            title: "Thêm khách hàng thành công!",
                             timer: 2000,
                             timerProgressBar: true,
                         }).then((result) => {
-                            window.location.href =
-                                "/admin/customer/" +
-                                $("#id-customer").val() +
-                                "/edit";
+                            window.location.href = "/admin/customer";
                         });
-                    } else if (
-                        response.status == 422 &&
-                        response.msg == "Incorrect name format"
-                    ) {
-                        showMsgWaring("Tên không hợp lệ!", "#name");
-                    } else if (
-                        response.status == 422 &&
-                        response.msg == "Incorrect phone format"
-                    ) {
-                        showMsgWaring(
-                            "Số điện thoại không hợp lệ!",
-                            "#phone_number"
-                        );
-                    } else if (
-                        response.status == 422 &&
-                        response.msg == "Incorrect email format"
-                    ) {
-                        showMsgWaring("Email không hợp lệ!", "#email");
                     }
+                },
+                error: function (response) {
+                    var errors = response.responseJSON.errors;
+                    showErrors(errors);
                 },
             });
         }
     });
-    function mandatoryTest(form) {
-        var formData = new FormData($(form)[0]);
-        var keys = ["name", "phone_number", "email"];
-        for (var i = 0; i < keys.length; i++) {
-            if (!(formData.has(keys[i]) && formData.get(keys[i]))) {
-                if (i == 0) {
-                    showMsgWaring("Vui lòng nhập tên khách hàng!!!", "#name");
-                    break;
+    //update customer
+    $("#btn-update-customer").on("click", function () {
+        // content will contain the content of the selected <option> element
+        var city = $("#city option:selected").html();
+        var district = $("#district option:selected").html();
+        var ward = $("#ward option:selected").html();
+        var address = $("#address").val();
+        // connecting the chain of province + city + district/commune
+        content = address + ", " + ward + ", " + district + ", " + city;
+        // form initialization
+        var formData = new FormData($("#update-customer")[0]);
+        // change the key address to the new value content
+        formData.set("address", content);
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            type: "POST",
+            url: "/api/admin/customer/update/" + $("#id-customer").val(),
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                console.log(response);
+                if (
+                    response.status == 200 &&
+                    response.msg == "Update customer successfully"
+                ) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Cập nhật thành công!",
+                        timer: 2000,
+                        timerProgressBar: true,
+                    }).then((result) => {
+                        window.location.href =
+                            "/admin/customer/" +
+                            $("#id-customer").val() +
+                            "/edit";
+                    });
                 }
-                if (i == 1) {
-                    showMsgWaring(
-                        "Vui lòng nhập số điện thoại!!!",
-                        "#phone_number"
-                    );
-                    break;
-                }
-                if (i == 2) {
-                    showMsgWaring("Vui lòng nhập Email!!!", "#email");
-                    break;
-                }
+            },
+            error: function (response) {
+                var errors = response.responseJSON.errors;
+                showErrors(errors);
+            },
+        });
+    });
+    // delete customer
+    $(".btn-delete-customer").on("click", function () {
+        let id = $(this).find("input").val();
+        Swal.fire({
+            title: "Bạn có chắc muốn xóa khách hàng?",
+            text: "Xóa rồi không thể hoàn tác!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Đồng ý",
+            cancelButtonText: "Hủy",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/admin/customer/delete/" + id,
+                    success: function (response) {
+                        if (
+                            response.status == 200 &&
+                            response.msg == "Delete customer successfully"
+                        ) {
+                            window.location.href = "/admin/customer";
+                        }
+                    },
+                });
             }
-            if (i == 2) return true;
+        });
+    });
+    $(".change-pasword").on("click", function () {
+        var passwordField = $(this).prev();
+        var passwordFieldType = passwordField.attr("type");
+        if (passwordFieldType === "password") {
+            passwordField.attr("type", "text");
+            $(this).find("i").removeClass("fa-eye").addClass("fa-eye-slash");
+        } else {
+            passwordField.attr("type", "password");
+            $(this).find("i").removeClass("fa-eye-slash").addClass("fa-eye");
         }
-        return false;
+    });
+    function showErrors(errors) {
+        if (
+            errors.name &&
+            errors.name.length > 0 &&
+            errors.name[0] == "Empty name"
+        ) {
+            showMsgWaring("Tên không được để trống!", "#name");
+        } else if (
+            errors.name &&
+            errors.name.length > 0 &&
+            errors.name[0] == "Incorrect name format"
+        ) {
+            showMsgWaring("Tên không hợp lệ!", "#name");
+        } else if (
+            errors.phone_number &&
+            errors.phone_number.length > 0 &&
+            errors.phone_number[0] == "Empty phone"
+        ) {
+            showMsgWaring(
+                "Số điện thoại không được để trống!",
+                "#phone_number"
+            );
+        } else if (
+            errors.phone_number &&
+            errors.phone_number.length > 0 &&
+            errors.phone_number[0] == "Incorrect phone format"
+        ) {
+            showMsgWaring("Số điện thoại không hợp lệ!", "#phone_number");
+        } else if (
+            errors.email &&
+            errors.email.length > 0 &&
+            errors.email[0] == "Empty email"
+        ) {
+            showMsgWaring("Email không được để trống!", "#email");
+        } else if (
+            errors.email &&
+            errors.email.length > 0 &&
+            errors.email[0] == "Email already exists"
+        ) {
+            showMsgWaring("Email đã tồn tại!", "#email");
+        } else if (
+            errors.email &&
+            errors.email.length > 0 &&
+            errors.email[0] == "Incorrect email format"
+        ) {
+            showMsgWaring("Email không hợp lệ!", "#email");
+        } else if (
+            errors.address &&
+            errors.address.length > 0 &&
+            errors.address[0] == "Empty address"
+        ) {
+            showMsgWaring("Địa chỉ không được để trống!", "#address");
+        } else if (
+            errors.password &&
+            errors.password.length > 0 &&
+            errors.password[0] == "Empty password"
+        ) {
+            showMsgWaring("Mật khẩu không được để trống!", "#password");
+        } else if (
+            errors.password &&
+            errors.password.length > 0 &&
+            errors.password[0] == "Min"
+        ) {
+            showMsgWaring("Mật khẩu tối thiểu 6 ký tự!", "#password");
+        } else if (
+            errors.password &&
+            errors.password.length > 0 &&
+            errors.password[0] == "Max"
+        ) {
+            showMsgWaring("Mật khẩu tối đa 30 ký tự!", "#password");
+        } else if (
+            errors.password_confirmation &&
+            errors.password_confirmation.length > 0 &&
+            errors.password_confirmation[0] == "Empty password confirmation"
+        ) {
+            showMsgWaring(
+                "Xác nhận mật khẩu không được để trống!",
+                "#password_confirmation"
+            );
+        } else if (
+            errors.password_confirmation &&
+            errors.password_confirmation.length > 0 &&
+            errors.password_confirmation[0] == "Min"
+        ) {
+            showMsgWaring(
+                "Xác nhận mật khẩu tối thiểu 6 ký tự!",
+                "#password_confirmation"
+            );
+        } else if (
+            errors.password_confirmation &&
+            errors.password_confirmation.length > 0 &&
+            errors.password_confirmation[0] == "Max"
+        ) {
+            showMsgWaring(
+                "Xác nhận mật khẩu tối đa 30 ký tự!",
+                "#password_confirmation"
+            );
+        } else if (
+            errors.password_confirmation &&
+            errors.password_confirmation.length > 0 &&
+            errors.password_confirmation[0] == "Doesn't match"
+        ) {
+            showMsgWaring("Mật khẩu xác nhận sai!", "#password_confirmation");
+        }
     }
 });

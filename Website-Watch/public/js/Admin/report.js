@@ -8,4 +8,7 @@ $(document).ready(function () {
             clearInterval(intervalId);
         }
     }, 70);
+
+
+
 });

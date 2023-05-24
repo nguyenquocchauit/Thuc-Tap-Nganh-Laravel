@@ -11,7 +11,7 @@
                     <div>
                         Người dùng
                         <div class="page-title-subheading">
-                            Xem, tạo, sửa, xóa và <strong>quản lý.</strong>
+                            <strong>Xem</strong>, tạo, sửa, xóa, và xóa.
                         </div>
                     </div>
                 </div>
@@ -59,24 +59,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($customers as $customer)
                                     <tr>
-                                        <td class="text-center">{{ $user->id }}</td>
-                                        <td class="text-center">{{ $user->name }}</td>
-                                        <td class="text-center">{{ $user->phone_number }}</td>
+                                        <td class="text-center">{{ $customer->id }}</td>
+                                        <td class="text-center">{{ $customer->name }}</td>
+                                        <td class="text-center">{{ $customer->phone_number }}</td>
                                         <td class="text-center">
-                                            @if ($user->address == null)
+                                            @if ($customer->address == null)
                                                 <div class="badge badge-warning mt-2">
                                                     <span>Chưa điền địa chỉ</span>
                                                 </div>
                                             @else
-                                                {{ $user->address }}
+                                                {{ $customer->address }}
                                             @endif
 
                                         </td>
 
                                         <td class="text-center">
-                                            {{ $user->email }}
+                                            {{ $customer->email }}
                                         </td>
 
                                         <td class="text-center">
@@ -84,25 +84,19 @@
                                         </td>
 
                                         <td class="text-center">
-                                            <a href="/admin/customer/{{ $user->id }}" data-toggle="tooltip"
-                                                title="Chi tiết" data-placement="bottom"
-                                                class="btn btn-outline-success border-0 btn-sm">
-                                                <span class="btn-icon-wrapper opacity-8">
-                                                    <i class="fas fa-info-circle fa-w-20"></i>
-                                                </span>
-                                            </a>
-                                            <a href="/admin/customer/{{ $user->id }}/edit" data-toggle="tooltip"
+                                            <a href="/admin/customer/{{ $customer->id }}/edit" data-toggle="tooltip"
                                                 title="Chỉnh sửa" data-placement="bottom"
                                                 class="btn btn-outline-warning border-0 btn-sm">
                                                 <span class="btn-icon-wrapper opacity-8">
                                                     <i class="fa fa-edit fa-w-20"></i>
                                                 </span>
                                             </a>
-                                            <button class="btn btn-hover-shine btn-outline-danger border-0 btn-sm"
+                                            <button class="btn btn-hover-shine btn-outline-danger border-0 btn-sm btn-delete-customer"
                                                 type="submit" data-toggle="tooltip" title="Delete" data-placement="bottom">
                                                 <span class="btn-icon-wrapper opacity-8">
                                                     <i class="fa fa-trash fa-w-20"></i>
                                                 </span>
+                                                <input type="hidden" name="" value="{{ $customer->id }}">
                                             </button>
                                         </td>
                                     </tr>
@@ -111,7 +105,7 @@
                         </table>
                     </div>
                     <div class="d-block card-footer">
-                        {!! $users->links() !!}
+                        {!! $customers->links() !!}
                     </div>
                 </div>
             </div>

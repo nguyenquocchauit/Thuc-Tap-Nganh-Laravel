@@ -24,18 +24,19 @@ class BrandRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required',
-            'name'=>'required',
-            'slug'=>'required'
+            'name' => ['required', 'unique:brands,name', 'regex:/^[a-zA-Z0-9\s\p{L}]+$/u'],
         ];
     }
+
+
+
 
     public function messages()
     {
         return [
-            'id.required' => 'Id không được bỏ trống',
-            'name.required' => 'Tên không được bỏ trống',
-            'slug.required' => 'Slug không được bỏ trống'
+            'name.required' => 'Empty name',
+            'name.unique' => 'Name already exists',
+            'name.regex' => 'Incorrect name format',
         ];
     }
 }

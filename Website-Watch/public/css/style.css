@@ -667,11 +667,13 @@
   position: relative;
   left: 45%;
   bottom: 40px;
+  cursor: pointer;
 }
 .modal-content .modal-body .changePasword_Singup {
   position: relative;
   left: 95%;
   bottom: 40px;
+  cursor: pointer;
 }
 .modal-content .modal-body .forgetPass {
   display: flex;

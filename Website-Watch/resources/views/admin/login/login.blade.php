@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- CSRF Token -->
-     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Đăng nhập quản trị</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
         integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-     <script type="text/javascript">
+    <script type="text/javascript">
         //Pass Header Token
         $.ajaxSetup({
             headers: {
@@ -23,6 +23,8 @@
         });
         let _token = $('meta[name="csrf-token"]').attr("content");
     </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script type="text/javascript" src="{{ asset('js/login-admin.js') }}"></script>
     <!-- Scripts -->
     <style>
@@ -90,6 +92,17 @@
             text-align: center;
             font-size: 20px;
         }
+
+        .form_hoa .box_login #login .row-item .change-pasword-login {
+            position: relative;
+            left: 94%;
+            bottom: 36px;
+            cursor: pointer;
+        }
+
+        #login-admin {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -99,13 +112,13 @@
             <form action="" method="POST" id="login">
                 <h2>Quản Trị TCWatch</h2>
                 <div class="row-item">
-                    <label for="username">Email</label>
-                    <input type="text" name="username" id="email-login-admin" placeholder="Enter Email or Username"
-                        value="" />
+                    <label for="username">Email<strong style="color: red">*</strong></label>
+                    <input type="text" name="username" id="email-login-admin" placeholder="Email" value="" />
                 </div>
                 <div class="row-item">
-                    <label for="password">Mật khẩu</label>
-                    <input type="password" name="password" id="password-login-admin" placeholder="Enter Password" />
+                    <label for="password">Mật khẩu<strong style="color: red">*</strong></label>
+                    <input type="password" name="password" id="password-login-admin" placeholder="Nhập mật khẩu" />
+                    <span class="change-pasword-login"><i class="fas fa-eye"></i></span>
                 </div>
                 <div class="row-item">
                     <button type="button" id="login-admin">Đăng nhập</button>

@@ -185,7 +185,7 @@ class ProductController extends Controller
         return response()->json([
             'status' => 200,
             'msg' => 'Create product successfully',
-            'id' =>$maxID,
+            'id' => $maxID,
         ]);
     }
     public function moveImageProduct($brand, $gender, $file, $name)
@@ -198,6 +198,9 @@ class ProductController extends Controller
         $slugGender = $product->checkGender($gender);
         // add image for list image of product
         $destinationPath = 'images/images-product' . "/" . $slugGender . "/" . $slugBrand[0]->slug . "/";
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0777, true);
+        }
         for ($i = 0; $i < count($file); $i++) {
             $file[$i]->move(public_path($destinationPath), $name[$i]);
         }

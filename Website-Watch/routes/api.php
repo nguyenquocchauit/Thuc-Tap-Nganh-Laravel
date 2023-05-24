@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Auth\LoginAdminController;
 use App\Http\Controllers\Auth\LoginUserController;
@@ -48,7 +49,10 @@ Route::middleware([Admin::class])->group(function () {
     Route::post('/admin/customer/create', [AdminUserController::class, 'store'])->name('create-customer');
     Route::get('/admin/customer/edit/{id}', [AdminUserController::class, 'editCustomer'])->name('edit-customer');
     Route::post('/admin/customer/update/{id}', [AdminUserController::class, 'update'])->name('update-customer');
+    Route::get('/admin/customer/delete/{id}', [AdminUserController::class, 'destroy'])->name('delete-customer');
     Route::get('/admin/profile/edit/{id}', [ProfileController::class, 'editEmployee'])->name('edit-profile');
+    Route::post('/admin/brand/create', [BrandController::class, 'store'])->name('create-brand');
+    Route::get('/admin/brand/delete/{id}', [BrandController::class, 'destroy'])->name('delete-brand');
 });
 
 // login and register of user

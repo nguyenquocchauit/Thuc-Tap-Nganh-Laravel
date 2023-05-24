@@ -33,6 +33,8 @@
     <script type="text/javascript" src="{{ asset('js/Admin/customer.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/Admin/report.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Admin/brand.js') }}"></script>
+
 
 
 </head>

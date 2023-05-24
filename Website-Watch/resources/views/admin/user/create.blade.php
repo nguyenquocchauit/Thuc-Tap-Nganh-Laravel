@@ -12,7 +12,7 @@
                     <div>
                         Khách hàng
                         <div class="page-title-subheading">
-                            Xem, <strong>tạo</strong>, sửa, xóa và quản lý.
+                            Xem, <strong>tạo</strong>, sửa và xóa.
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                                 <label for="name" class="col-md-3 text-md-right col-form-label">Tên</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="name" id="name" placeholder="Nhập tên" type="text"
-                                        class="form-control" value="{{ old('name') }}">
+                                        class="form-control" value="">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
@@ -37,21 +37,42 @@
                                     thoại</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="phone_number" id="phone_number" placeholder="Nhập số điện thoại"
-                                        type="tel" class="form-control" value="{{ old('phone_number') }}">
+                                        type="tel" class="form-control" value="">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
                                 <label for="address" class="col-md-3 text-md-right col-form-label">Địa chỉ</label>
+                                <div class="col-md-3 col-xl-2">
+                                    <select class="form-control form-select form-select-sm mb-3" id="city"
+                                        aria-label=".form-select-sm">
+                                        <option value="" selected>Chọn tỉnh thành</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 col-xl-2">
+                                    <select class=" form-control form-select form-select-sm mb-3" id="district"
+                                        aria-label=".form-select-sm">
+                                        <option value="" selected>Chọn quận huyện</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 col-xl-2">
+                                    <select class="form-control form-select form-select-sm" id="ward"
+                                        aria-label=".form-select-sm">
+                                        <option value="" selected>Chọn phường xã</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="position-relative row form-group" style="top:-10px">
+                                <label for="address" class="col-md-3 text-md-right col-form-label"></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="address" id="address" placeholder="Nhập địa chỉ" type="text"
-                                        class="form-control" value="{{ old('address') }}">
+                                        class="form-control" value="">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
                                 <label for="email" class="col-md-3 text-md-right col-form-label">Email</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input type="email" name="email" id="email" class="form-control"
-                                        placeholder="Nhập Email" value="{{ old('email') }}">
+                                        placeholder="Nhập Email" value="">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
@@ -59,6 +80,7 @@
                                 <div class="col-md-9 col-xl-8">
                                     <input name="password" id="password" placeholder="Nhập mật khẩu" type="password"
                                         class="form-control" value="">
+                                    <span class="change-pasword"><i  class="fas fa-eye"></i></span>
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
@@ -67,11 +89,12 @@
                                 <div class="col-md-9 col-xl-8">
                                     <input name="password_confirmation" id="password_confirmation"
                                         placeholder="Nhập lại mật khẩu" type="password" class="form-control" value="">
+                                    <span class="change-pasword"><i  class="fas fa-eye"></i></span>
                                 </div>
                             </div>
                             <div class="position-relative row form-group mb-1">
                                 <div class="col-md-9 col-xl-8 offset-md-2">
-                                    <a href="./admin/user" class="border-0 btn btn-outline-danger mr-1">
+                                    <a href="./admin/customer" class="border-0 btn btn-outline-danger mr-1">
                                         <span class="btn-icon-wrapper pr-1 opacity-8">
                                             <i class="fa fa-times fa-w-20"></i>
                                         </span>
@@ -92,5 +115,48 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        var citis = document.getElementById("city");
+        var districts = document.getElementById("district");
+        var wards = document.getElementById("ward");
+        var Parameter = {
+            url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+            method: "GET",
+            responseType: "application/json",
+        };
+        var promise = axios(Parameter);
+        promise.then(function(result) {
+            renderCity(result.data);
+        });
+
+        function renderCity(data) {
+            for (const x of data) {
+                citis.options[citis.options.length] = new Option(x.Name, x.Id);
+            }
+            citis.onchange = function() {
+                district.length = 1;
+                ward.length = 1;
+                if (this.value != "") {
+                    const result = data.filter(n => n.Id === this.value);
+
+                    for (const k of result[0].Districts) {
+                        district.options[district.options.length] = new Option(k.Name, k.Id);
+                    }
+                }
+            };
+            district.onchange = function() {
+                ward.length = 1;
+                const dataCity = data.filter((n) => n.Id === citis.value);
+                if (this.value != "") {
+                    const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+
+                    for (const w of dataWards) {
+                        wards.options[wards.options.length] = new Option(w.Name, w.Id);
+                    }
+                }
+            };
+        }
+    </script>
     <!-- End Main -->
 @endsection

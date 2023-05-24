@@ -58,6 +58,7 @@
     cursor: pointer;
 }
 
+
 .label {
     border-radius: 6px;
     font-size: 90%;
@@ -74,6 +75,12 @@
 .label-success {
     background-image: linear-gradient(230deg, #48bf2a, #11e5bb);
 }
+.label-confirm {
+    background-image: linear-gradient(230deg, #2c2c1b, #0f6801de);
+    color: white !important;
+}
+
+
 
 .date {
     justify-content: end;
@@ -137,6 +144,12 @@
     text-align: center;
     text-transform: none;
     margin-top: -70px;
+}
+.change-pasword{
+    position: relative;
+    left: 96%;
+    bottom: 30px;
+    cursor: pointer;
 }
 
 .fancytree-helper-hidden {

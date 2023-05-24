@@ -23,14 +23,14 @@
                     <div class="card-body">
                         <form id="create-product" method="post" action="" enctype="multipart/form-data">
                             <div class="position-relative row form-group">
-                                <label for="name_product" class="col-md-3 text-md-right col-form-label">Tên sản phẩm</label>
+                                <label for="name_product" class="col-md-3 text-md-right col-form-label">Tên sản phẩm<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="name_product" id="name_product" placeholder="Tên sản phẩm" type="text"
-                                        class="form-control" value="{{ old('name_product') }}">
+                                        class="form-control" value="">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
-                                <label for="brand" class="col-md-3 text-md-right col-form-label">Hãng</label>
+                                <label for="brand" class="col-md-3 text-md-right col-form-label">Hãng<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <select name="brand_id" id="brand" class="form-control">
                                         <option value="">-- Hãng --</option>
@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
-                                <label for="product_category_id" class="col-md-3 text-md-right col-form-label">Loại</label>
+                                <label for="product_category_id" class="col-md-3 text-md-right col-form-label">Loại<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <select name="product_category_id" id="product_category_id" class="form-control">
                                         <option value="">-- Loại --</option>
@@ -57,29 +57,29 @@
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
-                                <label for="price_product" class="col-md-3 text-md-right col-form-label">Giá</label>
+                                <label for="price_product" class="col-md-3 text-md-right col-form-label">Giá<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="price_product" id="price_product" placeholder="Giá" type="text"
-                                        class="form-control" value="{{ old('price_product') }}">
+                                        class="form-control" value="">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
-                                <label for="discount_product" class="col-md-3 text-md-right col-form-label">Giảm giá</label>
+                                <label for="discount_product" class="col-md-3 text-md-right col-form-label">Giảm giá<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="discount_product" id="discount_product" placeholder="Giảm giá"
-                                        type="text" class="form-control" value="{{ old('discount_product') }}">
+                                        type="text" class="form-control" value="">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
                                 <label for="quantity_product" class="col-md-3 text-md-right col-form-label">Số lượng
-                                    kho</label>
+                                    kho<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="quantity_product" id="quantity_product" placeholder="Số lượng kho"
-                                        type="text" class="form-control" value="{{ old('quantity_product') }}">
+                                        type="text" class="form-control" value="">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
-                                <label for="image_product" class="col-md-3 text-md-right col-form-label">Ảnh</label>
+                                <label for="image_product" class="col-md-3 text-md-right col-form-label">Ảnh<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <div class="row">
                                         <div class="col-2">
@@ -133,20 +133,13 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="position-relative row form-group">
                                 <label for="description_product" class="col-md-3 text-md-right col-form-label">Mô
-                                    tả</label>
+                                    tả<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <textarea class="form-control" name="description_product" id="description_product" placeholder="Mô tả">{{ old('description_product') }}</textarea>
                                 </div>
-                                <span style="color: red">
-                                    @error('id')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
                             </div>
-
                             <div class="position-relative row form-group mb-1">
                                 <div class="col-md-9 col-xl-8 offset-md-2">
                                     <a href="./admin/product" class="border-0 btn btn-outline-danger mr-1">
@@ -155,7 +148,6 @@
                                         </span>
                                         <span>Hủy</span>
                                     </a>
-
                                     <button type="button" class="btn-shadow btn-hover-shine btn btn-primary "
                                         id="btn-create-product">
                                         <span class="btn-icon-wrapper pr-2 opacity-8">

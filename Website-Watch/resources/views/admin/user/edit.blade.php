@@ -9,14 +9,34 @@
                         <i class="pe-7s-ticket icon-gradient bg-mean-fruit"></i>
                     </div>
                     <div>
-                        Người dùng
+                        Khách hàng
                         <div class="page-title-subheading">
-                            Xem, tạo, <strong>sửa</strong>, xóa và quản lý.
+                            Xem, tạo, <strong>sửa</strong>,và xóa.
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
+            <li class="nav-item">
+                <a href="./admin/customer" class="nav-link">
+                    <span class="btn-icon-wrapper pr-2 opacity-8">
+                        <i class="fa fa-arrow-left fa-w-20"></i>
+                    </span>
+                    <span>Quay lại</span>
+                </a>
+            </li>
+
+            <li class="nav-item delete">
+                <button class="nav-link btn btn-delete-product btn-delete-customer" type="button" >
+                    <span class="btn-icon-wrapper pr-2 opacity-8">
+                        <i class="fa fa-trash fa-w-20"></i>
+                    </span>
+                    <span>Xóa</span>
+                    <input type="hidden" name="" value="{{ $employee->id }}">
+                </button>
+            </li>
+        </ul>
         <div class="row">
             <div class="col-md-12">
                 <div class="main-card mb-3 card">
@@ -27,14 +47,14 @@
                                 <label for="name" class="col-md-3 text-md-right col-form-label">Tên</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="name" id="name" placeholder="Nhập tên" type="text"
-                                        class="form-control" value="{{ $user->name }}">
+                                        class="form-control" value="{{ $employee->name }}">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
                                 <label for="phone" class="col-md-3 text-md-right col-form-label">Số điện thoại</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="phone_number" id="phone_number" placeholder="Nhập số điện thoại"
-                                        type="tel" class="form-control" value="{{ $user->phone_number }}">
+                                        type="tel" class="form-control" value="{{ $employee->phone_number }}">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
@@ -69,15 +89,7 @@
                                 <label for="email" class="col-md-3 text-md-right col-form-label">Email</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="email" id="email" placeholder="Nhập Email" type="email"
-                                        class="form-control" value="{{ $user->email }}">
-                                </div>
-                            </div>
-
-                            <div class="position-relative row form-group">
-                                <label for="password" class="col-md-3 text-md-right col-form-label">Mật khẩu</label>
-                                <div class="col-md-9 col-xl-8">
-                                    <input name="password" id="password" placeholder="Nhập mật khẩu" type="password"
-                                        class="form-control" value="">
+                                        class="form-control" value="{{ $employee->email }}">
                                 </div>
                             </div>
                             <div class="position-relative row form-group mb-1">
@@ -95,7 +107,7 @@
                                         </span>
                                         <span>Lưu</span>
                                         <input type="hidden" name="" id="id-customer"
-                                            value="{{ $user->id }}">
+                                            value="{{ $employee->id }}">
                                     </button>
                                 </div>
                             </div>

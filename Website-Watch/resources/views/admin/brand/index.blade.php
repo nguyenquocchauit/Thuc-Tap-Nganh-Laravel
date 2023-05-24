@@ -36,7 +36,7 @@
                         <form>
                             <div class="input-group">
                                 <input type="search" name="search" id="search" placeholder="Nhập tên hãng "
-                                    class="form-control" value="{{request()->search}}">
+                                    class="form-control" value="{{ request()->search }}">
                                 <span class="input-group-append">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-search"></i>&nbsp;
@@ -45,13 +45,6 @@
                                 </span>
                             </div>
                         </form>
-
-                        {{-- <div class="btn-actions-pane-right">
-                            <div role="group" class="btn-group-sm btn-group">
-                                <button class="btn btn-focus">This week</button>
-                                <button class="active btn btn-focus">Anytime</button>
-                            </div>
-                        </div> --}}
                     </div>
                     @include('admin.alert')
                     <div class="table-responsive">
@@ -71,13 +64,7 @@
                                         <td class="text-center text-muted">{{ $brand->name }}</td>
                                         <td class="text-center text-muted">{{ $brand->slug }}</td>
                                         <td class="text-center">
-                                            <a href="/admin/brand/{{ $brand->id }}" data-toggle="tooltip"
-                                                title="Chi tiết" data-placement="bottom"
-                                                class="btn btn-outline-success border-0 btn-sm">
-                                                <span class="btn-icon-wrapper opacity-8">
-                                                    <i class="fas fa-info-circle fa-w-20"></i>
-                                                </span>
-                                            </a>
+
                                             <a href="/admin/brand/{{ $brand->id }}/edit" data-toggle="tooltip"
                                                 title="Chỉnh sửa" data-placement="bottom"
                                                 class="btn btn-outline-warning border-0 btn-sm">
@@ -85,18 +72,14 @@
                                                     <i class="fa fa-edit fa-w-20"></i>
                                                 </span>
                                             </a>
-                                            <form class="d-inline" action="./admin/brand/{{$brand->id}}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-hover-shine btn-outline-danger border-0 btn-sm"
-                                                    type="submit" data-toggle="tooltip" title="Delete"
-                                                    data-placement="bottom"
-                                                    onclick="return confirm('Bạn có thực sự muốn xóa hãng này?')">
-                                                    <span class="btn-icon-wrapper opacity-8">
-                                                        <i class="fa fa-trash fa-w-20"></i>
-                                                    </span>
-                                                </button>
-                                            </form>
+                                            <button
+                                                class="btn btn-hover-shine btn-outline-danger border-0 btn-sm delete-brand btn-delete-brand"
+                                                type="submit" data-toggle="tooltip" title="Delete" data-placement="bottom">
+                                                <span class="btn-icon-wrapper opacity-8">
+                                                    <i class="fa fa-trash fa-w-20"></i>
+                                                </span>
+                                                <input type="hidden" name="" value="{{ $brand->id }}">
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach

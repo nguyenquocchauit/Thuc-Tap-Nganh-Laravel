@@ -228,6 +228,9 @@
                                                     @if ($order->status === 'TB')
                                                         <span class="label label-danger">Thất bại</span>
                                                     @endif
+                                                    @if ($order->status === 'XN')
+                                                        <span class="label label-confirm ">Xác nhận</span>
+                                                    @endif
                                                 </td>
                                                 <td>{{ $order->idDetail }}</td>
                                                 <td>{{ $order->name_employee }}</td>

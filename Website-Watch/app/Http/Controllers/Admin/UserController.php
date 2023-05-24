@@ -32,8 +32,8 @@ class UserController extends Controller
         if (!empty($request->search)) {
             $search = $request->search;
         }
-        $users = $this->users->getAllUsers($search);
-        return view('admin.user.index', compact('title', 'users'));
+        $customers = $this->users->getAllUsers($search);
+        return view('admin.user.index', compact('title', 'customers'));
     }
 
     /**
@@ -57,51 +57,21 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        $user = new User();
+        $maxID = $user->maxID();
+        $maxID = $maxID[0]->ID_Max;
+        $maxID += 1;
+        $data = [
+            "id" => $maxID,
+            "name" => $request->name,
+            "phone_number" => $request->phone_number,
+            "address" => $request->address,
+            "email" => $request->email,
+            "password" => Hash::make($request->password),
+            "role" => 0,
 
-        // $valiName = Validator::make(['name' => $request->name], [
-        //     'name' => ['required', 'regex:/^[a-zA-ZÀ-ỹ ]*$/'],
-        // ]);
-        // if ($valiName->fails()) return response()->json([
-        //     'status' => 422,
-        //     'msg' => 'Incorrect name format',
-        // ]);
-        // $valiPhone = Validator::make(['phone_number' => $request->phone_number], [
-        //     'phone_number' => ['required', 'regex:/(09|03|07|08|05)+([0-9]{8})\b/'],
-        // ]);
-        // if ($valiPhone->fails()) return response()->json([
-        //     'status' => 422,
-        //     'msg' => 'Incorrect phone format',
-        // ]);
-        // $valiEmail = Validator::make(['email' => $request->email], [
-        //     'email' => ['required', 'unique:users,email', 'regex:/^[^ ]+@[^ ]+\.[a-z]{2,3}$/'],
-        // ]);
-        // if ($valiEmail->fails()) return response()->json([
-        //     'status' => 422,
-        //     'msg' => 'Incorrect email format',
-        // ]);
-        // if ($request->password != $request->password_confirmation) {
-        //     return response()->json([
-        //         'status' => 422,
-        //         'msg' => 'Password incorrect'
-        //     ]);
-        // }
-        // // $data = $request->all();
-        // $user = new User();
-        // $maxID = $user->maxID();
-        // $maxID = $maxID[0]->ID_Max;
-        // $maxID += 1;
-        // $data = [
-        //     "id" => $maxID,
-        //     "name" => $request->name,
-        //     "phone_number" => $request->phone_number,
-        //     "address" => $request->address,
-        //     "email" => $request->email,
-        //     "password" => Hash::make($request->password),
-        //     "role" => 0,
-
-        // ];
-        // // $data['password'] = bcrypt($request->get('password'));
-        // User::create($data);
+        ];
+        User::create($data);
         return response()->json([
             'status' => 200,
             'msg' => "Create customer successfully",
@@ -128,11 +98,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $employee = User::find($id);
         $title = 'Cập nhật người dùng';
-        $userAddress = explode(", ", $user->address);
-        $address = $userAddress[0] ?? "";
-        return view('admin.user.edit', compact('title', 'user', 'address'));
+        $employeeAddress = explode(", ", $employee->address);
+        $address = $employeeAddress[0] ?? "";
+        return view('admin.user.edit', compact('title', 'employee', 'address'));
     }
     public function editCustomer($id)
     {
@@ -155,38 +125,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
-        $valiName = Validator::make(['name' => $request->name], [
-            'name' => ['required', 'regex:/^[a-zA-ZÀ-ỹ ]*$/'],
-        ]);
-        if ($valiName->fails()) return response()->json([
-            'status' => 422,
-            'msg' => 'Incorrect name format',
-        ]);
-        $valiPhone = Validator::make(['phone_number' => $request->phone_number], [
-            'phone_number' => ['required', 'regex:/(09|03|07|08|05)+([0-9]{8})\b/'],
-        ]);
-        if ($valiPhone->fails()) return response()->json([
-            'status' => 422,
-            'msg' => 'Incorrect phone format',
-        ]);
-        $valiEmail = Validator::make(['email' => $request->email], [
-            'email' => ['required', 'regex:/^[^ ]+@[^ ]+\.[a-z]{2,3}$/'],
-        ]);
-        if ($valiEmail->fails()) return response()->json([
-            'status' => 422,
-            'msg' => 'Incorrect email format',
-        ]);
 
-        // //Xu ly password
+
+        //Xu ly password
         $users = User::find($id);
         $data = [
             "name" => $request->name,
             "phone_number" => $request->phone_number,
             "address" => $request->address,
             "email" => $request->email,
-            "password" => Hash::make($request->password),
+            // "password" => Hash::make($request->password),
         ];
         $users->update($data);
         return response()->json([
@@ -201,9 +151,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Request $request)
     {
-        User::destroy($user->id);
-        return redirect('/admin/user')->with('success', 'Xóa người dùng thành công');
+        User::destroy($request->id);
+        return response()->json([
+            'status' => 200,
+            'msg' => 'Delete customer successfully'
+        ]);
     }
 }

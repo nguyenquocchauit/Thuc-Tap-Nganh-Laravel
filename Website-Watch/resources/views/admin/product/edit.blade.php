@@ -44,7 +44,7 @@
                     <div class="card-body">
                         <form id="update-product" method="post" action="" enctype="multipart/form-data">
                             <div class="position-relative row form-group">
-                                <label for="name_product" class="col-md-3 text-md-right col-form-label">Tên sản phẩm</label>
+                                <label for="name_product" class="col-md-3 text-md-right col-form-label">Tên sản phẩm<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="name_product" id="name_product" placeholder="Tên sản phẩm" type="text"
                                         class="form-control" value="{{ $product->name }}">
@@ -52,7 +52,7 @@
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
-                                <label for="brand_id" class="col-md-3 text-md-right col-form-label">Hãng</label>
+                                <label for="brand_id" class="col-md-3 text-md-right col-form-label">Hãng<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <select name="brand_id" id="brand_id" class="form-control">
                                         @foreach ($brands as $brand)
@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="position-relative row form-group">
-                                <label for="product_category_id" class="col-md-3 text-md-right col-form-label">Loại</label>
+                                <label for="product_category_id" class="col-md-3 text-md-right col-form-label">Loại<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <select name="product_category_id" id="product_category_id" class="form-control">
                                         <option value="1" @if ($product->gender == 1) {{ 'selected' }} @endif>
@@ -80,7 +80,7 @@
                             </div>
 
                             <div class="position-relative row form-group">
-                                <label for="price_product" class="col-md-3 text-md-right col-form-label">Giá</label>
+                                <label for="price_product" class="col-md-3 text-md-right col-form-label">Giá<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="price_product" id="price_product" placeholder="Giá" type="text"
                                         class="form-control" value="{{ number_format($product->price) . ' VNĐ' }}">
@@ -89,7 +89,7 @@
                             </div>
 
                             <div class="position-relative row form-group">
-                                <label for="discount_product" class="col-md-3 text-md-right col-form-label">Giảm giá</label>
+                                <label for="discount_product" class="col-md-3 text-md-right col-form-label">Giảm giá<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="discount_product" id="discount_product" placeholder="Giảm giá"
                                         type="text" class="form-control" value="{{ $product->discount . '%' }}">
@@ -99,7 +99,7 @@
 
                             <div class="position-relative row form-group">
                                 <label for="quantity_product" class="col-md-3 text-md-right col-form-label">Số lượng
-                                    kho</label>
+                                    kho<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="quantity_product" id="quantity_product" placeholder="Số lượng kho"
                                         type="text" class="form-control" value="{{ $product->quantity }}">
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
-                                <label for="image_product" class="col-md-3 text-md-right col-form-label">Ảnh</label>
+                                <label for="image_product" class="col-md-3 text-md-right col-form-label">Ảnh<strong style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     {{-- lấy path image thông qua slug brand và gender của product --}}
                                     <div class="row">

@@ -27,17 +27,32 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'regex:/^[a-zA-ZÀ-ỹ ]*$/'],
-            'email' => 'required|unique:users,email',
+            'phone_number' => ['required', 'regex:/(09|03|07|08|05)+([0-9]{8})\b/'],
+            'email' => ['required', 'unique:users,email', 'regex:/^[^ ]+@[^ ]+\.[a-z]{2,3}$/'],
+            'address' => ['required'],
+            'password' => ['required', 'min:6', 'max:30'],
+            'password_confirmation' => ['required', 'min:6', 'max:30', 'same:password'],
         ];
     }
 
     public function messages()
     {
         return [
+            'name.required' => 'Empty name',
             'name.regex' => 'Incorrect name format',
-            'email.required' => 'Email không được bỏ trống',
-            'email.unique' => 'Email đã tồn tại',
+            'phone_number.required' => 'Empty phone',
+            'phone_number.regex' => 'Incorrect phone format',
+            'email.required' => 'Empty email',
+            'email.unique' => 'Email already exists',
+            'email.regex' => 'Incorrect email format',
+            'address.required' => 'Empty address',
+            'password.required' => 'Empty password',
+            'password.min' => 'Min',
+            'password.max' => 'Max',
+            'password_confirmation.required' => 'Empty password confirmation',
+            'password_confirmation.min' => 'Min',
+            'password_confirmation.max' => 'Max',
+            'password_confirmation.same' => "Doesn't match",
         ];
-
     }
 }
