@@ -45,10 +45,14 @@ class ProductController extends Controller
             $nameImages = $this->getFileImageProduct($image);
             //get brand slug
             $slugBrand = $this->getSlugBrand($product);
-            //get gender slug
-            $slugGender = $this->getSlugGender($product);
             //get comment of product
             $comments = $this->commentOfProduct($request->id);
+            //read gender value infer slug when taking photo
+            $slugGender = $product->gender;
+            if ($slugGender == 1)
+                $slugGender = "men";
+            if ($slugGender == 2)
+                $slugGender = "women";
             return view('product.detailProduct', compact('product', 'nameImages', 'slugBrand', 'slugGender', 'comments'));
         } else
             return Redirect('/');
@@ -211,8 +215,8 @@ class ProductController extends Controller
     {
         return $product->productBrand['slug'];
     }
-    public function getSlugGender($product)
-    {
-        return $product->productGender['slug'];
-    }
+    // public function getSlugGender($product)
+    // {
+    //     return $product->productGender['slug'];
+    // }
 }

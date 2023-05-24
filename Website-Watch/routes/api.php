@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Auth\LoginAdminController;
 use App\Http\Controllers\Auth\LoginUserController;
 use App\Http\Controllers\Auth\RegisterUserController;
@@ -7,7 +8,11 @@ use App\Http\Controllers\Front\BuyProductController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\Front\SearchProductController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Middleware\Admin;
 use App\Http\Middleware\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//middleware for customer
 Route::middleware([User::class])->group(function () {
     Route::post('/setting-profile', [UserController::class, 'updateProfile'])->name('setting-profile');
     Route::post('/buy-product-from-cart', [BuyProductController::class, 'buyProductCart'])->name('buy-product-from-cart');
@@ -34,6 +40,17 @@ Route::middleware([User::class])->group(function () {
     Route::post('/like-product', [ProductController::class, 'likeProduct'])->name('like-product');
     Route::post('/clear-like', [ProductController::class, 'removeLikeProduct'])->name('clear-like');
 });
+//middleware for employee
+Route::middleware([Admin::class])->group(function () {
+    Route::get('/admin/product/delete/{id}', [AdminProductController::class, 'destroy'])->name('delete-product');
+    Route::post('/admin/product/update/{id}', [AdminProductController::class, 'update'])->name('update-product');
+    Route::post('/admin/product/create', [AdminProductController::class, 'store'])->name('create-product');
+    Route::post('/admin/customer/create', [AdminUserController::class, 'store'])->name('create-customer');
+    Route::get('/admin/customer/edit/{id}', [AdminUserController::class, 'editCustomer'])->name('edit-customer');
+    Route::post('/admin/customer/update/{id}', [AdminUserController::class, 'update'])->name('update-customer');
+    Route::get('/admin/profile/edit/{id}', [ProfileController::class, 'editEmployee'])->name('edit-profile');
+});
+
 // login and register of user
 Route::post('/login-user', [LoginUserController::class, 'login'])->name('login-user');
 Route::get('/logout-user', [LoginUserController::class, 'logout'])->name('logout-user');

@@ -24,10 +24,7 @@ class Product extends Model
     {
         return $this->belongsTo(Image::class, 'image', 'id');
     }
-    public function productGender()
-    {
-        return $this->belongsTo(Gender::class, 'gender', 'id');
-    }
+
     public function productComment()
     {
         return $this->hasMany(Comment::class, 'product', 'id');
@@ -43,32 +40,39 @@ class Product extends Model
             ->get();
     }
     public function currentTime()
+{
+    $currentTime = Carbon::now('Asia/Ho_Chi_Minh');
+    return $currentTime->toDateTimeString();
+}
+    public function checkGender($gender)
     {
-        $currentTime = Carbon::now();
-        return $currentTime->toDateTimeString();
+        if ($gender == 1)
+            return  "men";
+        if ($gender == 2)
+            return  "women";
     }
 
-    public function getAllProducts($filters = [],$search = null, $sortbyArr = null) {
-         $products = Product::first('id')
-        ->select('products.*','gender.name as gender_name')
-        ->join('gender','products.gender','=','gender.id');
+    public function getAllProducts($filters = [], $search = null, $sortbyArr = null)
+    {
+        $products = Product::first('id')
+            ->select('products.*', 'gender as gender_name');
         $orderBy = 'id';
         $orderType = 'asc';
-        if(!empty($sortbyArr) && is_array($sortbyArr)) {
-            if(!empty($sortbyArr['sortBy']) && !empty($sortbyArr['sortType'])) {
+        if (!empty($sortbyArr) && is_array($sortbyArr)) {
+            if (!empty($sortbyArr['sortBy']) && !empty($sortbyArr['sortType'])) {
                 $orderBy = trim($sortbyArr['sortBy']);
                 $orderType = trim($sortbyArr['sortType']);
             }
         }
         $products = $products->orderBy($orderBy, $orderType);
 
-        if(!empty($filters)) {
+        if (!empty($filters)) {
             $products->where($filters);
         }
 
-        if(!empty($search)) {
-            $products = $products->where(function($query) use ($search) {
-                $query->orWhere('products.name','like','%'.$search.'%');
+        if (!empty($search)) {
+            $products = $products->where(function ($query) use ($search) {
+                $query->orWhere('products.name', 'like', '%' . $search . '%');
             });
         }
         $products = $products->paginate(10);

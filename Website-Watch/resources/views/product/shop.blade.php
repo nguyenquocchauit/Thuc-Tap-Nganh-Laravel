@@ -12,11 +12,17 @@
                         <div class="filter-wiget">
                             <h4 class="fw-title">Loại</h4>
                             <ul class="filter-categories">
-                                @foreach ($categories as $category)
+                                <li><a
+                                        href="{{ route('shop-index') }}/men }}">Nam</a>
+                                </li>
+                                <li><a
+                                    href="{{ route('shop-index') }}/women }}">Nữ</a>
+                            </li>
+                                {{-- @foreach ($categories as $category)
                                     <li><a
                                             href="{{ route('shop-index') }}/{{ ucfirst(trans($category->slug)) }}">{{ $category->name }}</a>
                                     </li>
-                                @endforeach
+                                @endforeach --}}
                             </ul>
                         </div>
                         <div class="filter-wiget">
@@ -76,7 +82,8 @@
                             <div id="row_wishlist" class="row">
                                 @foreach ($liked as $like)
                                     @if ($like->status == 'like' && $like->customers == Auth::user()->id)
-                                        <div class="row list-like-product product--{{ $like->product }}" style="margin: 10px 0" data-id="{{ $like->product }}">
+                                        <div class="row list-like-product product--{{ $like->product }}" style="margin: 10px 0"
+                                            data-id="{{ $like->product }}">
                                             @php
                                                 $nameImage = $like->products->productImage['image_1'];
                                             @endphp
@@ -87,7 +94,8 @@
                                                 <p>{{ $like->products['name'] }}</p>
                                                 <p style="color:#fe980f">@php $price = $like->products['price']-($like->products['price'] * ($like->products['discount']/100)) @endphp {{ number_format($price) . ' VNĐ' }}
                                                 </p>
-                                                <a class="btn btn-success" href="/chi-tiet-san-pham/{{ $like->product }}">Chi tiết</a>
+                                                <a class="btn btn-success" href="/chi-tiet-san-pham/{{ $like->product }}">Chi
+                                                    tiết</a>
                                                 <a class="btn btn-danger btn-xs delete_wishlist remove-like-product"
                                                     style="margin-top:0">Xóa</a>
                                                 <input type="hidden" class="idProduct" value="{{ $like->product }}">
@@ -98,7 +106,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 col-4 d-flex justify-content-end ">
-                                    <button type="button" class="btn btn-success mb-1" id="buy-all-like-product">Đặt mua tất cả</button>
+                                    <button type="button" class="btn btn-success mb-1" id="buy-all-like-product">Đặt mua tất
+                                        cả</button>
                                 </div>
                             </div>
                         @endguest
@@ -219,11 +228,9 @@
         </div>
     </section>
     {{-- Product Shop Section End --}}
-
 @endsection
 
 @push('scripts')
-
     <script>
         $(function() {
             $("#slider-range").slider({

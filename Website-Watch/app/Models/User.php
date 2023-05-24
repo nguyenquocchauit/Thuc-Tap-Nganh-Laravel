@@ -14,6 +14,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     protected $guard = "user";
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -65,6 +66,7 @@ class User extends Authenticatable
                 $query->orWhere('users.name','like','%'.$search.'%');
                 $query->orWhere('users.email','like','%'.$search.'%');
                 $query->orWhere('users.address','like','%'.$search.'%');
+                $query->orWhere('users.phone_number','like','%'.$search.'%');
             });
         }
         $users = $users->paginate(10);

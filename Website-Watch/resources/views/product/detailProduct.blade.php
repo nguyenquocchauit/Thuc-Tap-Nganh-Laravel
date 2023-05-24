@@ -171,8 +171,7 @@
                                                             id="IDComment">
                                                         @if (Auth::check())
                                                             @if ($comment->customers == Auth::user()->id)
-                                                                <span
-                                                                    class="d-flex justify-content-end "><i
+                                                                <span class="d-flex justify-content-end "><i
                                                                         class="fas fa-trash-alt delete-comment-product"></i></span>
                                                             @endif
                                                         @endif

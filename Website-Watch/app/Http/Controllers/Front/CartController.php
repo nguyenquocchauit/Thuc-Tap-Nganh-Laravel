@@ -19,6 +19,12 @@ class CartController extends Controller
     {
         // get product by id
         $product = Product::find($request->id);
+        //display product type (gender)
+        $gender = $product->gender;
+        if ($gender == 1)
+            $gender = "Nam";
+        if ($gender == 2)
+            $gender = "Nữ";
         // initialize session[cart]
         $cart = session()->get('cart', []);
         // price process when there is a discount
@@ -40,10 +46,11 @@ class CartController extends Controller
                 }
             }
         } else {
+
             $cart[$request->id] = [
                 "name" => $product->name,
                 "brand" => $product->productBrand['name'],
-                "gender" => $product->productGender['name'],
+                "gender" => $gender,
                 "quantity" => 1,
                 "price" => $product->price,
                 "discount" => $product->discount,
@@ -99,7 +106,7 @@ class CartController extends Controller
     }
     public function removeAllCart(Request $request)
     {
-        if ($request->action = "Remove all cart") {
+        if ($request->action == "Remove all cart") {
             $request->session()->forget('cart');
             // $request->session()->flush();
             return response()->json([

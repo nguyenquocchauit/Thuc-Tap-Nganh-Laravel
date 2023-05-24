@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,14 +19,14 @@ class BuyProductController extends Controller
         $total = 0;
         $user = User::find($request->user);
         $orderDetail = new OrderDetail();
-        $order = new Order();
-        // get ID automatic of table orders
-        $IDOrder = $order->maxID();
-        $IDOrder = $IDOrder[0]->ID_Max;
-        $IDOrder += 1;
-        // get ID automatic of table order_details
-        $IDOrderDetail = $orderDetail->maxID();
-        $IDOrderDetail = $IDOrderDetail[0]->ID_Max;
+        $time = $orderDetail->currentTime();
+        $times = Carbon::createFromFormat('Y-m-d H:i:s', $time);
+        $times = $times->format('HisdmY');
+
+        // get the total number of orders available in orders and order_details
+        $countOrderDetails = DB::table('order_details')->count();
+        $countOrders = DB::table('orders')->count();
+        $IDOrder = "HD" . $countOrders . $times;
         $detail = array();
         if ($user) {
             if ($user->address) {
@@ -36,9 +37,9 @@ class BuyProductController extends Controller
 
                         foreach ($cart as $id => $product) {
                             $total += $cart[$id]['total'];
-                            $IDOrderDetail++;
+                            $countOrderDetails++;
                             array_push($detail, array(
-                                "id" => $IDOrderDetail,
+                                "id" => "CTHD" . $countOrderDetails . $times,
                                 "orders" => $IDOrder,
                                 "product" => $id,
                                 "quantity" => $cart[$id]['quantity'],
@@ -47,12 +48,16 @@ class BuyProductController extends Controller
                                 "created_at" => $orderDetail->currentTime(),
                             ));
                         }
-                        // insert value to table order
-                        $order->id = $IDOrder;
-                        $order->customers = $request->user;
-                        $order->created_at = $order->currentTime();
-                        $order->total = $total + ($total * 0.08);
-                        $order->save();
+                        // // insert value to table order
+                        DB::table('orders')->insert([
+                            'id' => $IDOrder,
+                            'customers' => $request->user,
+                            'employee' => 1,
+                            'status' => 'DVC',
+                            'created_at' =>  $orderDetail->currentTime(),
+                            'updated_at' => $orderDetail->currentTime(),
+                            'total' => $total + ($total * 0.08),
+                        ]);
                         OrderDetail::insert($detail);
                         $request->session()->forget('cart');
                         return response()->json([

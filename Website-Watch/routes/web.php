@@ -7,7 +7,10 @@ use App\Http\Controllers\Front\ShopController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\LoginAdminController;
 use App\Http\Controllers\User\UserController as UserUserController;
 use App\Http\Middleware\Admin;
@@ -35,15 +38,19 @@ Route::get('/admin/login', [LoginAdminController::class, 'index'])->name('login-
 
 Route::prefix('shop')->group(function () {
     Route::get('/', [ShopController::class, 'index'])->name('shop-index');
-    Route::get('/{categoryName}', [ShopController::class, 'category']);
+    // Route::get('/{categoryName}', [ShopController::class, 'category']);
 });
 
 //Admin
 Route::middleware([Admin::class])->prefix('admin')->group(function () {
-    Route::resource('user', UserController::class);
+    Route::resource('customer', UserController::class);
     Route::resource('brand', BrandController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('product', AdminProductController::class);
+    Route::resource('report', ReportController::class);
+    Route::resource('employee', EmployeeController::class);
+    //Route::resource('/thong-tin-ca-nhan', ProfileController::class);
+    Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'profile'])->name('edit');
 });
 // User
 Route::middleware([User::class])->group(function () {

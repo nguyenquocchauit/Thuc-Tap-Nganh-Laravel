@@ -34,7 +34,6 @@
                     <div class="card-header">
 
                         <form>
-
                             <div class="row">
 
                                 <div class="col-3">
@@ -42,7 +41,8 @@
                                         <option value="0">Tất cả hãng</option>
                                         @foreach ($brands as $brand)
                                             <option value="{{ $brand->id }}"
-                                                {{ request()->brand == $brand->id ? 'selected' : false }}>{{ $brand->id }}
+                                                {{ request()->brand == $brand->id ? 'selected' : false }}>
+                                                {{ $brand->id }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -51,11 +51,12 @@
                                 <div class="col-3">
                                     <select name="category" class="form-control">
                                         <option value="0">Tất cả loại</option>
-                                        @foreach ($categories as $categories)
-                                            <option value="{{ $categories->id }}"
-                                                {{ request()->category == $categories->id ? 'selected' : false }}>
-                                                {{ $categories->name }}</option>
-                                        @endforeach
+                                        <option value="1" {{ request()->category == 1 ? 'selected' : false }}>
+                                            Nam
+                                        </option>
+                                        <option value="2" {{ request()->category == 2 ? 'selected' : false }}>
+                                            Nữ
+                                        </option>
                                     </select>
                                 </div>
 
@@ -76,12 +77,7 @@
                             </div>
                         </form>
 
-                        {{-- <div class="btn-actions-pane-right">
-                            <div role="group" class="btn-group-sm btn-group">
-                                <button class="btn btn-focus">This week</button>
-                                <button class="active btn btn-focus">Anytime</button>
-                            </div>
-                        </div> --}}
+
                     </div>
                     @include('admin.alert')
                     <div class="table-responsive">
@@ -92,17 +88,17 @@
                                     <th class="text-center">Ảnh</th>
                                     <th class="text-center">Tên</th>
                                     <th class="text-center">Giá
-                                        <a href="./admin/product?sort-by=price&sort-type={{ $sortType }}">
+                                        <a href="./admin/product?brand={{ request()->brand }}&category={{ request()->category }}&search={{ request()->search }}&sort-by=price&sort-type={{ $sortType }}">
                                             <i class="fas fa-sort"></i>
                                         </a>
                                     </th>
                                     <th class="text-center">Giảm giá
-                                        <a href="./admin/product?sort-by=discount&sort-type={{ $sortType }}">
+                                        <a href="./admin/product?brand={{ request()->brand }}&category={{ request()->category }}&search={{ request()->search }}&sort-by=discount&sort-type={{ $sortType }}">
                                             <i class="fas fa-sort"></i>
                                         </a>
                                     </th>
                                     <th class="text-center">Số lượng
-                                        <a href="./admin/product?sort-by=quantity&sort-type={{ $sortType }}">
+                                        <a href="./admin/product?brand={{ request()->brand }}&category={{ request()->category }}&search={{ request()->search }}&sort-by=quantity&sort-type={{ $sortType }}">
                                             <i class="fas fa-sort"></i>
                                         </a>
                                     </th>
@@ -129,19 +125,23 @@
                                                 </div>
                                             @else
                                                 <div class="badge badge-danger mt-2">
-                                                    {{ $product->quantity }}
+                                                    Hết hàng
                                                 </div>
                                             @endif
 
                                         </td>
-                                        <td class="text-center">{{ $product->productGender['name'] }}</td>
+                                        @if ($product->gender == 1)
+                                            <td class="text-center">Nam</td>
+                                        @else
+                                            <td class="text-center">Nữ</td>
+                                        @endif
                                         <td class="text-center">{{ $product->productBrand['name'] }}</td>
                                         <td class="text-center">
-                                            <a href="/admin/product/{{ $product->id }}" data-toggle="tooltip"
-                                                title="Chi tiết" data-placement="bottom"
+                                            <a href="/chi-tiet-san-pham/{{ $product->id }}" data-toggle="tooltip"
+                                                title="Xem tại trang bán hàng" data-placement="bottom"
                                                 class="btn btn-outline-success border-0 btn-sm">
                                                 <span class="btn-icon-wrapper opacity-8">
-                                                    <i class="fas fa-info-circle fa-w-20"></i>
+                                                    <i class="fas fa-eye fa-w-20"></i>
                                                 </span>
                                             </a>
                                             <a href="/admin/product/{{ $product->id }}/edit" data-toggle="tooltip"
@@ -151,19 +151,15 @@
                                                     <i class="fa fa-edit fa-w-20"></i>
                                                 </span>
                                             </a>
-                                            <form class="d-inline" action="./admin/product/ {{ $product->id }}"
-                                                method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-hover-shine btn-outline-danger border-0 btn-sm"
-                                                    type="submit" data-toggle="tooltip" title="Delete"
-                                                    data-placement="bottom"
-                                                    onclick="return confirm('Bạn có thực sự muốn xóa sản phẩm này?')">
-                                                    <span class="btn-icon-wrapper opacity-8">
-                                                        <i class="fa fa-trash fa-w-20"></i>
-                                                    </span>
-                                                </button>
-                                            </form>
+                                            <button
+                                                class="btn btn-hover-shine btn-outline-danger border-0 btn-sm btn-delete-product"
+                                                name="btn-delete-product" type="submit" data-toggle="tooltip"
+                                                title="Delete" data-placement="bottom">
+                                                <span class="btn-icon-wrapper opacity-8">
+                                                    <i class="fa fa-trash fa-w-20"></i>
+                                                </span>
+                                                <input type="hidden" name="" value="{{ $product->id }}">
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach

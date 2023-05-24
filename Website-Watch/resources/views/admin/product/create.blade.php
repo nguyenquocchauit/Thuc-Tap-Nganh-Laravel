@@ -17,24 +17,16 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
-                        <form method="post" action="admin/product" enctype="multipart/form-data">
-                            @csrf
-                            @include('admin.alert')
+                        <form id="create-product" method="post" action="" enctype="multipart/form-data">
                             <div class="position-relative row form-group">
                                 <label for="name_product" class="col-md-3 text-md-right col-form-label">Tên sản phẩm</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="name_product" id="name_product" placeholder="Tên sản phẩm" type="text"
-                                        class="form-control" value="{{old('name_product')}}">
-                                        <span style="color: red">
-                                            @error('name_product')
-                                                {{$message}}
-                                            @enderror
-                                        </span>
+                                        class="form-control" value="{{ old('name_product') }}">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
@@ -48,70 +40,42 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    <span style="color: red">
-                                        @error('brand_id')
-                                            {{$message}}
-                                        @enderror
-                                    </span>
                                 </div>
                             </div>
-
                             <div class="position-relative row form-group">
                                 <label for="product_category_id" class="col-md-3 text-md-right col-form-label">Loại</label>
                                 <div class="col-md-9 col-xl-8">
                                     <select name="product_category_id" id="product_category_id" class="form-control">
                                         <option value="">-- Loại --</option>
-                                        @foreach ($genders as $gender)
-                                            <option value="{{ $gender->id }}">
-                                                {{ $gender->name }}
-                                            </option>
-                                        @endforeach
+                                        <option value="1">
+                                            Nam
+                                        </option>
+                                        <option value="2">
+                                            Nữ
+                                        </option>
                                     </select>
-                                    <span style="color: red">
-                                        @error('product_category_id')
-                                            {{$message}}
-                                        @enderror
-                                    </span>
                                 </div>
                             </div>
-
                             <div class="position-relative row form-group">
                                 <label for="price_product" class="col-md-3 text-md-right col-form-label">Giá</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="price_product" id="price_product" placeholder="Giá" type="text"
-                                        class="form-control" value="{{old('price_product')}}">
-                                        <span style="color: red">
-                                            @error('price_product')
-                                                {{$message}}
-                                            @enderror
-                                        </span>
+                                        class="form-control" value="{{ old('price_product') }}">
                                 </div>
                             </div>
-
                             <div class="position-relative row form-group">
                                 <label for="discount_product" class="col-md-3 text-md-right col-form-label">Giảm giá</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="discount_product" id="discount_product" placeholder="Giảm giá"
-                                        type="text" class="form-control" value="{{old('discount_product')}}">
-                                        <span style="color: red">
-                                            @error('discount_product')
-                                                {{$message}}
-                                            @enderror
-                                        </span>
+                                        type="text" class="form-control" value="{{ old('discount_product') }}">
                                 </div>
                             </div>
-
                             <div class="position-relative row form-group">
                                 <label for="quantity_product" class="col-md-3 text-md-right col-form-label">Số lượng
                                     kho</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="quantity_product" id="quantity_product" placeholder="Số lượng kho"
-                                        type="text" class="form-control" value="{{old('quantity_product')}}">
-                                        <span style="color: red">
-                                            @error('quantity_product')
-                                                {{$message}}
-                                            @enderror
-                                        </span>
+                                        type="text" class="form-control" value="{{ old('quantity_product') }}">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
@@ -123,85 +87,49 @@
                                                 <img class="w-100" src="{{ 'images/default-image.jpg' }}" alt=""
                                                     id="img-1">
                                             </label>
-                                            <input class="image_product" type="file" id="image_1" name="image_1" data-id="img-1"
-                                                style="display:none;">
-                                                <span style="color: red">
-                                                    @error('image_1')
-                                                        {{$message}}
-                                                    @enderror
-                                                </span>
+                                            <input class="image_product" type="file" id="image_1" name="image[]"
+                                                data-id="img-1" style="display:none;">
                                         </div>
                                         <div class="col-2">
                                             <label for="image_2" class="file-image">
                                                 <img class="w-100" src="{{ 'images/default-image.jpg' }}" alt=""
                                                     id="img-2">
                                             </label>
-                                            <input class="image_product" type="file" id="image_2" name="image_2" data-id="img-2"
-                                                style="display:none;">
-                                                <span style="color: red">
-                                                    @error('image_2')
-                                                        {{$message}}
-                                                    @enderror
-                                                </span>
+                                            <input class="image_product" type="file" id="image_2" name="image[]"
+                                                data-id="img-2" style="display:none;">
                                         </div>
                                         <div class="col-2">
                                             <label for="image_3" class="file-image">
                                                 <img class="w-100" src="{{ 'images/default-image.jpg' }}" alt=""
                                                     id="img-3">
                                             </label>
-                                            <input class="image_product" type="file" id="image_3" name="image_3" data-id="img-3"
-                                                style="display:none;">
-                                                <span style="color: red">
-                                                    @error('image_3')
-                                                        {{$message}}
-                                                    @enderror
-                                                </span>
+                                            <input class="image_product" type="file" id="image_3" name="image[]"
+                                                data-id="img-3" style="display:none;">
                                         </div>
                                         <div class="col-2">
                                             <label for="image_4" class="file-image">
                                                 <img class="w-100" src="{{ 'images/default-image.jpg' }}" alt=""
                                                     id="img-4">
                                             </label>
-                                            <input class="image_product" type="file" id="image_4" name="image_4" data-id="img-4"
-                                                style="display:none;">
-                                                <span style="color: red">
-                                                    @error('image_4')
-                                                        {{$message}}
-                                                    @enderror
-                                                </span>
+                                            <input class="image_product" type="file" id="image_4" name="image[]"
+                                                data-id="img-4" style="display:none;">
                                         </div>
                                         <div class="col-2">
                                             <label for="image_5" class="file-image">
-                                                <img class="w-100" src="{{ 'images/default-image.jpg' }}" alt=""
-                                                    id="img-5">
+                                                <img class="w-100" src="{{ 'images/default-image.jpg' }}"
+                                                    alt="" id="img-5">
                                             </label>
-                                            <input class="image_product" type="file" id="image_5" name="image_5" data-id="img-5"
-                                                style="display:none;">
-                                                <span style="color: red">
-                                                    @error('image_5')
-                                                        {{$message}}
-                                                    @enderror
-                                                </span>
+                                            <input class="image_product" type="file" id="image_5" name="image[]"
+                                                data-id="img-5" style="display:none;">
                                         </div>
                                         <div class="col-2">
                                             <label for="image_6" class="file-image">
-                                                <img class="w-100" src="{{ 'images/default-image.jpg' }}" alt=""
-                                                    id="img-6">
+                                                <img class="w-100" src="{{ 'images/default-image.jpg' }}"
+                                                    alt="" id="img-6">
                                             </label>
-                                            <input class="image_product" type="file" id="image_6" name="image_6" data-id="img-6"
-                                                style="display:none;">
-                                                <span style="color: red">
-                                                    @error('image_6')
-                                                        {{$message}}
-                                                    @enderror
-                                                </span>
+                                            <input class="image_product" type="file" id="image_6" name="image[]"
+                                                data-id="img-6" style="display:none;">
                                         </div>
-                                        <span style="color: red">
-                                            @error('image_product')
-                                                {{$message}}
-                                            @enderror
-                                        </span>
-
                                     </div>
                                 </div>
                             </div>
@@ -210,11 +138,11 @@
                                 <label for="description_product" class="col-md-3 text-md-right col-form-label">Mô
                                     tả</label>
                                 <div class="col-md-9 col-xl-8">
-                                    <textarea class="form-control" name="description_product"  id="description_product" placeholder="Mô tả">{{ old('description_product') }}</textarea>
+                                    <textarea class="form-control" name="description_product" id="description_product" placeholder="Mô tả">{{ old('description_product') }}</textarea>
                                 </div>
                                 <span style="color: red">
                                     @error('id')
-                                        {{$message}}
+                                        {{ $message }}
                                     @enderror
                                 </span>
                             </div>
@@ -228,8 +156,8 @@
                                         <span>Hủy</span>
                                     </a>
 
-                                    <button type="submit" class="btn-shadow btn-hover-shine btn btn-primary "
-                                        id="btn-create_product">
+                                    <button type="button" class="btn-shadow btn-hover-shine btn btn-primary "
+                                        id="btn-create-product">
                                         <span class="btn-icon-wrapper pr-2 opacity-8">
                                             <i class="fa fa-download fa-w-20"></i>
                                         </span>

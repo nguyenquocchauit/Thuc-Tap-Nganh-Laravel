@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -27,11 +28,11 @@ class UserController extends Controller
         $title = 'Danh sách người dùng';
         //search
         $search = null;
-        if(!empty($request->search)) {
+        if (!empty($request->search)) {
             $search = $request->search;
         }
         $users = $this->users->getAllUsers($search);
-        return view('admin.user.index',compact('title','users'));
+        return view('admin.user.index', compact('title', 'users'));
     }
 
     /**
@@ -44,7 +45,7 @@ class UserController extends Controller
 
         $title = 'Thêm  người dùng';
         $roles = Role::all();
-        return view('admin.user.create',compact('title','roles'));
+        return view('admin.user.create', compact('title', 'roles'));
     }
 
     /**
@@ -53,11 +54,34 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserStoreRequest $request)
+    public function store(Request $request)
     {
-
-        if($request->get('password') != $request->get('password_confirmation')) {
-            return back()->with('error','Bạn nhập  mật khẩu không khớp, vui lòng nhập lại');
+        $valiName = Validator::make(['name' => $request->name], [
+            'name' => ['required', 'regex:/^[a-zA-ZÀ-ỹ ]*$/'],
+        ]);
+        if ($valiName->fails()) return response()->json([
+            'status' => 422,
+            'msg' => 'Incorrect name format',
+        ]);
+        $valiPhone = Validator::make(['phone_number' => $request->phone_number], [
+            'phone_number' => ['required', 'regex:/(09|03|07|08|05)+([0-9]{8})\b/'],
+        ]);
+        if ($valiPhone->fails()) return response()->json([
+            'status' => 422,
+            'msg' => 'Incorrect phone format',
+        ]);
+        $valiEmail = Validator::make(['email' => $request->email], [
+            'email' => ['required', 'regex:/^[^ ]+@[^ ]+\.[a-z]{2,3}$/'],
+        ]);
+        if ($valiEmail->fails()) return response()->json([
+            'status' => 422,
+            'msg' => 'Incorrect email format',
+        ]);
+        if ($request->password != $request->password_confirmation) {
+            return response()->json([
+                'status' => 422,
+                'msg' => 'Password incorrect'
+            ]);
         }
         // $data = $request->all();
         $user = new User();
@@ -71,7 +95,7 @@ class UserController extends Controller
             "address" => $request->address,
             "email" => $request->email,
             "password" => Hash::make($request->password),
-            "role" => $request->role
+            "role" => 0,
 
         ];
         // $data['password'] = bcrypt($request->get('password'));
@@ -88,7 +112,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $title = 'Chi tiết người dùng';
-        return view('admin.user.show',compact('title','user'));
+        return view('admin.user.show', compact('title', 'user'));
     }
 
     /**
@@ -97,14 +121,28 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-
+        $user = User::find($id);
         $title = 'Cập nhật người dùng';
-        $roles = Role::all();
-        return view('admin.user.edit',compact('title','user','roles'));
+        $userAddress = explode(", ", $user->address);
+        $address = $userAddress[0] ?? "";
+        return view('admin.user.edit', compact('title', 'user', 'address'));
     }
-
+    public function editCustomer($id)
+    {
+        $user = User::find($id);
+        $userAddress = explode(", ", $user->address);
+        $city = $userAddress[3] ?? "";
+        $district = $userAddress[2] ?? "";
+        $ward = $userAddress[1] ?? "";
+        return response()->json([
+            'status' => 200,
+            'city' => $city,
+            'district' => $district,
+            'ward' => $ward,
+        ]);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -112,9 +150,31 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        //Xu ly password
+        $valiName = Validator::make(['name' => $request->name], [
+            'name' => ['required', 'regex:/^[a-zA-ZÀ-ỹ ]*$/'],
+        ]);
+        if ($valiName->fails()) return response()->json([
+            'status' => 422,
+            'msg' => 'Incorrect name format',
+        ]);
+        $valiPhone = Validator::make(['phone_number' => $request->phone_number], [
+            'phone_number' => ['required', 'regex:/(09|03|07|08|05)+([0-9]{8})\b/'],
+        ]);
+        if ($valiPhone->fails()) return response()->json([
+            'status' => 422,
+            'msg' => 'Incorrect phone format',
+        ]);
+        $valiEmail = Validator::make(['email' => $request->email], [
+            'email' => ['required', 'regex:/^[^ ]+@[^ ]+\.[a-z]{2,3}$/'],
+        ]);
+        if ($valiEmail->fails()) return response()->json([
+            'status' => 422,
+            'msg' => 'Incorrect email format',
+        ]);
+
+        // //Xu ly password
         $users = User::find($id);
         $data = [
             "name" => $request->name,
@@ -122,10 +182,12 @@ class UserController extends Controller
             "address" => $request->address,
             "email" => $request->email,
             "password" => Hash::make($request->password),
-            "role" => $request->role
         ];
         $users->update($data);
-        return redirect('/admin/user')->with('success', 'Cập nhật người dùng thành công');
+        return response()->json([
+            'status' => 200,
+            'msg' => 'Update customer successfully',
+        ]);
     }
 
     /**

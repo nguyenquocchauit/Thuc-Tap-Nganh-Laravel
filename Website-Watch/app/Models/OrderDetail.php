@@ -12,7 +12,7 @@ class OrderDetail extends Model
     use HasFactory;
 
     protected $table = "order_details";
-    protected $primaryKey = "id";
+    protected $primaryKey = false;
     protected $guarded = [];
     public $timestamps = false;
     public function maxID()
@@ -22,8 +22,8 @@ class OrderDetail extends Model
             ->get();
     }
     public function currentTime()
-    {
-        $currentTime = Carbon::now();
-        return $currentTime->toDateTimeString();
-    }
+{
+    $currentTime = Carbon::now('Asia/Ho_Chi_Minh');
+    return $currentTime->toDateTimeString();
+}
 }

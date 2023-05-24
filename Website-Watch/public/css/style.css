@@ -253,9 +253,7 @@
 .body .productlist .filtering .item .price .price-pre {
   padding: 1px 5px 0px 0px;
   letter-spacing: 2px;
-  -webkit-text-decoration-color: rgba(255, 0, 0, 0.831372549);
-          text-decoration-color: rgba(255, 0, 0, 0.831372549);
-  -webkit-text-decoration-line: line-through;
+  text-decoration-color: rgba(255, 0, 0, 0.831372549);
   text-decoration-line: line-through;
   font-size: 14px;
   opacity: 0.6;
@@ -502,10 +500,8 @@
   justify-content: space-between;
 }
 .bodyshop .product-shop .item .price .price-pre {
-  -webkit-text-decoration-color: red;
-          text-decoration-color: red;
-  -webkit-text-decoration-line: line-through;
-          text-decoration-line: line-through;
+  text-decoration-color: red;
+  text-decoration-line: line-through;
   margin-right: 10px;
 }
 .bodyshop .product-shop .item .button-submit {
@@ -590,10 +586,8 @@
   height: 150px;
 }
 .bodydetail .price .price-pre {
-  -webkit-text-decoration-color: red;
-          text-decoration-color: red;
-  -webkit-text-decoration-line: line-through;
-          text-decoration-line: line-through;
+  text-decoration-color: red;
+  text-decoration-line: line-through;
   margin-right: 10px;
 }
 .bodydetail .quantity .inputq {
@@ -1131,6 +1125,5 @@ table th {
 
 thead {
   top: 0;
-  position: -webkit-sticky;
   position: sticky;
 }/*# sourceMappingURL=style.css.map */

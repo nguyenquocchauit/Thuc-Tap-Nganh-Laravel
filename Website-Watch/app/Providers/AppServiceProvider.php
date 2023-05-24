@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
         $men =  Product::query()
             ->join('brands', 'brands.id', '=', 'products.brand')
             ->selectRaw('DISTINCT brands.*, products.brand')
-            ->where('gender', '0')
+            ->where('gender', '2')
             ->get();
         $brands = ['men' => $men, 'women' => $women];
         return  $brands;

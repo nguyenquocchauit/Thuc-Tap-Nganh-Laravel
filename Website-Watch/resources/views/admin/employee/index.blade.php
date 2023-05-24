@@ -9,7 +9,7 @@
                         <i class="pe-7s-ticket icon-gradient bg-mean-fruit"></i>
                     </div>
                     <div>
-                        Người dùng
+                        Nhân viên
                         <div class="page-title-subheading">
                             Xem, tạo, sửa, xóa và <strong>quản lý.</strong>
                         </div>
@@ -43,13 +43,13 @@
                             </div>
                         </form>
                     </div>
-                    @include('admin.alert')
                     <div class="table-responsive">
                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
                                 <tr>
                                     <th class="text-center">ID</th>
                                     <th class="text-center">Tên</th>
+                                    <th class="text-center">Ảnh</th>
                                     <th class="text-center">Số điện thoại</th>
                                     <th class="text-center">Địa chỉ</th>
                                     <th class="text-center">Email</th>
@@ -59,39 +59,40 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($employees as $employee)
                                     <tr>
-                                        <td class="text-center">{{ $user->id }}</td>
-                                        <td class="text-center">{{ $user->name }}</td>
-                                        <td class="text-center">{{ $user->phone_number }}</td>
+                                        <td class="text-center">{{ $employee->id }}</td>
+                                        <td class="text-center">{{ $employee->name }}</td>
                                         <td class="text-center">
-                                            @if ($user->address == null)
+                                            <img width="50px" height="50px" class="img-fluid"
+                                                src="{{ asset('images/employee/') }}/{{ $employee->avt }}" alt="">
+                                        </td>
+                                        <td class="text-center">{{ $employee->phone_number }}</td>
+                                        <td class="text-center">
+                                            @if ($employee->address == null)
                                                 <div class="badge badge-warning mt-2">
                                                     <span>Chưa điền địa chỉ</span>
                                                 </div>
                                             @else
-                                                {{ $user->address }}
+                                                {{ $employee->address }}
                                             @endif
 
                                         </td>
 
                                         <td class="text-center">
-                                            {{ $user->email }}
+                                            {{ $employee->email }}
                                         </td>
 
                                         <td class="text-center">
-                                            <p>Khách hàng</p>
+                                            @if ($employee->role == '1')
+                                                Nhân viên
+                                            @else
+                                                Quản trị
+                                            @endif
                                         </td>
 
                                         <td class="text-center">
-                                            <a href="/admin/customer/{{ $user->id }}" data-toggle="tooltip"
-                                                title="Chi tiết" data-placement="bottom"
-                                                class="btn btn-outline-success border-0 btn-sm">
-                                                <span class="btn-icon-wrapper opacity-8">
-                                                    <i class="fas fa-info-circle fa-w-20"></i>
-                                                </span>
-                                            </a>
-                                            <a href="/admin/customer/{{ $user->id }}/edit" data-toggle="tooltip"
+                                            <a href="/admin/employee/{{ $employee->id }}/edit" data-toggle="tooltip"
                                                 title="Chỉnh sửa" data-placement="bottom"
                                                 class="btn btn-outline-warning border-0 btn-sm">
                                                 <span class="btn-icon-wrapper opacity-8">
@@ -110,9 +111,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-block card-footer">
-                        {!! $users->links() !!}
-                    </div>
+                    {{-- <div class="d-block card-footer">
+                        {!! $employees->links() !!}
+                    </div> --}}
                 </div>
             </div>
         </div>

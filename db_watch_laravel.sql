@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2022 at 07:37 AM
+-- Generation Time: May 24, 2023 at 02:01 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -30,9 +30,13 @@ SET time_zone = "+00:00";
 CREATE TABLE `administrator` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
+  `avt` text NOT NULL,
+  `address` text NOT NULL,
+  `phone_number` varchar(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `create_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   `role` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -40,8 +44,9 @@ CREATE TABLE `administrator` (
 -- Dumping data for table `administrator`
 --
 
-INSERT INTO `administrator` (`id`, `name`, `email`, `password`, `create_at`, `role`) VALUES
-(1, 'Nguyễn Quốc Châu', 'chauquocnguyen.cun1@gmail.com', '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', '2022-12-05 17:58:39', 1);
+INSERT INTO `administrator` (`id`, `name`, `avt`, `address`, `phone_number`, `email`, `password`, `create_at`, `updated_at`, `role`) VALUES
+(1, 'Nguyễn Quốc Châu', 'nguyen-quoc-chau.png', '02 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', '0386818888', 'chauquocnguyen.cun1@gmail.com', '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', '2022-12-05 17:58:39', '2023-05-16 23:13:36', 2),
+(2, 'Nguyễn Khánh Nam', 'nguyen-khanh-nam.png', 'Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', '0386888888', 'nguyenkhanhnam@gmail.com', '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', '2023-05-23 15:21:32', '2023-05-23 15:21:32', 1);
 
 -- --------------------------------------------------------
 
@@ -90,27 +95,9 @@ INSERT INTO `comment` (`id`, `customers`, `product`, `content`, `star`, `created
 (1, 1, 4, 'Sản phẩm tốt, đẹp. Mình đánh giá 4 sao nha', 4, '2022-12-08 10:03:41'),
 (2, 1, 4, 'Sản phẩm ok lắm nha. Ưng lắm', 5, '2022-12-15 11:53:14'),
 (3, 1, 1, 'Đẹp lắm ', 5, '2022-12-15 12:31:23'),
-(4, 2, 1, 'ddd', 4, '2022-12-25 05:10:34');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `gender`
---
-
-CREATE TABLE `gender` (
-  `id` smallint(5) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `slug` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `gender`
---
-
-INSERT INTO `gender` (`id`, `name`, `slug`) VALUES
-(0, 'Nam', 'men'),
-(1, 'Nữ', 'women');
+(4, 2, 1, 'ddd', 4, '2022-12-25 05:10:34'),
+(5, 2, 5, 'đẹp lắm bạn ạ', 0, '2023-04-01 07:00:00'),
+(6, 2, 3, 'good', 4, '2023-04-28 05:44:35');
 
 -- --------------------------------------------------------
 
@@ -153,7 +140,7 @@ INSERT INTO `images` (`id`, `image_1`, `image_2`, `image_3`, `image_4`, `image_5
 ('g-shock-gma-s110cw-7a2', 'g-shock-gma-s110cw-7a2-1.png', 'g-shock-gma-s110cw-7a2-2.png', 'g-shock-gma-s110cw-7a2-3.png', 'g-shock-gma-s110cw-7a2-4.png', 'g-shock-gma-s110cw-7a2-5.png', 'g-shock-gma-s110cw-7a2-6.png'),
 ('g-shock-gma-s120sr-7a', 'g-shock-gma-s120sr-7a-1.png', 'g-shock-gma-s120sr-7a-2.png', 'g-shock-gma-s120sr-7a-3.png', 'g-shock-gma-s120sr-7a-4.png', 'g-shock-gma-s120sr-7a-5.png', 'g-shock-gma-s120sr-7a-6.png'),
 ('g-shock-gma-s2100sk-2a', 'g-shock-gma-s2100sk-2a-1.png', 'g-shock-gma-s2100sk-2a-2.png', 'g-shock-gma-s2100sk-2a-3.png', 'g-shock-gma-s2100sk-2a-4.png', 'g-shock-gma-s2100sk-2a-5.png', 'g-shock-gma-s2100sk-2a-6.png'),
-('nguyen-quoc-chau', 'nguyen-quoc-chau-1.png', 'nguyen-quoc-chau-2.png', 'nguyen-quoc-chau-3.png', 'nguyen-quoc-chau-4.png', 'nguyen-quoc-chau-5.png', 'nguyen-quoc-chau-6.png'),
+('nguyen-quoc-chaudd-20230518152126', 'nguyen-quoc-chaudd-20230518152126-1.png', 'nguyen-quoc-chaudd-20230518152126-2.png', 'nguyen-quoc-chaudd-20230518152126-3.png', 'nguyen-quoc-chaudd-20230518152126-4.png', 'nguyen-quoc-chaudd-20230518152126-5.png', 'nguyen-quoc-chaudd-20230518152126-6.png'),
 ('olym-pianus-899833g1b', 'olym-pianus-899833g1b-1.png', 'olym-pianus-899833g1b-2.png', 'olym-pianus-899833g1b-3.png', 'olym-pianus-899833g1b-4.png', 'olym-pianus-899833g1b-5.png', 'olym-pianus-899833g1b-6.png'),
 ('olym-pianus-9946-1ags', 'olym-pianus-9946-1ags-1.png', 'olym-pianus-9946-1ags-2.png', 'olym-pianus-9946-1ags-3.png', 'olym-pianus-9946-1ags-4.png', 'olym-pianus-9946-1ags-5.png', 'olym-pianus-9946-1ags-6.png'),
 ('olym-pianus-fusion-op990-45addgr-x', 'olym-pianus-fusion-op990-45addgr-x-1.png', 'olym-pianus-fusion-op990-45addgr-x-2.png', 'olym-pianus-fusion-op990-45addgr-x-3.png', 'olym-pianus-fusion-op990-45addgr-x-4.png', 'olym-pianus-fusion-op990-45addgr-x-5.png', 'olym-pianus-fusion-op990-45addgr-x-6.png'),
@@ -208,7 +195,7 @@ INSERT INTO `likes` (`id`, `customers`, `product`, `status`, `created_at`) VALUE
 (17, 2, 1, 'none', '2022-12-19 03:42:49'),
 (18, 2, 35, 'none', '2022-12-19 03:42:54'),
 (19, 2, 36, 'none', '2022-12-19 03:42:56'),
-(20, 2, 3, 'like', '2022-12-19 03:43:11'),
+(20, 2, 3, 'none', '2022-12-19 03:43:11'),
 (21, 1, 8, 'none', '2022-12-20 03:33:46'),
 (22, 1, 7, 'none', '2022-12-20 03:33:47'),
 (23, 1, 4, 'none', '2022-12-20 03:34:19'),
@@ -216,7 +203,9 @@ INSERT INTO `likes` (`id`, `customers`, `product`, `status`, `created_at`) VALUE
 (25, 4, 16, 'none', '2022-12-26 16:26:02'),
 (26, 4, 15, 'none', '2022-12-26 16:26:03'),
 (27, 4, 2, 'like', '2022-12-26 16:28:48'),
-(28, 4, 4, 'none', '2022-12-26 16:29:17');
+(28, 4, 4, 'none', '2022-12-26 16:29:17'),
+(29, 2, 15, 'none', '2023-02-11 11:03:43'),
+(30, 2, 14, 'none', '2023-02-11 11:03:44');
 
 -- --------------------------------------------------------
 
@@ -237,9 +226,12 @@ CREATE TABLE `migrations` (
 --
 
 CREATE TABLE `orders` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` varchar(20) NOT NULL,
   `customers` bigint(20) UNSIGNED NOT NULL,
+  `employee` bigint(20) UNSIGNED NOT NULL,
+  `status` varchar(3) NOT NULL,
   `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   `total` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -247,11 +239,9 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `customers`, `created_at`, `total`) VALUES
-(1, 1, '2022-12-08 18:57:31', '18000000'),
-(2, 1, '2022-12-26 18:01:04', '37665000'),
-(3, 1, '2022-12-26 18:01:26', '137332044'),
-(4, 1, '2022-12-26 18:01:48', '327007692');
+INSERT INTO `orders` (`id`, `customers`, `employee`, `status`, `created_at`, `updated_at`, `total`) VALUES
+('HD017355722052023', 4, 1, 'TC', '2023-04-05 17:35:57', '2023-04-05 17:35:57', '38480400'),
+('HD114495723052023', 2, 1, 'DVC', '2023-05-23 14:49:57', '2023-05-23 14:49:57', '191261736');
 
 -- --------------------------------------------------------
 
@@ -260,8 +250,8 @@ INSERT INTO `orders` (`id`, `customers`, `created_at`, `total`) VALUES
 --
 
 CREATE TABLE `order_details` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `orders` bigint(20) UNSIGNED NOT NULL,
+  `id` varchar(25) NOT NULL,
+  `orders` varchar(20) NOT NULL,
   `product` bigint(20) UNSIGNED NOT NULL,
   `quantity` smallint(20) NOT NULL,
   `price` float NOT NULL,
@@ -274,27 +264,18 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `orders`, `product`, `quantity`, `price`, `total`, `created_at`) VALUES
-(1, 1, 1, 2, 9000000, 19440000, '2022-12-08 18:58:40'),
-(2, 2, 5, 1, 8075000, 8721000, '2022-12-26 18:01:04'),
-(3, 2, 4, 1, 8800000, 9504000, '2022-12-26 18:01:04'),
-(4, 2, 3, 1, 9000000, 9720000, '2022-12-26 18:01:04'),
-(5, 2, 1, 1, 9000000, 9720000, '2022-12-26 18:01:04'),
-(6, 3, 16, 1, 7125000, 7695000, '2022-12-26 18:01:26'),
-(7, 3, 15, 2, 38250000, 82620000, '2022-12-26 18:01:26'),
-(8, 3, 14, 2, 2728000, 5892480, '2022-12-26 18:01:26'),
-(9, 3, 11, 1, 17564800, 18970000, '2022-12-26 18:01:26'),
-(10, 3, 21, 1, 7280000, 7862400, '2022-12-26 18:01:26'),
-(11, 3, 20, 1, 8417000, 9090360, '2022-12-26 18:01:26'),
-(12, 3, 18, 1, 4816500, 5201820, '2022-12-26 18:01:26'),
-(13, 4, 17, 1, 8661500, 9354420, '2022-12-26 18:01:48'),
-(14, 4, 25, 1, 89910000, 97102800, '2022-12-26 18:01:48'),
-(15, 4, 24, 1, 8964000, 9681120, '2022-12-26 18:01:48'),
-(16, 4, 23, 1, 44700000, 48276000, '2022-12-26 18:01:48'),
-(17, 4, 22, 1, 5580000, 6026400, '2022-12-26 18:01:48'),
-(18, 4, 29, 1, 79929000, 86323300, '2022-12-26 18:01:48'),
-(19, 4, 28, 1, 7650000, 8262000, '2022-12-26 18:01:48'),
-(20, 4, 27, 1, 52164000, 56337100, '2022-12-26 18:01:48'),
-(21, 4, 26, 1, 5226400, 5644510, '2022-12-26 18:01:48');
+('CTHD1014495723052023', 'HD114495723052023', 14, 1, 2728000, 2946240, '2023-05-23 14:49:57'),
+('CTHD1114495723052023', 'HD114495723052023', 11, 1, 17564800, 18970000, '2023-05-23 14:49:57'),
+('CTHD117355722052023', 'HD017355722052023', 4, 1, 8800000, 9504000, '2023-05-22 17:35:57'),
+('CTHD1214495723052023', 'HD114495723052023', 10, 1, 89100000, 96228000, '2023-05-23 14:49:57'),
+('CTHD217355722052023', 'HD017355722052023', 3, 1, 9000000, 9720000, '2023-05-22 17:35:57'),
+('CTHD317355722052023', 'HD017355722052023', 2, 1, 17820000, 19245600, '2023-05-22 17:35:57'),
+('CTHD417355722052023', 'HD017355722052023', 1, 1, 9999.99, 10800, '2023-05-22 17:35:57'),
+('CTHD514495723052023', 'HD114495723052023', 9, 1, 8964000, 9681120, '2023-05-23 14:49:57'),
+('CTHD614495723052023', 'HD114495723052023', 8, 1, 8126000, 8776080, '2023-05-23 14:49:57'),
+('CTHD714495723052023', 'HD114495723052023', 7, 1, 4286400, 4629310, '2023-05-23 14:49:57'),
+('CTHD814495723052023', 'HD114495723052023', 5, 1, 8075000, 8721000, '2023-05-23 14:49:57'),
+('CTHD914495723052023', 'HD114495723052023', 15, 1, 38250000, 41310000, '2023-05-23 14:49:57');
 
 -- --------------------------------------------------------
 
@@ -312,7 +293,7 @@ CREATE TABLE `products` (
   `discount` tinyint(23) NOT NULL,
   `create_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `gender` smallint(5) NOT NULL,
+  `gender` smallint(5) NOT NULL COMMENT '1 is men, 2 is women',
   `brand` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -321,45 +302,45 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `image`, `quantity`, `price`, `discount`, `create_at`, `updated_at`, `gender`, `brand`) VALUES
-(1, 'DOUGLAS DAY-DATE 41', 'Cách mạng hóa hoạt động du lịch, Douglas DC-3 vận chuyển hành khách với phong cách Hạng Nhất và trở thành công cụ trong Thời kỳ Vàng của ngành hàng không. Bằng cách pha trộn sự tinh tế của chuyến du lịch sang trọng với công nghệ tiên tiến và tay nghề thủ công, chiếc đồng hồ AVIATOR Douglas Day Date 41 vinh danh chiếc máy bay vĩ đại nhất thời đại.', 'douglas-day-date-41', 0, 18000000, 50, '2022-12-05 18:22:40', '2022-12-26 16:45:41', 0, 'Avia'),
-(2, 'DOUGLAS MOONFLIGHT', 'Vào những năm 1930, các nhà thiết kế thời trang cao cấp đã mang đến sự quyến rũ cho đường băng và lên chiếc Douglas DC-3, chiếc máy bay đã thiết kế lại hành trình bằng cách mang đến sự sang trọng cho mỗi chuyến bay. Kết hợp các tính năng Art Deco cổ điển được đặt theo các giai đoạn của mặt trăng, AVIATOR MoonFlight cho phép bạn hạ cánh giữa các ngôi sao và tín đồ thời trang với phong cách cao cấp nhằm tôn vinh chiếc máy bay vĩ đại nhất của thời đại đó.', 'douglas-moonflight', 100, 18000000, 0, '2022-12-06 11:08:57', '2022-12-06 11:08:57', 1, 'Avia'),
-(3, 'AIRACOBRA P45 CHRONO 1', 'Tận dụng chiến lược tầm nhìn chim của mình trong suốt Thế chiến II, Airacobra là một máy bay chiến đấu ổn định mà Đồng minh có thể dựa vào để hỗ trợ quân đội trên mặt đất. Bằng cách kết hợp tinh thần đáng tin cậy của nó đã chứng tỏ là công cụ trong mọi nhiệm vụ, đồng hồ AVIATOR Airacobra P45 Chrono mang đến một vẻ ngoài giống như một công cụ xứng đáng được đề cập đến.', 'airacobra-p45-chrono-1', 1000, 10000000, 10, '2022-12-06 11:08:57', '2022-12-06 11:08:57', 0, 'Avia'),
-(4, 'AIRACOBRA P45 CHRONO', 'Tận dụng chiến lược tầm nhìn chim của mình trong suốt Thế chiến II, Airacobra là một máy bay chiến đấu ổn định mà Đồng minh có thể dựa vào để hỗ trợ quân đội trên mặt đất. Bằng cách kết hợp tinh thần đáng tin cậy của nó đã chứng tỏ là công cụ trong mọi nhiệm vụ, đồng hồ AVIATOR Airacobra P45 Chrono mang đến một vẻ ngoài giống như một công cụ xứng đáng được đề cập đến.', 'airacobra-p45-chrono', 100, 11000000, 20, '2022-12-06 11:13:51', '2022-12-06 11:13:51', 1, 'Avia'),
-(5, 'BABY G BGA-310-7A2', 'Thỏa sức ngao du ngoài trời với mẫu đồng hồ BGA-310 sành điệu và mạnh mẽ. Ngoài ra bạn cũng có thể chọn màu be sáng nếu yêu thích phong cách ngoài trời. Mặt đồng hồ tròn và rộng kết hợp dây đeo lớn và vạch chỉ giờ nổi làm tôn lên vẻ ngoài nghịch ngợm và giúp bạn dễ đọc. Dây đeo màu sáng giúp hiển thị giờ rõ ràng ngay cả trong bóng tối để bạn xem nhanh hơn. Chiếc đồng hồ có phần vấu nối dây đeo vừa vặn phù hợp với mọi chuyển động. Chiếc đồng hồ này còn cung cấp nhiều chức năng thực tiễn như cấu trúc chống va đập và khả năng chống nước ở độ sâu lên đến 100 mét. Nút bấm phía trước giúp bạn dễ mở đèn LED đôi chiếu sáng mặt đồng hồ và mở màn mình LCD khi đi cắm trại hoặc phiêu lưu.', 'baby-g-bga-310-7a2', 550, 8500000, 5, '2022-12-06 11:13:51', '2022-12-06 11:13:51', 0, 'Baby'),
-(6, 'BABY G BA-110XSM-2A', 'Từ BABY-G, dòng đồng hồ đơn giản dành cho giới nữ năng động, đã phát triển mẫu đồng hồ mới được hợp tác sản xuất cùng với thương hiệu Thủy thủ Mặt Trăng. Thương hiệu anime Thủy thủ Mặt Trăng và BABY-G nổi tiếng từ những năm 1990 và đã trở thành đối tác hoàn hảo của nhau. Chủ đề của mẫu đồng hồ mới này khả năng biến hình mang phong cách lãng mạn của Thủy thủ Mặt Trăng. Dựa trên mẫu đồng hồ BABY-G BA-110 nổi tiếng, chiếc đồng hồ mới này kết hợp nhiều yếu tố nguyên bản lung linh lấy cảm hứng từ phiên bản biến hình của Thủy thủ Mặt Trăng. Phần thân bán trong suốt màu xanh hải quân gợi lên hình ảnh bầu trời đêm, được trang trí bằng các ngôi sao, mặt trăng, trái tim và các hình ảnh Thủy thủ Mặt Trăng màu xanh lam, đỏ và vàng, tạo nên diện mạo vô cùng quyến rũ. Mặt đồng hồ được trang trí bằng những hình ảnh lấp lánh kết hợp dây đeo màu vàng hồng. Thiết kế đặc biệt này gợi lên hình ảnh Thủy thủ Mặt Trăng biến hình vô cùng cuốn hút và khó quên. Vòng dây đeo in hình Thủy thủ Mặt Trăng cũng được khắc trên nắp sau của đồng hồ. Thiết kế bao bì của mẫu đồng hồ này được lấy cảm hứng từ Thủy thủ Mặt Trăng. Mọi chi tiết liên quan đến mẫu đồng hồ này đều được thiết kế nhằm tôn vinh sự hợp tác đặc biệt giữa BABY-G và Thủy thủ Mặt Trăng, nữ anh hùng trong mơ của mọi cô gái.', 'baby-g-ba-110xsm-2a', 753, 5990000, 0, '2022-12-06 11:17:21', '2022-12-06 11:17:21', 0, 'Baby'),
-(7, 'BABY G BA-130PM-4A', 'Đồng hồ BABY-G pastel nhiều màu kết hợp kim loại vừa dễ thương vừa đơn giản, phù hợp với nhịp sống năng động của bạn. Mẫu đồng hồ với các dải và khối màu tông pastel mang phong cách pop nữ tính, kết hợp với những sắc màu dịu nhẹ tạo nên phong cách thiết kế đẹp mắt. Kim đồng hồ, vạch chỉ giờ và các thành phần mặt số khác đều được phủ lớp kim loại sáng bóng, tinh tế, kết hợp với vỏ và dây đeo mờ tạo nên phong cách độc đáo. Chiếc đồng hồ này không chỉ đẹp mắt mà còn cung cấp nhiều chức năng hữu ích hàng ngày như cấu trúc chống va đập và khả năng chống nước ở độ sâu lên đến 100 mét. Thể hiện phong cách huyền bí cùng sự tương phản ấn tượng bên trong mẫu đồng hồ kim loại mạnh mẽ với màu pastel dịu nhẹ.', 'baby-g-ba-130pm-4a', 511, 4560000, 6, '2022-12-06 11:17:21', '2022-12-06 11:17:21', 1, 'Baby'),
-(8, 'BABY G BGA-310-4A', 'Thỏa sức ngao du ngoài trời với mẫu đồng hồ BGA-310 sành điệu và mạnh mẽ. Ngoài ra bạn cũng có thể chọn màu be sáng nếu yêu thích phong cách ngoài trời. Mặt đồng hồ tròn và rộng kết hợp dây đeo lớn và vạch chỉ giờ nổi làm tôn lên vẻ ngoài nghịch ngợm và giúp bạn dễ đọc. Dây đeo màu sáng giúp hiển thị giờ rõ ràng ngay cả trong bóng tối để bạn xem nhanh hơn. Chiếc đồng hồ có phần vấu nối dây đeo vừa vặn phù hợp với mọi chuyển động. Chiếc đồng hồ này còn cung cấp nhiều chức năng thực tiễn như cấu trúc chống va đập và khả năng chống nước ở độ sâu lên đến 100 mét. Nút bấm phía trước giúp bạn dễ mở đèn LED đôi chiếu sáng mặt đồng hồ và mở màn mình LCD khi đi cắm trại hoặc phiêu lưu. Bạn đang không rảnh tay? Chỉ cần nghiêng cổ tay và bật chức năng phát sáng tự động để xem giờ ngay cả trong bóng tối. Đồng hồ BABY-G giúp bạn luôn có phong cách riêng dù là khi ở nhà giữa đô thị nhộn nhịp hay đang trên đường leo núi, sẵn sàng đối mặt với mọi chuyện xảy ra trong đời sống năng động của mình.', 'baby-g-bga-310-4a', 652, 9560000, 15, '2022-12-06 11:20:21', '2022-12-06 11:20:21', 1, 'Baby'),
-(9, 'BENTLEY BL1831-25MKNN', 'Đồng hồ Bentley là thương hiệu được thành lập vào năm 1948 tại La Chaux-de-Fonds, Thụy Sĩ. Thị trấn được biết đến như cái nôi của đồng hồ hiện đại. Tuy là thương hiệu của Thụy Sĩ nhưng lại được thiết kế gia công tại Đức – một quốc gia với nền công nghiệp chủ đạo về cơ khí, điện tử, sản xuất ôtô. Vào đầu thập niên 90, Bentley đã phát triển thành Tập đoàn Bentley Luxury Group và mở rộng danh mục sản phẩm của mình bao gồm các phụ kiện thời trang, đồ da cao cấp với phương châm “BE IN CONTROL”.', 'bentley-bl1831-25mknn', 1020, 9960000, 10, '2022-12-06 11:20:21', '2022-12-06 11:20:21', 0, 'Bentley'),
-(10, 'BENTLEY BL2080-252MKKI', 'BENTLEY 2080-152MKKI là mẫu đồng hồ cơ mới nhất hiện nay, xuất xứ thương hiệu đồng hồ của Đức nổi tiếng hàng đầu về sự chính xác và bền bỉ trong nghệ thuật chế tác đồng hồ. Nổi bật với 30 viên kim cương ( 12 viên tại cọc số, 18 viên còn lại được trải khắp đường viền của mặt phụ small second) và > 400 viên đá sapphire đầy sang trọng với độ tinh xảo cao mang tới phong cách sang trọng quý tộc và thanh lịch.', 'bentley-bl2080-252mkki', 222, 99000000, 10, '2022-12-06 11:23:33', '2022-12-06 11:23:33', 0, 'Bentley'),
-(11, 'BENTLY BL1805-20LKWD', 'Đồng hồ Bentley BL1805-20LKWD là mẫu đồng hồ nữ mới nhất hiện nay, xuất xứ thương hiệu đồng hồ của Đức nổi tiếng hàng đầu về sự chính xác và bền bỉ trong nghệ thuật chế tác đồng hồ, sản phẩm mang phong cách sang trọng quý tộc và thanh lịch, cuốn hút ngay từ cái nhìn đầu tiên với phong cách classic đầy tinh tế.', 'bentley-bl1805-20lkwd', 350, 19960000, 12, '2022-12-06 11:23:33', '2022-12-06 11:23:33', 1, 'Bentley'),
-(12, 'BENTLY BL1707-101LWWW', 'Đồng hồ Bentley BL1707-101LWWW là mẫu đồng hồ nữ mới nhất hiện nay, xuất xứ thương hiệu đồng hồ của Đức nổi tiếng hàng đầu về sự chính xác và bền bỉ trong nghệ thuật chế tác đồng hồ, sản phẩm mang phong cách sang trọng quý tộc và thanh lịch, cuốn hút ngay từ cái nhìn đầu tiên với phong cách classic đầy tinh tế khi trang bị cho mình vòng bezel đính đá Swarovski', 'bentley-bl1707-101lwww', 880, 9560000, 0, '2022-12-06 11:25:45', '2022-12-06 11:25:45', 1, 'Bentley'),
-(13, 'CITIZEN ECO DRIVE-BM7480', 'Đồng hồ Citizen BM7480-81L chính hãng, một thiết kế mới nhất của Citizen Japan năm 2022. Với chất liệu thép không gỉ 316L cao cấp, thiết kế măt số học trò to rõ đễ quan sát cùng bộ kim dạ quang sáng rõ cả trong bóng tối, mặt xanh lam dâyd sang trong. Bộ máy Eco-Drive bền bỉ có thể hoạt động với tuổi thọ trên 10 năm.', 'citizen-eco-drive-bm7480', 100, 18110000, 0, '2022-12-06 11:28:05', '2022-12-06 11:28:05', 0, 'Citizen'),
-(14, 'CITIZEN AG835186E', 'Đồng hồ nam Citizen AG8351-86E nổi bật đồng hồ 6 kim và các chức năng lịch ngày với thiết kế độc đáo phân ra 3 ô riêng biệt mang đậm nét cá tính trên nền mặt số tone đen mạnh mẽ.', 'citizen-ag835186e', 2000, 4960000, 45, '2022-12-06 11:28:05', '2022-12-06 11:28:05', 0, 'Citizen'),
-(15, 'CITIZEN ER0212-50D', 'Citizen Quartz ER0212-50D có đường kính 30 mm và độ dày 6.7 mm. Mặt kính được làm bằng chất liệu kính khoáng. Khung vỏ được làm bằng chất liệu thép không gỉ 316L. Bên trong khung vỏ là bộ máy quartz có độ chính xác cao. Dây đeo được làm bằng thép không gỉ và được mạ màu vàng gold (yellow gold) bằng công nghệ PVD.', 'citizen-er0212-50d', 711, 42500000, 10, '2022-12-06 11:30:40', '2022-12-06 11:30:40', 1, 'Citizen'),
-(16, 'CITIZEN EM0710-54Y', 'Đồng Hồ Nữ Citizen EM0710-54Y Chính Hãng. Đồng Hồ CitizenEco-Drive Women\'s Jolie Diamond EM0710-54Y có mặt số tròn, kim chỉ thanh mãnh,các nút chỉ giờ đính kim cương nổi bật trên nền số xà cừ màu hồng hiếm có, dây đeo stainless steel đem đến phong cách sang trọng và đẳng cấp cho phái nữ.', 'citizen-em0710-54y', 1111, 7500000, 5, '2022-12-06 11:30:40', '2022-12-06 11:30:40', 1, 'Citizen'),
-(17, 'OLYM PIANUS OP99141-71AGK-T', 'Đồng hồ Olym Pianus OP99141-71AGK-GL-T là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99141-71AGK-GL-T kính cong vòm huyền thoại là một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế hiện đại cũng như chất lượng sản phẩm mang tới cho khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op99141-71agk-t', 900, 10190000, 15, '2022-12-06 11:35:41', '2022-12-06 11:35:41', 0, 'Olym'),
-(18, 'OLYM PIANUS OP9946.1AGK-T', 'Đồng hồ Olym Pianus được ra đời từ những thập niên 50, trải qua suốt quá trình phát triển trên thị trường đồng hồ OP đã dần khẳng định là một trong những thương hiệu tầm trung có tiếng và được nhiều người yêu thích sử dụng. Mỗi thiết kế trong dòng OP luôn được cải tiến đổi mới cho phù hợp với lứa tuổi và thời gian hiện đại. Trong những năm trở lại đây đồng hồ OP được đưa vào thị trường Việt Nam, đã làm hài lòng đại đa số những người sử dụng về chất lượng cũng như mẫu mã sản phẩm.', 'olym-pianus-op9946-1agk-t', 510, 7410000, 35, '2022-12-06 11:35:41', '2022-12-06 11:35:41', 0, 'Olym'),
-(19, 'OLYM PIANUS OP990-143AGR-GL-XL', 'Olym Pianus OP990-45ADGS-GL-T  là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội, mang một diện mạo phong thái phóng khoáng và vô cùng sang trọng giúp nó nổi bật ở bất cứ nơi đâu, đây là một trong những sản phẩm nổi bật của thương hiệu Olym Pianus, có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op990-143agr-gl-xl', 100, 18000000, 0, '2022-12-07 02:39:07', '2022-12-07 02:39:07', 0, 'Olym'),
-(20, 'OLYM PIANUS OP9941-84AGK-GL-V', 'Đồng hồ Olym Pianus OP99411-84AGK-GL-T là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGK-GL-T là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op9941-84agk-gl-v', 545, 8860000, 5, '2022-12-07 02:39:07', '2022-12-07 02:39:07', 0, 'Olym'),
-(21, 'OLYM PIANUS OP9908-88AGSK-XL', 'Mẫu đồng hồ Automatic khẳng định giá trị của mình ở ngay thiết kế lộ máy, được biết đến như “trái tym” của OP9908-88AGSK-GL-T. Đối với anh em thích khám phá chắc hẳn rất thích nhìn chuyển động của bộ máy dưới lớp kính.Tuyệt vời hơn khi nhà sản xuất chế tác thang đo dự trữ với chiếc kim xăng hiển thị thời gian trữ cót đặt ngay giờ thứ 12. Niềm khao khát của nhiều quý ông khi hầu như thiết kế này chỉ thấy ở phân khúc đắt tiền. Ở vị trí 6h lộ diện chiếc đồng hồ 60 giây và chiếc kim nhỏ. Một tính năng được hoàn thiện thêm nhưng càng giúp OP9908-88AGSK-GL-T đánh bóng thêm đẳng cấp của mình.', 'olym-pianus-op9908-88agsk-xl', 155, 14560000, 50, '2022-12-07 02:41:33', '2022-12-07 02:41:33', 0, 'Olym'),
-(22, 'OLYM PIANUS OP990-15AMSK-T', 'Đồng hồ Olym Pianuss Skeleton OP990-15AMSK-T chính hãng, chất liệu thép không gỉ mạ đờmi, thiết kế thời trang cao cấp, thấy máy hoạt động cùng kính chống trầy, máy auotmmatic.', 'olym-pianus-op990-15amsk-t', 426, 7440000, 25, '2022-12-07 02:41:33', '2022-12-07 02:41:33', 0, 'Olym'),
-(23, 'OLYM PIANUS OP99411-84AGSK-V', 'Đồng hồ Olym Pianus OP99411-84AGSK-V là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGSK-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op99411-84agsk-v', 685, 59600000, 25, '2022-12-07 02:43:34', '2022-12-07 02:43:34', 0, 'Olym'),
-(24, 'OLYM PIANUS OP99411-84AGS-X', 'Đồng hồ Olym Pianus OP99411-84AGS-X là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGS-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op99411-84ags-x', 400, 9960000, 10, '2022-12-07 02:43:34', '2022-12-07 02:43:34', 0, 'Olym'),
-(25, 'OLYM PIANUS OP99411-84AGS-D', 'Đồng hồ Olym Pianus OP99411-84AGS-D là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGS-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op99411-84ags-d', 751, 99900000, 10, '2022-12-07 02:46:05', '2022-12-07 02:46:05', 0, 'Olym'),
-(26, 'OLYM PIANUS LA BÀN OP9943AGS-GL-D-KD', 'Đồng hồ Olym Pianus La Bàn OP9943AGS-GL-D-KD là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGS-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-la-ban-op9943ags-gl-d-kd', 642, 5560000, 6, '2022-12-07 02:46:05', '2022-12-07 02:46:05', 0, 'Olym'),
-(27, 'Olym Pianus Fusion OP990-45ADDGR-X', 'Olym Pianus Fusion OP990-45ADDGR-X. Sở hữu Case size 42mm, bezel size 40mm cực vừa vặn, tay nhỏ cũng đeo được. Có 2 phiên bản dây thép (SS) và dây cao su rất phù hợp cho mùa hè nóng bức và hay dùng nước, độ bền cực cao. Kính sapphire nguyên khối + bezel đính đá cực chắc chắn và sáng giúp tổng thể thiết kế trở lên Sang trọng - Đẳng cấp. Bộ máy Automatic quen thuộc của nhà OP - độ trữ cót 40H, chạy chính xác + bền bỉ.', 'olym-pianus-fusion-op990-45addgr-x', 352, 75600000, 31, '2022-12-07 02:47:23', '2022-12-07 02:47:23', 0, 'Olym'),
-(28, 'OLYM PIANUS OP99411-84AGK-GL-XL', 'Đồng hồ Olym Pianus OP99411-84AGK-GL-XL là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGK-GL-T là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op99411-84agk-gl-xl', 1656, 8500000, 10, '2022-12-07 02:47:23', '2022-12-07 02:47:23', 0, 'Olym'),
-(29, 'OLYM PIANUS OP990-45ADGS-GL-T', 'Olym Pianus OP990-45ADGS-GL-T  là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội, mang một diện mạo phong thái phóng khoáng và vô cùng sang trọng giúp nó nổi bật ở bất cứ nơi đâu, đây là một trong những sản phẩm nổi bật của thương hiệu Olym Pianus, có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op990-45adgs-gl-t', 872, 88810000, 10, '2022-12-07 02:48:59', '2022-12-07 02:48:59', 0, 'Olym'),
-(30, 'OLYM PIANUS OP990-45ADGR-GL-D', 'Đồng hồ Olym Pianus OP990-45ADGR-GL-D là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGS-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op990-45adgr-gl-d', 666, 4400000, 5, '2022-12-07 02:48:59', '2022-12-07 02:48:59', 0, 'Olym'),
-(31, 'OLYM PIANUS 9946.1AGS', 'Đồng hồ Olym Pianus 9946.1AGS là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGS-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-9946-1ags', 600, 15260000, 15, '2022-12-07 02:50:34', '2022-12-07 02:50:34', 0, 'Olym'),
-(32, 'OLYM PIANUS 899833G1B', 'Đồng hồ Olym Pianus 899833G1B là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGS-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-899833g1b', 639, 10260000, 37, '2022-12-07 02:50:34', '2022-12-07 02:50:34', 0, 'Olym'),
-(33, 'OLYM PIANUS OP2467LK-T', 'Thiết kế nhẹ nhàng nhưng đầy nét quý phái. Chắc chắn là điểm thu hút trên cổ tay của người phụ nữ sở hữu chiếc đồng hồ này.Tựa như một thứ trang sức lộng lẫy trên cổ tay người đẹp, OP2467LK-T là sự hòa điệu của sắc vàng quý phái, 4 viên đá quý lấp lánh trên mặt số cùng kiểu thiết kế lắc tay điệu đàng, độc lạ. Từng nấc từng nấc để lộ làn da quyến rũ của chị em trong những khoảng hổng đầy ngụ ý.', 'olym-pianus-op2467lk-t', 100, 59560000, 10, '2022-12-07 02:52:57', '2022-12-07 02:52:57', 1, 'Olym'),
-(34, 'OLYM PIANUS OP130-06LS-GL-T', 'Thiết kế nhẹ nhàng nhưng đầy nét quý phái. Chắc chắn là điểm thu hút trên cổ tay của người phụ nữ sở hữu chiếc đồng hồ này.Tựa như một thứ trang sức lộng lẫy trên cổ tay người đẹp, OP130-06LS-GL-T là sự hòa điệu của sắc vàng quý phái, 4 viên đá quý lấp lánh trên mặt số cùng kiểu thiết kế lắc tay điệu đàng, độc lạ. Từng nấc từng nấc để lộ làn da quyến rũ của chị em trong những khoảng hổng đầy ngụ ý.', 'olym-pianus-op130-06ls-gl-t', 599, 1260000, 35, '2022-12-07 02:52:57', '2022-12-07 02:52:57', 1, 'Olym'),
-(35, 'G-SHOCK GM-S5600GB-1', 'Chiếc đồng hồ G-SHOCK màu vàng kim trên nền đen phủ kim loại sở hữu thiết kế nhỏ và gọn hơn. Đường gờ kim loại phủ lớp ion màu vàng kim làm tôn lên vẻ ngoài trang nhã, sang trọng. Nút bấm và chốt cũng được phủ ion màu vàng kim tương phản với phần nền đen tạo nên lớp kim loại thực sự tỏa sáng. Sự kết hợp giữa màu vàng kim sang trọng và màu đen mạnh mẽ làm tôn lên vẻ đẹp lung linh độc đáo của riêng bạn.', 'g-shock-gm-s5600gb-1', 444, 19990000, 46, '2022-12-07 02:54:23', '2022-12-07 02:54:23', 0, 'GShock'),
-(36, 'G-SHOCK GMA-S2100SK-2A', 'Hãy đeo lên tay chiếc đồng hồ GA-2100 kết hợp kim-số, phủ kim loại trong suốt, vốn được ưa chuộng nay càng trở nên thu hút với thiết kế thanh mảnh và nhỏ gọn hơn. Chiếc đồng hồ sở hữu thiết kế kim loại trong suốt với nhiều màu cho bạn lựa chọn là phụ kiện linh hoạt, phù hợp với mọi loại trang phục trong suốt cả năm. Các vạch chỉ giờ được xử lý bằng phương pháp lắng đọng hơi bán mờ tạo nên vẻ ngoài bằng kim loại trong suốt sống động như thật.', 'g-shock-gma-s2100sk-2a', 741, 18500000, 0, '2022-12-07 02:54:23', '2022-12-07 02:54:23', 0, 'GShock'),
-(37, 'G-SHOCK GMA-S120SR-7A', 'Xin trân trọng giới thiệu mẫu G-SHOCK . Xuất hiện từ những năm 1990, phong cách trong suốt từng rất phổ biến và trở thành một phần không thể thiếu trong lịch sử của G-SHOCK .\r\nPhần mặt được dát lớp vỏ kim loại màu vàng hồng kết hợp cùng thiết kế chắc chắn đã tạo nên một mẫu đồng hồ đeo tay phù hợp với mọi hoàn cảnh, từ thời trang hiện đại cho đến thời trang đường phố và thường nhật.', 'g-shock-gma-s120sr-7a', 999, 18000000, 11, '2022-12-07 02:56:07', '2022-12-07 02:56:07', 1, 'GShock'),
-(38, 'G-SHOCK GMA-S110CW-7A2', 'Xin trân trọng giới thiệu mẫu G-SHOCK . Xuất hiện từ những năm 1990, phong cách trong suốt từng rất phổ biến và trở thành một phần không thể thiếu trong lịch sử của G-SHOCK .\r\nPhần mặt được dát lớp vỏ kim loại màu vàng hồng kết hợp cùng thiết kế chắc chắn đã tạo nên một mẫu đồng hồ đeo tay phù hợp với mọi hoàn cảnh, từ thời trang hiện đại cho đến thời trang đường phố và thường nhật.', 'g-shock-gma-s110cw-7a2', 362, 7500000, 5, '2022-12-07 02:56:07', '2022-12-07 02:56:07', 1, 'GShock'),
-(39, 'Nguyễn Quốc Châu', 'istockphoto-1018493446-170667a-PhotoRoom.png-PhotoRoom', 'nguyen-quoc-chau', 100, 100000000, 55, '2022-12-27 06:25:34', '2022-12-27 06:25:42', 1, 'Baby');
+(1, 'DOUGLAS DAY-DATE 41', 'Cách mạng hóa hoạt động du lịch, Douglas DC-3 vận chuyển hành khách với phong cách Hạng Nhất và trở thành công cụ trong Thời kỳ Vàng của ngành hàng không. Bằng cách pha trộn sự tinh tế của chuyến du lịch sang trọng với công nghệ tiên tiến và tay nghề thủ công, chiếc đồng hồ AVIATOR Douglas Day Date 41 vinh danh chiếc máy bay vĩ đại nhất thời đại.', 'douglas-day-date-41', 0, 999999, 99, '2022-12-05 18:22:40', '2023-05-18 11:53:59', 1, 'Avia'),
+(2, 'DOUGLAS MOONFLIGHT', 'Vào những năm 1930, các nhà thiết kế thời trang cao cấp đã mang đến sự quyến rũ cho đường băng và lên chiếc Douglas DC-3, chiếc máy bay đã thiết kế lại hành trình bằng cách mang đến sự sang trọng cho mỗi chuyến bay. Kết hợp các tính năng Art Deco cổ điển được đặt theo các giai đoạn của mặt trăng, AVIATOR MoonFlight cho phép bạn hạ cánh giữa các ngôi sao và tín đồ thời trang với phong cách cao cấp nhằm tôn vinh chiếc máy bay vĩ đại nhất của thời đại đó.', 'douglas-moonflight', 100, 18000000, 1, '2022-12-06 11:08:57', '2023-05-17 09:09:14', 2, 'Avia'),
+(3, 'AIRACOBRA P45 CHRONO 1', 'Tận dụng chiến lược tầm nhìn chim của mình trong suốt Thế chiến II, Airacobra là một máy bay chiến đấu ổn định mà Đồng minh có thể dựa vào để hỗ trợ quân đội trên mặt đất. Bằng cách kết hợp tinh thần đáng tin cậy của nó đã chứng tỏ là công cụ trong mọi nhiệm vụ, đồng hồ AVIATOR Airacobra P45 Chrono mang đến một vẻ ngoài giống như một công cụ xứng đáng được đề cập đến.', 'airacobra-p45-chrono-1', 1000, 10000000, 10, '2022-12-06 11:08:57', '2022-12-06 11:08:57', 1, 'Avia'),
+(4, 'AIRACOBRA P45 CHRONO', 'Tận dụng chiến lược tầm nhìn chim của mình trong suốt Thế chiến II, Airacobra là một máy bay chiến đấu ổn định mà Đồng minh có thể dựa vào để hỗ trợ quân đội trên mặt đất. Bằng cách kết hợp tinh thần đáng tin cậy của nó đã chứng tỏ là công cụ trong mọi nhiệm vụ, đồng hồ AVIATOR Airacobra P45 Chrono mang đến một vẻ ngoài giống như một công cụ xứng đáng được đề cập đến.', 'airacobra-p45-chrono', 100, 11000000, 20, '2022-12-06 11:13:51', '2022-12-06 11:13:51', 2, 'Avia'),
+(5, 'BABY G BGA-310-7A2', 'Thỏa sức ngao du ngoài trời với mẫu đồng hồ BGA-310 sành điệu và mạnh mẽ. Ngoài ra bạn cũng có thể chọn màu be sáng nếu yêu thích phong cách ngoài trời. Mặt đồng hồ tròn và rộng kết hợp dây đeo lớn và vạch chỉ giờ nổi làm tôn lên vẻ ngoài nghịch ngợm và giúp bạn dễ đọc. Dây đeo màu sáng giúp hiển thị giờ rõ ràng ngay cả trong bóng tối để bạn xem nhanh hơn. Chiếc đồng hồ có phần vấu nối dây đeo vừa vặn phù hợp với mọi chuyển động. Chiếc đồng hồ này còn cung cấp nhiều chức năng thực tiễn như cấu trúc chống va đập và khả năng chống nước ở độ sâu lên đến 100 mét. Nút bấm phía trước giúp bạn dễ mở đèn LED đôi chiếu sáng mặt đồng hồ và mở màn mình LCD khi đi cắm trại hoặc phiêu lưu.', 'baby-g-bga-310-7a2', 550, 8500000, 5, '2022-12-06 11:13:51', '2022-12-06 11:13:51', 1, 'Baby'),
+(6, 'BABY G BA-110XSM-2A', 'Từ BABY-G, dòng đồng hồ đơn giản dành cho giới nữ năng động, đã phát triển mẫu đồng hồ mới được hợp tác sản xuất cùng với thương hiệu Thủy thủ Mặt Trăng. Thương hiệu anime Thủy thủ Mặt Trăng và BABY-G nổi tiếng từ những năm 1990 và đã trở thành đối tác hoàn hảo của nhau. Chủ đề của mẫu đồng hồ mới này khả năng biến hình mang phong cách lãng mạn của Thủy thủ Mặt Trăng. Dựa trên mẫu đồng hồ BABY-G BA-110 nổi tiếng, chiếc đồng hồ mới này kết hợp nhiều yếu tố nguyên bản lung linh lấy cảm hứng từ phiên bản biến hình của Thủy thủ Mặt Trăng. Phần thân bán trong suốt màu xanh hải quân gợi lên hình ảnh bầu trời đêm, được trang trí bằng các ngôi sao, mặt trăng, trái tim và các hình ảnh Thủy thủ Mặt Trăng màu xanh lam, đỏ và vàng, tạo nên diện mạo vô cùng quyến rũ. Mặt đồng hồ được trang trí bằng những hình ảnh lấp lánh kết hợp dây đeo màu vàng hồng. Thiết kế đặc biệt này gợi lên hình ảnh Thủy thủ Mặt Trăng biến hình vô cùng cuốn hút và khó quên. Vòng dây đeo in hình Thủy thủ Mặt Trăng cũng được khắc trên nắp sau của đồng hồ. Thiết kế bao bì của mẫu đồng hồ này được lấy cảm hứng từ Thủy thủ Mặt Trăng. Mọi chi tiết liên quan đến mẫu đồng hồ này đều được thiết kế nhằm tôn vinh sự hợp tác đặc biệt giữa BABY-G và Thủy thủ Mặt Trăng, nữ anh hùng trong mơ của mọi cô gái.', 'baby-g-ba-110xsm-2a', 753, 5990000, 0, '2022-12-06 11:17:21', '2022-12-06 11:17:21', 1, 'Baby'),
+(7, 'BABY G BA-130PM-4A', 'Đồng hồ BABY-G pastel nhiều màu kết hợp kim loại vừa dễ thương vừa đơn giản, phù hợp với nhịp sống năng động của bạn. Mẫu đồng hồ với các dải và khối màu tông pastel mang phong cách pop nữ tính, kết hợp với những sắc màu dịu nhẹ tạo nên phong cách thiết kế đẹp mắt. Kim đồng hồ, vạch chỉ giờ và các thành phần mặt số khác đều được phủ lớp kim loại sáng bóng, tinh tế, kết hợp với vỏ và dây đeo mờ tạo nên phong cách độc đáo. Chiếc đồng hồ này không chỉ đẹp mắt mà còn cung cấp nhiều chức năng hữu ích hàng ngày như cấu trúc chống va đập và khả năng chống nước ở độ sâu lên đến 100 mét. Thể hiện phong cách huyền bí cùng sự tương phản ấn tượng bên trong mẫu đồng hồ kim loại mạnh mẽ với màu pastel dịu nhẹ.', 'baby-g-ba-130pm-4a', 511, 4560000, 6, '2022-12-06 11:17:21', '2022-12-06 11:17:21', 2, 'Baby'),
+(8, 'BABY G BGA-310-4A', 'Thỏa sức ngao du ngoài trời với mẫu đồng hồ BGA-310 sành điệu và mạnh mẽ. Ngoài ra bạn cũng có thể chọn màu be sáng nếu yêu thích phong cách ngoài trời. Mặt đồng hồ tròn và rộng kết hợp dây đeo lớn và vạch chỉ giờ nổi làm tôn lên vẻ ngoài nghịch ngợm và giúp bạn dễ đọc. Dây đeo màu sáng giúp hiển thị giờ rõ ràng ngay cả trong bóng tối để bạn xem nhanh hơn. Chiếc đồng hồ có phần vấu nối dây đeo vừa vặn phù hợp với mọi chuyển động. Chiếc đồng hồ này còn cung cấp nhiều chức năng thực tiễn như cấu trúc chống va đập và khả năng chống nước ở độ sâu lên đến 100 mét. Nút bấm phía trước giúp bạn dễ mở đèn LED đôi chiếu sáng mặt đồng hồ và mở màn mình LCD khi đi cắm trại hoặc phiêu lưu. Bạn đang không rảnh tay? Chỉ cần nghiêng cổ tay và bật chức năng phát sáng tự động để xem giờ ngay cả trong bóng tối. Đồng hồ BABY-G giúp bạn luôn có phong cách riêng dù là khi ở nhà giữa đô thị nhộn nhịp hay đang trên đường leo núi, sẵn sàng đối mặt với mọi chuyện xảy ra trong đời sống năng động của mình.', 'baby-g-bga-310-4a', 652, 9560000, 15, '2022-12-06 11:20:21', '2022-12-06 11:20:21', 2, 'Baby'),
+(9, 'BENTLEY BL1831-25MKNN', 'Đồng hồ Bentley là thương hiệu được thành lập vào năm 1948 tại La Chaux-de-Fonds, Thụy Sĩ. Thị trấn được biết đến như cái nôi của đồng hồ hiện đại. Tuy là thương hiệu của Thụy Sĩ nhưng lại được thiết kế gia công tại Đức – một quốc gia với nền công nghiệp chủ đạo về cơ khí, điện tử, sản xuất ôtô. Vào đầu thập niên 90, Bentley đã phát triển thành Tập đoàn Bentley Luxury Group và mở rộng danh mục sản phẩm của mình bao gồm các phụ kiện thời trang, đồ da cao cấp với phương châm “BE IN CONTROL”.', 'bentley-bl1831-25mknn', 1020, 9960000, 10, '2022-12-06 11:20:21', '2022-12-06 11:20:21', 1, 'Bentley'),
+(10, 'BENTLEY BL2080-252MKKI', 'BENTLEY 2080-152MKKI là mẫu đồng hồ cơ mới nhất hiện nay, xuất xứ thương hiệu đồng hồ của Đức nổi tiếng hàng đầu về sự chính xác và bền bỉ trong nghệ thuật chế tác đồng hồ. Nổi bật với 30 viên kim cương ( 12 viên tại cọc số, 18 viên còn lại được trải khắp đường viền của mặt phụ small second) và > 400 viên đá sapphire đầy sang trọng với độ tinh xảo cao mang tới phong cách sang trọng quý tộc và thanh lịch.', 'bentley-bl2080-252mkki', 222, 99000000, 10, '2022-12-06 11:23:33', '2022-12-06 11:23:33', 1, 'Bentley'),
+(11, 'BENTLY BL1805-20LKWD', 'Đồng hồ Bentley BL1805-20LKWD là mẫu đồng hồ nữ mới nhất hiện nay, xuất xứ thương hiệu đồng hồ của Đức nổi tiếng hàng đầu về sự chính xác và bền bỉ trong nghệ thuật chế tác đồng hồ, sản phẩm mang phong cách sang trọng quý tộc và thanh lịch, cuốn hút ngay từ cái nhìn đầu tiên với phong cách classic đầy tinh tế.', 'bentley-bl1805-20lkwd', 350, 19960000, 12, '2022-12-06 11:23:33', '2022-12-06 11:23:33', 2, 'Bentley'),
+(12, 'BENTLY BL1707-101LWWW', 'Đồng hồ Bentley BL1707-101LWWW là mẫu đồng hồ nữ mới nhất hiện nay, xuất xứ thương hiệu đồng hồ của Đức nổi tiếng hàng đầu về sự chính xác và bền bỉ trong nghệ thuật chế tác đồng hồ, sản phẩm mang phong cách sang trọng quý tộc và thanh lịch, cuốn hút ngay từ cái nhìn đầu tiên với phong cách classic đầy tinh tế khi trang bị cho mình vòng bezel đính đá Swarovski', 'bentley-bl1707-101lwww', 880, 9560000, 0, '2022-12-06 11:25:45', '2022-12-06 11:25:45', 2, 'Bentley'),
+(13, 'CITIZEN ECO DRIVE-BM7480', 'Đồng hồ Citizen BM7480-81L chính hãng, một thiết kế mới nhất của Citizen Japan năm 2022. Với chất liệu thép không gỉ 316L cao cấp, thiết kế măt số học trò to rõ đễ quan sát cùng bộ kim dạ quang sáng rõ cả trong bóng tối, mặt xanh lam dâyd sang trong. Bộ máy Eco-Drive bền bỉ có thể hoạt động với tuổi thọ trên 10 năm.', 'citizen-eco-drive-bm7480', 100, 18110000, 0, '2022-12-06 11:28:05', '2022-12-06 11:28:05', 1, 'Citizen'),
+(14, 'CITIZEN AG835186E', 'Đồng hồ nam Citizen AG8351-86E nổi bật đồng hồ 6 kim và các chức năng lịch ngày với thiết kế độc đáo phân ra 3 ô riêng biệt mang đậm nét cá tính trên nền mặt số tone đen mạnh mẽ.', 'citizen-ag835186e', 2000, 4960000, 45, '2022-12-06 11:28:05', '2022-12-06 11:28:05', 1, 'Citizen'),
+(15, 'CITIZEN ER0212-50D', 'Citizen Quartz ER0212-50D có đường kính 30 mm và độ dày 6.7 mm. Mặt kính được làm bằng chất liệu kính khoáng. Khung vỏ được làm bằng chất liệu thép không gỉ 316L. Bên trong khung vỏ là bộ máy quartz có độ chính xác cao. Dây đeo được làm bằng thép không gỉ và được mạ màu vàng gold (yellow gold) bằng công nghệ PVD.', 'citizen-er0212-50d', 711, 42500000, 10, '2022-12-06 11:30:40', '2022-12-06 11:30:40', 2, 'Citizen'),
+(16, 'CITIZEN EM0710-54Y', 'Đồng Hồ Nữ Citizen EM0710-54Y Chính Hãng. Đồng Hồ CitizenEco-Drive Women\'s Jolie Diamond EM0710-54Y có mặt số tròn, kim chỉ thanh mãnh,các nút chỉ giờ đính kim cương nổi bật trên nền số xà cừ màu hồng hiếm có, dây đeo stainless steel đem đến phong cách sang trọng và đẳng cấp cho phái nữ.', 'citizen-em0710-54y', 1111, 7500000, 5, '2022-12-06 11:30:40', '2022-12-06 11:30:40', 2, 'Citizen'),
+(17, 'OLYM PIANUS OP99141-71AGK-T', 'Đồng hồ Olym Pianus OP99141-71AGK-GL-T là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99141-71AGK-GL-T kính cong vòm huyền thoại là một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế hiện đại cũng như chất lượng sản phẩm mang tới cho khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op99141-71agk-t', 900, 10190000, 15, '2022-12-06 11:35:41', '2022-12-06 11:35:41', 1, 'Olym'),
+(18, 'OLYM PIANUS OP9946.1AGK-T', 'Đồng hồ Olym Pianus được ra đời từ những thập niên 50, trải qua suốt quá trình phát triển trên thị trường đồng hồ OP đã dần khẳng định là một trong những thương hiệu tầm trung có tiếng và được nhiều người yêu thích sử dụng. Mỗi thiết kế trong dòng OP luôn được cải tiến đổi mới cho phù hợp với lứa tuổi và thời gian hiện đại. Trong những năm trở lại đây đồng hồ OP được đưa vào thị trường Việt Nam, đã làm hài lòng đại đa số những người sử dụng về chất lượng cũng như mẫu mã sản phẩm.', 'olym-pianus-op9946-1agk-t', 510, 7410000, 35, '2022-12-06 11:35:41', '2022-12-06 11:35:41', 1, 'Olym'),
+(19, 'OLYM PIANUS OP990-143AGR-GL-XL', 'Olym Pianus OP990-45ADGS-GL-T  là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội, mang một diện mạo phong thái phóng khoáng và vô cùng sang trọng giúp nó nổi bật ở bất cứ nơi đâu, đây là một trong những sản phẩm nổi bật của thương hiệu Olym Pianus, có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op990-143agr-gl-xl', 100, 18000000, 0, '2022-12-07 02:39:07', '2022-12-07 02:39:07', 1, 'Olym'),
+(20, 'OLYM PIANUS OP9941-84AGK-GL-V', 'Đồng hồ Olym Pianus OP99411-84AGK-GL-T là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGK-GL-T là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op9941-84agk-gl-v', 545, 8860000, 5, '2022-12-07 02:39:07', '2022-12-07 02:39:07', 1, 'Olym'),
+(21, 'OLYM PIANUS OP9908-88AGSK-XL', 'Mẫu đồng hồ Automatic khẳng định giá trị của mình ở ngay thiết kế lộ máy, được biết đến như “trái tym” của OP9908-88AGSK-GL-T. Đối với anh em thích khám phá chắc hẳn rất thích nhìn chuyển động của bộ máy dưới lớp kính.Tuyệt vời hơn khi nhà sản xuất chế tác thang đo dự trữ với chiếc kim xăng hiển thị thời gian trữ cót đặt ngay giờ thứ 12. Niềm khao khát của nhiều quý ông khi hầu như thiết kế này chỉ thấy ở phân khúc đắt tiền. Ở vị trí 6h lộ diện chiếc đồng hồ 60 giây và chiếc kim nhỏ. Một tính năng được hoàn thiện thêm nhưng càng giúp OP9908-88AGSK-GL-T đánh bóng thêm đẳng cấp của mình.', 'olym-pianus-op9908-88agsk-xl', 155, 14560000, 50, '2022-12-07 02:41:33', '2022-12-07 02:41:33', 1, 'Olym'),
+(22, 'OLYM PIANUS OP990-15AMSK-T', 'Đồng hồ Olym Pianuss Skeleton OP990-15AMSK-T chính hãng, chất liệu thép không gỉ mạ đờmi, thiết kế thời trang cao cấp, thấy máy hoạt động cùng kính chống trầy, máy auotmmatic.', 'olym-pianus-op990-15amsk-t', 426, 7440000, 25, '2022-12-07 02:41:33', '2022-12-07 02:41:33', 1, 'Olym'),
+(23, 'OLYM PIANUS OP99411-84AGSK-V', 'Đồng hồ Olym Pianus OP99411-84AGSK-V là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGSK-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op99411-84agsk-v', 685, 59600000, 25, '2022-12-07 02:43:34', '2022-12-07 02:43:34', 1, 'Olym'),
+(24, 'OLYM PIANUS OP99411-84AGS-X', 'Đồng hồ Olym Pianus OP99411-84AGS-X là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGS-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op99411-84ags-x', 400, 9960000, 10, '2022-12-07 02:43:34', '2022-12-07 02:43:34', 1, 'Olym'),
+(25, 'OLYM PIANUS OP99411-84AGS-D', 'Đồng hồ Olym Pianus OP99411-84AGS-D là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGS-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op99411-84ags-d', 751, 99900000, 10, '2022-12-07 02:46:05', '2022-12-07 02:46:05', 1, 'Olym'),
+(26, 'OLYM PIANUS LA BÀN OP9943AGS-GL-D-KD', 'Đồng hồ Olym Pianus La Bàn OP9943AGS-GL-D-KD là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGS-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-la-ban-op9943ags-gl-d-kd', 642, 5560000, 6, '2022-12-07 02:46:05', '2022-12-07 02:46:05', 1, 'Olym'),
+(27, 'Olym Pianus Fusion OP990-45ADDGR-X', 'Olym Pianus Fusion OP990-45ADDGR-X. Sở hữu Case size 42mm, bezel size 40mm cực vừa vặn, tay nhỏ cũng đeo được. Có 2 phiên bản dây thép (SS) và dây cao su rất phù hợp cho mùa hè nóng bức và hay dùng nước, độ bền cực cao. Kính sapphire nguyên khối + bezel đính đá cực chắc chắn và sáng giúp tổng thể thiết kế trở lên Sang trọng - Đẳng cấp. Bộ máy Automatic quen thuộc của nhà OP - độ trữ cót 40H, chạy chính xác + bền bỉ.', 'olym-pianus-fusion-op990-45addgr-x', 352, 75600000, 31, '2022-12-07 02:47:23', '2022-12-07 02:47:23', 1, 'Olym'),
+(28, 'OLYM PIANUS OP99411-84AGK-GL-XL', 'Đồng hồ Olym Pianus OP99411-84AGK-GL-XL là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGK-GL-T là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op99411-84agk-gl-xl', 1656, 8500000, 10, '2022-12-07 02:47:23', '2022-12-07 02:47:23', 1, 'Olym'),
+(29, 'OLYM PIANUS OP990-45ADGS-GL-T', 'Olym Pianus OP990-45ADGS-GL-T  là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội, mang một diện mạo phong thái phóng khoáng và vô cùng sang trọng giúp nó nổi bật ở bất cứ nơi đâu, đây là một trong những sản phẩm nổi bật của thương hiệu Olym Pianus, có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op990-45adgs-gl-t', 872, 88810000, 10, '2022-12-07 02:48:59', '2022-12-07 02:48:59', 1, 'Olym'),
+(30, 'OLYM PIANUS OP990-45ADGR-GL-D', 'Đồng hồ Olym Pianus OP990-45ADGR-GL-D là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGS-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-op990-45adgr-gl-d', 666, 4400000, 5, '2022-12-07 02:48:59', '2022-12-07 02:48:59', 1, 'Olym'),
+(31, 'OLYM PIANUS 9946.1AGS', 'Đồng hồ Olym Pianus 9946.1AGS là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGS-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-9946-1ags', 600, 15260000, 15, '2022-12-07 02:50:34', '2022-12-07 02:50:34', 1, 'Olym'),
+(32, 'OLYM PIANUS 899833G1B', 'Đồng hồ Olym Pianus 899833G1B là một thương hiệu đồng hồ Nhật Bản nổi tiếng bền bỉ với chất lượng vượt trội. Đồng hồ Olym Pianus OP99411-84AGS-X là mẫu đồng hồ cơ mới nhất 2019 với độ hoàn thiện hoàn hảo, một trong những thương hiệu đồng hồ hiếm hoi có giá thành vừa phải mà vẫn đáp ứng đầy đủ các tiêu chí về thiết kế cũng như chất lượng sản phẩm mang tới khách hàng có những trải nghiệm tuyệt vời nhất.', 'olym-pianus-899833g1b', 639, 10260000, 37, '2022-12-07 02:50:34', '2022-12-07 02:50:34', 1, 'Olym'),
+(33, 'OLYM PIANUS OP2467LK-T', 'Thiết kế nhẹ nhàng nhưng đầy nét quý phái. Chắc chắn là điểm thu hút trên cổ tay của người phụ nữ sở hữu chiếc đồng hồ này.Tựa như một thứ trang sức lộng lẫy trên cổ tay người đẹp, OP2467LK-T là sự hòa điệu của sắc vàng quý phái, 4 viên đá quý lấp lánh trên mặt số cùng kiểu thiết kế lắc tay điệu đàng, độc lạ. Từng nấc từng nấc để lộ làn da quyến rũ của chị em trong những khoảng hổng đầy ngụ ý.', 'olym-pianus-op2467lk-t', 100, 59560000, 10, '2022-12-07 02:52:57', '2022-12-07 02:52:57', 2, 'Olym'),
+(34, 'OLYM PIANUS OP130-06LS-GL-T', 'Thiết kế nhẹ nhàng nhưng đầy nét quý phái. Chắc chắn là điểm thu hút trên cổ tay của người phụ nữ sở hữu chiếc đồng hồ này.Tựa như một thứ trang sức lộng lẫy trên cổ tay người đẹp, OP130-06LS-GL-T là sự hòa điệu của sắc vàng quý phái, 4 viên đá quý lấp lánh trên mặt số cùng kiểu thiết kế lắc tay điệu đàng, độc lạ. Từng nấc từng nấc để lộ làn da quyến rũ của chị em trong những khoảng hổng đầy ngụ ý.', 'olym-pianus-op130-06ls-gl-t', 599, 1260000, 35, '2022-12-07 02:52:57', '2022-12-07 02:52:57', 2, 'Olym'),
+(35, 'G-SHOCK GM-S5600GB-1', 'Chiếc đồng hồ G-SHOCK màu vàng kim trên nền đen phủ kim loại sở hữu thiết kế nhỏ và gọn hơn. Đường gờ kim loại phủ lớp ion màu vàng kim làm tôn lên vẻ ngoài trang nhã, sang trọng. Nút bấm và chốt cũng được phủ ion màu vàng kim tương phản với phần nền đen tạo nên lớp kim loại thực sự tỏa sáng. Sự kết hợp giữa màu vàng kim sang trọng và màu đen mạnh mẽ làm tôn lên vẻ đẹp lung linh độc đáo của riêng bạn.', 'g-shock-gm-s5600gb-1', 444, 19990000, 46, '2022-12-07 02:54:23', '2022-12-07 02:54:23', 1, 'GShock'),
+(36, 'G-SHOCK GMA-S2100SK-2A', 'Hãy đeo lên tay chiếc đồng hồ GA-2100 kết hợp kim-số, phủ kim loại trong suốt, vốn được ưa chuộng nay càng trở nên thu hút với thiết kế thanh mảnh và nhỏ gọn hơn. Chiếc đồng hồ sở hữu thiết kế kim loại trong suốt với nhiều màu cho bạn lựa chọn là phụ kiện linh hoạt, phù hợp với mọi loại trang phục trong suốt cả năm. Các vạch chỉ giờ được xử lý bằng phương pháp lắng đọng hơi bán mờ tạo nên vẻ ngoài bằng kim loại trong suốt sống động như thật.', 'g-shock-gma-s2100sk-2a', 741, 18500000, 0, '2022-12-07 02:54:23', '2022-12-07 02:54:23', 1, 'GShock'),
+(37, 'G-SHOCK GMA-S120SR-7A', 'Xin trân trọng giới thiệu mẫu G-SHOCK . Xuất hiện từ những năm 1990, phong cách trong suốt từng rất phổ biến và trở thành một phần không thể thiếu trong lịch sử của G-SHOCK .\r\nPhần mặt được dát lớp vỏ kim loại màu vàng hồng kết hợp cùng thiết kế chắc chắn đã tạo nên một mẫu đồng hồ đeo tay phù hợp với mọi hoàn cảnh, từ thời trang hiện đại cho đến thời trang đường phố và thường nhật.', 'g-shock-gma-s120sr-7a', 999, 18000000, 11, '2022-12-07 02:56:07', '2022-12-07 02:56:07', 2, 'GShock'),
+(38, 'G-SHOCK GMA-S110CW-7A2', 'Xin trân trọng giới thiệu mẫu G-SHOCK . Xuất hiện từ những năm 1990, phong cách trong suốt từng rất phổ biến và trở thành một phần không thể thiếu trong lịch sử của G-SHOCK .\r\nPhần mặt được dát lớp vỏ kim loại màu vàng hồng kết hợp cùng thiết kế chắc chắn đã tạo nên một mẫu đồng hồ đeo tay phù hợp với mọi hoàn cảnh, từ thời trang hiện đại cho đến thời trang đường phố và thường nhật.', 'g-shock-gma-s110cw-7a2', 362, 7500000, 5, '2022-12-07 02:56:07', '2022-12-07 02:56:07', 2, 'GShock'),
+(42, 'nguyen quoc chaudd', 'gst-b100d-1a9dr-01', 'nguyen-quoc-chaudd-20230518152126', 1000, 1000000000, 99, '2023-05-18 15:21:26', '2023-05-18 15:24:27', 1, 'Avia');
 
 -- --------------------------------------------------------
 
@@ -368,8 +349,8 @@ INSERT INTO `products` (`id`, `name`, `description`, `image`, `quantity`, `price
 --
 
 CREATE TABLE `role` (
-  `id` int(20) NOT NULL,
-  `type` tinyint(1) NOT NULL COMMENT '0 is user and 1 is admin'
+  `id` int(1) NOT NULL,
+  `type` tinyint(1) NOT NULL COMMENT '0 is customer and 1,2 is employee'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -378,7 +359,8 @@ CREATE TABLE `role` (
 
 INSERT INTO `role` (`id`, `type`) VALUES
 (0, 0),
-(1, 1);
+(1, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -405,10 +387,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `phone_number`, `address`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
-(1, 'Nguyễn Quốc Châu', '0386888889', 'Nha Trang', 'chau.nq.61cntt@ntu.edu.vn', NULL, '$2y$10$/FJjyDThVu2Z9pDn6gEaf.YmgH3Tas8/6wYuWosYDva3U6Tt608e6', NULL, '2022-12-05 18:15:54', '2022-12-26 15:12:46', 0),
-(2, 'Nguyen Quoc Chau', '0926383006', 'Nha Trang', 'mallie69@example.org', NULL, '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', NULL, '2022-12-12 16:36:59', '2022-12-21 15:57:51', 0),
-(3, 'Nguyen Quoc Chau', '0926383076', '20 Nha Trang Khanh Hoa', 'mallie6@example.org', NULL, '$2y$10$huFy/caUfNuL2S52nYiwJu6s/ob2L0V5mQcdcreo986vsmEhJKV2.', NULL, '2022-12-12 17:23:17', '2022-12-12 17:23:17', 0),
-(4, 'Phan Thị Huyền Trâm', '0926553006', NULL, 'phanthihuyentram@gmail.com', NULL, '$2y$10$D3HhiIKE5nd9ZkoPtbyrhu6IzFAGTbnwFUkrdsrZ9Z1twHgEjPkQi', NULL, '2022-12-26 16:01:25', '2022-12-26 16:40:56', 0);
+(1, 'Nguyễn Quốc Châu', '0386888889', '12 Nguyễn Tất Thành, Xã Nghĩa Hiệp, Huyện Yên Mỹ, Tỉnh Hưng Yên', 'chau.nq.61cntt@ntu.edu.vn', NULL, '$2y$10$gkNHqPktu4xPHBP21yEpbu8aftSeVjfn4wSH.z7zibQgpHLfeLuKu', NULL, '2022-12-05 18:15:54', '2023-05-19 09:31:46', 0),
+(2, 'Nguyen Quoc Chau', '0926383006', 'Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', 'mallie69@example.org', NULL, '$2y$10$CM9tvkv48v4u0HzfgFLeceE1WyXPKLUUpRQbe1.7Y3ko6BvZsxnbK', NULL, '2022-12-12 16:36:59', '2023-05-18 15:37:17', 0),
+(3, 'Nguyen Quoc Chau', '0926383076', '03 Phùng Hưng, Phường Văn Chương, Quận Đống Đa, Thành phố Hà Nội', 'mallie6@example.org', NULL, '$2y$10$huFy/caUfNuL2S52nYiwJu6s/ob2L0V5mQcdcreo986vsmEhJKV2.', NULL, '2022-12-12 17:23:17', '2022-12-12 17:23:17', 0),
+(4, 'Phan Thị Huyền Trâm', '0926858585', '02 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', 'phanthihuyentram@gmail.com', NULL, '$2y$10$zVkefGONz.3kvfgb1DpwHOT5xdQ3c.Tj8oyXOc0FM55hQkrrfDh.W', NULL, '2022-12-26 16:01:25', '2023-05-22 09:27:59', 0),
+(5, 'Nguyễn Trần Hoàn Kim', '0926666666', '20 Phùng Hưng, Phường Cửa Ông, Thành phố Cẩm Phả, Tỉnh Quảng Ninh', 'nguyentranhoankim@gmail.com', NULL, '$2y$10$EAHDCsUpCGFOOQ7tLggrVusBz4dWnsDZfluYMO70g2J0965wDoENu', NULL, '2023-05-23 08:21:44', '2023-05-23 08:22:28', 0);
 
 --
 -- Indexes for dumped tables
@@ -439,12 +422,6 @@ ALTER TABLE `comment`
   ADD KEY `product_3` (`product`);
 
 --
--- Indexes for table `gender`
---
-ALTER TABLE `gender`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `images`
 --
 ALTER TABLE `images`
@@ -469,22 +446,22 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `customers` (`customers`);
+  ADD KEY `customers` (`customers`),
+  ADD KEY `orders_employee` (`employee`);
 
 --
 -- Indexes for table `order_details`
 --
 ALTER TABLE `order_details`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `order` (`orders`),
-  ADD KEY `product` (`product`);
+  ADD KEY `product` (`product`),
+  ADD KEY `orders_details_fk` (`orders`);
 
 --
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `gender` (`gender`),
   ADD KEY `brand` (`brand`),
   ADD KEY `image` (`image`);
 
@@ -539,6 +516,7 @@ ALTER TABLE `likes`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_employee` FOREIGN KEY (`employee`) REFERENCES `administrator` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customers`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -546,13 +524,12 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `order_details`
   ADD CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`product`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`orders`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `orders_details_fk` FOREIGN KEY (`orders`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_4` FOREIGN KEY (`gender`) REFERENCES `gender` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `products_ibfk_5` FOREIGN KEY (`brand`) REFERENCES `brands` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `products_ibfk_6` FOREIGN KEY (`image`) REFERENCES `images` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
