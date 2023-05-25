@@ -8,6 +8,8 @@ use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -45,8 +47,7 @@ class UserController extends Controller
     {
 
         $title = 'Thêm  người dùng';
-        $roles = Role::all();
-        return view('admin.user.create', compact('title', 'roles'));
+        return view('admin.user.create', compact('title'));
     }
 
     /**
@@ -61,6 +62,7 @@ class UserController extends Controller
         $maxID = $user->maxID();
         $maxID = $maxID[0]->ID_Max;
         $maxID += 1;
+        $now = now()->setTimezone('Asia/Ho_Chi_Minh');
         $data = [
             "id" => $maxID,
             "name" => $request->name,
@@ -69,6 +71,8 @@ class UserController extends Controller
             "email" => $request->email,
             "password" => Hash::make($request->password),
             "role" => 0,
+            "created_at" =>$now,
+            "update_at"=>$now
 
         ];
         User::create($data);
@@ -98,24 +102,31 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $employee = User::find($id);
+        $customer = User::find($id);
         $title = 'Cập nhật người dùng';
-        $employeeAddress = explode(", ", $employee->address);
-        $address = $employeeAddress[0] ?? "";
-        return view('admin.user.edit', compact('title', 'employee', 'address'));
+        $employeeAddress = explode(", ", $customer->address);
+        $address = $customerAddress[0] ?? "";
+        return view('admin.user.edit', compact('title', 'customer', 'address'));
     }
     public function editCustomer($id)
     {
-        $user = User::find($id);
-        $userAddress = explode(", ", $user->address);
-        $city = $userAddress[3] ?? "";
-        $district = $userAddress[2] ?? "";
-        $ward = $userAddress[1] ?? "";
+        $customer = User::select(
+            DB::raw("*, DATE_FORMAT(created_at,'%H:%i:%s %d-%m-%Y') as create_at"),
+            DB::raw("DATE_FORMAT(updated_at,'%H:%i:%s %d-%m-%Y') as update_at")
+        )->find($id);
+        $customerAddress = explode(", ", $customer->address);
+        $city = $customerAddress[3] ?? "";
+        $district = $customerAddress[2] ?? "";
+        $ward = $customerAddress[1] ?? "";
+        $address = $customerAddress[0] ?? "";
         return response()->json([
             'status' => 200,
             'city' => $city,
             'district' => $district,
             'ward' => $ward,
+            'address' => $address,
+            'created_at' => $customer->create_at,
+            'updated_at' => $customer->update_at,
         ]);
     }
     /**
@@ -128,17 +139,15 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
 
-
-        //Xu ly password
-        $users = User::find($id);
-        $data = [
-            "name" => $request->name,
-            "phone_number" => $request->phone_number,
-            "address" => $request->address,
-            "email" => $request->email,
-            // "password" => Hash::make($request->password),
-        ];
-        $users->update($data);
+        $customer = new User();
+        User::where('id', $id)
+            ->update([
+                "name" => $request->name,
+                "phone_number" => $request->phone_number,
+                "address" => $request->address,
+                "email" => $request->email,
+                "updated_at" => $customer->currentTime(),
+            ]);
         return response()->json([
             'status' => 200,
             'msg' => 'Update customer successfully',

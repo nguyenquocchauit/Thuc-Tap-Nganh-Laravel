@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // check format email
+    // check format name
     $("#name").on("keypress paste", function () {
         var name = $(this).val();
         var pattern = /^[a-zA-ZÀ-ỹ ]*$/;
@@ -7,7 +7,17 @@ $(document).ready(function () {
             .toggleClass("is-valid", pattern.test(name))
             .toggleClass("is-invalid", !pattern.test(name));
     });
-
+    // review name
+    $("#name").keyup(function () {
+        var value = $(this).val();
+        $("#review-name").text(value);
+    });
+    // review position
+    $("#position").on("change", function () {
+        var value = $(this).val();
+        if (value == "1") $("#review-position").text("Nhân viên");
+        else if (value == "2") $("#review-position").text("Quản trị viên");
+    });
     // check format email
     $("#email").on("keypress paste", function () {
         var email = $(this).val();
@@ -43,26 +53,35 @@ $(document).ready(function () {
         });
         $(vali).addClass("is-invalid");
     }
-    function isEmpty(str) {
-        return !str || str.length === 0;
-    }
     //create customer
     $("#btn-create-customer").on("click", function () {
-        // content will contain the content of the selected <option> element
+        // Lấy giá trị của các input select và ô nhập địa chỉ
         var city = $("#city option:selected").html();
         var district = $("#district option:selected").html();
         var ward = $("#ward option:selected").html();
         var address = $("#address").val();
-        if (!city || !district || !ward || !address) {
-            // At least one of the variables is null or has no value
+
+        // Kiểm tra xem các giá trị của các input select và ô nhập địa chỉ có rỗng hay không
+        if (
+            !city ||
+            !district ||
+            !ward ||
+            !address ||
+            $("#city option:selected").val() == "" ||
+            $("#district option:selected").val() == "" ||
+            $("#ward option:selected").val() == ""
+        ) {
+            // Hiển thị thông báo lỗi nếu có giá trị rỗng
             showMsgWaring("Địa chỉ không được để trống!", "#address");
         } else {
-            // connecting the chain of province + city + district/commune
+            // Tạo chuỗi đại diện cho địa chỉ của khách hàng mới
             content = address + ", " + ward + ", " + district + ", " + city;
-            // form initialization
+
+            // Tạo đối tượng FormData để gửi dữ liệu của khách hàng mới lên server
             var formData = new FormData($("#create-customer")[0]);
-            // change the key address to the new value content
             formData.set("address", content);
+
+            // Gửi dữ liệu của khách hàng mới lên server bằng phương thức POST
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -97,52 +116,61 @@ $(document).ready(function () {
             });
         }
     });
+
     //update customer
     $("#btn-update-customer").on("click", function () {
-        // content will contain the content of the selected <option> element
+        // Lấy giá trị của các input select và ô nhập địa chỉ
         var city = $("#city option:selected").html();
         var district = $("#district option:selected").html();
         var ward = $("#ward option:selected").html();
         var address = $("#address").val();
-        // connecting the chain of province + city + district/commune
-        content = address + ", " + ward + ", " + district + ", " + city;
-        // form initialization
-        var formData = new FormData($("#update-customer")[0]);
-        // change the key address to the new value content
-        formData.set("address", content);
-        $.ajax({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            type: "POST",
-            url: "/api/admin/customer/update/" + $("#id-customer").val(),
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                console.log(response);
-                if (
-                    response.status == 200 &&
-                    response.msg == "Update customer successfully"
-                ) {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Cập nhật thành công!",
-                        timer: 2000,
-                        timerProgressBar: true,
-                    }).then((result) => {
-                        window.location.href =
-                            "/admin/customer/" +
-                            $("#id-customer").val() +
-                            "/edit";
-                    });
-                }
-            },
-            error: function (response) {
-                var errors = response.responseJSON.errors;
-                showErrors(errors);
-            },
-        });
+
+        // Kiểm tra xem các giá trị của các input select và ô nhập địa chỉ có rỗng hay không
+        if (!city || !district || !ward || !address) {
+            // Hiển thị thông báo lỗi nếu có giá trị rỗng
+            showMsgWaring("Địa chỉ không được để trống!", "#address");
+        } else {
+            // Tạo chuỗi đại diện cho địa chỉ của khách hàng mới
+            content = address + ", " + ward + ", " + district + ", " + city;
+
+            // Tạo đối tượng FormData để gửi dữ liệu của khách hàng mới lên server
+            var formData = new FormData($("#update-customer")[0]);
+            formData.set("address", content);
+
+            // Gửi dữ liệu của khách hàng mới lên server bằng phương thức POST
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                type: "POST",
+                url: "/api/admin/customer/update/" + $("#id-customer").val(),
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    console.log(response);
+                    if (
+                        response.status == 200 &&
+                        response.msg == "Update customer successfully"
+                    ) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Cập nhật thành công!",
+                            timer: 2000,
+                            timerProgressBar: true,
+                        }).then((result) => {
+                            location.reload();
+                        });
+                    }
+                },
+                error: function (response) {
+                    var errors = response.responseJSON.errors;
+                    showErrors(errors);
+                },
+            });
+        }
     });
     // delete customer
     $(".btn-delete-customer").on("click", function () {
@@ -198,6 +226,12 @@ $(document).ready(function () {
         ) {
             showMsgWaring("Tên không hợp lệ!", "#name");
         } else if (
+            errors.address &&
+            errors.address.length > 0 &&
+            errors.address[0] == "Empty address"
+        ) {
+            showMsgWaring("Địa chỉ không được để trống!", "#address");
+        } else if (
             errors.phone_number &&
             errors.phone_number.length > 0 &&
             errors.phone_number[0] == "Empty phone"
@@ -231,12 +265,6 @@ $(document).ready(function () {
         ) {
             showMsgWaring("Email không hợp lệ!", "#email");
         } else if (
-            errors.address &&
-            errors.address.length > 0 &&
-            errors.address[0] == "Empty address"
-        ) {
-            showMsgWaring("Địa chỉ không được để trống!", "#address");
-        } else if (
             errors.password &&
             errors.password.length > 0 &&
             errors.password[0] == "Empty password"
@@ -261,24 +289,6 @@ $(document).ready(function () {
         ) {
             showMsgWaring(
                 "Xác nhận mật khẩu không được để trống!",
-                "#password_confirmation"
-            );
-        } else if (
-            errors.password_confirmation &&
-            errors.password_confirmation.length > 0 &&
-            errors.password_confirmation[0] == "Min"
-        ) {
-            showMsgWaring(
-                "Xác nhận mật khẩu tối thiểu 6 ký tự!",
-                "#password_confirmation"
-            );
-        } else if (
-            errors.password_confirmation &&
-            errors.password_confirmation.length > 0 &&
-            errors.password_confirmation[0] == "Max"
-        ) {
-            showMsgWaring(
-                "Xác nhận mật khẩu tối đa 30 ký tự!",
                 "#password_confirmation"
             );
         } else if (

@@ -10,7 +10,9 @@ use App\Models\Gender;
 use App\Models\Image;
 use App\Models\Product;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -22,15 +24,10 @@ class ProductController extends Controller
     {
         $this->products = new Product();
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $title = 'Danh sách sản phẩm';
-        //filter brand, categories,
+        // Lọc sản phẩm theo thương hiệu và danh mục
         $filters = [];
         $search = null;
         if (!empty($request->category)) {
@@ -42,13 +39,12 @@ class ProductController extends Controller
             $filters[] = ['products.brand', '=', $brand];
         }
 
-        //search name products
-
+        // Tìm kiếm tên sản phẩm
         if (!empty($request->search)) {
             $search = $request->search;
         }
 
-        //Sort price,discount and quantity
+        // Sắp xếp sản phẩm theo giá tiền, giảm giá và số lượng
         $sortBy = $request->input('sort-by');
         $sortType = $request->input('sort-type');
 
@@ -66,39 +62,30 @@ class ProductController extends Controller
             'sortBy' => $sortBy,
             'sortType' => $sortType,
         ];
+
+        // Lấy danh sách thương hiệu
         $brands = Brand::orderBy('name', 'ASC')->get();
+
+        // Lấy danh sách sản phẩm
         $products = $this->products->getAllProducts($filters, $search, $sortArr);
 
-
-        return view('admin.product.index', compact('title', 'products', 'brands',  'sortType'));
+        return view('admin.product.index', compact('title', 'products', 'brands', 'sortType'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        // get list of brand and gender
+        // lấy danh sách thương hiệu và giới tính
+
         $brands = Brand::get();
         $title = 'Thêm sản phẩm';
         return view('admin.product.create', compact('title', 'brands'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //Check the product name is the same, then refuse
+        // Kiểm tra tên sản phẩm có giống nhau không thì từ chối
         $sameProduct = Product::where("name", "=", $request->name_product)->first();
         if ($sameProduct) {
             return response()->json([
-                'status' => 500,
+                'status' => 422,
                 'msg' => 'Duplicate name'
             ]);
         }
@@ -132,11 +119,7 @@ class ProductController extends Controller
          * Image 6 ảnh chỉ chấp nhận 3 loại file: png, jpg, webp
          */
         $name = $request->name_product;
-        $id_image = strtolower($name);
-        $id_image = explode(" ", $id_image);
-        $id_image = implode("-", $id_image);
-        //delete Vietnamese with accents
-        $id_image = $this->stripVN($id_image);
+        $id_image = Str::slug($name);
 
         // insert data of image
         $id_image = $id_image . "-" . $times;
@@ -191,12 +174,14 @@ class ProductController extends Controller
     public function moveImageProduct($brand, $gender, $file, $name)
     {
         $product = new Product();
-        // get slug path gender and brand for product
+
+        // Lấy slug path gender và brand cho sản phẩm
         $slugBrand = Brand::query()
-            ->where("id",  $brand,)
+            ->where("id", $brand,)
             ->get();
         $slugGender = $product->checkGender($gender);
-        // add image for list image of product
+
+        // Thêm hình ảnh vào danh sách hình ảnh của sản phẩm
         $destinationPath = 'images/images-product' . "/" . $slugGender . "/" . $slugBrand[0]->slug . "/";
         if (!File::exists($destinationPath)) {
             File::makeDirectory($destinationPath, 0777, true);
@@ -204,32 +189,23 @@ class ProductController extends Controller
         for ($i = 0; $i < count($file); $i++) {
             $file[$i]->move(public_path($destinationPath), $name[$i]);
         }
-        //add image preview of font web such as: page hom, shop, cart,...
+
+        // Thêm hình ảnh xem trước cho font web như: trang chủ, cửa hàng, giỏ hàng,...
         $filecpy = $destinationPath . $name[0];
         $destinationPathHome = 'images/image_products_home/' . $name[0];
         File::copy(public_path($filecpy), public_path($destinationPathHome));
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Product $product)
     {
         $title = 'Chi tiết sản phẩm';
         return view('admin.product.show', compact('title', 'product'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $product = Product::find($id);
+        $product = Product::select(
+            DB::raw("*, DATE_FORMAT(create_at,'%H:%i:%s %d-%m-%Y') as created_at"),
+            DB::raw("DATE_FORMAT(updated_at,'%H:%i:%s %d-%m-%Y') as update_at")
+        )->find($id);
         if ($product) {
             $brands = Brand::get();
             $title = 'Cập nhật sản phẩm';
@@ -240,44 +216,37 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(ProductUpdateRequest $request, $id)
     {
-        //Check the product name is the same, then refuse
+        // Kiểm tra tên sản phẩm có giống nhau không, sau đó từ chối
         $sameProduct = Product::where("name", "=", $request->name_product)->first();
         if ($sameProduct) {
             if ($sameProduct->id != $id) {
                 return response()->json([
                     'status' => 500,
-                    'msg' => 'Duplicate name'
+                    'msg' => 'Tên trùng lặp'
                 ]);
             }
         }
-        // find product
+        // Tìm sản phẩm
         $product = Product::find($id);
-        // processing to remove VNĐ and commas
+        // Xử lý để loại bỏ VNĐ và dấu phẩy
         $price = explode(" ", $request->price_product);
         $price = explode(",", $price[0]);
         $price = implode("", $price);
         if ($price < 100000 || $price > 1000000000)
             return response()->json([
                 'status' => 500,
-                'msg' => 'Minimum selling price 100,000 VND'
+                'msg' => 'Giá bán tối thiểu 100.000 VNĐ'
             ]);
-        // processing to remove %
+        // Xử lý để loại bỏ %
         $discount = explode("%", $request->discount_product);
         if ($discount[0] < 0 || $discount[0] > 99)
             return response()->json([
                 'status' => 500,
-                'msg' => 'Up to 99% discount'
+                'msg' => 'Giảm giá lên đến 99%'
             ]);
-        // insert data of product
+        // Chèn dữ liệu sản phẩm
         $dataProduct = [
             "name" => $request->name_product,
             "description" => $request->description_product,
@@ -286,9 +255,9 @@ class ProductController extends Controller
             "discount" => $discount[0],
             "gender" => $request->product_category_id,
             "brand" => $request->brand_id,
-            "updated_at" => $this->products->currentTime(),
+            "updated_at" => $product->currentTime(),
         ];
-        // check if gender or brand changes then move image in folder to folder corresponding to gender and brand
+        // Kiểm tra nếu giới tính hoặc thương hiệu thay đổi thì di chuyển hình ảnh trong thư mục đến thư mục tương ứng với giới tính và thương hiệu
         if (($product->brand != $request->brand_id) && ($product->gender != $request->product_category_id)) {
             $this->copyImageUpdate($id, $request->product_category_id, $request->brand_id);
         } else if ($product->brand != $request->brand_id) {
@@ -296,11 +265,12 @@ class ProductController extends Controller
         } else if ($product->gender != $request->product_category_id) {
             $this->copyImageUpdate($id, $request->product_category_id, $product->brand);
         }
+        // Cập nhật sản phẩm
         $product->update($dataProduct);
-        //If there is a change to the array image, then proceed to edit the image
+        //Nếu có thay đổi ảnh mảng thì tiến hành chỉnh sửa ảnh
         /**
-         * because we have performed the operation to replace the image position corresponding to the slug of gender and brand
-         * After the update is completed, the slug of gender and brand has been updated. So the image change event (if any) still runs normally
+         * do ta đã thực hiện thao tác thay thế vị trí ảnh tương ứng với slug của giới tính và thương hiệu
+         * Sau khi cập nhật xong slug giới tính và thương hiệu đã được cập nhật. Nên sự kiện đổi ảnh (nếu có) vẫn chạy bình thường
          */
         if ($request->image) {
             $files = $request->file('image');
@@ -308,7 +278,7 @@ class ProductController extends Controller
             foreach ($files as $key => $file) {
                 $image = "image_" . strval($key + 1);
                 $imageProduct = $product->productImage["" . $image . ""];
-                // get path image of product by slug brand and gender
+                // lấy hình ảnh đường dẫn của sản phẩm theo thương hiệu slug và giới tính
                 $images = "images/images-product/" . $slugGender . "/" . $product->productBrand["slug"] . "/" . $imageProduct;
                 if (File::exists($images)) {
                     File::delete($images);
@@ -337,11 +307,13 @@ class ProductController extends Controller
      */
     public function destroy(Request $request)
     {
-
-        // delete image in table images of product
+        // Lấy thông tin của một đối tượng Product với id là $request->id
         $product = Product::find($request->id);
-        // delete product
+
+        // Lấy thông tin của một đối tượng Image với id là $product->image
         $image = Image::query()->where("id", $product->image)->selectRaw("*")->get();
+
+        // Xóa các file ảnh liên quan đến sản phẩm
         $slugGender = $product->checkGender($product->gender);
         $pathHome = "images/image_products_home/";
         for ($i = 1; $i <= 6; $i++) {
@@ -358,36 +330,23 @@ class ProductController extends Controller
                 File::delete($path);
             }
         }
+
+        // Xóa đối tượng Image với id là $product->image
         Image::query()->where("id", $product->image)->delete();
+
+        // Truyền các biến vào một đối tượng Response
         return response()->json([
             'status' => 200,
             'msg' => 'Delete product successfully'
         ]);
     }
 
-    public function stripVN($str)
-    {
-        $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $str);
-        $str = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", 'e', $str);
-        $str = preg_replace("/(ì|í|ị|ỉ|ĩ)/", 'i', $str);
-        $str = preg_replace("/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/", 'o', $str);
-        $str = preg_replace("/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/", 'u', $str);
-        $str = preg_replace("/(ỳ|ý|ỵ|ỷ|ỹ)/", 'y', $str);
-        $str = preg_replace("/(đ)/", 'd', $str);
 
-        $str = preg_replace("/(À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ)/", 'A', $str);
-        $str = preg_replace("/(È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ)/", 'E', $str);
-        $str = preg_replace("/(Ì|Í|Ị|Ỉ|Ĩ)/", 'I', $str);
-        $str = preg_replace("/(Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ)/", 'O', $str);
-        $str = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", 'U', $str);
-        $str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $str);
-        $str = preg_replace("/(Đ)/", 'D', $str);
-        return $str;
-    }
+
     public function copyImageUpdate($id, $idGender, $idBrand)
     {
         $product = Product::find($id);
-        // get slug of brand and gender when it changes
+        // Lấy slug của thương hiệu và giới tính khi thay đổi
         $slugBrand = Brand::query()->selectRaw("brands.*")->where("id", $idBrand)->get();
         $oldGender = $product->checkGender($product->gender);
         $oldBrand = $product->productBrand["slug"];
@@ -396,10 +355,14 @@ class ProductController extends Controller
         for ($i = 1; $i <= 6; $i++) {
             $image = "image_" . $i;
             $imageProduct = $product->productImage["" . $image . ""];
-            $oldImage = "images/images-product/" . $oldGender . "/" . $oldBrand  . "/" . $imageProduct;
-            $destinationNewFolder = "images/images-product/" . $newGender . "/" .   $newBrand . "/" . $imageProduct;
+            // Lấy đường dẫn hình ảnh cũ
+            $oldImage = "images/images-product/" . $oldGender . "/" . $oldBrand . "/" . $imageProduct;
+            // Lấy đường dẫn hình ảnh mới
+            $destinationNewFolder = "images/images-product/" . $newGender . "/" . $newBrand . "/" . $imageProduct;
             if (File::exists($oldImage)) {
+                // Sao chép hình ảnh cũ sang thư mục mới
                 File::copy(public_path($oldImage), public_path($destinationNewFolder));
+                // Xóa hình ảnh cũ
                 File::delete($oldImage);
             }
         }

@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $guard = "user";
-
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -53,20 +55,26 @@ class User extends Authenticatable
     {
         return $this->belongsTo(User::class, 'customers', 'id');
     }
+    public function currentTime()
+    {
+        $currentTime = Carbon::now('Asia/Ho_Chi_Minh');
+        return $currentTime->toDateTimeString();
+    }
     public function maxID()
     {
         return DB::table('users')
             ->select(DB::raw("MAX(id) AS ID_Max "))
             ->get();
     }
-    public function getAllUsers($search = null) {
+    public function getAllUsers($search = null)
+    {
         $users = User::first('id');
-        if(!empty($search)) {
-            $users = $users->where(function($query) use ($search) {
-                $query->orWhere('users.name','like','%'.$search.'%');
-                $query->orWhere('users.email','like','%'.$search.'%');
-                $query->orWhere('users.address','like','%'.$search.'%');
-                $query->orWhere('users.phone_number','like','%'.$search.'%');
+        if (!empty($search)) {
+            $users = $users->where(function ($query) use ($search) {
+                $query->orWhere('users.name', 'like', '%' . $search . '%');
+                $query->orWhere('users.email', 'like', '%' . $search . '%');
+                $query->orWhere('users.address', 'like', '%' . $search . '%');
+                $query->orWhere('users.phone_number', 'like', '%' . $search . '%');
             });
         }
         $users = $users->paginate(10);

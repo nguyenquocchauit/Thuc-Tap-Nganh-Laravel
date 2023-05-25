@@ -19,8 +19,7 @@ class BuyProductController extends Controller
         $total = 0;
         $user = User::find($request->user);
         $orderDetail = new OrderDetail();
-        $time = $orderDetail->currentTime();
-        $times = Carbon::createFromFormat('Y-m-d H:i:s', $time);
+        $times = Carbon::createFromFormat('Y-m-d H:i:s', $orderDetail->currentTime());
         $times = $times->format('HisdmY');
 
         // get the total number of orders available in orders and order_details
@@ -53,7 +52,7 @@ class BuyProductController extends Controller
                             'id' => $IDOrder,
                             'customers' => $request->user,
                             'employee' => 1,
-                            'status' => 'DVC',
+                            'status' => 'XN',
                             'created_at' =>  $orderDetail->currentTime(),
                             'updated_at' => $orderDetail->currentTime(),
                             'total' => $total + ($total * 0.08),

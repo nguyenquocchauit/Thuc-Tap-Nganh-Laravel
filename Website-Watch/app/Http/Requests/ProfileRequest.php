@@ -6,23 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Validator;
 
-class UserRequest extends FormRequest
+class ProfileRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
@@ -30,8 +19,7 @@ class UserRequest extends FormRequest
             'phone_number' => ['required', 'regex:/(09|03|07|08|05)+([0-9]{8})\b/'],
             'email' => ['required', 'unique:users,email', 'regex:/^[^ ]+@[^ ]+\.[a-z]{2,3}$/'],
             'address' => ['required'],
-            'password' => ['required', 'min:6', 'max:30'],
-            'password_confirmation' => ['required', 'min:6', 'max:30', 'same:password'],
+
         ];
     }
 
@@ -46,11 +34,7 @@ class UserRequest extends FormRequest
             'email.unique' => 'Email already exists',
             'email.regex' => 'Incorrect email format',
             'address.required' => 'Empty address',
-            'password.required' => 'Empty password',
-            'password.min' => 'Min',
-            'password.max' => 'Max',
-            'password_confirmation.required' => 'Empty password confirmation',
-            'password_confirmation.same' => "Doesn't match",
+
         ];
     }
 }

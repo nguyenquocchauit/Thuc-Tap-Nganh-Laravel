@@ -32,7 +32,7 @@
                         <i class="fa fa-trash fa-w-20"></i>
                     </span>
                     <span>Xóa</span>
-                    <input type="hidden" name="" value="{{ $brand->id }}">
+                    <input type="hidden" name="" value="{{ $brand->id }}" id="id-brand">
                 </button>
             </li>
         </ul>
@@ -40,18 +40,16 @@
             <div class="col-md-12">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
-                        <form method="post" action="" enctype="multipart/form-data">
+                        <form id="update-brand" method="post" action="" enctype="multipart/form-data">
                             <div class="position-relative row form-group">
-                                <label for="name" class="col-md-3 text-md-right col-form-label">Tên<strong
-                                        style="color: red">*</strong></label>
+                                <label for="name" class="col-md-3 text-md-right col-form-label">Tên</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="name" id="name" placeholder="Name" type="text"
                                         class="form-control" value="{{ $brand->name }}">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
-                                <label for="slug" class="col-md-3 text-md-right col-form-label">Slug<strong
-                                        style="color: red">*</strong></label>
+                                <label for="slug" class="col-md-3 text-md-right col-form-label">Slug</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="slug" id="slug" placeholder="Nhập slug" type="text"
                                         class="form-control" value="{{ $brand->slug }}">
@@ -59,8 +57,8 @@
                             </div>
                             <div class="position-relative row form-group mb-1">
                                 <div class="col-md-9 col-xl-8 offset-md-2">
-
-                                    <button type="submit" class="btn-shadow btn-hover-shine btn btn-primary">
+                                    <button type="button" class="btn-shadow btn-hover-shine btn btn-primary "
+                                        id="btn-update-brand">
                                         <span class="btn-icon-wrapper pr-2 opacity-8">
                                             <i class="fa fa-download fa-w-20"></i>
                                         </span>

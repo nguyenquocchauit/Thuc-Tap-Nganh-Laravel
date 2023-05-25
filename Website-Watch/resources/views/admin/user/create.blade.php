@@ -26,22 +26,17 @@
                         <form id="create-customer" method="post" action="" enctype="multipart/form-data">
 
                             <div class="position-relative row form-group">
-                                <label for="name" class="col-md-3 text-md-right col-form-label">Tên</label>
+                                <label for="name" class="col-md-3 text-md-right col-form-label">Tên<strong
+                                    style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="name" id="name" placeholder="Nhập tên" type="text"
                                         class="form-control" value="">
                                 </div>
                             </div>
+
                             <div class="position-relative row form-group">
-                                <label for="phone_number" class="col-md-3 text-md-right col-form-label">Số điện
-                                    thoại</label>
-                                <div class="col-md-9 col-xl-8">
-                                    <input name="phone_number" id="phone_number" placeholder="Nhập số điện thoại"
-                                        type="tel" class="form-control" value="">
-                                </div>
-                            </div>
-                            <div class="position-relative row form-group">
-                                <label for="address" class="col-md-3 text-md-right col-form-label">Địa chỉ</label>
+                                <label for="address" class="col-md-3 text-md-right col-form-label">Địa chỉ<strong
+                                    style="color: red">*</strong></label>
                                 <div class="col-md-3 col-xl-2">
                                     <select class="form-control form-select form-select-sm mb-3" id="city"
                                         aria-label=".form-select-sm">
@@ -69,14 +64,25 @@
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
-                                <label for="email" class="col-md-3 text-md-right col-form-label">Email</label>
+                                <label for="phone_number" class="col-md-3 text-md-right col-form-label">Số điện
+                                    thoại<strong
+                                    style="color: red">*</strong></label>
+                                <div class="col-md-9 col-xl-8">
+                                    <input name="phone_number" id="phone_number" placeholder="Nhập số điện thoại"
+                                        type="tel" class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="position-relative row form-group">
+                                <label for="email" class="col-md-3 text-md-right col-form-label">Email<strong
+                                    style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input type="email" name="email" id="email" class="form-control"
                                         placeholder="Nhập Email" value="">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
-                                <label for="password" class="col-md-3 text-md-right col-form-label">Mật khẩu</label>
+                                <label for="password" class="col-md-3 text-md-right col-form-label">Mật khẩu<strong
+                                    style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="password" id="password" placeholder="Nhập mật khẩu" type="password"
                                         class="form-control" value="">
@@ -85,7 +91,8 @@
                             </div>
                             <div class="position-relative row form-group">
                                 <label for="password_confirmation" class="col-md-3 text-md-right col-form-label">Nhập lại
-                                    mật khẩu</label>
+                                    mật khẩu<strong
+                                    style="color: red">*</strong></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="password_confirmation" id="password_confirmation"
                                         placeholder="Nhập lại mật khẩu" type="password" class="form-control" value="">

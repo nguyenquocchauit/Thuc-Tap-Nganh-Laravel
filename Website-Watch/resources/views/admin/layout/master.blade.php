@@ -29,11 +29,14 @@
     <link href="./dashboard/my_style.css" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
     <script type="text/javascript" src="{{ asset('js/Admin/product.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/Admin/customer.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/Admin/report.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/Admin/brand.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Admin/profile.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Admin/employee.js') }}"></script>
 
 
 
@@ -82,50 +85,7 @@
                     <div class="header-btn-lg pr-0">
                         <div class="widget-content p-0">
                             <div class="widget-content-wrapper">
-                                <div class="widget-content-left">
-                                    <div class="btn-group">
-                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                            class="p-0 btn">
-                                            <img width="42" class="rounded-circle"
-                                                src="{{ asset('/images/avt-comment.webp') }}" alt="">
-                                            <i class="fa fa-angle-down ml-2 opacity-8"></i>
-                                        </a>
-                                        <div tabindex="-1" role="menu" aria-hidden="true"
-                                            class="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right">
-                                            <div class="dropdown-menu-header">
-                                                <div class="dropdown-menu-header-inner bg-info">
-                                                    <div class="menu-header-image opacity-2"
-                                                        style="background-image: url('assets/images/dropdown-header/city3.jpg');">
-                                                    </div>
-                                                    <div class="menu-header-content text-center">
-                                                        <div class="widget-content p-0">
-                                                            <div class="widget-content-left p-1">
-                                                                <div class="widget-content-right mr-2">
-                                                                    <button
-                                                                        class="btn-pill btn-shadow btn-shine btn btn-focus"><a
-                                                                            href="{{ url('/admin/thong-tin-ca-nhan') }}"
-                                                                            style="color: white"> Cài đặt thông tin cá
-                                                                            nhân</a></button>
-                                                                            <input type="hidden" name="" id="id-current-user" value="{{ auth()->guard('admin')->user()->id }}">
-                                                                </div>
-                                                            </div>
-                                                            <div class="widget-content-left">
-                                                                <div class="widget-content-right mr-2">
-                                                                    <button
-                                                                        class="btn-pill btn-shadow btn-shine btn btn-focus"><a
-                                                                            href="{{ url('api/logout-admin') }}"
-                                                                            style="color: white">Đăng xuất</a></button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="grid-menu grid-menu-2col">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="widget-content-left  ml-3 header-user-info">
 
                                     <div class="widget-heading" style="color:white">
@@ -139,8 +99,51 @@
                                             @endif
                                         @endif
                                     </div>
+
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">
+                                    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        class="p-0 btn">
+                                        <img width="42" class="rounded-circle"
+                                            src="{{ asset('/images/avt-comment.webp') }}" alt="">
+                                        <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                                    </a>
+                                    <div tabindex="-1" role="menu" aria-hidden="true"
+                                        class="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right">
+                                        <div class="dropdown-menu-header">
+                                            <div class="dropdown-menu-header-inner bg-info">
+                                                <div class="menu-header-image opacity-2"
+                                                    style="background-image: url('assets/images/dropdown-header/city3.jpg');">
+                                                </div>
+                                                <div class="menu-header-content text-center">
+                                                    <div class="widget-content p-0">
+                                                        <div class="widget-content-left p-1">
+                                                            <div class="widget-content-right mr-2">
+                                                                <button
+                                                                    class="btn-pill btn-shadow btn-shine btn btn-focus"><a
+                                                                        href="{{ url('/admin/thong-tin-ca-nhan') }}"
+                                                                        style="color: white"> Cài đặt thông tin cá
+                                                                        nhân</a></button>
+                                                                <input type="hidden" name=""
+                                                                    id="id-current-user"
+                                                                    value="{{ auth()->guard('admin')->user()->id }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-content-left">
+                                                            <div class="widget-content-right mr-2">
+                                                                <button
+                                                                    class="btn-pill btn-shadow btn-shine btn btn-focus"><a
+                                                                        href="{{ url('api/logout-admin') }}"
+                                                                        style="color: white">Đăng xuất</a></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="grid-menu grid-menu-2col">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -659,12 +662,14 @@
                                             <i class="metismenu-icon"></i>Nhân viên
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="./admin/report"
-                                            class="{{ request()->segment(2) == 'report' ? 'mm-active' : '' }}">
-                                            <i class="metismenu-icon"></i>Báo cáo
-                                        </a>
-                                    </li>
+                                    @if (auth()->guard('admin')->user()->id == '1')
+                                        <li>
+                                            <a href="./admin/report"
+                                                class="{{ request()->segment(2) == 'report' ? 'mm-active' : '' }}">
+                                                <i class="metismenu-icon"></i>Báo cáo
+                                            </a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </li>
                         </ul>

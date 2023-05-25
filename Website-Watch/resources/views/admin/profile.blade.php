@@ -8,12 +8,12 @@
                         <h4 class="title">Cập nhật thông tin</h4>
                     </div>
                     <div class="content">
-                        <form>
+                        <form id="update-profile-dashboard" method="post" action="" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Họ và tên</label>
-                                        <input type="text" class="form-control"
+                                        <input name="name" type="text" class="form-control"
                                             value="{{ auth()->guard('admin')->user()->name }}">
                                     </div>
                                 </div>
@@ -22,14 +22,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Số điện thoại</label>
-                                        <input type="text" class="form-control"
+                                        <input name="phone_number" type="text" class="form-control"
                                             value="{{ auth()->guard('admin')->user()->phone_number }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email</label>
-                                        <input type="email" class="form-control"
+                                        <label>Email</label>
+                                        <input name="email" type="email" class="form-control"
                                             value="{{ auth()->guard('admin')->user()->email }}">
                                     </div>
                                 </div>
@@ -73,8 +73,8 @@
                             </div>
 
 
-                            <button type="submit" class="btn btn-info btn-fill pull-right">Cập nhật</button>
-                            <input type="hidden" name="" id="id-employee"
+                            <button type="button" class="btn btn-info btn-fill pull-right" id="btn-update-profile-dashboard">Cập nhật</button>
+                            <input type="hidden" name="" id="id-employee-dashboard"
                                 value="{{ auth()->guard('admin')->user()->id }}">
                             <div class="clearfix"></div>
                         </form>
@@ -84,13 +84,12 @@
             <div class="col-md-4">
                 <div class="card card-user">
                     <div class="image">
-                        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&amp;fm=jpg&amp;h=300&amp;q=75&amp;w=400"
+                        <img src="{{ asset("images/banner-profile-dashboard.png") }}"
                             alt="...">
                     </div>
                     <div class="content">
                         <div class="author">
-                            <a href="#">
-                                <img class="avatar border-gray"
+                                <img class="avatar-profile border-gray"
                                     src="{{ asset('images/employee/') }}/{{ auth()->guard('admin')->user()->avt }}"
                                     alt="...">
 
@@ -102,9 +101,7 @@
                                             <small>Quản trị</small>
                                         @endif
                                     @endif
-
                                 </h4>
-                            </a>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -146,7 +143,7 @@
                             <input class="form-control" id="confirm-password" type="password"
                                 placeholder="Xác nhận mật khẩu">
                         </div>
-                        <button class="btn btn-primary btn-block"> Đổi Mật Khẩu </button>
+                        <button type="button" class="btn btn-primary btn-block" id="bth-update-pass-profile-dashboard"> Đổi Mật Khẩu </button>
                     </div>
                 </div>
             </div>
@@ -176,7 +173,7 @@
                         "content"
                     ),
                 },
-                url: "/api/admin/profile/edit/" + $("#id-employee").val(),
+                url: "/api/admin/profile/edit/" + $("#id-employee-dashboard").val(),
                 type: "GET",
                 contentType: false,
                 processData: false,

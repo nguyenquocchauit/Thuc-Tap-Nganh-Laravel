@@ -24,7 +24,7 @@ class LoginAdminController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json([
-                'status' => 0,
+                'status' => 422,
                 'msg' => $validator->getMessageBag(),
             ]);
         } else {

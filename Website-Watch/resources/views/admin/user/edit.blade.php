@@ -28,12 +28,12 @@
             </li>
 
             <li class="nav-item delete">
-                <button class="nav-link btn btn-delete-product btn-delete-customer" type="button" >
+                <button class="nav-link btn btn-delete-product btn-delete-customer" type="button">
                     <span class="btn-icon-wrapper pr-2 opacity-8">
                         <i class="fa fa-trash fa-w-20"></i>
                     </span>
                     <span>Xóa</span>
-                    <input type="hidden" name="" value="{{ $employee->id }}">
+                    <input type="hidden" name="" value="{{ $customer->id }}">
                 </button>
             </li>
         </ul>
@@ -47,14 +47,14 @@
                                 <label for="name" class="col-md-3 text-md-right col-form-label">Tên</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="name" id="name" placeholder="Nhập tên" type="text"
-                                        class="form-control" value="{{ $employee->name }}">
+                                        class="form-control" value="{{ $customer->name }}">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
                                 <label for="phone" class="col-md-3 text-md-right col-form-label">Số điện thoại</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="phone_number" id="phone_number" placeholder="Nhập số điện thoại"
-                                        type="tel" class="form-control" value="{{ $employee->phone_number }}">
+                                        type="tel" class="form-control" value="{{ $customer->phone_number }}">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
@@ -82,14 +82,29 @@
                                 <label for="address" class="col-md-3 text-md-right col-form-label"></label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="address" id="address" placeholder="Nhập địa chỉ" type="text"
-                                        class="form-control" value="{{ $address }}">
+                                        class="form-control" value="">
                                 </div>
                             </div>
                             <div class="position-relative row form-group">
                                 <label for="email" class="col-md-3 text-md-right col-form-label">Email</label>
                                 <div class="col-md-9 col-xl-8">
                                     <input name="email" id="email" placeholder="Nhập Email" type="email"
-                                        class="form-control" value="{{ $employee->email }}">
+                                        class="form-control" value="{{ $customer->email }}">
+                                </div>
+                            </div>
+                            <div class="position-relative row form-group">
+                                <label for="email" class="col-md-3 text-md-right col-form-label">Tạo vào ngày</label>
+                                <div class="col-md-9 col-xl-8">
+                                    <input disabled="" name="created_at" id="created_at" type="text"
+                                        class="form-control" value="{{ $customer->create_at }}">
+                                </div>
+                            </div>
+                            <div class="position-relative row form-group">
+                                <label for="email" class="col-md-3 text-md-right col-form-label">Cập nhật vào
+                                    ngày</label>
+                                <div class="col-md-9 col-xl-8">
+                                    <input disabled="" name="updated_at" id="updated_at" type="text"
+                                        class="form-control" value="{{ $customer->update_at }}">
                                 </div>
                             </div>
                             <div class="position-relative row form-group mb-1">
@@ -107,7 +122,7 @@
                                         </span>
                                         <span>Lưu</span>
                                         <input type="hidden" name="" id="id-customer"
-                                            value="{{ $employee->id }}">
+                                            value="{{ $customer->id }}">
                                     </button>
                                 </div>
                             </div>
@@ -145,6 +160,9 @@
                 contentType: false,
                 processData: false,
                 success: function(response) {
+                    $("#address").val(response.address);
+                    $("#created_at").val(response.created_at);
+                    $("#updated_at").val(response.updated_at);
                     var idCitis = null;
                     var idDistrict = null;
 

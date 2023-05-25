@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\LoginAdminController;
 use App\Http\Controllers\User\UserController as UserUserController;
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\Host;
 use App\Http\Middleware\User;
 use Illuminate\Support\Facades\Route;
 
@@ -47,12 +48,14 @@ Route::middleware([Admin::class])->prefix('admin')->group(function () {
     Route::resource('brand', BrandController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('product', AdminProductController::class);
-    Route::resource('report', ReportController::class);
     Route::resource('employee', EmployeeController::class);
-    //Route::resource('/thong-tin-ca-nhan', ProfileController::class);
     Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'profile'])->name('edit');
 });
-// User
+//Host
+Route::middleware([Host::class])->prefix('admin')->group(function () {
+    Route::resource('report', ReportController::class);
+});
+// Customer
 Route::middleware([User::class])->group(function () {
     Route::get('/thong-tin-ca-nhan', [UserUserController::class, 'profile'])->name('profile');
     Route::get('/lich-su-dat-hang', [UserUserController::class, 'purchaseHistory'])->name('purchaseHistory');

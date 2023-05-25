@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="page-title-actions">
-                    <a href="./admin/customer/create" class="btn-shadow btn-hover-shine mr-3 btn btn-primary">
+                    <a href="./admin/employee/create" class="btn-shadow btn-hover-shine mr-3 btn btn-primary">
                         <span class="btn-icon-wrapper pr-2 opacity-7">
                             <i class="fa fa-plus fa-w-20"></i>
                         </span>
@@ -99,11 +99,13 @@
                                                     <i class="fa fa-edit fa-w-20"></i>
                                                 </span>
                                             </a>
-                                            <button class="btn btn-hover-shine btn-outline-danger border-0 btn-sm"
-                                                type="submit" data-toggle="tooltip" title="Delete" data-placement="bottom">
+                                            <button
+                                                class="btn btn-hover-shine btn-outline-danger border-0 btn-sm btn-delete-employee"
+                                                type="button" data-toggle="tooltip" title="Delete" data-placement="bottom">
                                                 <span class="btn-icon-wrapper opacity-8">
                                                     <i class="fa fa-trash fa-w-20"></i>
                                                 </span>
+                                                <input type="hidden" value="{{ $employee->id }}">
                                             </button>
                                         </td>
                                     </tr>

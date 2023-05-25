@@ -82,7 +82,7 @@ $(document).ready(function () {
                                 "/admin/product/" + response.id + "/edit";
                         });
                     } else if (
-                        response.status == 500 &&
+                        response.status == 422 &&
                         response.msg == "Up to 99% discount"
                     ) {
                         showMsgWaring(
@@ -90,7 +90,7 @@ $(document).ready(function () {
                             "#discount_product"
                         );
                     } else if (
-                        response.status == 500 &&
+                        response.status == 422 &&
                         response.msg == "Minimum selling price 100,000 VND"
                     ) {
                         showMsgWaring(
@@ -98,7 +98,7 @@ $(document).ready(function () {
                             "#price_product"
                         );
                     } else if (
-                        response.status == 500 &&
+                        response.status == 422 &&
                         response.msg == "Duplicate name"
                     ) {
                         showMsgWaring(

@@ -40,10 +40,10 @@ class Product extends Model
             ->get();
     }
     public function currentTime()
-{
-    $currentTime = Carbon::now('Asia/Ho_Chi_Minh');
-    return $currentTime->toDateTimeString();
-}
+    {
+        $currentTime = Carbon::now('Asia/Ho_Chi_Minh');
+        return $currentTime->toDateTimeString();
+    }
     public function checkGender($gender)
     {
         if ($gender == 1)

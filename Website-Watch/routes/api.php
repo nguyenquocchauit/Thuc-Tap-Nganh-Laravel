@@ -46,13 +46,23 @@ Route::middleware([Admin::class])->group(function () {
     Route::get('/admin/product/delete/{id}', [AdminProductController::class, 'destroy'])->name('delete-product');
     Route::post('/admin/product/update/{id}', [AdminProductController::class, 'update'])->name('update-product');
     Route::post('/admin/product/create', [AdminProductController::class, 'store'])->name('create-product');
+    // product
     Route::post('/admin/customer/create', [AdminUserController::class, 'store'])->name('create-customer');
     Route::get('/admin/customer/edit/{id}', [AdminUserController::class, 'editCustomer'])->name('edit-customer');
     Route::post('/admin/customer/update/{id}', [AdminUserController::class, 'update'])->name('update-customer');
     Route::get('/admin/customer/delete/{id}', [AdminUserController::class, 'destroy'])->name('delete-customer');
+    // customer
     Route::get('/admin/profile/edit/{id}', [ProfileController::class, 'editEmployee'])->name('edit-profile');
+    Route::post('/admin/profile/update/{id}', [ProfileController::class, 'update'])->name('update-profile-dashboard');
+    Route::post('/admin/profile/update-password/{id}', [ProfileController::class, 'updatePassword'])->name('update-password-dashboard');
+    // profile-dashboard
     Route::post('/admin/brand/create', [BrandController::class, 'store'])->name('create-brand');
     Route::get('/admin/brand/delete/{id}', [BrandController::class, 'destroy'])->name('delete-brand');
+    Route::post('/admin/brand/update/{id}', [BrandController::class, 'update'])->name('update-brand');
+    // brand
+    Route::post('/admin/employee/create', [EmployeeController::class, 'store'])->name('create-employee');
+    Route::get('/admin/employee/delete/{id}', [EmployeeController::class, 'destroy'])->name('delete-employee');
+    // employee
 });
 
 // login and register of user
@@ -69,5 +79,3 @@ Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add
 Route::post('/remove-all-cart', [CartController::class, 'removeAllCart'])->name('remove-all-cart');
 Route::get('/remove-product-by-id/{id}', [CartController::class, 'removeProductCart'])->name('remove-product-by-id');
 Route::post('/update-quantity-cart', [CartController::class, 'updateQuantityCart'])->name('update-quantity-cart');
-
-
