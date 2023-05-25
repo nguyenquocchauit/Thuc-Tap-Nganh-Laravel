@@ -31,4 +31,18 @@ class Administrator extends Authenticatable
             ->select(DB::raw("MAX(id) AS ID_Max "))
             ->get();
     }
+    public function getAllUsers($search = null)
+    {
+        $employeer = Administrator::first('id');
+        if (!empty($search)) {
+            $employeer = $employeer->where(function ($query) use ($search) {
+                $query->orWhere('administrator.name', 'like', '%' . $search . '%');
+                $query->orWhere('administrator.email', 'like', '%' . $search . '%');
+                $query->orWhere('administrator.address', 'like', '%' . $search . '%');
+                $query->orWhere('administrator.phone_number', 'like', '%' . $search . '%');
+            });
+        }
+        $employeer = $employeer->paginate(10);
+        return $employeer;
+    }
 }

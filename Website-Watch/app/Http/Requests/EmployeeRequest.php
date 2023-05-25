@@ -14,7 +14,7 @@ class EmployeeRequest extends FormRequest
     {
         return [
             'name' => ['required', 'regex:/^[a-zA-ZÀ-ỹ ]*$/'],
-            'phone_number' => ['required', 'regex:/(09|03|07|08|05)+([0-9]{8})\b/'],
+            'phone_number' => ['required','unique:administrator,phone_number', 'regex:/(09|03|07|08|05)+([0-9]{8})\b/'],
             'email' => ['required', 'unique:administrator,email', 'regex:/^[^ ]+@[^ ]+\.[a-z]{2,3}$/'],
             'address' => ['required'],
             'password' => ['required', 'min:6', 'max:30'],
@@ -31,6 +31,7 @@ class EmployeeRequest extends FormRequest
             'role.required' => 'Empty role',
             'address.required' => 'Empty address',
             'phone_number.required' => 'Empty phone',
+            'phone_number.unique' => 'Phone already exists',
             'phone_number.regex' => 'Incorrect phone format',
             'email.required' => 'Empty email',
             'email.unique' => 'Email already exists',

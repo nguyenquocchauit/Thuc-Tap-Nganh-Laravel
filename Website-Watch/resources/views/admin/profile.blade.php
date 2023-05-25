@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
-                <div class="card-profile">
+                <div class="card-profile-dashboard">
                     <div class="header">
                         <h4 class="title">Cập nhật thông tin</h4>
                     </div>
@@ -73,10 +73,11 @@
                             </div>
 
 
-                            <button type="button" class="btn btn-info btn-fill pull-right" id="btn-update-profile-dashboard">Cập nhật</button>
+                            <button type="button" class="btn btn-info btn-fill pull-right"
+                                id="btn-update-profile-dashboard">Cập nhật</button>
                             <input type="hidden" name="" id="id-employee-dashboard"
                                 value="{{ auth()->guard('admin')->user()->id }}">
-                            <div class="clearfix"></div>
+
                         </form>
                     </div>
                 </div>
@@ -84,30 +85,35 @@
             <div class="col-md-4">
                 <div class="card card-user">
                     <div class="image">
-                        <img src="{{ asset("images/banner-profile-dashboard.png") }}"
-                            alt="...">
+                        <img src="{{ asset('images/banner-profile-dashboard.png') }}" alt="...">
                     </div>
                     <div class="content">
                         <div class="author">
-                                <img class="avatar-profile border-gray"
+                            <label for="image-profile-dashboard" class="file-image">
+                                <img class="avatar-profile border-gray" id="avatar-profile"
                                     src="{{ asset('images/employee/') }}/{{ auth()->guard('admin')->user()->avt }}"
                                     alt="...">
+                            </label>
+                            <input class="image_product" type="file" name="image_profile" id="image-profile-dashboard"
+                                style="display:none;">
 
-                                <h4 class="title">{{ auth()->guard('admin')->user()->name }}<br>
-                                    @if (auth()->guard('admin')->user()->role == '1')
-                                        <small>Nhân viên</small>
-                                    @else
-                                        @if (auth()->guard('admin')->user()->role == '2')
-                                            <small>Quản trị</small>
-                                        @endif
+
+                            <h4 class="title">{{ auth()->guard('admin')->user()->name }}<br>
+                                @if (auth()->guard('admin')->user()->role == '1')
+                                    <small>Nhân viên</small>
+                                @else
+                                    @if (auth()->guard('admin')->user()->role == '2')
+                                        <small>Quản trị</small>
                                     @endif
-                                </h4>
+                                @endif
+                            </h4>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tạo vào ngày</label>
-                                    <input id="created_at" disabled="" type="text" class="form-control" value="">
+                                    <input id="created_at" disabled="" type="text" class="form-control"
+                                        value="">
 
                                 </div>
                             </div>
@@ -143,7 +149,8 @@
                             <input class="form-control" id="confirm-password" type="password"
                                 placeholder="Xác nhận mật khẩu">
                         </div>
-                        <button type="button" class="btn btn-primary btn-block" id="bth-update-pass-profile-dashboard"> Đổi Mật Khẩu </button>
+                        <button type="button" class="btn btn-primary btn-block" id="bth-update-pass-profile-dashboard">
+                            Đổi Mật Khẩu </button>
                     </div>
                 </div>
             </div>

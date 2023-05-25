@@ -55,7 +55,6 @@
                                     <th class="text-center">Email</th>
                                     <th class="text-center">Vai trò</th>
                                     <th class="text-center">Hành động</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,7 +63,9 @@
                                         <td class="text-center">{{ $employee->id }}</td>
                                         <td class="text-center">{{ $employee->name }}</td>
                                         <td class="text-center">
-                                            <img width="50px" height="50px" class="img-fluid"
+                                            <img width="70px" height="70px" class="img-fluid"
+                                                style="border-radius: 50%;
+                                            border: 5px solid #ffffff;"
                                                 src="{{ asset('images/employee/') }}/{{ $employee->avt }}" alt="">
                                         </td>
                                         <td class="text-center">{{ $employee->phone_number }}</td>
@@ -76,13 +77,10 @@
                                             @else
                                                 {{ $employee->address }}
                                             @endif
-
                                         </td>
-
                                         <td class="text-center">
                                             {{ $employee->email }}
                                         </td>
-
                                         <td class="text-center">
                                             @if ($employee->role == '1')
                                                 Nhân viên
@@ -90,23 +88,35 @@
                                                 Quản trị
                                             @endif
                                         </td>
-
                                         <td class="text-center">
-                                            <a href="/admin/employee/{{ $employee->id }}/edit" data-toggle="tooltip"
-                                                title="Chỉnh sửa" data-placement="bottom"
-                                                class="btn btn-outline-warning border-0 btn-sm">
-                                                <span class="btn-icon-wrapper opacity-8">
-                                                    <i class="fa fa-edit fa-w-20"></i>
-                                                </span>
-                                            </a>
-                                            <button
-                                                class="btn btn-hover-shine btn-outline-danger border-0 btn-sm btn-delete-employee"
-                                                type="button" data-toggle="tooltip" title="Delete" data-placement="bottom">
-                                                <span class="btn-icon-wrapper opacity-8">
-                                                    <i class="fa fa-trash fa-w-20"></i>
-                                                </span>
-                                                <input type="hidden" value="{{ $employee->id }}">
-                                            </button>
+                                            @if (auth()->guard('admin')->user()->role == $employee->role &&
+                                                    auth()->guard('admin')->user()->id == $employee->id)
+                                                <a href="/admin/thong-tin-ca-nhan" data-toggle="tooltip" title="Chỉnh sửa"
+                                                    data-placement="bottom" class="btn btn-outline-warning border-0 btn-sm">
+                                                    <span class="btn-icon-wrapper opacity-8">
+                                                        <i class="fa fa-edit fa-w-20"></i>
+                                                    </span>
+                                                </a>
+                                            @else
+                                                <a href="/admin/employee/{{ $employee->id }}/edit" data-toggle="tooltip" title="Chỉnh sửa"
+                                                    data-placement="bottom" class="btn btn-outline-warning border-0 btn-sm">
+                                                    <span class="btn-icon-wrapper opacity-8">
+                                                        <i class="fa fa-edit fa-w-20"></i>
+                                                    </span>
+                                                </a>
+                                            @endif
+                                            @if (auth()->guard('admin')->user()->role == '2')
+                                                <button
+                                                    class="btn btn-hover-shine btn-outline-danger border-0 btn-sm btn-delete-employee"
+                                                    type="button" data-toggle="tooltip" title="Delete"
+                                                    data-placement="bottom">
+                                                    <span class="btn-icon-wrapper opacity-8">
+                                                        <i class="fa fa-trash fa-w-20"></i>
+                                                    </span>
+                                                    <input type="hidden" value="{{ $employee->id }}">
+                                                </button>
+                                            @endif
+
                                         </td>
                                     </tr>
                                 @endforeach

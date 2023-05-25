@@ -1,19 +1,20 @@
 @extends('admin.layout.master')
 @section('body')
-    {{-- <div class="container-fluid">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
-                <div class="card-profile">
+                <div class="card-update-employee">
                     <div class="header">
-                        <h4 class="title">Cập nhật thông tin</h4>
+                        <h4 class="title">Thông tin</h4>
                     </div>
                     <div class="content">
-                        <form>
+                        <form id="update-profile-dashboard" method="post" action="" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Họ và tên</label>
-                                        <input type="text" class="form-control" value="{{ $employee->name }}">
+                                        <input name="name" id="name" type="text" class="form-control"
+                                            value="{{ $employee->name }}">
                                     </div>
                                 </div>
                             </div>
@@ -21,13 +22,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Số điện thoại</label>
-                                        <input type="text" class="form-control" value="{{ $employee->phone_number }}">
+                                        <input name="phone_number" id="phone_number" type="text" class="form-control"
+                                            value="{{ $employee->phone_number }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email</label>
-                                        <input type="email" class="form-control" value="{{ $employee->email }}">
+                                        <label>Email</label>
+                                        <input name="email" id="email" type="email" class="form-control"
+                                            value="{{ $employee->email }}">
                                     </div>
                                 </div>
                             </div>
@@ -64,92 +67,78 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <input name="address" id="address" placeholder="Nhập địa chỉ" type="text"
-                                            class="form-control" value="{{ $address }}">
+                                            class="form-control" value="">
                                     </div>
                                 </div>
                             </div>
 
-
-                            <button type="submit" class="btn btn-info btn-fill pull-right">Cập nhật</button>
-                            <input type="hidden" name="" id="id-employee" value="{{ $employee->id }}">
-                            <div class="clearfix"></div>
+                            <button type="button" class="btn btn-info btn-fill pull-right"
+                                id="btn-update-employee-dashboard">Cập nhật</button>
+                            <input type="hidden" name="" id="id-employee-dashboard" value="{{ $employee->id }}">
                         </form>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card card-user">
-                    <div class="image">
-                        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&amp;fm=jpg&amp;h=300&amp;q=75&amp;w=400"
-                            alt="...">
+                <div class="card card-employee">
+                    <div class="image">s
+                        <img src="{{ asset('images/banner-profile-dashboard.png') }}" alt="...">
                     </div>
                     <div class="content">
                         <div class="author">
-                            <a href="#">
-                                <img class="avatar border-gray" src="{{ asset('images/employee/') }}/{{ $employee->avt }}"
-                                    alt="...">
+                            <label for="image-profile-dashboard" class="file-image">
+                                <img class="avatar-profile border-gray" id="avatar-profile"
+                                    src="{{ asset('images/employee/') }}/{{ $employee->avt }}" alt="...">
+                            </label>
+                            <input class="image_product" type="file" name="image_profile" id="image-profile-dashboard"
+                                style="display:none;">
 
-                                <h4 class="title">{{ $employee->name }}<br>
-                                    @if ($employee->role == '1')
-                                        <small>Nhân viên</small>
-                                    @else
-                                        @if ($employee->role == '2')
-                                            <small>Quản trị</small>
-                                        @endif
+
+                            <h4 class="title">{{ $employee->name }}<br>
+                                @if ($employee->role == '1')
+                                    <small>Nhân viên</small>
+                                @else
+                                    @if ($employee->role == '2')
+                                        <small>Quản trị</small>
                                     @endif
-
-                                </h4>
-                            </a>
+                                @endif
+                            </h4>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tạo vào ngày</label>
-                                    <input disabled="" type="text" class="form-control"
-                                        value="{{ $employee->create_at }}">
+                                    <input id="created_at" disabled="" type="text" class="form-control"
+                                        value="">
+
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Cập nhật vào ngày</label>
-                                    <input disabled="" type="text" class="form-control"
-                                        value="{{ $employee->update_at }}">
+                                    <input id="updated_at" disabled="" type="text" class="form-control"
+                                        value="">
                                 </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
-                <div class="card card-password">
 
-                    <div class="card-header">
-                        <h5 class="mb-0">Đổi Mật Khẩu</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label class="form-label" for="old-password">Mật Khẩu Cũ</label>
-                            <input class="form-control" id="old-password" type="password"
-                                placeholder="Nhập mật khẩu hiện tại">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="new-password">Mật Khẩu Mới</label>
-                            <input class="form-control" id="new-password" type="password"
-                                placeholder="Nhập mật khẩu mới">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="confirm-password">Xác Nhận Mật Khẩu</label>
-                            <input class="form-control" id="confirm-password" type="password"
-                                placeholder="Xác nhận mật khẩu">
-                        </div>
-                        <button class="btn btn-primary btn-block"> Đổi Mật Khẩu </button>
-                    </div>
-                </div>
             </div>
 
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
+        // Kiểm tra giá trị của phần tử có id là role-current-user
+        if ($("#role-current-user").val() != 2) {
+            // Nếu giá trị của phần tử có id là role-current-user khác 2 thì thuộc tính disable sẽ được thêm vào các phần tử có id là name, phone_number, email, city, district, ward, address và avatar-profile.
+            $(
+                "#name, #phone_number, #email, #city, #district, #ward, #address, #avatar-profile,#btn-update-employee-dashboard",
+            ).prop("disabled", true);
+
+        }
         var citis = document.getElementById("city");
         var districts = document.getElementById("district");
         var wards = document.getElementById("ward");
@@ -171,11 +160,14 @@
                         "content"
                     ),
                 },
-                url: "/api/admin/employee/edit/" + $("#id-employee").val(),
+                url: "/api/admin/employee/edit/" + $("#id-employee-dashboard").val(),
                 type: "GET",
                 contentType: false,
                 processData: false,
                 success: function(response) {
+                    $("#address").val(response.address);
+                    $("#created_at").val(response.created_at);
+                    $("#updated_at").val(response.updated_at);
                     var idCitis = null;
                     var idDistrict = null;
 
@@ -240,5 +232,5 @@
                 }
             };
         }
-    </script> --}}
+    </script>
 @endsection

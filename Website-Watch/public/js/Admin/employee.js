@@ -90,11 +90,20 @@ $(document).ready(function () {
                     type: "GET",
                     url: "/api/admin/employee/delete/" + id,
                     success: function (response) {
+                        console.log(response.msg);
                         if (
                             response.status == 200 &&
                             response.msg == "Delete employee successfully"
                         ) {
                             window.location.href = "/admin/employee";
+                        }else if (
+                            response.status == 500 &&
+                            response.msg == "Delete yourself"
+                        ) {
+                            showMsgWaring(
+                                "Không được xóa chính mình",
+                                ".btn-delete-employee"
+                            );
                         }
                     },
                 });
@@ -102,7 +111,7 @@ $(document).ready(function () {
         });
     });
 
-    // review image product
+    // review image employee
     $(document).on("change", "#image-profile", function () {
         let reader = new FileReader();
 
@@ -166,6 +175,12 @@ $(document).ready(function () {
             errors.phone_number[0] == "Incorrect phone format"
         ) {
             showMsgWaring("Số điện thoại không hợp lệ!", "#phone_number");
+        } else if (
+            errors.phone_number &&
+            errors.phone_number.length > 0 &&
+            errors.phone_number[0] == "Phone already exists"
+        ) {
+            showMsgWaring("Số điện thoại đã tồn tại!", "#email");
         } else if (
             errors.email &&
             errors.email.length > 0 &&
@@ -240,4 +255,5 @@ $(document).ready(function () {
             );
         }
     }
+
 });

@@ -62,6 +62,7 @@ Route::middleware([Admin::class])->group(function () {
     // brand
     Route::post('/admin/employee/create', [EmployeeController::class, 'store'])->name('create-employee');
     Route::get('/admin/employee/delete/{id}', [EmployeeController::class, 'destroy'])->name('delete-employee');
+    Route::get('/admin/employee/edit/{id}', [EmployeeController::class, 'editEmployee'])->name('edit-employee');
     // employee
 });
 

@@ -27,14 +27,10 @@ class ProfileController extends Controller
     }
     public function edit($id)
     {
-
-
         if ($id) {
             if (!(auth()->guard("admin")->user()->id == $id))
                 return Redirect('/admin/profile/' . auth()->guard("admin")->user()->id . '/edit');
-            $employee = Administrator::find($id);
-            $employeeAddress = explode(", ", $employee->address);
-            $address = $employeeAddress[0] ?? "";
+            $employee = Administrator::find($id);;
             return view('admin.profile', compact('title', 'employee', 'address'));
         }
         return Redirect('/admin/login');

@@ -46,7 +46,6 @@
                             </div>
                         </form>
                     </div>
-                    @include('admin.alert')
                     <div class="table-responsive">
                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>

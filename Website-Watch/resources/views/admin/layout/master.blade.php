@@ -127,6 +127,9 @@
                                                                 <input type="hidden" name=""
                                                                     id="id-current-user"
                                                                     value="{{ auth()->guard('admin')->user()->id }}">
+                                                                    <input type="hidden" name=""
+                                                                    id="role-current-user"
+                                                                    value="{{ auth()->guard('admin')->user()->role }}">
                                                             </div>
                                                         </div>
                                                         <div class="widget-content-left">

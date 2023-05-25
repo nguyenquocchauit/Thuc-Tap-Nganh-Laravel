@@ -1,10 +1,10 @@
 $(document).ready(function () {
-    $(".avatar-profile").hover(function(){
-        $(this).animate({left: '+=10px'}, 200);
-        $(this).animate({left: '-=10px'}, 200);
-        $(this).animate({top: '-=10px'}, 200);
-        $(this).animate({top: '+=10px'}, 200);
-      });
+    setInterval(function () {
+        $("#avatar-profile").animate({ left: "+=10px" }, 200);
+        $("#avatar-profile").animate({ left: "-=10px" }, 200);
+        $("#avatar-profile").animate({ top: "-=10px" }, 200);
+        $("#avatar-profile").animate({ top: "+=10px" }, 200);
+    }, 1000);
     //update brand
     $("#btn-update-profile-dashboard").on("click", function () {
         // content will contain the content of the selected <option> element
@@ -279,4 +279,27 @@ $(document).ready(function () {
             showMsgWaring("Mật khẩu xác nhận sai!", "#password_confirmation");
         }
     }
+    // review image profile dashboard
+    $(document).on("change", "#image-profile-dashboard", function () {
+        let reader = new FileReader();
+        alert("d");
+        // Kiểm tra định dạng file ảnh
+        let file = this.files[0];
+        let fileType = file["type"];
+        let validImageTypes = ["image/jpeg", "image/png", "image/jpg"];
+        if ($.inArray(fileType, validImageTypes) < 0) {
+            // Hiển thị thông báo lỗi nếu định dạng file không hợp lệ
+            showMsgWaring(
+                "Chỉ cho phép định dạng ảnh jpg,png,jpeg",
+                ".image-profile"
+            );
+            $(this).val("");
+            return false;
+        }
+
+        reader.onload = (e) => {
+            $("#avatar-profile").attr("src", e.target.result);
+        };
+        reader.readAsDataURL(this.files[0]);
+    });
 });

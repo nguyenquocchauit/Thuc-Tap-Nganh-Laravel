@@ -7,8 +7,10 @@ use App\Http\Requests\EmployeeRequest;
 use App\Models\Administrator;
 use App\Models\Role;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,6 +31,12 @@ class EmployeeController extends Controller
     {
         $title = 'Nhân viên';
         $employees = Administrator::get();
+        //search
+        $search = null;
+        if (!empty($request->search)) {
+            $search = $request->search;
+        }
+        $employees = $this->employee->getAllUsers($search);
         return view('admin.employee.index', compact('title', 'employees'));
     }
     public function create()
@@ -38,15 +46,22 @@ class EmployeeController extends Controller
     }
     public function store(EmployeeRequest $request)
     {
+        // Tạo một đối tượng mới của lớp Administrator
         $employee = new Administrator();
+
+        // Lấy ID lớn nhất hiện tại trong cơ sở dữ liệu
         $maxID = $employee->maxID();
         $maxID = $maxID[0]->ID_Max;
         $maxID += 1;
+
+        // Lấy thời gian hiện tại theo múi giờ Asia/Ho_Chi_Minh
         $now = now()->setTimezone('Asia/Ho_Chi_Minh');
+
+        // Tạo mảng dữ liệu mới cho nhân viên
         $data = [
             "id" => $maxID,
             "name" => $request->name,
-            "avt" => Str::slug($request->name) . $maxID,
+            "avt" => Str::slug($request->name) . $maxID . ".png",
             "phone_number" => $request->phone_number,
             "address" => $request->address,
             "email" => $request->email,
@@ -54,10 +69,15 @@ class EmployeeController extends Controller
             "role" => $request->role,
             "create_at" => $now,
             "updated_at" => $now
-
         ];
-        $request->file('image_profile')->storeAs('public/images/employee/', Str::slug($request->name) . $maxID);
+
+        // Lưu ảnh của nhân viên vào thư mục public/images/employee/
+        $request->file('image_profile')->move(public_path('images/employee/'), Str::slug($request->name) . $maxID . ".png");
+
+        // Thêm nhân viên mới vào cơ sở dữ liệu
         Administrator::create($data);
+
+        // Trả về thông báo thành công
         return response()->json([
             'status' => 200,
             'msg' => "Create employee successfully",
@@ -66,37 +86,27 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $title = 'Cập nhật người dùng';
-
-        // Kiểm tra xem id có tồn tại hay không
         if ($id) {
-            // Lấy thông tin của một đối tượng Administrator với id là $id
-            $employee = Administrator::select(
-                DB::raw("*, DATE_FORMAT(create_at,'%H:%i:%s %d-%m-%Y') as create_at"),
-                DB::raw("DATE_FORMAT(updated_at,'%H:%i:%s %d-%m-%Y') as update_at")
-            )->find($id);
-
-            // Tách chuỗi địa chỉ của đối tượng Administrator thành hai phần
-            $employeeAddress = explode(", ", $employee->address);
-            $address = $employeeAddress[0] ?? "";
-
-            // Truyền các biến vào view 'admin.employee.edit'
-            return view('admin.employee.edit', compact('title', 'employee', 'address'));
+            $employee = Administrator::find($id);
+            return view('admin.employee.edit', compact('title', 'employee'));
         }
-
-        // Nếu không có id, trả về view 'admin.login'
-        return view('admin.login');
+        return Redirect('/admin/login');
     }
 
     public function editEmployee($id)
     {
         // Lấy thông tin của một đối tượng Administrator với id là $id
-        $user = Administrator::find($id);
+        $employee = Administrator::select(
+            DB::raw("*, DATE_FORMAT(create_at,'%H:%i:%s %d-%m-%Y') as create_at"),
+            DB::raw("DATE_FORMAT(updated_at,'%H:%i:%s %d-%m-%Y') as update_at")
+        )->find($id);
 
         // Tách chuỗi địa chỉ của đối tượng Administrator thành ba phần
-        $userAddress = explode(", ", $user->address);
-        $city = $userAddress[3] ?? "";
-        $district = $userAddress[2] ?? "";
-        $ward = $userAddress[1] ?? "";
+        $employeeAddress = explode(", ", $employee->address);
+        $city = $employeeAddress[3] ?? "";
+        $district = $employeeAddress[2] ?? "";
+        $ward = $employeeAddress[1] ?? "";
+        $address = $employeeAddress[0] ?? "";
 
         // Truyền các biến vào một đối tượng Response
         return response()->json([
@@ -104,11 +114,39 @@ class EmployeeController extends Controller
             'city' => $city,
             'district' => $district,
             'ward' => $ward,
+            'address' => $address,
+            'created_at' => $employee->create_at,
+            'updated_at' => $employee->update_at,
         ]);
     }
     public function destroy(Request $request)
     {
-        Administrator::destroy($request->id);
+        // Tìm kiếm nhân viên theo id
+        $employee = Administrator::findOrFail($request->id);
+        // Kiểm tra nếu là người dùng hiện tại đang thực hiện thao tác xóa hoặc nhân viên xóa quản trị viên thì ngăn chặn
+        if (Auth::guard('admin')->check() == false || Auth::guard('admin')->user()->id == $request->id) {
+            return response()->json([
+                'status' => 500,
+                'msg' => 'Delete yourself'
+            ]);
+        }
+        if (Auth::guard('admin')->check() == false || Auth::guard('admin')->user()->role == $request->role) {
+            return response()->json([
+                'status' => 500,
+                'msg' => 'No permissions'
+            ]);
+        }
+
+        // Kiểm tra xem ảnh của nhân viên có tồn tại không
+        if (File::exists("images/employee/" . $employee->avt)) {
+            // Nếu có, xóa ảnh đó
+            File::delete("images/employee/" . $employee->avt);
+        }
+
+        // Xóa nhân viên khỏi cơ sở dữ liệu
+        $employee->delete();
+
+        // Trả về thông báo thành công
         return response()->json([
             'status' => 200,
             'msg' => 'Delete employee successfully'
