@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2023 at 02:01 AM
+-- Generation Time: May 26, 2023 at 01:00 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `administrator` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` varchar(15) NOT NULL,
   `name` varchar(255) NOT NULL,
   `avt` text NOT NULL,
   `address` text NOT NULL,
@@ -45,8 +45,9 @@ CREATE TABLE `administrator` (
 --
 
 INSERT INTO `administrator` (`id`, `name`, `avt`, `address`, `phone_number`, `email`, `password`, `create_at`, `updated_at`, `role`) VALUES
-(1, 'Nguyễn Quốc Châu', 'nguyen-quoc-chau.png', '02 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', '0386818888', 'chauquocnguyen.cun1@gmail.com', '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', '2022-12-05 17:58:39', '2023-05-16 23:13:36', 2),
-(2, 'Nguyễn Khánh Nam', 'nguyen-khanh-nam.png', 'Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', '0386888888', 'nguyenkhanhnam@gmail.com', '$2y$10$TVgFCg5swzeh6PtjoblMGehheym22/pzB9PhrbSpYgSMeBdQhNlLm', '2023-05-23 15:21:32', '2023-05-23 15:21:32', 1);
+('nv105122022', 'Nguyễn Quốc Châu', 'nguyen-quoc-chau.png', '074 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', '0386818829', 'chauquocnguyen.cun1@gmail.com', '$2y$10$tSkxt3MiZmU599FKUhud0uN0AF/EWps/PaDqpMmi8z2ryul3vh.gO', '2022-12-05 17:58:39', '2023-05-26 01:58:50', 2),
+('nv226052023', 'Nguyễn Khánh Namm', 'nguyen-khanh-nam.png', '25 Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', '0386888888', 'nguyenkhanhnam@gmail.com', '$2y$10$Vc9cEkOcGOlmm9S10mVbB.C0uVFUsYFZJuDRqdSSD5rRRkGSK3p7y', '2023-05-23 15:21:32', '2023-05-26 16:44:24', 1),
+('nv323052023', 'Nguyễn Trần Hoàn Kim', 'nguyen-tran-hoan-kim3.png', '100 Nguyễn Thiện Thuật, Phường Hùng Vương, Thành phố Phúc Yên, Tỉnh Vĩnh Phúc', '0926262626', 'hoankim.nguyentran@gmail.com', '$2y$10$8kb3RBJ5boVYZ2WDyIcvPuLwL2wilp.yqQw2aDpJr05mqUkC2DZr6', '2023-05-26 01:36:13', '2023-05-26 16:31:16', 1);
 
 -- --------------------------------------------------------
 
@@ -80,7 +81,7 @@ INSERT INTO `brands` (`id`, `name`, `slug`) VALUES
 
 CREATE TABLE `comment` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `customers` bigint(20) UNSIGNED NOT NULL,
+  `customers` varchar(15) NOT NULL,
   `product` bigint(20) UNSIGNED NOT NULL,
   `content` text DEFAULT NULL,
   `star` smallint(5) NOT NULL,
@@ -92,12 +93,12 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`id`, `customers`, `product`, `content`, `star`, `created_at`) VALUES
-(1, 1, 4, 'Sản phẩm tốt, đẹp. Mình đánh giá 4 sao nha', 4, '2022-12-08 10:03:41'),
-(2, 1, 4, 'Sản phẩm ok lắm nha. Ưng lắm', 5, '2022-12-15 11:53:14'),
-(3, 1, 1, 'Đẹp lắm ', 5, '2022-12-15 12:31:23'),
-(4, 2, 1, 'ddd', 4, '2022-12-25 05:10:34'),
-(5, 2, 5, 'đẹp lắm bạn ạ', 0, '2023-04-01 07:00:00'),
-(6, 2, 3, 'good', 4, '2023-04-28 05:44:35');
+(1, 'kh105122022', 4, 'Sản phẩm tốt, đẹp. Mình đánh giá 4 sao nha', 4, '2022-12-08 10:03:41'),
+(2, 'kh105122022', 4, 'Sản phẩm ok lắm nha. Ưng lắm', 5, '2022-12-15 11:53:14'),
+(3, 'kh105122022', 1, 'Đẹp lắm ', 5, '2022-12-15 12:31:23'),
+(4, 'kh26122022', 1, 'ddd', 4, '2022-12-25 05:10:34'),
+(5, 'kh26122022', 5, 'đẹp lắm bạn ạ', 0, '2023-04-01 07:00:00'),
+(6, 'kh26122022', 3, 'good', 4, '2023-04-28 05:44:35');
 
 -- --------------------------------------------------------
 
@@ -140,7 +141,13 @@ INSERT INTO `images` (`id`, `image_1`, `image_2`, `image_3`, `image_4`, `image_5
 ('g-shock-gma-s110cw-7a2', 'g-shock-gma-s110cw-7a2-1.png', 'g-shock-gma-s110cw-7a2-2.png', 'g-shock-gma-s110cw-7a2-3.png', 'g-shock-gma-s110cw-7a2-4.png', 'g-shock-gma-s110cw-7a2-5.png', 'g-shock-gma-s110cw-7a2-6.png'),
 ('g-shock-gma-s120sr-7a', 'g-shock-gma-s120sr-7a-1.png', 'g-shock-gma-s120sr-7a-2.png', 'g-shock-gma-s120sr-7a-3.png', 'g-shock-gma-s120sr-7a-4.png', 'g-shock-gma-s120sr-7a-5.png', 'g-shock-gma-s120sr-7a-6.png'),
 ('g-shock-gma-s2100sk-2a', 'g-shock-gma-s2100sk-2a-1.png', 'g-shock-gma-s2100sk-2a-2.png', 'g-shock-gma-s2100sk-2a-3.png', 'g-shock-gma-s2100sk-2a-4.png', 'g-shock-gma-s2100sk-2a-5.png', 'g-shock-gma-s2100sk-2a-6.png'),
-('nguyen-quoc-chaudd-20230518152126', 'nguyen-quoc-chaudd-20230518152126-1.png', 'nguyen-quoc-chaudd-20230518152126-2.png', 'nguyen-quoc-chaudd-20230518152126-3.png', 'nguyen-quoc-chaudd-20230518152126-4.png', 'nguyen-quoc-chaudd-20230518152126-5.png', 'nguyen-quoc-chaudd-20230518152126-6.png'),
+('nguyen-quoc-chau-02572224052023', 'nguyen-quoc-chau-02572224052023-1.png', 'nguyen-quoc-chau-02572224052023-2.png', 'nguyen-quoc-chau-02572224052023-3.png', 'nguyen-quoc-chau-02572224052023-4.png', 'nguyen-quoc-chau-02572224052023-5.png', 'nguyen-quoc-chau-02572224052023-6.png'),
+('nguyen-quoc-chau-08160025052023', 'nguyen-quoc-chau-08160025052023-1.png', 'nguyen-quoc-chau-08160025052023-2.png', 'nguyen-quoc-chau-08160025052023-3.png', 'nguyen-quoc-chau-08160025052023-4.png', 'nguyen-quoc-chau-08160025052023-5.png', 'nguyen-quoc-chau-08160025052023-6.png'),
+('nguyen-quoc-chau-10421724052023', 'nguyen-quoc-chau-10421724052023-1.png', 'nguyen-quoc-chau-10421724052023-2.png', 'nguyen-quoc-chau-10421724052023-3.png', 'nguyen-quoc-chau-10421724052023-4.png', 'nguyen-quoc-chau-10421724052023-5.png', 'nguyen-quoc-chau-10421724052023-6.png'),
+('nguyen-quoc-chau-12350025052023', 'nguyen-quoc-chau-12350025052023-1.png', 'nguyen-quoc-chau-12350025052023-2.png', 'nguyen-quoc-chau-12350025052023-3.png', 'nguyen-quoc-chau-12350025052023-4.png', 'nguyen-quoc-chau-12350025052023-5.png', 'nguyen-quoc-chau-12350025052023-6.png'),
+('nguyen-quoc-chau-14532324052023', 'nguyen-quoc-chau-14532324052023-1.png', 'nguyen-quoc-chau-14532324052023-2.png', 'nguyen-quoc-chau-14532324052023-3.png', 'nguyen-quoc-chau-14532324052023-4.png', 'nguyen-quoc-chau-14532324052023-5.png', 'nguyen-quoc-chau-14532324052023-6.png'),
+('nguyen-quoc-chau-44340025052023', 'nguyen-quoc-chau-44340025052023-1.png', 'nguyen-quoc-chau-44340025052023-2.png', 'nguyen-quoc-chau-44340025052023-3.png', 'nguyen-quoc-chau-44340025052023-4.png', 'nguyen-quoc-chau-44340025052023-5.png', 'nguyen-quoc-chau-44340025052023-6.png'),
+('nguyen-quoc-chau-50331724052023', 'nguyen-quoc-chau-50331724052023-1.png', 'nguyen-quoc-chau-50331724052023-2.png', 'nguyen-quoc-chau-50331724052023-3.png', 'nguyen-quoc-chau-50331724052023-4.png', 'nguyen-quoc-chau-50331724052023-5.png', 'nguyen-quoc-chau-50331724052023-6.png'),
 ('olym-pianus-899833g1b', 'olym-pianus-899833g1b-1.png', 'olym-pianus-899833g1b-2.png', 'olym-pianus-899833g1b-3.png', 'olym-pianus-899833g1b-4.png', 'olym-pianus-899833g1b-5.png', 'olym-pianus-899833g1b-6.png'),
 ('olym-pianus-9946-1ags', 'olym-pianus-9946-1ags-1.png', 'olym-pianus-9946-1ags-2.png', 'olym-pianus-9946-1ags-3.png', 'olym-pianus-9946-1ags-4.png', 'olym-pianus-9946-1ags-5.png', 'olym-pianus-9946-1ags-6.png'),
 ('olym-pianus-fusion-op990-45addgr-x', 'olym-pianus-fusion-op990-45addgr-x-1.png', 'olym-pianus-fusion-op990-45addgr-x-2.png', 'olym-pianus-fusion-op990-45addgr-x-3.png', 'olym-pianus-fusion-op990-45addgr-x-4.png', 'olym-pianus-fusion-op990-45addgr-x-5.png', 'olym-pianus-fusion-op990-45addgr-x-6.png'),
@@ -168,7 +175,7 @@ INSERT INTO `images` (`id`, `image_1`, `image_2`, `image_3`, `image_4`, `image_5
 
 CREATE TABLE `likes` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `customers` bigint(20) UNSIGNED NOT NULL,
+  `customers` varchar(15) NOT NULL,
   `product` bigint(20) UNSIGNED NOT NULL,
   `status` varchar(10) NOT NULL COMMENT 'none or liked',
   `created_at` datetime NOT NULL
@@ -179,33 +186,33 @@ CREATE TABLE `likes` (
 --
 
 INSERT INTO `likes` (`id`, `customers`, `product`, `status`, `created_at`) VALUES
-(1, 1, 3, 'none', '2022-12-15 16:26:27'),
-(5, 2, 31, 'none', '2022-12-18 16:00:12'),
-(6, 2, 26, 'none', '2022-12-18 16:00:13'),
-(7, 2, 19, 'none', '2022-12-18 16:00:14'),
-(8, 2, 22, 'none', '2022-12-18 16:14:04'),
-(9, 2, 32, 'none', '2022-12-18 16:21:02'),
-(10, 2, 27, 'none', '2022-12-18 16:25:53'),
-(11, 2, 2, 'none', '2022-12-18 17:16:18'),
-(12, 2, 4, 'none', '2022-12-18 17:16:19'),
-(13, 2, 37, 'none', '2022-12-18 17:20:58'),
-(14, 2, 38, 'none', '2022-12-18 17:20:58'),
-(15, 2, 7, 'none', '2022-12-18 17:25:00'),
-(16, 2, 8, 'none', '2022-12-18 17:25:01'),
-(17, 2, 1, 'none', '2022-12-19 03:42:49'),
-(18, 2, 35, 'none', '2022-12-19 03:42:54'),
-(19, 2, 36, 'none', '2022-12-19 03:42:56'),
-(20, 2, 3, 'none', '2022-12-19 03:43:11'),
-(21, 1, 8, 'none', '2022-12-20 03:33:46'),
-(22, 1, 7, 'none', '2022-12-20 03:33:47'),
-(23, 1, 4, 'none', '2022-12-20 03:34:19'),
-(24, 1, 2, 'none', '2022-12-20 03:34:20'),
-(25, 4, 16, 'none', '2022-12-26 16:26:02'),
-(26, 4, 15, 'none', '2022-12-26 16:26:03'),
-(27, 4, 2, 'like', '2022-12-26 16:28:48'),
-(28, 4, 4, 'none', '2022-12-26 16:29:17'),
-(29, 2, 15, 'none', '2023-02-11 11:03:43'),
-(30, 2, 14, 'none', '2023-02-11 11:03:44');
+(1, 'kh105122022', 3, 'none', '2022-12-15 16:26:27'),
+(5, 'kh26122022', 31, 'none', '2022-12-18 16:00:12'),
+(6, 'kh26122022', 26, 'none', '2022-12-18 16:00:13'),
+(7, 'kh26122022', 19, 'none', '2022-12-18 16:00:14'),
+(8, 'kh26122022', 22, 'none', '2022-12-18 16:14:04'),
+(9, 'kh26122022', 32, 'none', '2022-12-18 16:21:02'),
+(10, 'kh26122022', 27, 'none', '2022-12-18 16:25:53'),
+(11, 'kh26122022', 2, 'none', '2022-12-18 17:16:18'),
+(12, 'kh26122022', 4, 'none', '2022-12-18 17:16:19'),
+(13, 'kh26122022', 37, 'none', '2022-12-18 17:20:58'),
+(14, 'kh26122022', 38, 'none', '2022-12-18 17:20:58'),
+(15, 'kh26122022', 7, 'none', '2022-12-18 17:25:00'),
+(16, 'kh26122022', 8, 'none', '2022-12-18 17:25:01'),
+(17, 'kh26122022', 1, 'none', '2022-12-19 03:42:49'),
+(18, 'kh26122022', 35, 'none', '2022-12-19 03:42:54'),
+(19, 'kh26122022', 36, 'none', '2022-12-19 03:42:56'),
+(20, 'kh26122022', 3, 'none', '2022-12-19 03:43:11'),
+(21, 'kh105122022', 8, 'none', '2022-12-20 03:33:46'),
+(22, 'kh105122022', 7, 'none', '2022-12-20 03:33:47'),
+(23, 'kh105122022', 4, 'none', '2022-12-20 03:34:19'),
+(24, 'kh105122022', 2, 'none', '2022-12-20 03:34:20'),
+(25, 'kh412122022', 16, 'none', '2022-12-26 16:26:02'),
+(26, 'kh412122022', 15, 'none', '2022-12-26 16:26:03'),
+(27, 'kh412122022', 2, 'like', '2022-12-26 16:28:48'),
+(28, 'kh412122022', 4, 'none', '2022-12-26 16:29:17'),
+(29, 'kh26122022', 15, 'none', '2023-02-11 11:03:43'),
+(30, 'kh26122022', 14, 'none', '2023-02-11 11:03:44');
 
 -- --------------------------------------------------------
 
@@ -227,8 +234,8 @@ CREATE TABLE `migrations` (
 
 CREATE TABLE `orders` (
   `id` varchar(20) NOT NULL,
-  `customers` bigint(20) UNSIGNED NOT NULL,
-  `employee` bigint(20) UNSIGNED NOT NULL,
+  `customers` varchar(15) NOT NULL,
+  `employee` varchar(15) NOT NULL,
   `status` varchar(3) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
@@ -240,8 +247,13 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `customers`, `employee`, `status`, `created_at`, `updated_at`, `total`) VALUES
-('HD017355722052023', 4, 1, 'TC', '2023-04-05 17:35:57', '2023-04-05 17:35:57', '38480400'),
-('HD114495723052023', 2, 1, 'DVC', '2023-05-23 14:49:57', '2023-05-23 14:49:57', '191261736');
+('HD017355722052023', 'kh412122022', 'nv105122022', 'TC', '2023-04-05 17:35:57', '2023-04-05 17:35:57', '38480400'),
+('HD114495723052023', 'kh105122022', 'nv105122022', 'DVC', '2023-05-23 14:49:57', '2023-05-23 14:49:57', '191261736'),
+('HD215345424052023', 'kh624052023', 'nv105122022', 'DVC', '2023-05-24 15:34:54', '2023-05-24 15:34:54', '9090360'),
+('HD315360924052023', 'kh924052023', 'nv105122022', 'TC', '2023-05-24 15:36:09', '2023-05-24 15:36:09', '18980784'),
+('HD415364724052023', 'kh105122022', 'nv105122022', 'XN', '2023-05-24 15:36:47', '2023-05-24 15:36:47', '29294784'),
+('HD515500424052023', 'kh724052023', 'nv105122022', 'TB', '2023-05-24 15:50:04', '2023-05-24 15:50:04', '37539288'),
+('HD602055925052023', 'kh412122022', 'nv105122022', 'DVC', '2023-05-25 02:05:59', '2023-05-25 02:05:59', '9504000');
 
 -- --------------------------------------------------------
 
@@ -268,7 +280,17 @@ INSERT INTO `order_details` (`id`, `orders`, `product`, `quantity`, `price`, `to
 ('CTHD1114495723052023', 'HD114495723052023', 11, 1, 17564800, 18970000, '2023-05-23 14:49:57'),
 ('CTHD117355722052023', 'HD017355722052023', 4, 1, 8800000, 9504000, '2023-05-22 17:35:57'),
 ('CTHD1214495723052023', 'HD114495723052023', 10, 1, 89100000, 96228000, '2023-05-23 14:49:57'),
+('CTHD1315345424052023', 'HD215345424052023', 20, 1, 8417000, 9090360, '2023-05-24 15:34:54'),
+('CTHD1415360924052023', 'HD315360924052023', 1, 1, 9999.99, 10800, '2023-05-24 15:36:09'),
+('CTHD1515360924052023', 'HD315360924052023', 11, 1, 17564800, 18970000, '2023-05-24 15:36:09'),
+('CTHD1615364724052023', 'HD415364724052023', 12, 1, 9560000, 10324800, '2023-05-24 15:36:47'),
+('CTHD1715364724052023', 'HD415364724052023', 11, 1, 17564800, 18970000, '2023-05-24 15:36:47'),
+('CTHD1815500424052023', 'HD515500424052023', 34, 1, 819000, 884520, '2023-05-24 15:50:04'),
+('CTHD1915500424052023', 'HD515500424052023', 35, 1, 10794600, 11658200, '2023-05-24 15:50:04'),
+('CTHD2015500424052023', 'HD515500424052023', 37, 1, 16020000, 17301600, '2023-05-24 15:50:04'),
+('CTHD2115500424052023', 'HD515500424052023', 38, 1, 7125000, 7695000, '2023-05-24 15:50:04'),
 ('CTHD217355722052023', 'HD017355722052023', 3, 1, 9000000, 9720000, '2023-05-22 17:35:57'),
+('CTHD2202055925052023', 'HD602055925052023', 4, 1, 8800000, 9504000, '2023-05-25 02:05:59'),
 ('CTHD317355722052023', 'HD017355722052023', 2, 1, 17820000, 19245600, '2023-05-22 17:35:57'),
 ('CTHD417355722052023', 'HD017355722052023', 1, 1, 9999.99, 10800, '2023-05-22 17:35:57'),
 ('CTHD514495723052023', 'HD114495723052023', 9, 1, 8964000, 9681120, '2023-05-23 14:49:57'),
@@ -340,7 +362,7 @@ INSERT INTO `products` (`id`, `name`, `description`, `image`, `quantity`, `price
 (36, 'G-SHOCK GMA-S2100SK-2A', 'Hãy đeo lên tay chiếc đồng hồ GA-2100 kết hợp kim-số, phủ kim loại trong suốt, vốn được ưa chuộng nay càng trở nên thu hút với thiết kế thanh mảnh và nhỏ gọn hơn. Chiếc đồng hồ sở hữu thiết kế kim loại trong suốt với nhiều màu cho bạn lựa chọn là phụ kiện linh hoạt, phù hợp với mọi loại trang phục trong suốt cả năm. Các vạch chỉ giờ được xử lý bằng phương pháp lắng đọng hơi bán mờ tạo nên vẻ ngoài bằng kim loại trong suốt sống động như thật.', 'g-shock-gma-s2100sk-2a', 741, 18500000, 0, '2022-12-07 02:54:23', '2022-12-07 02:54:23', 1, 'GShock'),
 (37, 'G-SHOCK GMA-S120SR-7A', 'Xin trân trọng giới thiệu mẫu G-SHOCK . Xuất hiện từ những năm 1990, phong cách trong suốt từng rất phổ biến và trở thành một phần không thể thiếu trong lịch sử của G-SHOCK .\r\nPhần mặt được dát lớp vỏ kim loại màu vàng hồng kết hợp cùng thiết kế chắc chắn đã tạo nên một mẫu đồng hồ đeo tay phù hợp với mọi hoàn cảnh, từ thời trang hiện đại cho đến thời trang đường phố và thường nhật.', 'g-shock-gma-s120sr-7a', 999, 18000000, 11, '2022-12-07 02:56:07', '2022-12-07 02:56:07', 2, 'GShock'),
 (38, 'G-SHOCK GMA-S110CW-7A2', 'Xin trân trọng giới thiệu mẫu G-SHOCK . Xuất hiện từ những năm 1990, phong cách trong suốt từng rất phổ biến và trở thành một phần không thể thiếu trong lịch sử của G-SHOCK .\r\nPhần mặt được dát lớp vỏ kim loại màu vàng hồng kết hợp cùng thiết kế chắc chắn đã tạo nên một mẫu đồng hồ đeo tay phù hợp với mọi hoàn cảnh, từ thời trang hiện đại cho đến thời trang đường phố và thường nhật.', 'g-shock-gma-s110cw-7a2', 362, 7500000, 5, '2022-12-07 02:56:07', '2022-12-07 02:56:07', 2, 'GShock'),
-(42, 'nguyen quoc chaudd', 'gst-b100d-1a9dr-01', 'nguyen-quoc-chaudd-20230518152126', 1000, 1000000000, 99, '2023-05-18 15:21:26', '2023-05-18 15:24:27', 1, 'Avia');
+(39, 'nguyen quoc chau', 'gst-b100d-1a9dr-01', 'nguyen-quoc-chau-12350025052023', 100, 100000, 10, '2023-05-25 00:35:12', '2023-05-25 02:02:37', 1, 'Baby');
 
 -- --------------------------------------------------------
 
@@ -369,7 +391,7 @@ INSERT INTO `role` (`id`, `type`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` varchar(15) NOT NULL,
   `name` varchar(255) NOT NULL,
   `phone_number` varchar(11) NOT NULL,
   `address` text DEFAULT NULL,
@@ -387,11 +409,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `phone_number`, `address`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
-(1, 'Nguyễn Quốc Châu', '0386888889', '12 Nguyễn Tất Thành, Xã Nghĩa Hiệp, Huyện Yên Mỹ, Tỉnh Hưng Yên', 'chau.nq.61cntt@ntu.edu.vn', NULL, '$2y$10$gkNHqPktu4xPHBP21yEpbu8aftSeVjfn4wSH.z7zibQgpHLfeLuKu', NULL, '2022-12-05 18:15:54', '2023-05-19 09:31:46', 0),
-(2, 'Nguyen Quoc Chau', '0926383006', 'Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', 'mallie69@example.org', NULL, '$2y$10$CM9tvkv48v4u0HzfgFLeceE1WyXPKLUUpRQbe1.7Y3ko6BvZsxnbK', NULL, '2022-12-12 16:36:59', '2023-05-18 15:37:17', 0),
-(3, 'Nguyen Quoc Chau', '0926383076', '03 Phùng Hưng, Phường Văn Chương, Quận Đống Đa, Thành phố Hà Nội', 'mallie6@example.org', NULL, '$2y$10$huFy/caUfNuL2S52nYiwJu6s/ob2L0V5mQcdcreo986vsmEhJKV2.', NULL, '2022-12-12 17:23:17', '2022-12-12 17:23:17', 0),
-(4, 'Phan Thị Huyền Trâm', '0926858585', '02 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', 'phanthihuyentram@gmail.com', NULL, '$2y$10$zVkefGONz.3kvfgb1DpwHOT5xdQ3c.Tj8oyXOc0FM55hQkrrfDh.W', NULL, '2022-12-26 16:01:25', '2023-05-22 09:27:59', 0),
-(5, 'Nguyễn Trần Hoàn Kim', '0926666666', '20 Phùng Hưng, Phường Cửa Ông, Thành phố Cẩm Phả, Tỉnh Quảng Ninh', 'nguyentranhoankim@gmail.com', NULL, '$2y$10$EAHDCsUpCGFOOQ7tLggrVusBz4dWnsDZfluYMO70g2J0965wDoENu', NULL, '2023-05-23 08:21:44', '2023-05-23 08:22:28', 0);
+('kh105122022', 'Nguyễn Quốc Châu', '0386888889', '12 Nguyễn Tất Thành, Xã Nghĩa Hiệp, Huyện Yên Mỹ, Tỉnh Hưng Yên', 'chau.nq.61cntt@ntu.edu.vn', NULL, '$2y$10$gkNHqPktu4xPHBP21yEpbu8aftSeVjfn4wSH.z7zibQgpHLfeLuKu', NULL, '2022-12-05 18:15:54', '2023-05-19 09:31:46', 0),
+('kh26122022', 'Phan Thị Huyền Trâm', '0926858585', '02 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', 'phanthihuyentram@gmail.com', NULL, '$2y$10$zVkefGONz.3kvfgb1DpwHOT5xdQ3c.Tj8oyXOc0FM55hQkrrfDh.W', NULL, '2022-12-26 16:01:25', '2023-05-22 09:27:59', 0),
+('kh312122022', 'Lê Thị E', '0926355076', '03 Hưng, Phường Quang Trung, Quận Đống Đa, Thành phố Hà Nội', 'lethie@gmail.com', NULL, '$2y$10$huFy/caUfNuL2S52nYiwJu6s/ob2L0V5mQcdcreo986vsmEhJKV2.', NULL, '2022-12-12 17:23:17', '2023-05-24 08:32:04', 0),
+('kh412122022', 'Trần Văn D', '0926383006', 'Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', 'tranvand@gmail.com', NULL, '$2y$10$CM9tvkv48v4u0HzfgFLeceE1WyXPKLUUpRQbe1.7Y3ko6BvZsxnbK', NULL, '2022-12-12 16:36:59', '2023-05-24 08:30:32', 0),
+('kh523052023', 'Nguyễn Trần Hoàn Kim', '0966666666', '20 Phùng Hưng, Phường Cửa Ông, Thành phố Cẩm Phả, Tỉnh Quảng Ninh', 'nguyentranhoankim@gmail.com', NULL, '$2y$10$ns0/RvgnHeKBw0jR7rrA3.kvXlSv4e5iIyA/U0bs8fmFK7P676i4.', NULL, '2023-05-23 08:21:44', '2023-05-24 08:12:11', 0),
+('kh624052023', 'Trần Văn AB', '0826666666', 'Địa chỉ 2, Xã Lý Bôn, Huyện Bảo Lâm, Tỉnh Cao Bằng', 'tranvanab@gmail.com', NULL, '$2y$10$A3Rd6DuaT5z52LtU5Mz3CeWyZDj5tHAQTzLvgxHLNVuo6lpAOBfDi', NULL, '2023-05-24 08:29:05', '2023-05-24 16:19:12', 0),
+('kh724052023', 'Trần Văn B', '0826666668', 'Địa chỉ 2, Xã Hồng Trị, Huyện Bảo Lạc, Tỉnh Cao Bằng', 'tranvanb@gmail.com', NULL, '$2y$10$XBEr.WZumGnh3H3mOZH0T.TLrXIyQqhA1TRUB0Ub/Vd1eI6ZuDXd.', NULL, '2023-05-24 08:29:32', '2023-05-24 08:29:32', 0),
+('kh824052023', 'Trần Văn C', '0866666668', 'Địa chỉ 2, Xã Tân Tri, Huyện Bắc Sơn, Tỉnh Lạng Sơn', 'tranvanc@gmail.com', NULL, '$2y$10$ns0/RvgnHeKBw0jR7rrA3.kvXlSv4e5iIyA/U0bs8fmFK7P676i4.', NULL, '2023-05-24 08:29:48', '2023-05-24 08:29:48', 0),
+('kh924052023', 'Nguyễn Yến Nhi', '0386888881', 'Địa chỉ 1c, Thị trấn Pác Miầu, Huyện Bảo Lâm, Tỉnh Cao Bằng', 'nguyenyennhi@gmail.com', NULL, '$2y$10$/IyXglucDzCGHbDHRhnbfew74.kSddBb7UfVfz7D4Y4K6PiCmEa7m', NULL, '2023-05-24 17:54:22', '2023-05-25 01:57:09', 0);
 
 --
 -- Indexes for dumped tables
@@ -502,22 +528,22 @@ ALTER TABLE `administrator`
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`customers`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comment_customers` FOREIGN KEY (`customers`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`product`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `likes`
 --
 ALTER TABLE `likes`
-  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`customers`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `likes_customers` FOREIGN KEY (`customers`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`product`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_employee` FOREIGN KEY (`employee`) REFERENCES `administrator` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customers`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `orders_customers` FOREIGN KEY (`customers`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_employee` FOREIGN KEY (`employee`) REFERENCES `administrator` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order_details`
