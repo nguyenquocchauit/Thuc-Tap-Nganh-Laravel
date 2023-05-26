@@ -47,7 +47,8 @@
                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th class="text-center">ID</th>
+                                    <th class="text-center">STT</th>
+                                    <th class="text-center">Mã khách hàng</th>
                                     <th class="text-center">Tên</th>
                                     <th class="text-center">Số điện thoại</th>
                                     <th class="text-center">Địa chỉ</th>
@@ -58,8 +59,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($customers as $customer)
+                                @foreach ($customers as $key=>$customer)
                                     <tr>
+                                        <td class="text-center">{{ $key +1 }}</td>
                                         <td class="text-center">{{ $customer->id }}</td>
                                         <td class="text-center">{{ $customer->name }}</td>
                                         <td class="text-center">{{ $customer->phone_number }}</td>

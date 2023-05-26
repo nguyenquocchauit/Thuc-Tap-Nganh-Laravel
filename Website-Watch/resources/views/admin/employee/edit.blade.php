@@ -1,14 +1,16 @@
 @extends('admin.layout.master')
 @section('body')
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card-update-employee">
-                    <div class="header">
-                        <h4 class="title">Thông tin</h4>
-                    </div>
-                    <div class="content">
-                        <form id="update-profile-dashboard" method="post" action="" enctype="multipart/form-data">
+        <form id="update-profile-dashboard" method="post" action="" enctype="multipart/form-data">
+            <div class="row">
+
+                <div class="col-md-8">
+                    <div class="card-update-employee">
+                        <div class="header">
+                            <h4 class="title">Thông tin</h4>
+                        </div>
+                        <div class="content">
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -18,6 +20,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Chức vụ</label>
+                                        <select name="role" id="position" class="form-control">
+                                            <option value="">Chọn chức vụ</option>
+                                            <option value="1" @if ($employee->role == '1') selected @endif>
+                                                Nhân viên
+                                            </option>
+                                            <option value="2" @if ($employee->role == '2') selected @endif>
+                                                Quản trị
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -75,59 +94,59 @@
                             <button type="button" class="btn btn-info btn-fill pull-right"
                                 id="btn-update-employee-dashboard">Cập nhật</button>
                             <input type="hidden" name="" id="id-employee-dashboard" value="{{ $employee->id }}">
-                        </form>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-employee">
-                    <div class="image">s
-                        <img src="{{ asset('images/banner-profile-dashboard.png') }}" alt="...">
-                    </div>
-                    <div class="content">
-                        <div class="author">
-                            <label for="image-profile-dashboard" class="file-image">
-                                <img class="avatar-profile border-gray" id="avatar-profile"
-                                    src="{{ asset('images/employee/') }}/{{ $employee->avt }}" alt="...">
-                            </label>
-                            <input class="image_product" type="file" name="image_profile" id="image-profile-dashboard"
-                                style="display:none;">
+                <div class="col-md-4">
+                    <div class="card card-employee">
+                        <div class="image">
+                            <img src="{{ asset('images/banner-profile-dashboard.png') }}" alt="...">
+                        </div>
+                        <div class="content">
+                            <div class="author">
+                                <label for="image-profile-dashboard" class="file-image">
+                                    <img class="avatar-profile border-gray" id="avatar-profile"
+                                        src="{{ asset('images/employee/') }}/{{ $employee->avt }}" alt="...">
+                                </label>
+                                <input class="image_profile_dashboard" type="file" name="image_profile"
+                                    id="image-profile-dashboard" style="display:none;">
 
 
-                            <h4 class="title">{{ $employee->name }}<br>
-                                @if ($employee->role == '1')
-                                    <small>Nhân viên</small>
-                                @else
-                                    @if ($employee->role == '2')
-                                        <small>Quản trị</small>
+                                <h4 class="title">{{ $employee->name }}<br>
+                                    @if ($employee->role == '1')
+                                        <small>Nhân viên</small>
+                                    @else
+                                        @if ($employee->role == '2')
+                                            <small>Quản trị</small>
+                                        @endif
                                     @endif
-                                @endif
-                            </h4>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Tạo vào ngày</label>
-                                    <input id="created_at" disabled="" type="text" class="form-control"
-                                        value="">
+                                </h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tạo vào ngày</label>
+                                        <input id="created_at" disabled="" type="text" class="form-control"
+                                            value="">
 
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Cập nhật vào ngày</label>
+                                        <input id="updated_at" disabled="" type="text" class="form-control"
+                                            value="">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Cập nhật vào ngày</label>
-                                    <input id="updated_at" disabled="" type="text" class="form-control"
-                                        value="">
-                                </div>
-                            </div>
-                        </div>
 
+                        </div>
                     </div>
+
                 </div>
-
             </div>
-
-        </div>
+        </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
@@ -135,7 +154,7 @@
         if ($("#role-current-user").val() != 2) {
             // Nếu giá trị của phần tử có id là role-current-user khác 2 thì thuộc tính disable sẽ được thêm vào các phần tử có id là name, phone_number, email, city, district, ward, address và avatar-profile.
             $(
-                "#name, #phone_number, #email, #city, #district, #ward, #address, #avatar-profile,#btn-update-employee-dashboard",
+                "#name, #phone_number, #email, #city, #district, #ward, #address, #avatar-profile,#position,#btn-update-employee-dashboard",
             ).prop("disabled", true);
 
         }

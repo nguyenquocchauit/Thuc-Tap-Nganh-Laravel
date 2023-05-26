@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\Host;
 use App\Http\Middleware\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,10 @@ Route::middleware([Admin::class])->group(function () {
     Route::get('/admin/employee/delete/{id}', [EmployeeController::class, 'destroy'])->name('delete-employee');
     Route::get('/admin/employee/edit/{id}', [EmployeeController::class, 'editEmployee'])->name('edit-employee');
     // employee
+});
+
+Route::middleware([Host::class])->group(function () {
+    Route::post('/admin/employee/update/{id}', [EmployeeController::class, 'update'])->name('update-employee');
 });
 
 // login and register of user

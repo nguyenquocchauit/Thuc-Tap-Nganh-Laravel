@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EmployeeRequest;
+use App\Http\Requests\EmployeeUpdateRequest;
 use App\Models\Administrator;
 use App\Models\Role;
 use Illuminate\Support\Str;
@@ -88,7 +89,9 @@ class EmployeeController extends Controller
         $title = 'Cập nhật người dùng';
         if ($id) {
             $employee = Administrator::find($id);
-            return view('admin.employee.edit', compact('title', 'employee'));
+            if ($employee->role == "1" || Auth::guard('admin')->user()->id != $employee->id)
+                return view('admin.employee.edit', compact('title', 'employee'));
+            else return Redirect('/admin/employee');
         }
         return Redirect('/admin/login');
     }
@@ -119,6 +122,33 @@ class EmployeeController extends Controller
             'updated_at' => $employee->update_at,
         ]);
     }
+    public function update(EmployeeUpdateRequest $request, $id)
+    {
+
+        $employeer = Administrator::find($id);
+        // Lấy thời gian hiện tại theo múi giờ Asia/Ho_Chi_Minh
+        $now = now()->setTimezone('Asia/Ho_Chi_Minh');
+        Administrator::where('id', $id)
+            ->update([
+                "name" => $request->name,
+                "phone_number" => $request->phone_number,
+                "address" => $request->address,
+                "email" => $request->email,
+                "updated_at" => $now,
+                "role" => $request->role,
+            ]);
+        // Lưu ảnh của nhân viên vào thư mục public/images/employee/
+        if (File::exists('images/employee/' . $employeer->avt)) {
+            File::delete('images/employee/' . $employeer->avt);
+        }
+        $request->file('image_profile')->move(public_path('images/employee/'), $employeer->avt);
+
+        return response()->json([
+            'status' => 200,
+            'msg' => 'Update employee successfully',
+        ]);
+    }
+
     public function destroy(Request $request)
     {
         // Tìm kiếm nhân viên theo id

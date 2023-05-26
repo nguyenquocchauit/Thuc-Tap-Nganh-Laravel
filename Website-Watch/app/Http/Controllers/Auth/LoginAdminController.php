@@ -14,7 +14,8 @@ class LoginAdminController extends Controller
 {
     public function index()
     {
-        return view(('admin.login.login'));
+        $user = Auth::guard('admin')->user();
+        return view('admin.login.login', compact('user'));
     }
     public function login(Request $request)
     {
@@ -32,9 +33,11 @@ class LoginAdminController extends Controller
             if ($user) {
                 if (Hash::check($request->password, $user->password)) {
                     if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
+                        Session::flash('success', 'Login successfully');
                         return response()->json([
                             'status' => 200,
-                            'msg' => 'Login successfully'
+                            'msg' => 'Login successfully',
+                            "data" => Auth::guard('admin')->user()
                         ]);
                     }
                 } else {
@@ -51,6 +54,7 @@ class LoginAdminController extends Controller
             }
         }
     }
+
     public function logout()
     {
 

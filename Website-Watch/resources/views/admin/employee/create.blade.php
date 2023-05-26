@@ -143,7 +143,7 @@
                                             <img class="w-100" src="{{ 'images/default-image.jpg' }}" alt=""
                                                 id="avt-review">
                                         </label>
-                                        <input class="image_product" type="file" name="image_profile"
+                                        <input class="image_profile_dashboard" type="file" name="image_profile"
                                             id="image-profile" style="display:none;">
                                     </div>
                                     <div class="row d-flex justify-content-center text-align-center">

@@ -282,7 +282,6 @@ $(document).ready(function () {
     // review image profile dashboard
     $(document).on("change", "#image-profile-dashboard", function () {
         let reader = new FileReader();
-        alert("d");
         // Kiểm tra định dạng file ảnh
         let file = this.files[0];
         let fileType = file["type"];

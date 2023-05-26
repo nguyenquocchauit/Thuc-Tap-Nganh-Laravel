@@ -110,7 +110,7 @@
     <div class="form_hoa">
         <div class="box_login">
             <form action="" method="POST" id="login">
-                <h2>Quản Trị TCWatch</h2>
+                <h2>Quản Trị TCWatch </h2>
                 <div class="row-item">
                     <label for="username">Email<strong style="color: red">*</strong></label>
                     <input type="text" name="username" id="email-login-admin" placeholder="Email" value="" />

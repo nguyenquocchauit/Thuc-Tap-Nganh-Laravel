@@ -96,7 +96,7 @@ $(document).ready(function () {
                             response.msg == "Delete employee successfully"
                         ) {
                             window.location.href = "/admin/employee";
-                        }else if (
+                        } else if (
                             response.status == 500 &&
                             response.msg == "Delete yourself"
                         ) {
@@ -110,9 +110,64 @@ $(document).ready(function () {
             }
         });
     });
+    //update employee
+    $("#btn-update-employee-dashboard").on("click", function () {
+        // Lấy giá trị của các input select và ô nhập địa chỉ
+        var city = $("#city option:selected").html();
+        var district = $("#district option:selected").html();
+        var ward = $("#ward option:selected").html();
+        var address = $("#address").val();
+
+        // Kiểm tra xem các giá trị của các input select và ô nhập địa chỉ có rỗng hay không
+        if (!city || !district || !ward || !address) {
+            // Hiển thị thông báo lỗi nếu có giá trị rỗng
+            showMsgWaring("Địa chỉ không được để trống!", "#address");
+        } else {
+            // Tạo chuỗi đại diện cho địa chỉ của khách hàng mới
+            content = address + ", " + ward + ", " + district + ", " + city;
+
+            // Tạo đối tượng FormData để gửi dữ liệu của khách hàng mới lên server
+            var formData = new FormData($("#update-profile-dashboard")[0]);
+            formData.set("address", content);
+
+            // Gửi dữ liệu của khách hàng mới lên server bằng phương thức POST
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                type: "POST",
+                url: "/api/admin/employee/update/" + $("#id-employee-dashboard").val(),
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    console.log(response);
+                    if (
+                        response.status == 200 &&
+                        response.msg == "Update employee successfully"
+                    ) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Cập nhật thành công!",
+                            timer: 2000,
+                            timerProgressBar: true,
+                        }).then((result) => {
+                            location.reload();
+                        });
+                    }
+                },
+                error: function (response) {
+                    var errors = response.responseJSON.errors;
+                    showErrors(errors);
+                },
+            });
+        }
+    });
 
     // review image employee
-    $(document).on("change", "#image-profile", function () {
+    $(document).on("change", ".image_profile_dashboard", function () {
         let reader = new FileReader();
 
         // Kiểm tra định dạng file ảnh
@@ -123,7 +178,7 @@ $(document).ready(function () {
             // Hiển thị thông báo lỗi nếu định dạng file không hợp lệ
             showMsgWaring(
                 "Chỉ cho phép định dạng ảnh jpg,png,jpeg",
-                ".image-profile"
+                ".image_profile_dashboard"
             );
             $(this).val("");
             return false;
@@ -255,5 +310,4 @@ $(document).ready(function () {
             );
         }
     }
-
 });

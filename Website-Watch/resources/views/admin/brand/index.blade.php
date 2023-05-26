@@ -50,6 +50,7 @@
                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
                                 <tr>
+                                    <th class="text-center">STT</th>
                                     <th class="text-center">ID</th>
                                     <th class="text-center">Tên</th>
                                     <th class="text-center">Slug</th>
@@ -57,8 +58,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($brands as $brand)
+                                @foreach ($brands as $key=> $brand)
                                     <tr>
+                                        <td class="text-center text-muted">{{ $key+1 }}</td>
                                         <td class="text-center text-muted">{{ $brand->id }}</td>
                                         <td class="text-center text-muted">{{ $brand->name }}</td>
                                         <td class="text-center text-muted">{{ $brand->slug }}</td>

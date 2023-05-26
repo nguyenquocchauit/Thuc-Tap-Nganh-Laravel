@@ -17,7 +17,9 @@ class Administrator extends Authenticatable
     protected $guard = "admin";
     protected $table = "administrator";
     protected $primaryKey = "id";
+    protected $keyType = 'string';
     protected $guarded = [];
+
     public $timestamps = false;
 
     public function currentTime()

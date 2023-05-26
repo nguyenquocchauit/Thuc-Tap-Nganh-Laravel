@@ -197,6 +197,7 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th>STT</th>
                                             <th>Mã sản phẩm</th>
                                             <th>Ảnh</th>
                                             <th>Khách hàng</th>
@@ -207,9 +208,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($orders as $order)
+                                        @foreach ($orders as $key=> $order)
                                             <tr>
-
+                                                <td>{{ $key+1 }}</td>
                                                 <td>{{ $order->idProduct }}</td>
                                                 <td>
                                                     <img width="25px" height="25px" class="img-fluid"

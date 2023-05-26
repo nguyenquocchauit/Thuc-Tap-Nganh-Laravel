@@ -665,7 +665,7 @@
                                             <i class="metismenu-icon"></i>Nhân viên
                                         </a>
                                     </li>
-                                    @if (auth()->guard('admin')->user()->id == '1')
+                                    @if (auth()->guard('admin')->user()->role == '2')
                                         <li>
                                             <a href="./admin/report"
                                                 class="{{ request()->segment(2) == 'report' ? 'mm-active' : '' }}">

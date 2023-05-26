@@ -71,8 +71,8 @@ class UserController extends Controller
             "email" => $request->email,
             "password" => Hash::make($request->password),
             "role" => 0,
-            "created_at" =>$now,
-            "update_at"=>$now
+            "created_at" => $now,
+            "update_at" => $now
 
         ];
         User::create($data);
@@ -140,13 +140,15 @@ class UserController extends Controller
     {
 
         $customer = new User();
+        // Lấy thời gian hiện tại theo múi giờ Asia/Ho_Chi_Minh
+        $now = now()->setTimezone('Asia/Ho_Chi_Minh');
         User::where('id', $id)
             ->update([
                 "name" => $request->name,
                 "phone_number" => $request->phone_number,
                 "address" => $request->address,
                 "email" => $request->email,
-                "updated_at" => $customer->currentTime(),
+                "updated_at" => $now,
             ]);
         return response()->json([
             'status' => 200,

@@ -47,6 +47,7 @@
                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
                                 <tr>
+                                    <th class="text-center">STT</th>
                                     <th class="text-center">ID</th>
                                     <th class="text-center">Tên</th>
                                     <th class="text-center">Ảnh</th>
@@ -58,8 +59,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($employees as $employee)
+                                @foreach ($employees as $key=> $employee)
                                     <tr>
+                                        <td class="text-center">{{ $key+1 }}</td>
                                         <td class="text-center">{{ $employee->id }}</td>
                                         <td class="text-center">{{ $employee->name }}</td>
                                         <td class="text-center">

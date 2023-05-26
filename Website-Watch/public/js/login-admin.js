@@ -96,7 +96,7 @@ $(document).ready(function () {
                         }).then((result) => {
                             // done then reload page
                             if (result.dismiss === Swal.DismissReason.timer) {
-                                window.location.href = "/admin/customer";
+                                window.location.href = "/admin/thong-tin-ca-nhan";
                             }
                         });
                     }
