@@ -12,6 +12,7 @@ class LikeProduct extends Model
 
     protected $table = 'likes';
     protected $primaryKey = "id";
+    protected $keyType = 'string';
     protected $guarded = [];
     public $timestamps = false;
 

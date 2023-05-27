@@ -34,7 +34,7 @@ class UserController extends Controller
         if (!empty($request->search)) {
             $search = $request->search;
         }
-        $customers = $this->users->getAllUsers($search);
+        $customers = $this->users->getAllUsers($search,"");
         return view('admin.user.index', compact('title', 'customers'));
     }
 
@@ -58,29 +58,20 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $user = new User();
-        $maxID = $user->maxID();
-        $maxID = $maxID[0]->ID_Max;
-        $maxID += 1;
-        $now = now()->setTimezone('Asia/Ho_Chi_Minh');
-        $data = [
-            "id" => $maxID,
-            "name" => $request->name,
-            "phone_number" => $request->phone_number,
-            "address" => $request->address,
-            "email" => $request->email,
-            "password" => Hash::make($request->password),
-            "role" => 0,
-            "created_at" => $now,
-            "update_at" => $now
+        $user = User::make($request->all());
+        $user->id = "kh" . (User::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY');
+        $user->password = Hash::make($request->password);
+        $user->role = 0;
+        $user->created_at = now()->setTimezone('Asia/Ho_Chi_Minh');
+        $user->updated_at = now()->setTimezone('Asia/Ho_Chi_Minh');
+        $user->save();
 
-        ];
-        User::create($data);
         return response()->json([
             'status' => 200,
             'msg' => "Create customer successfully",
         ]);
     }
+
 
     /**
      * Display the specified resource.

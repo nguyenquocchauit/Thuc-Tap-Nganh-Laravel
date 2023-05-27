@@ -22,20 +22,10 @@ class Administrator extends Authenticatable
 
     public $timestamps = false;
 
-    public function currentTime()
-    {
-        $currentTime = Carbon::now('Asia/Ho_Chi_Minh');
-        return $currentTime->toDateTimeString();
-    }
-    public function maxID()
-    {
-        return DB::table('administrator')
-            ->select(DB::raw("MAX(id) AS ID_Max "))
-            ->get();
-    }
+
     public function getAllUsers($search = null)
     {
-        $employeer = Administrator::first('id');
+        $employeer = Administrator::orderBy('create_at', 'asc');
         if (!empty($search)) {
             $employeer = $employeer->where(function ($query) use ($search) {
                 $query->orWhere('administrator.name', 'like', '%' . $search . '%');

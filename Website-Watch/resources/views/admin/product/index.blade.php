@@ -83,6 +83,7 @@
                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
                                 <tr>
+                                    <th class="text-center">STT</th>
                                     <th class="text-center">ID</th>
                                     <th class="text-center">Ảnh</th>
                                     <th class="text-center">Tên</th>
@@ -108,9 +109,10 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($products as $product)
+                                @foreach ($products as $key=> $product)
                                     <tr>
-                                        <td class="text-center text-muted">{{ $product->id }}</td>
+                                        <td class="text-center text-muted" >{{ $key+1 }}</td>
+                                        <td class="text-center text-muted"style="opacity: 0.8;">{{ $product->id }}</td>
                                         <td class="text-center image-list-product"><img width="100px" height="100px"
                                                 src="{{ asset('images/image_products_home/') }}/{{ $product->productImage['image_1'] }}"
                                                 alt=""></td>
@@ -138,7 +140,7 @@
                                         <td class="text-center">
                                             <a href="/chi-tiet-san-pham/{{ $product->id }}" data-toggle="tooltip"
                                                 title="Xem tại trang bán hàng" data-placement="bottom"
-                                                class="btn btn-outline-success border-0 btn-sm">
+                                                class="btn btn-outline-success border-0 btn-sm" target="_blank">
                                                 <span class="btn-icon-wrapper opacity-8">
                                                     <i class="fas fa-eye fa-w-20"></i>
                                                 </span>

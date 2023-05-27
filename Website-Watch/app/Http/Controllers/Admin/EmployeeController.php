@@ -47,33 +47,23 @@ class EmployeeController extends Controller
     }
     public function store(EmployeeRequest $request)
     {
-        // Tạo một đối tượng mới của lớp Administrator
-        $employee = new Administrator();
-
-        // Lấy ID lớn nhất hiện tại trong cơ sở dữ liệu
-        $maxID = $employee->maxID();
-        $maxID = $maxID[0]->ID_Max;
-        $maxID += 1;
-
-        // Lấy thời gian hiện tại theo múi giờ Asia/Ho_Chi_Minh
-        $now = now()->setTimezone('Asia/Ho_Chi_Minh');
-
         // Tạo mảng dữ liệu mới cho nhân viên
         $data = [
-            "id" => $maxID,
+            "id" => "nv" . (Administrator::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY'),
             "name" => $request->name,
-            "avt" => Str::slug($request->name) . $maxID . ".png",
+            "avt" => Str::slug($request->name) . (Administrator::count() + 1) . ".png",
             "phone_number" => $request->phone_number,
             "address" => $request->address,
             "email" => $request->email,
             "password" => Hash::make($request->password),
             "role" => $request->role,
-            "create_at" => $now,
-            "updated_at" => $now
+            "create_at" => now()->setTimezone('Asia/Ho_Chi_Minh'),
+            "updated_at" => now()->setTimezone('Asia/Ho_Chi_Minh')
         ];
 
         // Lưu ảnh của nhân viên vào thư mục public/images/employee/
-        $request->file('image_profile')->move(public_path('images/employee/'), Str::slug($request->name) . $maxID . ".png");
+        $request->file('image_profile')->move(public_path('images/employee/'), Str::slug($request->name) . (Administrator::count() + 1) . ".png");
+
 
         // Thêm nhân viên mới vào cơ sở dữ liệu
         Administrator::create($data);

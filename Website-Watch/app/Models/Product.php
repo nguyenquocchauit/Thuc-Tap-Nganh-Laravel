@@ -13,6 +13,7 @@ class Product extends Model
 
     protected $table = "products";
     protected $primaryKey = "id";
+    protected $keyType = 'string';
     protected $guarded = [];
     public $timestamps = false;
 

@@ -33,7 +33,7 @@
                         <form>
                             <div class="input-group">
                                 <input type="search" name="search" id="search" placeholder="Tên, email, SĐT, địa chỉ"
-                                    class="form-control">
+                                    class="form-control" >
                                 <span class="input-group-append">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-search"></i>&nbsp;
@@ -62,7 +62,7 @@
                                 @foreach ($customers as $key=>$customer)
                                     <tr>
                                         <td class="text-center">{{ $key +1 }}</td>
-                                        <td class="text-center">{{ $customer->id }}</td>
+                                        <td class="text-center" style="opacity: 0.7;">{{ $customer->id }}</td>
                                         <td class="text-center">{{ $customer->name }}</td>
                                         <td class="text-center">{{ $customer->phone_number }}</td>
                                         <td class="text-center">

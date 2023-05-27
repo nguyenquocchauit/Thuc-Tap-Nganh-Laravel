@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Auth\LoginAdminController;
 use App\Http\Controllers\Auth\LoginUserController;
 use App\Http\Controllers\Auth\RegisterUserController;
@@ -65,6 +66,8 @@ Route::middleware([Admin::class])->group(function () {
     Route::get('/admin/employee/delete/{id}', [EmployeeController::class, 'destroy'])->name('delete-employee');
     Route::get('/admin/employee/edit/{id}', [EmployeeController::class, 'editEmployee'])->name('edit-employee');
     // employee
+    Route::post('/admin/order/status/{id}', [OrdersController::class, 'updateStatus'])->name('updateStatus');
+    // order
 });
 
 Route::middleware([Host::class])->group(function () {

@@ -15,9 +15,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $guard = "user";
-    public $timestamps = false;
+
     protected $primaryKey = "id";
     protected $keyType = 'string';
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -57,20 +58,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(User::class, 'customers', 'id');
     }
-    public function currentTime()
+    public function getAllUsers($search = null, $times = [])
     {
-        $currentTime = Carbon::now('Asia/Ho_Chi_Minh');
-        return $currentTime->toDateTimeString();
-    }
-    public function maxID()
-    {
-        return DB::table('users')
-            ->select(DB::raw("MAX(id) AS ID_Max "))
-            ->get();
-    }
-    public function getAllUsers($search = null)
-    {
-        $users = User::first('id');
+        $users = User::orderBy('created_at', 'asc');
         if (!empty($search)) {
             $users = $users->where(function ($query) use ($search) {
                 $query->orWhere('users.name', 'like', '%' . $search . '%');
@@ -78,6 +68,10 @@ class User extends Authenticatable
                 $query->orWhere('users.address', 'like', '%' . $search . '%');
                 $query->orWhere('users.phone_number', 'like', '%' . $search . '%');
             });
+        }
+        if (!empty($times)) {
+            $users = $users->whereYear('created_at','=', $times[0]);
+            $users = $users->whereMonth('created_at', '=', $times[1]);
         }
         $users = $users->paginate(10);
         return $users;

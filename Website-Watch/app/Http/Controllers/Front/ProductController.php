@@ -71,26 +71,30 @@ class ProductController extends Controller
     public function writeComment(Request $request)
     {
         if ($request->action == "Write comment product") {
-            // get time now
-            $currentTime = Carbon::now();
-            // get max id
+            $content = null;
+            if (empty($request->textComment)) {
+                $content = "";
+            } else {
+                $content = $request->textComment;
+            }
             $comment = new Comment();
-            $IDComment = $comment->maxID();
-            $IDComment = $IDComment[0]->ID_Max;
-            $IDComment += 1;
-            $comment->id  = $IDComment;
+            $comment->id  = "cm" . (Comment::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY');
             $comment->customers  = $request->user;
             $comment->product  = $request->product;
-            $comment->content = $request->textComment;
+            $comment->content = $content;
             $comment->star = $request->rating;
-            $comment->created_at = $currentTime->toDateTimeString();
+            $comment->created_at = now()->setTimezone('Asia/Ho_Chi_Minh');
             $comment->save();
             $name = User::find($request->user);
             return response()->json([
                 'status' => 200,
                 'msg' => 'Write comment successfully',
-                'id' => $IDComment,
-                'data' =>  $comment,
+                'id' => "cm" . (Comment::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY'),
+                'data' =>  [
+                    'star' => $request->rating,
+                    'created_at' => now()->setTimezone('Asia/Ho_Chi_Minh')->format('H:i:s d-m-Y'),
+                    'content' => $content,
+                ],
                 'author' => $name,
             ]);
         } else
@@ -154,19 +158,13 @@ class ProductController extends Controller
                     }
                 }
             } else {
-                // get time now
-                $currentTime = Carbon::now();
-                // get max id
 
                 $like = new likeProduct();
-                $IDLike = $like->maxID();
-                $IDLike = $IDLike[0]->ID_Max;
-                $IDLike += 1;
-                $like->id  = $IDLike;
+                $like->id  = "like" . (LikeProduct::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY');
                 $like->customers = $request->user;
                 $like->product = $request->product;
                 $like->status = 'like';
-                $like->created_at = $currentTime->toDateTimeString();
+                $like->created_at = now()->setTimezone('Asia/Ho_Chi_Minh');
                 $like->save();
                 return response()->json([
                     'status' => 200,
@@ -215,8 +213,4 @@ class ProductController extends Controller
     {
         return $product->productBrand['slug'];
     }
-    // public function getSlugGender($product)
-    // {
-    //     return $product->productGender['slug'];
-    // }
 }

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\LikeProduct;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Pagination\Paginator;
 
@@ -36,7 +37,8 @@ class AppServiceProvider extends ServiceProvider
             $nameUser = $this->getNameUser();
             $brand = $this->menuBrandForGender();
             $liked = $this->getLikeProduct();
-            $view->with(['nameUser' => $nameUser, 'brandMenu' => $brand, 'liked' => $liked]);
+            $yourOrderUnconfirm = $this->OrderUnconfirmed();
+            $view->with(['nameUser' => $nameUser, 'brandMenu' => $brand, 'liked' => $liked, 'yourOrderUnconfirm' => $yourOrderUnconfirm]);
         });
     }
     public function getNameUser()
@@ -48,6 +50,13 @@ class AppServiceProvider extends ServiceProvider
             $name = $name[sizeof($name) - 2] . " " . $name[sizeof($name) - 1];
         }
         return $name;
+    }
+    public function OrderUnconfirmed()
+    {
+        $yourOrderUnconfirm  = Order::where('status', 'XN')
+            ->where('employee', auth()->guard("admin")->user()->id)
+            ->count();
+        return $yourOrderUnconfirm;
     }
     public function menuBrandForGender()
     {

@@ -89,14 +89,6 @@ class ProductController extends Controller
                 'msg' => 'Duplicate name'
             ]);
         }
-
-        //take the time to set up the photo name
-        $product = new Product();
-        $time = $product->currentTime();
-        $times = Carbon::createFromFormat('Y-m-d H:i:s', $time);
-        $times = $times->format('siHdmY');
-
-
         // processing to remove VNĐ and commas
         $price = explode(" ", $request->price_product);
         $price = explode(",", $price[0]);
@@ -122,7 +114,7 @@ class ProductController extends Controller
         $id_image = Str::slug($name);
 
         // insert data of image
-        $id_image = $id_image . "-" . $times;
+        $id_image = $id_image . "-" . now()->setTimezone('Asia/Ho_Chi_Minh')->format('siHdmY');
         $image_1 = $id_image . "-1.png";
         $image_2 = $id_image . "-2.png";
         $image_3 = $id_image . "-3.png";
@@ -140,13 +132,9 @@ class ProductController extends Controller
         ];
         // add data to table image
         Image::insert($dataImage);
-        // get max id from table product
-        $maxID = $product->maxID();
-        $maxID = $maxID[0]->ID_Max;
-        $maxID += 1;
         // insert data of product
         $dataProduct = [
-            "id" => $maxID,
+            "id" => "sp" . (Product::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY'),
             "name" => $request->name_product,
             "image" => $id_image,
             "description" => $request->description_product,
@@ -155,8 +143,8 @@ class ProductController extends Controller
             "discount" => $discount[0],
             "gender" => $request->product_category_id,
             "brand" => $request->brand_id,
-            "create_at" => $product->currentTime(),
-            "updated_at" => $product->currentTime(),
+            "create_at" => now()->setTimezone('Asia/Ho_Chi_Minh'),
+            "updated_at" => now()->setTimezone('Asia/Ho_Chi_Minh'),
         ];
 
         // add data to table product
@@ -168,7 +156,6 @@ class ProductController extends Controller
         return response()->json([
             'status' => 200,
             'msg' => 'Create product successfully',
-            'id' => $maxID,
         ]);
     }
     public function moveImageProduct($brand, $gender, $file, $name)
@@ -255,7 +242,7 @@ class ProductController extends Controller
             "discount" => $discount[0],
             "gender" => $request->product_category_id,
             "brand" => $request->brand_id,
-            "updated_at" => $product->currentTime(),
+            "updated_at" =>now()->setTimezone('Asia/Ho_Chi_Minh'),
         ];
         // Kiểm tra nếu giới tính hoặc thương hiệu thay đổi thì di chuyển hình ảnh trong thư mục đến thư mục tương ứng với giới tính và thương hiệu
         if (($product->brand != $request->brand_id) && ($product->gender != $request->product_category_id)) {

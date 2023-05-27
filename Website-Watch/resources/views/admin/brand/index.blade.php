@@ -61,7 +61,7 @@
                                 @foreach ($brands as $key=> $brand)
                                     <tr>
                                         <td class="text-center text-muted">{{ $key+1 }}</td>
-                                        <td class="text-center text-muted">{{ $brand->id }}</td>
+                                        <td class="text-center text-muted" style="opacity: 0.8;">{{ $brand->id }}</td>
                                         <td class="text-center text-muted">{{ $brand->name }}</td>
                                         <td class="text-center text-muted">{{ $brand->slug }}</td>
                                         <td class="text-center">

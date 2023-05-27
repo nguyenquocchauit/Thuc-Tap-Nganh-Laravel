@@ -75,6 +75,20 @@
             display: none;
         }
     </style>
+    <script>
+        $(document).ready(function() {
+            setInterval(function() {
+                $('.shopping-cart').animate({
+                    marginLeft: "-=5px",
+                    marginTop: "-=5px"
+                }, 500);
+                $('.shopping-cart').animate({
+                    marginLeft: "+=5px",
+                    marginTop: "+=5px"
+                }, 500)
+            }, 100);
+        });
+    </script>
 
 </head>
 
@@ -223,7 +237,7 @@
                                 <li class="nav-item show_history_cart">
                                     <a href="{{ url('/gio-hang') }}" id="show_history_cart" class="nav-link">
                                         <span class="header-cart-title">GIỎ HÀNG
-                                            <i style="" class="fas fa-cart-plus mx-2 shopping-cart"></i>
+                                            <i style="" class="fas fa-cart-plus  shopping-cart"></i>
                                             <span style="position: absolute;top: 0%;color:white;">
                                                 <p id="quantity-shopping-cart">{{ count((array) session('cart')) }}
                                                 </p>

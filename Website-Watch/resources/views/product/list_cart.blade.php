@@ -129,7 +129,7 @@
                                 <div>
                                     <strong>Tổng thanh toán</strong>
                                     <strong>
-                                        <p class="mb-0">(bao gồm VAT)</p>
+                                        <p class="mb-0">(bao gồm VAT 8%)</p>
                                     </strong>
                                 </div>
                                 <span><strong>@php $totalVAT = $total + ($total * 0.08);   @endphp {{ number_format($totalVAT) . ' VNĐ' }}</strong></span>

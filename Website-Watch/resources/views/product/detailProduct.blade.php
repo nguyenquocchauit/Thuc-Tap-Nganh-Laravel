@@ -184,7 +184,7 @@
                                                     @endfor
                                                 </p>
                                                 <p class="small">
-                                                    {{ date('d-m-Y H:i:s', strtotime($comment->created_at)) }}
+                                                    {{ date(' H:i:s d-m-Y', strtotime($comment->created_at)) }}
                                                 </p>
                                                 <p>
                                                     {{ $comment->content }}

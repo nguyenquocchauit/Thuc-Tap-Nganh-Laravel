@@ -62,7 +62,7 @@
                                 @foreach ($employees as $key=> $employee)
                                     <tr>
                                         <td class="text-center">{{ $key+1 }}</td>
-                                        <td class="text-center">{{ $employee->id }}</td>
+                                        <td class="text-center" style="opacity: 0.8;">{{ $employee->id }}</td>
                                         <td class="text-center">{{ $employee->name }}</td>
                                         <td class="text-center">
                                             <img width="70px" height="70px" class="img-fluid"

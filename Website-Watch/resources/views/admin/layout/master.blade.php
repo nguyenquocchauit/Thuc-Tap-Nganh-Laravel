@@ -37,8 +37,21 @@
     <script type="text/javascript" src="{{ asset('js/Admin/brand.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/Admin/profile.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/Admin/employee.js') }}"></script>
-
-
+    <script type="text/javascript" src="{{ asset('js/Admin/order.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            setInterval(function() {
+                if ($(".yourOrderUnconfirm").val() > 0) {
+                    Swal.fire({
+                        position: 'top-end',
+                        title: "Bạn có " +
+                            $(".yourOrderUnconfirm").val() +
+                            " đơn hàng cần được xác nhận!",
+                    })
+                }
+            }, 300000);
+        });
+    </script>
 
 </head>
 
@@ -127,9 +140,11 @@
                                                                 <input type="hidden" name=""
                                                                     id="id-current-user"
                                                                     value="{{ auth()->guard('admin')->user()->id }}">
-                                                                    <input type="hidden" name=""
+                                                                <input type="hidden" name=""
                                                                     id="role-current-user"
                                                                     value="{{ auth()->guard('admin')->user()->role }}">
+                                                                <input type="hidden" value="{{ $yourOrderUnconfirm }}"
+                                                                    class="yourOrderUnconfirm">
                                                             </div>
                                                         </div>
                                                         <div class="widget-content-left">

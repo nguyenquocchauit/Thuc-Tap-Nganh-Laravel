@@ -19,13 +19,88 @@
 /*------------------------------------------------------------------------------
  * Helpers
  *----------------------------------------------------------------------------*/
+.nav-order .nav-tabs {
+    border-bottom: 1px solid #ddd;
+}
+.nav-order .md-tabs .nav-item {
+    width: calc(100% / 3);
+    text-align: center !important;
+}
+.nav-order .md-tabs li:hover {
+    border: none;
+}
+.nav-report .nav-tabs {
+    border-bottom: 1px solid #ddd;
+}
+.nav-report .md-tabs .nav-item {
+    width: calc(100% / 4);
+    text-align: center !important;
+}
+.nav-report .md-tabs li:hover {
+    border: none;
+}
+.tab-content>.tab-pane {
+    display: none;
+}
+.tab-content>.active {
+    display: block;
+}
+
+
+
+.nav-item .nav-link {
+    justify-content: center;
+}
+.md-tabs .nav-item a {
+    padding: 10px 0 !important;
+    color: #222;
+}
+.nav-link:hover .nav-link:focus {
+    border: none;
+}
+.md-tabs .nav-link.active,
+.md-tabs .nav-link.active:focus,
+.md-tabs .nav-link.active:hover {
+    color: #4099ff;
+    border: none;
+    background-color: transparent;
+    border-radius: 0;
+}
+.nav-order .nav-tabs .slide {
+    background: #4099ff;
+    width: calc(100% / 3.1);
+    height: 4px;
+    position: absolute;
+    -webkit-transition: left 0.3s ease-out;
+    transition: left 0.3s ease-out;
+}
+.nav-report .nav-tabs .slide {
+    background: #4099ff;
+    width: calc(100% / 4.1);
+    height: 4px;
+    position: absolute;
+    -webkit-transition: left 0.3s ease-out;
+    transition: left 0.3s ease-out;
+}
+.md-tabs .nav-item .nav-link ~ .slide {
+    opacity: 0;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+.md-tabs .nav-item .nav-link.active ~ .slide {
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+/*  */
+
 .card {
     margin-bottom: 30px;
     border-radius: 1.25rem !important;
 }
 .gradient-1 {
     color: #fff !important;
-    background-image: linear-gradient(230deg, #759bff, #843cf6);
+    background: linear-gradient(45deg, #2ed8b6, #59e0c5);
 }
 .gradient-2 {
     color: #fff !important;
@@ -38,6 +113,14 @@
 .gradient-4 {
     color: #fff !important;
     background-image: linear-gradient(230deg, #0e4cfd, #6a8eff);
+}
+.gradient-5 {
+    color: #fff !important;
+    background-image: linear-gradient(to top, #e8198b 0%, #c7eafd 100%);
+}
+.gradient-6 {
+    color: #fff !important;
+    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
 }
 .card-title {
     font-size: 18px;
@@ -58,7 +141,6 @@
     cursor: pointer;
 }
 
-
 .label {
     border-radius: 6px;
     font-size: 90%;
@@ -66,21 +148,54 @@
     font-weight: 400;
     color: #000 !important;
 }
+#status option {
+    color: black !important;
+}
+.select-tb {
+    height: 35px !important;
+    color: white !important;
+    background-image: linear-gradient(230deg, #fc5286, #fbaaa2);
+    width: 50% !important;
+    border: 0 !important;
+}
+.select-dvc {
+    height: 35px !important;
+    color: white !important;
+    background-image: linear-gradient(230deg, #0e4cfd, #6a8eff);
+    width: 90% !important;
+    border: 0 !important;
+}
+.select-tc {
+    height: 35px !important;
+    color: white !important;
+    background: linear-gradient(45deg, #2ed8b6, #59e0c5);
+    width: 75% !important;
+    border: 0 !important;
+}
+.select-xn {
+    height: 35px !important;
+    color: white !important;
+    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+    width: 75% !important;
+    border: 0 !important;
+}
+
 .label-warning {
-    background-image: linear-gradient(230deg, #ffc080, #ffe408);
+    background-image: linear-gradient(230deg, #0e4cfd, #6a8eff);
+    color: white !important;
 }
 .label-danger {
     background-image: linear-gradient(230deg, #fc5286, #fbaaa2);
-}
-.label-success {
-    background-image: linear-gradient(230deg, #48bf2a, #11e5bb);
-}
-.label-confirm {
-    background-image: linear-gradient(230deg, #2c2c1b, #0f6801de);
     color: white !important;
 }
-
-
+.label-success {
+    background: linear-gradient(45deg, #2ed8b6, #59e0c5);
+    color: white !important;
+}
+.label-confirm {
+    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+    color: white !important;
+}
 
 .date {
     justify-content: end;
@@ -98,7 +213,6 @@
     margin-bottom: 100px;
 }
 .card-update-employee {
-
     padding: 50px;
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(63, 63, 68, 0.1);
@@ -167,7 +281,7 @@
     border-radius: 50%;
     margin-right: 5px;
 }
-#avt-review{
+#avt-review {
     overflow: hidden;
     border-radius: 50%;
     margin-right: 5px;
@@ -189,21 +303,12 @@
     text-transform: none;
     margin-top: -70px;
 }
-.change-pasword{
+.change-pasword {
     position: relative;
     left: 96%;
     bottom: 30px;
     cursor: pointer;
 }
-
-
-
-
-
-
-
-
-
 
 .fancytree-helper-hidden {
     display: none;

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ReportController;
@@ -49,6 +50,7 @@ Route::middleware([Admin::class])->prefix('admin')->group(function () {
     Route::resource('category', CategoryController::class);
     Route::resource('product', AdminProductController::class);
     Route::resource('employee', EmployeeController::class);
+    Route::resource('order', OrdersController::class);
     Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'profile'])->name('edit');
 });
 //Host
