@@ -33,26 +33,6 @@ class ShopController extends Controller
         return view('product.shop', compact('brands', 'products', 'min_price_range', 'max_price_range'));
     }
 
-    // public function category($categoryName, Request $request)
-    // {
-    //     //Get brand
-    //     $brands = Brand::all();
-    //     //Get min,max price
-    //     $min_price = Product::min('price');
-    //     $max_price = Product::max('price');
-    //     $min_price_range = $min_price - 260000;
-    //     $max_price_range = $max_price + 140000;
-    //     //Get products
-    //     $perPage = $request->show ?? 6;
-    //     $sortBy = $request->sort_by ?? 'latest';
-    //     $products = Gender::where('slug', ucfirst(trans($categoryName)))
-    //         ->first()->products->toQuery();
-    //     $products = $this->filter($products, $request);
-    //     $products = $this->sortAndPagination($products, $sortBy, $perPage);
-
-    //     return view('product.shop', compact('categories', 'brands', 'products', 'min_price_range', 'max_price_range'));
-    // }
-
     public function sortAndPagination($products, $sortBy, $perPage)
     {
         switch ($sortBy) {

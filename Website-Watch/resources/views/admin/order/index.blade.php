@@ -341,10 +341,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="d-block card-footer">
+                                {!! $details->links() !!}
+                            </div>
                         </div>
-                        <div class="d-block card-footer">
-                            {!! $details->links() !!}
-                        </div>
+
                     </div>
                 </div>
             </div>

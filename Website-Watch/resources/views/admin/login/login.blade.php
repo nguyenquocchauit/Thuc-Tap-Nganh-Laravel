@@ -104,6 +104,17 @@
             cursor: pointer;
         }
     </style>
+    <script>
+        $(document).ready(function() {
+            localStorage.setItem('yourOrderUnconfirm', true);
+            if (window.location.href.indexOf("/admin/login") !== -1) {
+                localStorage.setItem('yourOrderUnconfirm', false);
+            }
+
+            console.log(localStorage.getItem('yourOrderUnconfirm'));
+
+        });
+    </script>
 </head>
 
 <body>

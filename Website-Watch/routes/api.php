@@ -12,6 +12,7 @@ use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\Front\SearchProductController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Middleware\Admin;
@@ -72,6 +73,8 @@ Route::middleware([Admin::class])->group(function () {
 
 Route::middleware([Host::class])->group(function () {
     Route::post('/admin/employee/update/{id}', [EmployeeController::class, 'update'])->name('update-employee');
+    Route::get('/admin/report/data-chart/{id}', [ReportController::class, 'dataChart'])->name('data-chart');
+
 });
 
 // login and register of user

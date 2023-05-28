@@ -42,7 +42,7 @@
                                         @foreach ($brands as $brand)
                                             <option value="{{ $brand->id }}"
                                                 {{ request()->brand == $brand->id ? 'selected' : false }}>
-                                                {{ $brand->id }}
+                                                {{ $brand->name }}
                                             </option>
                                         @endforeach
                                     </select>

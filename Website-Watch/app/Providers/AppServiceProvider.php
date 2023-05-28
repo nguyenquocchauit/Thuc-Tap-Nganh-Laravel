@@ -53,9 +53,11 @@ class AppServiceProvider extends ServiceProvider
     }
     public function OrderUnconfirmed()
     {
-        $yourOrderUnconfirm  = Order::where('status', 'XN')
-            ->where('employee', auth()->guard("admin")->user()->id)
-            ->count();
+        $yourOrderUnconfirm = null;
+        if (auth()->guard("admin")->check())
+            $yourOrderUnconfirm  = Order::where('status', 'XN')
+                ->where('employee', auth()->guard("admin")->user()->id)
+                ->count();
         return $yourOrderUnconfirm;
     }
     public function menuBrandForGender()

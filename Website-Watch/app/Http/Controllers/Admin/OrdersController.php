@@ -28,16 +28,16 @@ class OrdersController extends Controller
             $time_select[] = ['orders.created_at', '=',  $year];
             $time_select[] = ['orders.created_at', '=',  $month];
         }
-        if (!empty($request->unconfimred && $request->unconfimred == "true")) {
+        if (!empty($request->unconfimred) && $request->unconfimred == "true") {
             $filters[] = ['orders.status', '=', "XN"];
         }
-        if (!empty($request->received && $request->received == "true")) {
+        if (!empty($request->received) && $request->received == "true") {
             $filters[] = ['orders.status', '=', "TC"];
         }
-        if (!empty($request->shipping && $request->shipping == "true")) {
+        if (!empty($request->shipping) && $request->shipping == "true") {
             $filters[] = ['orders.status', '=', "DVC"];
         }
-        if (!empty($request->fail && $request->fail == "true")) {
+        if (!empty($request->fail) && $request->fail == "true") {
             $filters[] = ['orders.status', '=', "TB"];
         }
         if (!empty($request->customer)) {

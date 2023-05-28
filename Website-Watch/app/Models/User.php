@@ -63,6 +63,7 @@ class User extends Authenticatable
         $users = User::orderBy('created_at', 'asc');
         if (!empty($search)) {
             $users = $users->where(function ($query) use ($search) {
+                $query->orWhere('users.id', $search);
                 $query->orWhere('users.name', 'like', '%' . $search . '%');
                 $query->orWhere('users.email', 'like', '%' . $search . '%');
                 $query->orWhere('users.address', 'like', '%' . $search . '%');
@@ -70,7 +71,7 @@ class User extends Authenticatable
             });
         }
         if (!empty($times)) {
-            $users = $users->whereYear('created_at','=', $times[0]);
+            $users = $users->whereYear('created_at', '=', $times[0]);
             $users = $users->whereMonth('created_at', '=', $times[1]);
         }
         $users = $users->paginate(10);

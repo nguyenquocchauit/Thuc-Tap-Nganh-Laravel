@@ -22,9 +22,10 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $title = 'Báo cáo';
-        $search = [];
+        $time_select = [];
         $filters = [];
-        $times =[];
+        $search = [];
+        $times = [];
         $time = now()->setTimezone('Asia/Ho_Chi_Minh');
         $date = Carbon::parse($time);
         $year = $date->year;
@@ -32,23 +33,26 @@ class ReportController extends Controller
         $times[0] =  $year;
         $times[1] =  $month;
         if (!empty($request->time_select)) {
-            $search = explode("-", $request->time_select);
-            $year = $search[0];
-            $month = $search[1];
-            $search[0] = ['orders.updated_at', '=',  $year];
-            $search[1] = ['orders.updated_at', '=',  $month];
+            $time_select = explode("-", $request->time_select);
+            $year = $time_select[0];
+            $month = $time_select[1];
+            $time_select[0] = ['orders.created_at', '=',  $year];
+            $time_select[1] = ['orders.created_at', '=',  $month];
         }
-        if (!empty($request->unconfimred && $request->unconfimred == "true")) {
+        if (!empty($request->unconfimred) && $request->unconfimred == "true") {
             $filters[] = ['orders.status', '=', "XN"];
         }
-        if (!empty($request->received && $request->received == "true")) {
+        if (!empty($request->received) && $request->received == "true") {
             $filters[] = ['orders.status', '=', "TC"];
         }
-        if (!empty($request->shipping && $request->shipping == "true")) {
+        if (!empty($request->shipping) && $request->shipping == "true") {
             $filters[] = ['orders.status', '=', "DVC"];
         }
-        if (!empty($request->fail && $request->fail == "true")) {
+        if (!empty($request->fail) && $request->fail == "true") {
             $filters[] = ['orders.status', '=', "TB"];
+        }
+        if (!empty($request->search)) {
+            $search = $request->search;
         }
         $shipping = Order::where('status', 'DVC')
             ->whereYear('updated_at', '=', $year)
@@ -74,9 +78,48 @@ class ReportController extends Controller
             ->whereMonth('updated_at', '=', $month)
             ->count();
 
-        $orders = $this->orders->getAllOrder($filters, $search);
+        $orders = $this->orders->getAllOrder($filters, $time_select, $search);
         $customers = new ModelsUser();
-        $customers = $customers->getAllUsers($filters,$times );
-        return view('admin.reporting.index', compact('title', 'orders','customers', 'fail', 'shipping', 'received', 'time', 'year', 'month', 'newbie', 'revenue', 'unconfimred'));
+        $customers = $customers->getAllUsers($search, $times);
+        $revenueBrands = $this->orders->revenueBrand($filters, $time_select, $search);
+        return view('admin.reporting.index', compact('title', 'orders', 'customers', 'revenueBrands', 'fail', 'shipping', 'received', 'time', 'year', 'month', 'newbie', 'revenue', 'unconfimred'));
+    }
+    public function dataChart(Request $request)
+    {
+        $year = $month = null;
+        $time = now()->setTimezone('Asia/Ho_Chi_Minh');
+        $date = Carbon::parse($time);
+        $year = $date->year;
+        if (!empty($request->time)) {
+            [$year, $month] = explode("-", $request->time);
+        }
+
+        $value = Order::join('order_details', 'orders.id', '=', 'order_details.orders')
+            ->join('products', 'order_details.product', '=', 'products.id')
+            ->join('brands', 'products.brand', '=', 'brands.id')
+            ->select([
+                'brands.name as name_brand',
+                DB::raw('SUM(CASE WHEN MONTH(orders.updated_at) = 1 THEN order_details.quantity ELSE 0 END) AS "thang_1"'),
+                DB::raw('SUM(CASE WHEN MONTH(orders.updated_at) = 2 THEN order_details.quantity  ELSE 0  END) AS "thang_2"'),
+                DB::raw('SUM(CASE WHEN MONTH(orders.updated_at) = 3 THEN order_details.quantity ELSE 0 END) AS "thang_3"'),
+                DB::raw('SUM(CASE WHEN MONTH(orders.updated_at) = 4 THEN order_details.quantity ELSE 0  END) AS "thang_4"'),
+                DB::raw('SUM(CASE WHEN MONTH(orders.updated_at) = 5 THEN order_details.quantity  ELSE 0 END) AS "thang_5"'),
+                DB::raw('SUM(CASE WHEN MONTH(orders.updated_at) = 6 THEN order_details.quantity  ELSE 0  END) AS "thang_6"'),
+                DB::raw('SUM(CASE WHEN MONTH(orders.updated_at) = 7 THEN order_details.quantity  ELSE 0  END) AS "thang_7"'),
+                DB::raw('SUM(CASE WHEN MONTH(orders.updated_at) = 8 THEN order_details.quantity  ELSE 0  END) AS "thang_8"'),
+                DB::raw('SUM(CASE WHEN MONTH(orders.updated_at) = 9 THEN order_details.quantity  ELSE 0  END) AS "thang_9"'),
+                DB::raw('SUM(CASE WHEN MONTH(orders.updated_at) = 10 THEN order_details.quantity  ELSE 0  END) AS "thang_10"'),
+                DB::raw('SUM(CASE WHEN MONTH(orders.updated_at) = 11 THEN order_details.quantity  ELSE 0  END) AS "thang_11"'),
+                DB::raw('SUM(CASE WHEN MONTH(orders.updated_at) = 12 THEN order_details.quantity  ELSE 0  END) AS "thang_12"')
+            ])
+            ->whereYear('orders.updated_at', $year)
+            ->where('orders.status', '=', 'TC')
+            ->groupBy('brands.name')->get();
+
+        return response()->json([
+            'status'=>200,
+            'msg'=>'Get data successfully',
+            'data' =>$value,
+        ]);
     }
 }

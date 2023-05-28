@@ -40,8 +40,20 @@
     <script type="text/javascript" src="{{ asset('js/Admin/order.js') }}"></script>
     <script>
         $(document).ready(function() {
+            if ($(".yourOrderUnconfirm").val() > 0 && localStorage.getItem('yourOrderUnconfirm') === 'false') {
+
+                Swal.fire({
+                    position: 'top-end',
+                    title: "Bạn có " +
+                        $(".yourOrderUnconfirm").val() +
+                        " đơn hàng cần được xác nhận!",
+                });
+                localStorage.setItem('yourOrderUnconfirm', true);
+
+            }
             setInterval(function() {
-                if ($(".yourOrderUnconfirm").val() > 0) {
+                if ($(".yourOrderUnconfirm").val() > 0 && localStorage.getItem('yourOrderUnconfirm') ===
+                    "true") {
                     Swal.fire({
                         position: 'top-end',
                         title: "Bạn có " +

@@ -70,7 +70,7 @@
     <style type="text/css">
         #btn-back-to-top {
             position: fixed;
-            bottom: 20px;
+            bottom: 70px;
             right: 20px;
             display: none;
         }
@@ -266,13 +266,24 @@
     </main>
     <div class="footer ">
         <div class="container">
+            <div class="wrapper">
+                <div class="ring">
+                    <a href="tel:+840386555555">
+                        <div class="coccoc-alo-phone coccoc-alo-green coccoc-alo-show">
+                            <div class="coccoc-alo-ph-circle"></div>
+                            <div class="coccoc-alo-ph-circle-fill"></div>
+                            <div class="coccoc-alo-ph-img-circle"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-6 col-sm-12 mt-5">
                     <img class="logo" src="{{ asset('images/tcwlogo.png') }}" alt="" srcset="">
                     <table>
                         <tr>
                             <td><i class="fas fa-map-marker-alt"></i></td>
-                            <td>2 Nguyễn Đình Chiểu, Nha Trang, Khánh Hòa</td>
+                            <td>123 Nguyễn Tất Thành, Nha Trang, Khánh Hòa</td>
                         </tr>
                         <tr>
                             <td><i class="fas fa-phone-volume"></i> </td>
