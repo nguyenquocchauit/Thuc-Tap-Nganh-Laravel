@@ -36,8 +36,10 @@ class ReportController extends Controller
             $time_select = explode("-", $request->time_select);
             $year = $time_select[0];
             $month = $time_select[1];
-            $time_select[0] = ['orders.created_at', '=',  $year];
-            $time_select[1] = ['orders.created_at', '=',  $month];
+            $time_select[0] = ['orders.updated_at', '=',  $year];
+            $time_select[1] = ['orders.updated_at', '=',  $month];
+            $times[0] =  $year;
+            $times[1] =  $month;
         }
         if (!empty($request->unconfimred) && $request->unconfimred == "true") {
             $filters[] = ['orders.status', '=', "XN"];
@@ -51,9 +53,9 @@ class ReportController extends Controller
         if (!empty($request->fail) && $request->fail == "true") {
             $filters[] = ['orders.status', '=', "TB"];
         }
-        if (!empty($request->search)) {
-            $search = $request->search;
-        }
+        // if (!empty($request->search)) {
+        //     $search = $request->search;
+        // }
         $shipping = Order::where('status', 'DVC')
             ->whereYear('updated_at', '=', $year)
             ->whereMonth('updated_at', '=', $month)
@@ -62,8 +64,8 @@ class ReportController extends Controller
             ->whereYear('updated_at', '=', $year)
             ->whereMonth('updated_at', '=', $month)
             ->count();
-        $newbie = ModelsUser::whereYear('created_at', '=', $year)
-            ->whereMonth('created_at', '=', $month)
+        $newbie = ModelsUser::whereYear('created_at', '=', $times[0])
+            ->whereMonth('created_at', '=', $times[1])
             ->count();
         $revenue = Order::where('status', 'TC')
             ->whereYear('updated_at', '=', $year)
@@ -77,12 +79,15 @@ class ReportController extends Controller
             ->whereYear('updated_at', '=', $year)
             ->whereMonth('updated_at', '=', $month)
             ->count();
-
+        $totalOrder = Order::whereYear('updated_at', '=', $year)
+            ->whereMonth('updated_at', '=', $month)
+            ->count();
         $orders = $this->orders->getAllOrder($filters, $time_select, $search);
         $customers = new ModelsUser();
         $customers = $customers->getAllUsers($search, $times);
         $revenueBrands = $this->orders->revenueBrand($filters, $time_select, $search);
-        return view('admin.reporting.index', compact('title', 'orders', 'customers', 'revenueBrands', 'fail', 'shipping', 'received', 'time', 'year', 'month', 'newbie', 'revenue', 'unconfimred'));
+
+        return view('admin.reporting.index', compact('title', 'orders', 'customers', 'revenueBrands','totalOrder', 'fail', 'shipping', 'received', 'time', 'year', 'month', 'newbie', 'revenue', 'unconfimred'));
     }
     public function dataChart(Request $request)
     {
@@ -117,9 +122,9 @@ class ReportController extends Controller
             ->groupBy('brands.name')->get();
 
         return response()->json([
-            'status'=>200,
-            'msg'=>'Get data successfully',
-            'data' =>$value,
+            'status' => 200,
+            'msg' => 'Get data successfully',
+            'data' => $value,
         ]);
     }
 }

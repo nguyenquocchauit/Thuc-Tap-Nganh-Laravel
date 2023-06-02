@@ -37,7 +37,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //middleware for customer
 Route::middleware([User::class])->group(function () {
-    Route::post('/setting-profile', [UserController::class, 'updateProfile'])->name('setting-profile');
+    Route::get('/profile/edit/{id}', [UserController::class, 'editCustomer'])->name('edit-profile-customer');
+    Route::post('/profile-customer/update/{id}', [UserController::class, 'updateCustomer'])->name('update-profile-customer');
+    Route::post('/profile-customer/update-password/{id}', [UserController::class, 'updatePassword'])->name('update-password-dashboard');
     Route::post('/buy-product-from-cart', [BuyProductController::class, 'buyProductCart'])->name('buy-product-from-cart');
     Route::post('/comment-product', [ProductController::class, 'writeComment'])->name('comment-product');
     Route::post('/delete-comment', [ProductController::class, 'deleteComment'])->name('delete-comment');
@@ -63,18 +65,17 @@ Route::middleware([Admin::class])->group(function () {
     Route::get('/admin/brand/delete/{id}', [BrandController::class, 'destroy'])->name('delete-brand');
     Route::post('/admin/brand/update/{id}', [BrandController::class, 'update'])->name('update-brand');
     // brand
-    Route::post('/admin/employee/create', [EmployeeController::class, 'store'])->name('create-employee');
-    Route::get('/admin/employee/delete/{id}', [EmployeeController::class, 'destroy'])->name('delete-employee');
-    Route::get('/admin/employee/edit/{id}', [EmployeeController::class, 'editEmployee'])->name('edit-employee');
-    // employee
     Route::post('/admin/order/status/{id}', [OrdersController::class, 'updateStatus'])->name('updateStatus');
     // order
 });
 
 Route::middleware([Host::class])->group(function () {
+    Route::post('/admin/employee/create', [EmployeeController::class, 'store'])->name('create-employee');
+    Route::get('/admin/employee/delete/{id}', [EmployeeController::class, 'destroy'])->name('delete-employee');
+    Route::get('/admin/employee/edit/{id}', [EmployeeController::class, 'editEmployee'])->name('edit-employee');
+    // employee
     Route::post('/admin/employee/update/{id}', [EmployeeController::class, 'update'])->name('update-employee');
     Route::get('/admin/report/data-chart/{id}', [ReportController::class, 'dataChart'])->name('data-chart');
-
 });
 
 // login and register of user

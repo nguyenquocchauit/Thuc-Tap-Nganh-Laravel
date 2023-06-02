@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 
-class ProfileRequest extends FormRequest
+class UpdateProfileCustomerRequest extends FormRequest
 {
     public function authorize()
     {
@@ -19,9 +19,8 @@ class ProfileRequest extends FormRequest
         return [
             'name' => ['required', 'regex:/^[a-zA-ZÀ-ỹ ]*$/'],
             'phone_number' => ['required', 'regex:/(09|03|07|08|05)+([0-9]{8})\b/'],
-            'email' => ['required',  Rule::unique('administrator')->ignore($this->id), 'regex:/^[^ ]+@[^ ]+\.[a-z]{2,3}$/'],
+            'email' => ['required', Rule::unique('users')->ignore($this->id), 'regex:/^[^ ]+@[^ ]+\.[a-z]{2,3}$/'],
             'address' => ['required'],
-            'image_profile' => 'image|mimes:jpg,png,jpeg'
 
         ];
     }
@@ -37,8 +36,7 @@ class ProfileRequest extends FormRequest
             'email.unique' => 'Email already exists',
             'email.regex' => 'Incorrect email format',
             'address.required' => 'Empty address',
-            'image_profile.image' => 'Incorrect image format',
-            'image_profile.mimes' => 'jpg, png, jpeg.'
+
         ];
     }
 }

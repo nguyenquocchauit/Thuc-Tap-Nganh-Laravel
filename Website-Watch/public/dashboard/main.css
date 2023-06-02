@@ -310,8 +310,13 @@
     cursor: pointer;
 }
 .dashboard-chart-legend {
+    justify-content: center;
     list-style-type: none;
     padding-left: 0;
+    flex-direction: row !important;
+}
+.dashboard-chart-legend li {
+   padding: 5px;
 }
 .dashboard-chart-legend li span {
     width: 11px;

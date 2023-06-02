@@ -147,107 +147,174 @@ $(document).ready(function () {
                         pointBackgroundColor: "#fff",
                     });
                 });
-            },
-        });
-        var data = {
-            labels: [
-                "Tháng 1",
-                "Tháng 2",
-                "Tháng 3",
-                "Tháng 4",
-                "Tháng 5",
-                "Tháng 6",
-                "Tháng 7",
-                "Tháng 8",
-                "Tháng 9",
-                "Tháng 10",
-                "Tháng 11",
-                "Tháng 12",
-            ],
-            datasets: data_sets,
-        };
-        var options = {
-            scales: {
-                yAxes: [
-                    {
-                        display: true,
-                        gridLines: {
-                            drawBorder: false,
-                            lineWidth: 1,
-                            color: "#e9e9e9",
-                            zeroLineColor: "#e9e9e9",
+
+                var data = {
+                    labels: [
+                        "Tháng 1",
+                        "Tháng 2",
+                        "Tháng 3",
+                        "Tháng 4",
+                        "Tháng 5",
+                        "Tháng 6",
+                        "Tháng 7",
+                        "Tháng 8",
+                        "Tháng 9",
+                        "Tháng 10",
+                        "Tháng 11",
+                        "Tháng 12",
+                    ],
+                    datasets: data_sets,
+                };
+                var options = {
+                    scales: {
+                        yAxes: [
+                            {
+                                display: true,
+                                gridLines: {
+                                    drawBorder: false,
+                                    lineWidth: 1,
+                                    color: "#e9e9e9",
+                                    zeroLineColor: "#e9e9e9",
+                                },
+                                ticks: {
+                                    min: 0,
+                                    max: 100,
+                                    stepSize: 20,
+                                    fontColor: "#6c7383",
+                                    fontSize: 16,
+                                    fontStyle: 300,
+                                    padding: 15,
+                                },
+                            },
+                        ],
+                        xAxes: [
+                            {
+                                display: true,
+                                gridLines: {
+                                    drawBorder: false,
+                                    lineWidth: 1,
+                                    color: "#e9e9e9",
+                                },
+                                ticks: {
+                                    fontColor: "#6c7383",
+                                    fontSize: 16,
+                                    fontStyle: 300,
+                                    padding: 15,
+                                },
+                            },
+                        ],
+                    },
+                    legend: {
+                        display: false,
+                    },
+                    legendCallback: function (chart) {
+                        var text = [];
+                        text.push(
+                            '<ul class="navbar-nav dashboard-chart-legend">'
+                        );
+                        for (var i = 0; i < chart.data.datasets.length; i++) {
+                            text.push(
+                                '<li class="nav-item"><span style="background-color: ' +
+                                    chart.data.datasets[i].borderColor[0] +
+                                    ' "></span>'
+                            );
+                            if (chart.data.datasets[i].label) {
+                                text.push(chart.data.datasets[i].label);
+                            }
+                        }
+                        text.push("</ul>");
+                        return text.join("");
+                    },
+                    elements: {
+                        point: {
+                            radius: 3,
                         },
-                        ticks: {
-                            min: 0,
-                            max: 100,
-                            stepSize: 20,
-                            fontColor: "#6c7383",
-                            fontSize: 16,
-                            fontStyle: 300,
-                            padding: 15,
+                        line: {
+                            tension: 0,
                         },
                     },
-                ],
-                xAxes: [
-                    {
-                        display: true,
-                        gridLines: {
-                            drawBorder: false,
-                            lineWidth: 1,
-                            color: "#e9e9e9",
-                        },
-                        ticks: {
-                            fontColor: "#6c7383",
-                            fontSize: 16,
-                            fontStyle: 300,
-                            padding: 15,
+                    stepsize: 1,
+                    layout: {
+                        padding: {
+                            top: 0,
+                            bottom: -10,
+                            left: -10,
+                            right: 0,
                         },
                     },
-                ],
+                };
+                var cashDeposits = new Chart(cashDepositsCanvas, {
+                    type: "line",
+                    data: data,
+                    options: options,
+                });
+                document.getElementById(
+                    "cash-deposits-chart-legend"
+                ).innerHTML = cashDeposits.generateLegend();
             },
-            legend: {
-                display: false,
-            },
-            legendCallback: function (chart) {
-                var text = [];
-                text.push('<ul class="dashboard-chart-legend">');
-                for (var i = 0; i < chart.data.datasets.length; i++) {
-                    text.push(
-                        '<li><span style="background-color: ' +
-                            chart.data.datasets[i].borderColor[0] +
-                            ' "></span>'
-                    );
-                    if (chart.data.datasets[i].label) {
-                        text.push(chart.data.datasets[i].label);
-                    }
-                }
-                text.push("</ul>");
-                return text.join("");
-            },
-            elements: {
-                point: {
-                    radius: 3,
-                },
-                line: {
-                    tension: 0,
-                },
-            },
-            stepsize: 1,
-            layout: {
-                padding: {
-                    top: 0,
-                    bottom: -10,
-                    left: -10,
-                    right: 0,
-                },
-            },
-        };
-        var cashDeposits = new Chart(cashDepositsCanvas, {
-            type: "line",
-            data: data,
-            options: options,
         });
-        document.getElementById("cash-deposits-chart-legend").innerHTML =
-            cashDeposits.generateLegend();
     }
+    // sales-chart-c start
+    if (parseFloat($("#chart-fail").val()) == 0 && parseFloat($("#chart-received").val()) == 0) {
+        $(".stretch-card-circle").hide();
+
+    } else if (
+        $("#sales-chart-c").length ||
+        $("#chart-fail").val() > 0 ||
+        $("#chart-received").val() > 0
+    ) {
+        var salesChartCCanvas = $("#sales-chart-c").get(0).getContext("2d");
+        var salesChartC = new Chart(salesChartCCanvas, {
+            type: "pie",
+            data: {
+                datasets: [
+                    {
+                        data: [
+                            parseFloat($("#chart-fail").val()).toFixed(2),
+                            parseFloat($("#chart-received").val()).toFixed(2),
+                        ],
+                        backgroundColor: ["#ff4747", "#21bf06"],
+                        borderColor: ["#ff4747", "#21bf06"],
+                    },
+                ],
+
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: ["Thất bại", "Thành công"],
+            },
+            options: {
+                responsive: true,
+                animation: {
+                    animateScale: true,
+                    animateRotate: true,
+                },
+                legend: {
+                    display: false,
+                },
+                legendCallback: function (chart) {
+                    var text = [];
+                    text.push(
+                        '<ul class="legend chart-legend-cirle' + chart.id + '">'
+                    );
+                    for (
+                        var i = 0;
+                        i < chart.data.datasets[0].data.length;
+                        i++
+                    ) {
+                        text.push(
+                            '<li><span class="legend-dots" style="background-color:' +
+                                chart.data.datasets[0].backgroundColor[i] +
+                                '"></span>'
+                        );
+                        if (chart.data.labels[i]) {
+                            text.push(chart.data.labels[i]);
+                        }
+                        text.push("</li>");
+                    }
+                    text.push("</ul>");
+                    return text.join("");
+                },
+            },
+        });
+    }
+    // sales-chart-c end
 });

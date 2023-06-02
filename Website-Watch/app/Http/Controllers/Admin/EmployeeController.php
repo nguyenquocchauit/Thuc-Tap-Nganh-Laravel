@@ -116,22 +116,22 @@ class EmployeeController extends Controller
     {
 
         $employeer = Administrator::find($id);
-        // Lấy thời gian hiện tại theo múi giờ Asia/Ho_Chi_Minh
-        $now = now()->setTimezone('Asia/Ho_Chi_Minh');
         Administrator::where('id', $id)
             ->update([
                 "name" => $request->name,
                 "phone_number" => $request->phone_number,
                 "address" => $request->address,
                 "email" => $request->email,
-                "updated_at" => $now,
+                "updated_at" => now()->setTimezone('Asia/Ho_Chi_Minh'),
                 "role" => $request->role,
             ]);
-        // Lưu ảnh của nhân viên vào thư mục public/images/employee/
-        if (File::exists('images/employee/' . $employeer->avt)) {
-            File::delete('images/employee/' . $employeer->avt);
+        // Lưu ảnh của nhân viên vào thư mục public/images/employee/ nếu có sự thay đổi của image_profile
+        if ($request->image_profile) {
+            if (File::exists('images/employee/' . $employeer->avt)) {
+                File::delete('images/employee/' . $employeer->avt);
+            }
+            $request->file('image_profile')->move(public_path('images/employee/'), $employeer->avt);
         }
-        $request->file('image_profile')->move(public_path('images/employee/'), $employeer->avt);
 
         return response()->json([
             'status' => 200,

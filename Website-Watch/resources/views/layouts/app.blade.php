@@ -114,7 +114,7 @@
                                 <a href="{{ url('/') }}">
                                     <p class="">
                                         <i id="iconhouse" class="fas fa-home"></i>
-                                        <strong>SHOP: </strong>2 Nguyễn Đình Chiểu, Nha Trang, Khánh Hòa
+                                        <strong>SHOP: </strong>123 Nguyễn Tất Thành, Nha Trang, Khánh Hòa
                                     </p>
                                 </a>
                             </div>
@@ -122,6 +122,7 @@
                         <div class="center col-2">
                         </div>
                         <div class="right col-4 ">
+
                             <p class="">
                                 <i id="iconphone" class="fas fa-phone-volume"></i>
                                 <strong>HOTLINE: </strong>038 655 5555 |
@@ -182,7 +183,7 @@
                                                 @foreach ($brandMenu['men'] as $value)
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="/shop/Men?brand%5B{{ $value->brand }}%5D">{{ $value->name }}</a>
+                                                            href="/shop?gender=Nam&brand[{{ $value->brand }}]">{{ $value->name }}</a>
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -198,7 +199,7 @@
                                                 @foreach ($brandMenu['women'] as $value)
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="/shop/Women?brand%5B{{ $value->brand }}%5D">{{ $value->name }}</a>
+                                                            href="/shop?gender=Nữ&brand[{{ $value->brand }}]">{{ $value->name }}</a>
                                                     </li>
                                                 @endforeach
 
@@ -317,7 +318,7 @@
             <hr>
             <div class="row">
                 <div class="col-11 copy-right">
-                    <i>Copyright ©2022 Tất cả các quyền | Mẫu này được thực hiện bởi #TeamTCWatch</i>
+                    <i>Copyright ©2023 Tất cả các quyền | Mẫu này được thực hiện bởi #TeamTCWatch</i>
                 </div>
                 <div class=" col-1 back-top" style="display: block;">
                     <a title="Go to top" href="#">

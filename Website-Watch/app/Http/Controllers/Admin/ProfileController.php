@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\File;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfilePasswordRequest;
 use App\Http\Requests\ProfileRequest;
@@ -58,9 +60,15 @@ class ProfileController extends Controller
     }
     public function update(ProfileRequest $request, $id)
     {
-        $now = now()->setTimezone('Asia/Ho_Chi_Minh');
-        Administrator::where('id', $id)->update($request->only(['name', 'phone_number', 'address', 'email']) + ['updated_at' => $now]);
-
+        Administrator::where('id', $id)->update($request->only(['name', 'phone_number', 'address', 'email']) + ['updated_at' => now()->setTimezone('Asia/Ho_Chi_Minh')]);
+        // Lưu ảnh của nhân viên vào thư mục public/images/employee/ nếu có sự thay đổi của image_profile
+        $profile = Administrator::find($id);
+        if ($request->image_profile) {
+            if (File::exists('images/employee/' . $profile->avt)) {
+                File::delete('images/employee/' . $profile->avt);
+            }
+            $request->file('image_profile')->move(public_path('images/employee/'), $profile->avt);
+        }
         return response()->json([
             'status' => 200,
             'msg' => 'Update profile successfully',

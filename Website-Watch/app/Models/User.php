@@ -60,7 +60,15 @@ class User extends Authenticatable
     }
     public function getAllUsers($search = null, $times = [])
     {
-        $users = User::orderBy('created_at', 'asc');
+        $users = User::leftJoin('orders', 'orders.customers', '=', 'users.id')
+            ->select([
+                'users.*',
+                DB::raw('COALESCE(SUM(orders.total), 0) as userTotalMoney'),
+                DB::raw('COALESCE(COUNT(orders.id), 0) as userTotalOrder'),
+            ])
+            ->groupBy('users.name')
+            ->orderBy('users.created_at', 'asc');
+
         if (!empty($search)) {
             $users = $users->where(function ($query) use ($search) {
                 $query->orWhere('users.id', $search);
@@ -71,8 +79,8 @@ class User extends Authenticatable
             });
         }
         if (!empty($times)) {
-            $users = $users->whereYear('created_at', '=', $times[0]);
-            $users = $users->whereMonth('created_at', '=', $times[1]);
+            $users = $users->whereYear('users.created_at', '=', $times[0]);
+            $users = $users->whereMonth('users.created_at', '=', $times[1]);
         }
         $users = $users->paginate(10);
         return $users;

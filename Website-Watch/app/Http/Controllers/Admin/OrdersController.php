@@ -25,8 +25,8 @@ class OrdersController extends Controller
         $customerView = $employeerView = $create_atView = $idOrderView = $statusView = $totalView = $phone = $address = $note = null;
         if (!empty($request->time_select)) {
             [$year, $month] = explode("-", $request->time_select);
-            $time_select[] = ['orders.created_at', '=',  $year];
-            $time_select[] = ['orders.created_at', '=',  $month];
+            $time_select[] = ['orders.updated_at', '=',  $year];
+            $time_select[] = ['orders.updated_at', '=',  $month];
         }
         if (!empty($request->unconfimred) && $request->unconfimred == "true") {
             $filters[] = ['orders.status', '=', "XN"];

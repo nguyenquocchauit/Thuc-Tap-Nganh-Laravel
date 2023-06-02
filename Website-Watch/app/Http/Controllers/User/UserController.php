@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfilePasswordCustomerRequest;
+use App\Http\Requests\UpdateProfileCustomerRequest;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -18,59 +21,48 @@ class UserController extends Controller
     {
         return view('user.profile');
     }
-
-    public function updateProfile(Request $request)
+    public function editCustomer($id)
     {
-        $profile = User::find($request->id);
-        if ($profile && Hash::check($request->password, $profile->password)) {
-            if ($request->action == "Save profile") {
-                $validator = Validator::make($request->all(), [
-                    'email' => [
-                        'required',
-                        Rule::unique('users')->ignore($request->id),
-                    ],
-                    'phone_number' => [
-                        'required',
-                        Rule::unique('users')->ignore($request->id),
-                    ],
-                ]);
-                if ($validator->fails()) {
-                    $msgPhone = null;
-                    $msgEmail = null;
-                    $messages = $validator->errors()->all();
-                    for ($i = 0; $i < count($messages); $i++) {
-                        if ($messages[$i] == "The phone number has already been taken.") {
-                            $msgPhone = "The phone number has already been taken.";
-                        }
-                        if ($messages[$i] == "The email has already been taken.") {
-                            $msgEmail = "The email has already been taken.";
-                        }
-                    }
-                    return response()->json([
-                        'status' => 500,
-                        'msg' => "Error",
-                        'email' => $msgEmail,
-                        'phone' => $msgPhone,
-                    ]);
-                } else {
+        $employee = User::select(
+            DB::raw("*, DATE_FORMAT(created_at,'%H:%i:%s %d-%m-%Y') as create_at"),
+            DB::raw("DATE_FORMAT(updated_at,'%H:%i:%s %d-%m-%Y') as update_at")
+        )->find($id);
+        $employeeAddress = explode(", ", $employee->address);
+        $city = $employeeAddress[3] ?? "";
+        $district = $employeeAddress[2] ?? "";
+        $ward = $employeeAddress[1] ?? "";
+        $address = $employeeAddress[0] ?? "";
+        return response()->json([
+            'status' => 200,
+            'city' => $city,
+            'district' => $district,
+            'ward' => $ward,
+            'address' => $address,
+            'created_at' => $employee->create_at,
+            'updated_at' => $employee->update_at,
+        ]);
+    }
+    public function updateCustomer(UpdateProfileCustomerRequest $request, $id)
+    {
+        $now = now()->setTimezone('Asia/Ho_Chi_Minh');
+        User::where('id', $id)->update($request->only(['name', 'phone_number', 'address', 'email']) + ['updated_at' => $now]);
 
-                    $update = $request->only('name', 'phone_number', 'email', 'address');
-                    if ($request->changePass) {
-                        $update['password'] = Hash::make($request->changePass);
-                    }
-                    $profile->update($update);
-                    return response()->json([
-                        'status' => 200,
-                        'msg' => "Update information successfully",
-                    ]);
-                }
-            }
-        } else {
-            return response()->json([
-                'status' => 500,
-                'msg' => 'Cofirm password incorrect',
-            ]);
-        }
+        return response()->json([
+            'status' => 200,
+            'msg' => 'Update profile customer successfully',
+        ]);
+    }
+    public function updatePassword(ProfilePasswordCustomerRequest $request, $id)
+    {
+        $user = User::find($id);
+        $user->password = Hash::make($request->newPass);
+        $user->updated_at = now()->setTimezone('Asia/Ho_Chi_Minh');
+        $user->save();
+
+        return response()->json([
+            'status' => 200,
+            'msg' => 'Update password successfully',
+        ]);
     }
     public function purchaseHistory()
     {
@@ -80,8 +72,7 @@ class UserController extends Controller
             order_details.price as priceOrderDetail,order_details.total as totalOrderDetail')
             ->join('products', 'order_details.product', '=', 'products.id')
             ->join('orders', 'order_details.orders', '=', 'orders.id')
-            ->where("orders.customers", auth()->user()->id)
-            ->get();
+            ->where("orders.customers", auth()->user()->id);
         return view('user.purchaseHistory', compact('orders'));
     }
 }

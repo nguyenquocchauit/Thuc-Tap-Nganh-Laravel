@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Gender;
 use App\Models\Brand;
-
+use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {
@@ -17,20 +17,17 @@ class ShopController extends Controller
         //Get products
         $perPage = $request->show ?? 6;
         $sortBy = $request->sort_by ?? 'latest';
-        $searchProducts = $request->search;
         //Get min,max price
         $min_price = Product::min('price');
         $max_price = Product::max('price');
         $min_price_range = $min_price - 260000;
         $max_price_range = $max_price + 140000;
-        $products = Product::where('name', 'like', '%' . $searchProducts . '%');
-        // if(!empty($searchProducts)) {
-        //     $request->session()->flash('error');
-        // }
+        $products = new Product();
         $products = $this->filter($products, $request);
         $products = $this->sortAndPagination($products, $sortBy, $perPage);
 
-        return view('product.shop', compact('brands', 'products', 'min_price_range', 'max_price_range'));
+
+        return view('product.shop', compact('brands', 'products', 'min_price', 'max_price'));
     }
 
     public function sortAndPagination($products, $sortBy, $perPage)
@@ -70,11 +67,12 @@ class ShopController extends Controller
         $products = $brand_ids != null ? $products->whereIn('brand', $brand_ids) : $products;
 
         //Price
-
         $priceMin = $request->start_price;
         $priceMax = $request->end_price;
-        $products = ($priceMin != null && $priceMin != null) ? $products
-            ->whereBetween('price', [$priceMin, $priceMax]) : $products;
+        if ($priceMin != null && $priceMax != null) {
+            $products = $products->whereBetween(DB::raw('ROUND(price - (price * (discount/100)), 1)'), [$priceMin, $priceMax]);
+        }
+        $products = $products->paginate(10);
         return $products;
     }
 }

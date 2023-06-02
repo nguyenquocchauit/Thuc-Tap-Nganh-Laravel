@@ -33,6 +33,7 @@
     <script type="text/javascript" src="{{ asset('js/Admin/product.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/Admin/customer.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+
     <script type="text/javascript" src="{{ asset('js/Admin/report.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/Admin/brand.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/Admin/profile.js') }}"></script>
@@ -696,7 +697,7 @@
                                         <li>
                                             <a href="./admin/report"
                                                 class="{{ request()->segment(2) == 'report' ? 'mm-active' : '' }}">
-                                                <i class="metismenu-icon"></i>Báo cáo
+                                                <i class="metismenu-icon"></i>Thống kê
                                             </a>
                                         </li>
                                     @endif

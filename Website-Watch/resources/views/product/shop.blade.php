@@ -8,21 +8,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 products-sidebar-filter">
-                    <form action="">
+                    <form id="form-shop">
                         <div class="filter-wiget">
                             <h4 class="fw-title">Loại</h4>
                             <ul class="filter-categories">
-                                <li><a
-                                        href="{{ route('shop-index') }}/men }}">Nam</a>
-                                </li>
-                                <li><a
-                                    href="{{ route('shop-index') }}/women }}">Nữ</a>
-                            </li>
-                                {{-- @foreach ($categories as $category)
-                                    <li><a
-                                            href="{{ route('shop-index') }}/{{ ucfirst(trans($category->slug)) }}">{{ $category->name }}</a>
-                                    </li>
-                                @endforeach --}}
+                                <li>Nam</li>
+                                <li>Nữ</li>
+                                <input type="hidden" name="gender" id="gender" value="">
                             </ul>
                         </div>
                         <div class="filter-wiget">
@@ -45,22 +37,20 @@
                         <div class="filter-wiget">
                             <h4 class="fw-title">Giá</h4>
                             <label for="amount">Lọc theo giá</label>
-                            <form>
-                                <div id="slider-range">
-                                </div>
-                                <div class="slider-range">
-                                    <p><input type="text" id="amount_start" readonly
-                                            style="border:0; color:#f6931f; font-weight:bold;background-color: #f8fafc;">
-                                    </p>
-                                    <p><input type="text" id="amount_end" readonly
-                                            style="border:0; color:#f6931f; font-weight:bold;width: 100px;background-color: #f8fafc;">
-                                    </p>
-                                </div>
-                                <input type="hidden" name="start_price" id="start_price" value="{{ old('start_price') }}">
-                                <input type="hidden" name="end_price" id="end_price" value="{{ old('end_price') }}">
+                            <div id="slider-range">
+                            </div>
+                            <div class="slider-range">
+                                <p><input type="text" id="amount_start" readonly
+                                        style="border:0; color:#f6931f; font-weight:bold;background-color: #f8fafc;">
+                                </p>
+                                <p><input type="text" id="amount_end" readonly
+                                        style="border:0; color:#f6931f; font-weight:bold;width: 100px;background-color: #f8fafc;">
+                                </p>
+                            </div>
+                            <input type="hidden" name="start_price" id="start_price" value="{{ request()->start_price }}">
+                            <input type="hidden" name="end_price" id="end_price" value="{{ request()->end_price }}">
 
-                                <input type="submit" name="filter_price" class="filter-btn" value="Lọc">
-                            </form>
+                            <input type="submit" name="filter_price" class="filter-btn" value="Lọc">
                         </div>
                     </form>
                     <div class="brands-wishlist">
@@ -232,13 +222,19 @@
 
 @push('scripts')
     <script>
-        $(function() {
+        $(document).ready(function() {
+            var min = {{ $min_price }};
+            var max = {{ $max_price }};
+            if ($("#start_price").val() >= min)
+                min = $("#start_price").val();
+            if ($("#end_price").val() <= max)
+                max = $("#end_price").val();
             $("#slider-range").slider({
                 orientation: "horizontal",
                 range: true,
-                min: {{ $min_price_range }},
-                max: {{ $max_price_range }},
-                values: [{{ $min_price_range }}, {{ $max_price_range }}],
+                min: {{ $min_price }},
+                max: {{ $max_price }},
+                values: [min, max],
                 step: 100000,
                 slide: function(event, ui) {
                     $("#amount_start").val(ui.values[0]).simpleMoneyFormat();
@@ -249,6 +245,12 @@
             });
             $("#amount_start").val($("#slider-range").slider("values", 0)).simpleMoneyFormat();
             $("#amount_end").val($("#slider-range").slider("values", 1)).simpleMoneyFormat();
+            $("#gender").val(localStorage.getItem("genderSearch"));
+            $('.filter-categories li').click(function() {
+                $(this).parent().find('input').val($(this).text());
+                localStorage.setItem("genderSearch", $(this).text())
+                $('#form-shop').submit();
+            });
         });
     </script>
 @endpush
