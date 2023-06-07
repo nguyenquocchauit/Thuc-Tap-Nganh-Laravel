@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2023 at 10:40 AM
+-- Generation Time: Jun 07, 2023 at 09:33 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -33,11 +33,11 @@ CREATE TABLE `administrator` (
   `avt` text NOT NULL,
   `address` text NOT NULL,
   `phone_number` varchar(11) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `email` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `create_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `role` int(20) NOT NULL
+  `role` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -45,10 +45,10 @@ CREATE TABLE `administrator` (
 --
 
 INSERT INTO `administrator` (`id`, `name`, `avt`, `address`, `phone_number`, `email`, `password`, `create_at`, `updated_at`, `role`) VALUES
-('nv105122022', 'Nguyễn Quốc Châu', 'nguyen-quoc-chau.png', '074 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', '0386818829', 'chauquocnguyen.cun1@gmail.com', '$2y$10$tSkxt3MiZmU599FKUhud0uN0AF/EWps/PaDqpMmi8z2ryul3vh.gO', '2022-12-05 17:58:39', '2023-05-26 01:58:50', 2),
-('nv226052023', 'Nguyễn Khánh Namm', 'nguyen-khanh-nam.png', '25 Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', '0386888888', 'nguyenkhanhnam@gmail.com', '$2y$10$Vc9cEkOcGOlmm9S10mVbB.C0uVFUsYFZJuDRqdSSD5rRRkGSK3p7y', '2023-05-23 15:21:32', '2023-05-26 16:44:24', 1),
-('nv323052023', 'Nguyễn Trần Hoàn Kim', 'nguyen-tran-hoan-kim3.png', '100 Nguyễn Thiện Thuật, Phường Hùng Vương, Thành phố Phúc Yên, Tỉnh Vĩnh Phúc', '0926262626', 'hoankim.nguyentran@gmail.com', '$2y$10$8kb3RBJ5boVYZ2WDyIcvPuLwL2wilp.yqQw2aDpJr05mqUkC2DZr6', '2023-04-05 01:36:13', '2023-05-26 16:31:16', 1),
-('nv426052023', 'Lê Thị Mỹ Huyền', 'le-thi-my-huyen4.png', 'Địa chỉ 1c, Phường Quang Trung, Thành phố Hà Giang, Tỉnh Hà Giang', '0926383585', 'lethimyhuyen@gmail.com', '$2y$10$1ubzOIQEJok63jCNWdH1euSKw9qfw5teFk1ys2LszCS6RjtfAhTte', '2023-05-26 19:41:36', '2023-05-26 19:41:36', 1);
+('nv105122022', 'Nguyễn Quốc Châu', 'nguyen-quoc-chau.png', '074 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', '0386888829', 'chauquocnguyen.cun1@gmail.com', '$2y$10$hzTq/HDrl69S/kXnpf2SIuhBy2rkHQAqca3zNMHaaV0QTIV6Hb/J6', '2022-12-05 17:58:39', '2023-05-30 20:26:31', 2),
+('nv226052023', 'Nguyễn Khánh Nam', 'nguyen-khanh-nam.png', '25 Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', '0386888888', 'nguyenkhanhnam@gmail.com', '$2y$10$/nMeQirGpmQwSI.XG24aCeVEbpF3BLpMfQ0.JEshDf/ROn.cSOYou', '2023-05-23 15:21:32', '2023-06-07 22:57:13', 1),
+('nv323052023', 'Nguyễn Trần Hoàn Kim', 'nguyen-tran-hoan-kim3.png', '100 Nguyễn Thiện Thuật, Phường Trưng Trắc, Thành phố Phúc Yên, Tỉnh Vĩnh Phúc', '0926266666', 'hoankim.nguyentran@gmail.com', '$2y$10$8kb3RBJ5boVYZ2WDyIcvPuL', '2023-04-05 01:36:13', '2023-05-30 20:21:30', 1),
+('nv426052023', 'Lê Thị Mỹ Huyền', 'le-thi-my-huyen4.png', 'Địa chỉ 1c, Phường Quang Trung, Thành phố Hà Giang, Tỉnh Hà Giang', '0926383585', 'lethimyhuyen@gmail.com', '$2y$10$1ubzOIQEJok63jCNWdH1euS', '2023-05-26 19:41:36', '2023-05-26 19:41:36', 1);
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,8 @@ INSERT INTO `comment` (`id`, `customers`, `product`, `content`, `star`, `created
 ('cm508122022', 'kh26122022', 'sp527052023', 'đẹp lắm bạn ạ', 0, '2023-04-01 07:00:00'),
 ('cm608122022', 'kh26122022', 'sp327052023', 'good', 4, '2023-04-28 05:44:35'),
 ('cm727052023', 'kh26122022', 'sp827052023', 'Sản phẩm đẹp lắm', 4, '2023-05-27 01:31:53'),
-('cm827052023', 'kh26122022', 'sp827052023', '', 4, '2023-05-27 01:43:25');
+('cm827052023', 'kh26122022', 'sp827052023', '', 4, '2023-05-27 01:43:25'),
+('cm929052023', 'kh1026052023', 'sp527052023', '.', 4, '2023-05-29 19:01:26');
 
 -- --------------------------------------------------------
 
@@ -198,18 +199,6 @@ INSERT INTO `likes` (`id`, `customers`, `product`, `status`, `created_at`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `orders`
 --
 
@@ -220,7 +209,7 @@ CREATE TABLE `orders` (
   `status` varchar(3) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `total` decimal(10,0) NOT NULL,
+  `total` float NOT NULL,
   `note` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -229,23 +218,23 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `customers`, `employee`, `status`, `created_at`, `updated_at`, `total`, `note`) VALUES
-('HD1018253928052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 18:25:39', '2023-05-28 18:26:43', '97200', 'nv105122022 status: Thành công - 18:26:43 28-05-2023, nv105122022 status: Chưa xác nhận - 18:25:39 28-05-2023'),
-('HD1118255228052023', 'kh1026052023', 'nv105122022', 'TC', '2023-04-06 18:25:52', '2023-04-06 18:25:52', '8721000', 'nv105122022 status: Thành công - 18:26:41 28-05-2023, nv105122022 status: Chưa xác nhận - 18:25:52 28-05-2023'),
-('HD114523728052023', 'kh1026052023', 'nv105122022', 'TC', '2023-04-14 14:52:37', '2023-05-28 15:11:25', '105909120', 'nv105122022 status: Thành công - 15:11:25 28-05-2023, nv105122022 status: Thất bại - 14:52:57 28-05-2023, nv323052023 status: Chưa xác nhận - 14:52:37 28-05-2023'),
-('HD1218261128052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 18:26:11', '2023-05-28 18:26:38', '9354420', 'nv105122022 status: Thành công - 18:26:38 28-05-2023, nv105122022 status: Chưa xác nhận - 18:26:11 28-05-2023'),
-('HD1318261728052023', 'kh1026052023', 'nv105122022', 'DVC', '2023-05-28 18:26:17', '2023-05-29 14:11:55', '5201820', 'nv105122022 status: Đang vận chuyển - 14:11:55 29-05-2023, nv105122022 status: Thành công - 18:26:36 28-05-2023, nv105122022 status: Chưa xác nhận - 18:26:17 28-05-2023'),
-('HD1418261928052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 18:26:19', '2023-05-28 18:26:34', '19440000', 'nv105122022 status: Thành công - 18:26:34 28-05-2023, nv105122022 status: Chưa xác nhận - 18:26:19 28-05-2023'),
-('HD1518262128052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 18:26:21', '2023-05-28 18:26:30', '9090360', 'nv105122022 status: Thành công - 18:26:30 28-05-2023, nv105122022 status: Chưa xác nhận - 18:26:21 28-05-2023'),
-('HD1614083129052023', 'kh1026052023', 'nv105122022', 'XN', '2023-05-29 14:08:31', '2023-05-29 14:09:48', '97200', 'nv105122022 status: Chưa xác nhận - 14:09:48 29-05-2023, nv105122022 status: Đang vận chuyển - 14:09:44 29-05-2023, nv323052023 status: Chưa xác nhận - 14:08:31 29-05-2023'),
-('HD1714483729052023', 'kh26122022', 'nv323052023', 'XN', '2023-05-29 14:48:37', '2023-05-29 14:48:37', '31807512', 'nv323052023 status: Chưa xác nhận - 14:48:37 29-05-2023'),
-('HD214524428052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 14:52:44', '2023-05-28 14:52:55', '29294784', 'nv105122022 status: Thành công - 14:52:55 28-05-2023, nv323052023 status: Chưa xác nhận - 14:52:44 28-05-2023'),
-('HD314532028052023', 'kh1026052023', 'nv105122022', 'TB', '2023-05-28 14:53:20', '2023-05-28 14:53:25', '29294784', 'nv105122022 status: Thất bại - 14:53:25 28-05-2023, nv323052023 status: Chưa xác nhận - 14:53:20 28-05-2023'),
-('HD414534728052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 14:53:47', '2023-05-28 17:01:44', '20005920', 'nv105122022 status: Thành công - 17:01:44 28-05-2023, nv105122022 status: Chưa xác nhận - 16:11:43 28-05-2023, nv105122022 status: Thành công - 14:54:21 28-05-2023, nv105122022 status: Thất bại - 14:53:50 28-05-2023, nv323052023 status: Chưa xác nhận - 14:53:47 28-05-2023'),
-('HD517010428052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 17:01:04', '2023-05-28 17:01:39', '121236264', 'nv105122022 status: Thành công - 17:01:39 28-05-2023, nv323052023 status: Chưa xác nhận - 17:01:04 28-05-2023'),
-('HD617025428052023', 'kh1026052023', 'nv323052023', 'TC', '2023-03-08 17:02:54', '2023-03-09 17:02:54', '78019632', 'nv323052023 status: Chưa xác nhận - 17:02:54 28-05-2023'),
-('HD718192428052023', 'kh1026052023', 'nv105122022', 'TC', '2023-03-09 18:19:24', '2023-03-09 18:19:24', '588556692', 'nv105122022 status: Thành công - 18:19:29 28-05-2023, nv105122022 status: Chưa xác nhận - 18:19:24 28-05-2023'),
-('HD818204928052023', 'kh1026052023', 'nv105122022', 'TC', '2023-01-11 18:20:49', '2023-05-28 18:22:12', '163652400', 'nv105122022 status: Thành công - 18:22:12 28-05-2023, nv105122022 status: Chưa xác nhận - 18:20:49 28-05-2023'),
-('HD918213528052023', 'kh1026052023', 'nv105122022', 'TC', '2023-02-07 18:21:35', '2023-02-07 18:22:15', '192402000', 'nv105122022 status: Thành công - 18:22:15 28-05-2023, nv105122022 status: Chưa xác nhận - 18:21:35 28-05-2023');
+('HD1018253928052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 18:25:39', '2023-05-28 18:26:43', 97200, 'nv105122022 status: Thành công - 18:26:43 28-05-2023, nv105122022 status: Chưa xác nhận - 18:25:39 28-05-2023'),
+('HD1118255228052023', 'kh1026052023', 'nv105122022', 'TC', '2023-04-06 18:25:52', '2023-04-06 18:25:52', 8721000, 'nv105122022 status: Thành công - 18:26:41 28-05-2023, nv105122022 status: Chưa xác nhận - 18:25:52 28-05-2023'),
+('HD114523728052023', 'kh1026052023', 'nv105122022', 'TC', '2023-04-14 14:52:37', '2023-05-28 15:11:25', 105909000, 'nv105122022 status: Thành công - 15:11:25 28-05-2023, nv105122022 status: Thất bại - 14:52:57 28-05-2023, nv323052023 status: Chưa xác nhận - 14:52:37 28-05-2023'),
+('HD1218261128052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 18:26:11', '2023-05-28 18:26:38', 9354420, 'nv105122022 status: Thành công - 18:26:38 28-05-2023, nv105122022 status: Chưa xác nhận - 18:26:11 28-05-2023'),
+('HD1318261728052023', 'kh1026052023', 'nv105122022', 'DVC', '2023-05-28 18:26:17', '2023-05-29 14:11:55', 5201820, 'nv105122022 status: Đang vận chuyển - 14:11:55 29-05-2023, nv105122022 status: Thành công - 18:26:36 28-05-2023, nv105122022 status: Chưa xác nhận - 18:26:17 28-05-2023'),
+('HD1418261928052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 18:26:19', '2023-05-28 18:26:34', 19440000, 'nv105122022 status: Thành công - 18:26:34 28-05-2023, nv105122022 status: Chưa xác nhận - 18:26:19 28-05-2023'),
+('HD1518262128052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 18:26:21', '2023-05-28 18:26:30', 9090360, 'nv105122022 status: Thành công - 18:26:30 28-05-2023, nv105122022 status: Chưa xác nhận - 18:26:21 28-05-2023'),
+('HD1614083129052023', 'kh1026052023', 'nv105122022', 'XN', '2023-05-29 14:08:31', '2023-05-29 14:09:48', 97200, 'nv105122022 status: Chưa xác nhận - 14:09:48 29-05-2023, nv105122022 status: Đang vận chuyển - 14:09:44 29-05-2023, nv323052023 status: Chưa xác nhận - 14:08:31 29-05-2023'),
+('HD1714483729052023', 'kh26122022', 'nv323052023', 'XN', '2023-05-29 14:48:37', '2023-05-29 14:48:37', 31807500, 'nv323052023 status: Chưa xác nhận - 14:48:37 29-05-2023'),
+('HD214524428052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 14:52:44', '2023-05-28 14:52:55', 29294800, 'nv105122022 status: Thành công - 14:52:55 28-05-2023, nv323052023 status: Chưa xác nhận - 14:52:44 28-05-2023'),
+('HD314532028052023', 'kh1026052023', 'nv105122022', 'TB', '2023-05-28 14:53:20', '2023-05-28 14:53:25', 29294800, 'nv105122022 status: Thất bại - 14:53:25 28-05-2023, nv323052023 status: Chưa xác nhận - 14:53:20 28-05-2023'),
+('HD414534728052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 14:53:47', '2023-05-28 17:01:44', 20005900, 'nv105122022 status: Thành công - 17:01:44 28-05-2023, nv105122022 status: Chưa xác nhận - 16:11:43 28-05-2023, nv105122022 status: Thành công - 14:54:21 28-05-2023, nv105122022 status: Thất bại - 14:53:50 28-05-2023, nv323052023 status: Chưa xác nhận - 14:53:47 28-05-2023'),
+('HD517010428052023', 'kh1026052023', 'nv105122022', 'TC', '2023-05-28 17:01:04', '2023-05-28 17:01:39', 121236000, 'nv105122022 status: Thành công - 17:01:39 28-05-2023, nv323052023 status: Chưa xác nhận - 17:01:04 28-05-2023'),
+('HD617025428052023', 'kh1026052023', 'nv323052023', 'TC', '2023-03-08 17:02:54', '2023-03-09 17:02:54', 78019600, 'nv323052023 status: Chưa xác nhận - 17:02:54 28-05-2023'),
+('HD718192428052023', 'kh1026052023', 'nv105122022', 'TC', '2023-03-09 18:19:24', '2023-03-09 18:19:24', 588557000, 'nv105122022 status: Thành công - 18:19:29 28-05-2023, nv105122022 status: Chưa xác nhận - 18:19:24 28-05-2023'),
+('HD818204928052023', 'kh1026052023', 'nv105122022', 'TC', '2023-01-11 18:20:49', '2023-05-28 18:22:12', 163652000, 'nv105122022 status: Thành công - 18:22:12 28-05-2023, nv105122022 status: Chưa xác nhận - 18:20:49 28-05-2023'),
+('HD918213528052023', 'kh1026052023', 'nv105122022', 'TC', '2023-02-07 18:21:35', '2023-02-07 18:22:15', 192402000, 'nv105122022 status: Thành công - 18:22:15 28-05-2023, nv105122022 status: Chưa xác nhận - 18:21:35 28-05-2023');
 
 -- --------------------------------------------------------
 
@@ -257,7 +246,7 @@ CREATE TABLE `order_details` (
   `id` varchar(100) NOT NULL,
   `orders` varchar(20) NOT NULL,
   `product` varchar(20) NOT NULL,
-  `quantity` smallint(20) NOT NULL,
+  `quantity` smallint(2) NOT NULL,
   `price` float NOT NULL,
   `discount` tinyint(3) NOT NULL,
   `total` float NOT NULL
@@ -337,12 +326,12 @@ CREATE TABLE `products` (
   `name` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
   `image` varchar(255) NOT NULL,
-  `quantity` smallint(20) NOT NULL,
+  `quantity` smallint(2) NOT NULL,
   `price` float NOT NULL,
   `discount` tinyint(3) NOT NULL,
   `create_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `gender` smallint(5) NOT NULL COMMENT '1 is men, 2 is women',
+  `gender` smallint(1) NOT NULL COMMENT '1 is men, 2 is women',
   `brand` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -398,8 +387,8 @@ INSERT INTO `products` (`id`, `name`, `description`, `image`, `quantity`, `price
 --
 
 CREATE TABLE `role` (
-  `id` int(1) NOT NULL,
-  `type` tinyint(1) NOT NULL COMMENT '0 is customer and 1,2 is employee'
+  `id` tinyint(1) NOT NULL,
+  `type` tinyint(2) NOT NULL COMMENT '0 is customer and 1,2 is employee'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -422,30 +411,29 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `phone_number` varchar(11) NOT NULL,
   `address` text DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `email` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `role` int(20) NOT NULL
+  `role` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `phone_number`, `address`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
-('kh1026052023', 'Nguyen Quoc Chau', '0926383006', '20 Nha Trang Khanh Hoa, Xã Lũng Táo, Huyện Đồng Văn, Tỉnh Hà Giang', 'chauquocnguyen.cun1@gmail.com', NULL, '$2y$10$/nMeQirGpmQwSI.XG24aCeVEbpF3BLpMfQ0.JEshDf/ROn.cSOYou', NULL, '2023-05-26 19:27:26', '2023-05-26 19:32:58', 0),
-('kh105122022', 'Nguyễn Quốc Châu', '0386888889', '12 Nguyễn Tất Thành, Xã Nghĩa Hiệp, Huyện Yên Mỹ, Tỉnh Hưng Yên', 'chau.nq.61cntt@ntu.edu.vn', NULL, '$2y$10$gkNHqPktu4xPHBP21yEpbu8aftSeVjfn4wSH.z7zibQgpHLfeLuKu', NULL, '2022-12-05 18:15:54', '2023-05-19 09:31:46', 0),
-('kh26122022', 'Phan Thị Huyền Trâm', '0926858585', '02 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', 'phanthihuyentram@gmail.com', NULL, '$2y$10$zVkefGONz.3kvfgb1DpwHOT5xdQ3c.Tj8oyXOc0FM55hQkrrfDh.W', NULL, '2022-12-26 16:01:25', '2023-05-22 09:27:59', 0),
-('kh312122022', 'Lê Thị E', '0926355076', '03 Hưng, Phường Quang Trung, Quận Đống Đa, Thành phố Hà Nội', 'lethie@gmail.com', NULL, '$2y$10$huFy/caUfNuL2S52nYiwJu6s/ob2L0V5mQcdcreo986vsmEhJKV2.', NULL, '2022-12-12 17:23:17', '2023-05-24 08:32:04', 0),
-('kh412122022', 'Trần Văn D', '0926383006', 'Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', 'tranvand@gmail.com', NULL, '$2y$10$CM9tvkv48v4u0HzfgFLeceE1WyXPKLUUpRQbe1.7Y3ko6BvZsxnbK', NULL, '2022-12-12 16:36:59', '2023-05-24 08:30:32', 0),
-('kh523052023', 'Nguyễn Trần Hoàn Kim', '0966666666', '20 Phùng Hưng, Phường Cửa Ông, Thành phố Cẩm Phả, Tỉnh Quảng Ninh', 'nguyentranhoankim@gmail.com', NULL, '$2y$10$ns0/RvgnHeKBw0jR7rrA3.kvXlSv4e5iIyA/U0bs8fmFK7P676i4.', NULL, '2023-05-23 08:21:44', '2023-05-24 08:12:11', 0),
-('kh624052023', 'Trần Văn AB', '0826666666', 'Địa chỉ 2, Xã Lý Bôn, Huyện Bảo Lâm, Tỉnh Cao Bằng', 'tranvanab@gmail.com', NULL, '$2y$10$A3Rd6DuaT5z52LtU5Mz3CeWyZDj5tHAQTzLvgxHLNVuo6lpAOBfDi', NULL, '2023-05-24 08:29:05', '2023-05-24 16:19:12', 0),
-('kh724052023', 'Trần Văn B', '0826666668', 'Địa chỉ 2, Xã Hồng Trị, Huyện Bảo Lạc, Tỉnh Cao Bằng', 'tranvanb@gmail.com', NULL, '$2y$10$XBEr.WZumGnh3H3mOZH0T.TLrXIyQqhA1TRUB0Ub/Vd1eI6ZuDXd.', NULL, '2023-05-24 08:29:32', '2023-05-24 08:29:32', 0),
-('kh824052023', 'Trần Văn C', '0866666668', 'Địa chỉ 2, Xã Tân Tri, Huyện Bắc Sơn, Tỉnh Lạng Sơn', 'tranvanc@gmail.com', NULL, '$2y$10$ns0/RvgnHeKBw0jR7rrA3.kvXlSv4e5iIyA/U0bs8fmFK7P676i4.', NULL, '2023-05-24 08:29:48', '2023-05-24 08:29:48', 0),
-('kh924052023', 'Nguyễn Yến Nhi', '0386888881', 'Địa chỉ 1c, Thị trấn Pác Miầu, Huyện Bảo Lâm, Tỉnh Cao Bằng', 'nguyenyennhi@gmail.com', NULL, '$2y$10$/IyXglucDzCGHbDHRhnbfew74.kSddBb7UfVfz7D4Y4K6PiCmEa7m', NULL, '2023-05-24 17:54:22', '2023-05-25 01:57:09', 0);
+INSERT INTO `users` (`id`, `name`, `phone_number`, `address`, `email`, `password`, `created_at`, `updated_at`, `role`) VALUES
+('kh1026052023', 'Nguyen Quoc Chau', '0926383006', '20 Nha Trang Khanh Hoa, Xã Lũng Táo, Huyện Đồng Văn, Tỉnh Hà Giang', 'chauquocnguyen.cun1@gmail.com', '$2y$10$/nMeQirGpmQwSI.XG24aCeVEbpF3BLpMfQ0.JEshDf/ROn.cSOYou', '2023-05-26 19:27:26', '2023-05-26 19:32:58', 0),
+('kh105122022', 'Nguyễn Quốc Châu', '0386888889', '12 Nguyễn Tất Thành, Xã Nghĩa Hiệp, Huyện Yên Mỹ, Tỉnh Hưng Yên', 'chau.nq.61cntt@ntu.edu.vn', '$2y$10$/nMeQirGpmQwSI.XG24aCeVEbpF3BLpMfQ0.JEshDf/ROn.cSOYou', '2022-12-05 18:15:54', '2023-05-19 09:31:46', 0),
+('kh1130052023', 'Nguyen Quoc Chauit', '0926383006', 'Địa chỉ 1c, Phường Ngọc Hà, Thành phố Hà Giang, Tỉnh Hà Giang', 'chauquocnguyen.cun@gmail.com', '$2y$10$H5K9fSZxnEMSrFJkoN5t6enBf1koSbDnJWkjSocUk89.4UBUSD9xe', '2023-05-30 11:14:51', '2023-05-30 12:42:55', 0),
+('kh26122022', 'Phan Thị Huyền Trâm', '0926858585', '02 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', 'phanthihuyentram@gmail.com', '$2y$10$zVkefGONz.3kvfgb1DpwHOT', '2022-12-26 16:01:25', '2023-05-22 09:27:59', 0),
+('kh312122022', 'Lê Thị E', '0926355076', '03 Hưng, Phường Quang Trung, Quận Đống Đa, Thành phố Hà Nội', 'lethie@gmail.com', '$2y$10$huFy/caUfNuL2S52nYiwJu6', '2022-12-12 17:23:17', '2023-05-24 08:32:04', 0),
+('kh412122022', 'Trần Văn D', '0926383006', 'Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', 'tranvand@gmail.com', '$2y$10$CM9tvkv48v4u0HzfgFLeceE', '2022-12-12 16:36:59', '2023-05-24 08:30:32', 0),
+('kh523052023', 'Nguyễn Trần Hoàn Kim', '0966666666', '20 Phùng Hưng, Phường Cửa Ông, Thành phố Cẩm Phả, Tỉnh Quảng Ninh', 'nguyentranhoankim@gmail.com', '$2y$10$ns0/RvgnHeKBw0jR7rrA3.k', '2023-05-23 08:21:44', '2023-05-24 08:12:11', 0),
+('kh624052023', 'Trần Văn AB', '0826666666', 'Địa chỉ 2, Xã Lý Bôn, Huyện Bảo Lâm, Tỉnh Cao Bằng', 'tranvanab@gmail.com', '$2y$10$A3Rd6DuaT5z52LtU5Mz3CeW', '2023-05-24 08:29:05', '2023-05-24 16:19:12', 0),
+('kh724052023', 'Trần Văn B', '0826666668', 'Địa chỉ 2, Xã Hồng Trị, Huyện Bảo Lạc, Tỉnh Cao Bằng', 'tranvanb@gmail.com', '$2y$10$XBEr.WZumGnh3H3mOZH0T.T', '2023-05-24 08:29:32', '2023-05-24 08:29:32', 0),
+('kh824052023', 'Trần Văn C', '0866666668', 'Địa chỉ 2, Xã Tân Tri, Huyện Bắc Sơn, Tỉnh Lạng Sơn', 'tranvanc@gmail.com', '$2y$10$ns0/RvgnHeKBw0jR7rrA3.k', '2023-05-24 08:29:48', '2023-05-24 08:29:48', 0),
+('kh924052023', 'Nguyễn Yến Nhi', '0386888881', 'Địa chỉ 1c, Thị trấn Pác Miầu, Huyện Bảo Lâm, Tỉnh Cao Bằng', 'nguyenyennhi@gmail.com', '$2y$10$/IyXglucDzCGHbDHRhnbfew', '2023-05-24 17:54:22', '2023-05-25 01:57:09', 0);
 
 --
 -- Indexes for dumped tables
@@ -490,12 +478,6 @@ ALTER TABLE `likes`
   ADD KEY `product` (`product`);
 
 --
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -533,16 +515,6 @@ ALTER TABLE `users`
   ADD KEY `role` (`role`);
 
 --
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- Constraints for dumped tables
 --
 
@@ -550,7 +522,7 @@ ALTER TABLE `migrations`
 -- Constraints for table `administrator`
 --
 ALTER TABLE `administrator`
-  ADD CONSTRAINT `administrator_ibfk_1` FOREIGN KEY (`role`) REFERENCES `role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `administrator_role` FOREIGN KEY (`role`) REFERENCES `role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `comment`
@@ -591,7 +563,7 @@ ALTER TABLE `products`
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role`) REFERENCES `role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `users_role` FOREIGN KEY (`role`) REFERENCES `role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
