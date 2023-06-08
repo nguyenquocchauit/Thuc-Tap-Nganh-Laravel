@@ -114,7 +114,7 @@
                                         <div class="col-2">
                                             <label for="image_1" class="file-image">
                                                 <img class="w-100"
-                                                    src="{{ 'images/images-product/' . $slugGender . '/' . $product->productBrand['slug'] . '/' . $product->productImage['image_1'] }}"
+                                                    src="{{ 'images/images-product/' . $slugGender . '/' . $product->productBrand['slug'] . '/' . $product->image_1 }}"
                                                     alt="" id="img-1">
                                             </label>
                                             <input class="image_product" type="file" id="image_1" name="image[]"
@@ -123,7 +123,7 @@
                                         <div class="col-2">
                                             <label for="image_2" class="file-image">
                                                 <img class="w-100"
-                                                    src="{{ 'images/images-product/' . $slugGender . '/' . $product->productBrand['slug'] . '/' . $product->productImage['image_2'] }}"
+                                                    src="{{ 'images/images-product/' . $slugGender . '/' . $product->productBrand['slug'] . '/' . $product->image_2 }}"
                                                     alt="" id="img-2">
                                             </label>
                                             <input class="image_product" type="file" id="image_2" name="image[]"
@@ -132,7 +132,7 @@
                                         <div class="col-2">
                                             <label for="image_3" class="file-image">
                                                 <img class="w-100"
-                                                    src="{{ 'images/images-product/' . $slugGender . '/' . $product->productBrand['slug'] . '/' . $product->productImage['image_3'] }}"
+                                                    src="{{ 'images/images-product/' . $slugGender . '/' . $product->productBrand['slug'] . '/' . $product->image_3 }}"
                                                     alt="" id="img-3">
                                             </label>
                                             <input class="image_product" type="file" id="image_3" name="image[]"
@@ -141,7 +141,7 @@
                                         <div class="col-2">
                                             <label for="image_4" class="file-image">
                                                 <img class="w-100"
-                                                    src="{{ 'images/images-product/' . $slugGender . '/' . $product->productBrand['slug'] . '/' . $product->productImage['image_4'] }}"
+                                                    src="{{ 'images/images-product/' . $slugGender . '/' . $product->productBrand['slug'] . '/' . $product->image_4 }}"
                                                     alt="" id="img-4">
                                             </label>
                                             <input class="image_product" type="file" id="image_4" name="image[]"
@@ -150,7 +150,7 @@
                                         <div class="col-2">
                                             <label for="image_5" class="file-image">
                                                 <img class="w-100"
-                                                    src="{{ 'images/images-product/' . $slugGender . '/' . $product->productBrand['slug'] . '/' . $product->productImage['image_5'] }}"
+                                                    src="{{ 'images/images-product/' . $slugGender . '/' . $product->productBrand['slug'] . '/' . $product->image_5 }}"
                                                     alt="" id="img-5">
                                             </label>
                                             <input class="image_product" type="file" id="image_5" name="image[]"
@@ -159,7 +159,7 @@
                                         <div class="col-2">
                                             <label for="image_6" class="file-image">
                                                 <img class="w-100"
-                                                    src="{{ 'images/images-product/' . $slugGender . '/' . $product->productBrand['slug'] . '/' . $product->productImage['image_6'] }}"
+                                                    src="{{ 'images/images-product/' . $slugGender . '/' . $product->productBrand['slug'] . '/' . $product->image_6 }}"
                                                     alt="" id="img-6">
                                             </label>
                                             <input class="image_product" type="file" id="image_6" name="image[]"

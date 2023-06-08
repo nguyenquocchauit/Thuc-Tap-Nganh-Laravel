@@ -20,16 +20,23 @@ class ShopController extends Controller
         //Get min,max price
         $min_price = Product::min('price');
         $max_price = Product::max('price');
-        $min_price_range = $min_price - 260000;
-        $max_price_range = $max_price + 140000;
-        $products = new Product();
+        $products = Product::where('name', 'like', '%%');
+        $products = $this->gender($products, $request);
         $products = $this->filter($products, $request);
-        //$products = $this->sortAndPagination($products, $sortBy, $perPage);
-
-
+        $products = $this->sortAndPagination($products, $sortBy, $perPage);
         return view('product.shop', compact('brands', 'products', 'min_price', 'max_price'));
     }
+    public function gender($products, Request $request)
+    {
+        //Gender
+        $genders = $request->gender ?? [];
+        $gender_ids = array_map(function ($gender) {
+            return $gender == 'nam' ? 1 : 2;
+        }, array_keys($genders));
+        $products = $gender_ids != null ? $products->whereIn('gender', $gender_ids) : $products;
 
+        return $products;
+    }
     public function sortAndPagination($products, $sortBy, $perPage)
     {
         switch ($sortBy) {
@@ -46,9 +53,10 @@ class ShopController extends Controller
                 $products = $products->orderByDesc('name');
                 break;
             case  'price-ascending':
-                $products = $products->orderBy('price');
+                $products = $products->orderByRaw('ROUND(price - (price * (discount/100)), 1)');
+                break;
             case  'price-descending':
-                $products = $products->orderByDesc('price');
+                $products = $products->orderByRaw('ROUND(price - (price * (discount/100)), 1) DESC');
                 break;
             default:
                 $products = $products->orderBy('id');
@@ -72,7 +80,6 @@ class ShopController extends Controller
         if ($priceMin != null && $priceMax != null) {
             $products = $products->whereBetween(DB::raw('ROUND(price - (price * (discount/100)), 1)'), [$priceMin, $priceMax]);
         }
-        $products = $products->paginate(10);
         return $products;
     }
 }

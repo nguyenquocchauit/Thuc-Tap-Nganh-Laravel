@@ -75,7 +75,6 @@ class Order extends Model
             ->join('users', 'orders.customers', '=', 'users.id')
             ->join('administrator', 'orders.employee', '=', 'administrator.id')
             ->join('products', 'order_details.product', '=', 'products.id')
-            ->join('images', 'images.id', '=', 'products.image')
             ->select([
                 'orders.id as idOrder',
                 'orders.status as status',
@@ -86,7 +85,7 @@ class Order extends Model
                 'administrator.id as id_employee',
                 'products.id as idProduct',
                 'products.name as name_product',
-                'images.image_1 as image',
+                'products.image_1 as image_1',
                 'order_details.id as idDetail',
                 'order_details.price as detail_price',
                 'order_details.discount as detail_discount',

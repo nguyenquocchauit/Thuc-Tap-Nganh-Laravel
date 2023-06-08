@@ -79,7 +79,7 @@ class CartController extends Controller
                     "price" => $product->price,
                     "discount" => $product->discount,
                     "priceDiscount" => $priceDiscount,
-                    "image" => $product->productImage['image_1'],
+                    "image" => $product->image_1,
                     "total" => $priceDiscount
                 ];
             }

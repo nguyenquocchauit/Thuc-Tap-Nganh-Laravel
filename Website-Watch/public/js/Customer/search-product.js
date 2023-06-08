@@ -15,8 +15,8 @@ $(document).ready(function () {
                     _html += '   <div class="col-2">';
                     _html +=
                         "<img class='imgSearch' src='/images/image_products_home/" +
-                        pro.image +
-                        "-1.png'>";
+                        pro.image_1 +
+                        "'>";
                     _html += " </div>";
                     _html += '<div class="col-10">';
                     _html +=

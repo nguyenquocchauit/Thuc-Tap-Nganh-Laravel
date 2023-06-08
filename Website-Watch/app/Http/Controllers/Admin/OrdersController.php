@@ -134,17 +134,24 @@ class OrdersController extends Controller
                     'note' => $status . ", " . $statusOld->note
                 ]
             );
-        if ($request->statusOrder == "TC") {
-            $details = Order::join('order_details', 'orders.id', '=', 'order_details.orders')
-                ->select([
-                    'order_details.product as idProduct',
-                    'order_details.quantity as quantity',
-                ])
-                ->where('orders.id', $id)->get();;
+        $details = Order::join('order_details', 'orders.id', '=', 'order_details.orders')
+            ->select([
+                'order_details.product as idProduct',
+                'order_details.quantity as quantity',
+                'orders.status as status',
+            ])
+            ->where('orders.id', $id)->get();
+        if ($request->statusOrder == "TC" && $request->statusOrder !=  $statusOld->status) {
             foreach ($details as $detail) {
                 Product::where('id', $detail->idProduct)->decrement('quantity', $detail->quantity);
             }
         }
+        if ($request->statusOrder == "TB" &&   $statusOld->status == "TC") {
+            foreach ($details as $detail) {
+                Product::where('id', $detail->idProduct)->increment('quantity', $detail->quantity);
+            }
+        }
+
         return response()->json([
             'status' => 200,
             'msg' => "Update status successfully",

@@ -45,25 +45,25 @@
         let _token = $('meta[name="csrf-token"]').attr("content");
     </script>
     {{-- Add file handling user login  --}}
-    <script type="text/javascript" src="{{ asset('js/login-user.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Customer/login-user.js') }}"></script>
     {{-- Add file to handle user registration  --}}
-    <script type="text/javascript" src="{{ asset('js/register-user.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Customer/register-user.js') }}"></script>
     {{-- Add a file to hide or show the password --}}
-    <script type="text/javascript" src="{{ asset('js/hidden-show-pass.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Customer/hidden-show-pass.js') }}"></script>
     {{-- Add product search processing file --}}
-    <script type="text/javascript" src="{{ asset('js/search-product.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Customer/search-product.js') }}"></script>
     {{-- Add add to cart processing file --}}
-    <script type="text/javascript" src="{{ asset('js/add-to-cart.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Customer/add-to-cart.js') }}"></script>
     {{-- Add remove item cart processing file --}}
-    <script type="text/javascript" src="{{ asset('js/remove-pro-cart.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Customer/remove-pro-cart.js') }}"></script>
     {{-- Add comment product processing file --}}
-    <script type="text/javascript" src="{{ asset('js/comment-product.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Customer/comment-product.js') }}"></script>
     {{-- Add like product processing file --}}
-    <script type="text/javascript" src="{{ asset('js/like-product.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Customer/like-product.js') }}"></script>
     {{-- Add buy product processing file --}}
-    <script type="text/javascript" src="{{ asset('js/buy-product.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Customer/buy-product.js') }}"></script>
     {{-- Add setting profile user processing file --}}
-    <script type="text/javascript" src="{{ asset('js/setting-profile-user.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Customer/setting-profile-user.js') }}"></script>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -183,7 +183,7 @@
                                                 @foreach ($brandMenu['men'] as $value)
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="/shop?gender=Nam&brand[{{ $value->brand }}]">{{ $value->name }}</a>
+                                                            href="/shop?gender%5Bnam%5D=on&brand%5B{{ $value->brand }}%5D=on">{{ $value->name }}</a>
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -199,7 +199,7 @@
                                                 @foreach ($brandMenu['women'] as $value)
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="/shop?gender=Nữ&brand[{{ $value->brand }}]">{{ $value->name }}</a>
+                                                            href="/shop?gender%5Bnu%5D=on&brand%5B{{ $value->brand }}%5D=on">{{ $value->name }}</a>
                                                     </li>
                                                 @endforeach
 

@@ -29,7 +29,7 @@
     <link href="./dashboard/my_style.css" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+    <script type="text/javascript" src="{{ asset('js/doctien.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/Admin/product.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/Admin/customer.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
@@ -41,6 +41,8 @@
     <script type="text/javascript" src="{{ asset('js/Admin/order.js') }}"></script>
     <script>
         $(document).ready(function() {
+
+
             if ($(".yourOrderUnconfirm").val() > 0 && localStorage.getItem('yourOrderUnconfirm') === 'false') {
 
                 Swal.fire({

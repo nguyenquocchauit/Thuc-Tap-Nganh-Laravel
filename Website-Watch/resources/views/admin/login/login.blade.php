@@ -24,7 +24,7 @@
         let _token = $('meta[name="csrf-token"]').attr("content");
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <script type="text/javascript" src="{{ asset('js/login-admin.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/Admin/login-admin.js') }}"></script>
     <!-- Scripts -->
     <style>
         * {

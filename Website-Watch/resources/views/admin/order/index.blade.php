@@ -83,8 +83,9 @@
                         <div class="col-12 nav-order">
                             <ul class="nav nav-tabs md-tabs" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active a-order" data-toggle="tab" href="#order" role="tab" onclick='window.location.href = "./admin/order"'><i
-                                            class="fa fa-home"> </i>&nbsp;Đơn hàng</a>
+                                    <a class="nav-link active a-order" data-toggle="tab" href="#order" role="tab"
+                                        onclick='window.location.href = "./admin/order"'><i class="fa fa-home">
+                                        </i>&nbsp;Đơn hàng</a>
                                     <div class="slide"></div>
                                 </li>
                                 <li class="nav-item">
@@ -239,7 +240,7 @@
                                                         <td>{{ $detail->name_product }}</td>
                                                         <td>
                                                             <img width="25px" height="25px" class="img-fluid"
-                                                                src="{{ asset('images/image_products_home/') }}/{{ $detail->image }}"
+                                                                src="{{ asset('images/image_products_home/') }}/{{ $detail->image_1 }}"
                                                                 alt="">
                                                         </td>
                                                         <td>{{ number_format($detail->detail_price) . ' VNĐ' }}</td>
@@ -320,7 +321,7 @@
                                             </div>
                                             <div class="row text-center">
                                                 <div class="col-md-12">
-                                                    <textarea name="" id="" cols="50" rows="2">{{ $note }}</textarea>
+                                                    <textarea name="" id="" cols="40" rows="2">{{ $note }}</textarea>
                                                 </div>
                                             </div>
                                             <br>
@@ -333,6 +334,8 @@
                                                                 style="color:red; font-size:25px">{{ number_format($totalView) . ' VNĐ' }}</strong>
                                                         </p>
                                                     </h5>
+                                                    <strong id="dang-chu">
+                                                    </strong>
                                                 </div>
                                             </div>
                                         </div>
@@ -351,4 +354,10 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            var docTien = new DocTienBangChu();
+            $("#dang-chu").html("Dạng chữ: "+docTien.doc({{ $totalView }}));
+        });
+    </script>
 @endsection

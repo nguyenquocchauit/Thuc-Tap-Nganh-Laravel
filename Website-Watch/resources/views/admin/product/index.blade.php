@@ -114,7 +114,7 @@
                                         <td class="text-center text-muted" >{{ $key+1 }}</td>
                                         <td class="text-center text-muted"style="opacity: 0.8;">{{ $product->id }}</td>
                                         <td class="text-center image-list-product"><img width="100px" height="100px"
-                                                src="{{ asset('images/image_products_home/') }}/{{ $product->productImage['image_1'] }}"
+                                                src="{{ asset('images/image_products_home/') }}/{{ $product->image_1 }}"
                                                 alt=""></td>
                                         <td class="text-center">{{ $product->name }}</td>
                                         <td class="text-center">{{ number_format($product->price) . ' VNĐ' }}</td>

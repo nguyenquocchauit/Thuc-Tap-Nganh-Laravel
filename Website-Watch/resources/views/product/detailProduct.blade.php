@@ -96,7 +96,7 @@
                             <div class="">
                                 <button type="button" class="btn btn-light detail-add-to-cart " id="order-product"
                                     name="add-to-cart">
-                                    <i class="fas fa-cart-plus mx-2 shopping-cart"></i> Đặt mua
+                                    <i class="fas fa-cart-plus mx-2 shopping-cart"></i>THÊM VÀO GIỎ
                                 </button>
                                 <input type="hidden" id="productID" value="{{ $product->id }}">
                             </div>
