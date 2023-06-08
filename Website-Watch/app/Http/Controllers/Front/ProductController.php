@@ -41,8 +41,6 @@ class ProductController extends Controller
         if ($product) {
             //get name image from product retrieve
             $image = $product->productImage;
-            //get a list of product image names
-            $nameImages = $this->getFileImageProduct($image);
             //get brand slug
             $slugBrand = $this->getSlugBrand($product);
             //get comment of product
@@ -53,7 +51,7 @@ class ProductController extends Controller
                 $slugGender = "men";
             if ($slugGender == 2)
                 $slugGender = "women";
-            return view('product.detailProduct', compact('product', 'nameImages', 'slugBrand', 'slugGender', 'comments'));
+            return view('product.detailProduct', compact('product', 'slugBrand', 'slugGender', 'comments'));
         } else
             return Redirect('/');
     }
@@ -200,15 +198,7 @@ class ProductController extends Controller
     }
 
 
-    public function getFileImageProduct($image)
-    {
-        $nameImage = [];
-        for ($i = 0; $i < 6; $i++) {
-            $get = 'image_' . ($i + 1);
-            $nameImage[$i] = $image->$get;
-        }
-        return  $nameImage;
-    }
+
     public function getSlugBrand($product)
     {
         return $product->productBrand['slug'];

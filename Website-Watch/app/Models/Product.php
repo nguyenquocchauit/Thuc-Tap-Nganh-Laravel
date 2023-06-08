@@ -21,10 +21,6 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class, 'brand', 'id');
     }
-    public function productImage()
-    {
-        return $this->belongsTo(Image::class, 'image', 'id');
-    }
 
     public function productComment()
     {

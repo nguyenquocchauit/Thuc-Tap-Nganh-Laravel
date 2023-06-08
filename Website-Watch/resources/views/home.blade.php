@@ -38,7 +38,7 @@
                                     <div class="wap-items-ss brbox">
                                         <div class="wap-ss-img">
                                             <img alt=""
-                                                src="{{ asset('images/image_products_home') . '/' . $allProduct->productImage['image_1'] }}">
+                                                src="{{ asset('images/image_products_home') . '/' . $allProduct->image_1 }}">
                                         </div>
                                         <div class="textleft">
                                             <div style="line-height: 12px;"><a
@@ -87,7 +87,7 @@
                                         <div class="wap-items-ss brbox product-item ">
                                             <div class="wap-ss-img product-item-img">
                                                 <img alt=""
-                                                    src="{{ asset('images/image_products_home') . '/' . $allProduct->productImage['image_1'] }}">
+                                                    src="{{ asset('images/image_products_home') . '/' . $allProduct->image_1 }}">
                                             </div>
                                             <div class="textleft product-item-desc">
                                                 <div style="line-height: 12px;"><a
@@ -111,7 +111,7 @@
                                                     <input type="hidden" name="productName" class="productName"
                                                         value="{{ $allProduct->name }}">
                                                     <input type="hidden" name="productImage" class="productImage"
-                                                        value="{{ $allProduct->productImage['image_1'] }}">
+                                                        value="{{ $allProduct->image_1 }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -156,7 +156,7 @@
                                             <div class="wap-ss-img product-item-img">
                                                 <!-- Image lưu trữ nhiều ảnh, tách dữ liệu lấy ảnh đầu tiên. Các ảnh được ngăn cách bởi dấu , -->
                                                 <img alt=""
-                                                    src="{{ asset('images/image_products_home') . '/' . $bestSellingProduct->productImage['image_1'] }}">
+                                                    src="{{ asset('images/image_products_home') . '/' . $bestSellingProduct->image_1 }}">
                                             </div>
                                             <div class="textleft product-item-desc">
                                                 <div style="line-height: 12px;"><a
@@ -183,7 +183,7 @@
                                                     <input type="hidden" name="productName" class="productName"
                                                         value="{{ $bestSellingProduct->name }}">
                                                     <input type="hidden" name="productImage" class="productImage"
-                                                        value="{{ $bestSellingProduct->productImage['image_1'] }}">
+                                                        value="{{ $bestSellingProduct->image_1 }}">
                                                 </div>
                                             </div>
                                         </div>

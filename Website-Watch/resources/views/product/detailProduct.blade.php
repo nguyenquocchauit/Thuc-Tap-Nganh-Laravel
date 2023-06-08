@@ -26,12 +26,30 @@
                                                     data-bs-slide-to="5" class="btnslide" aria-label="Slide 6"></button>
                                             </div>
                                             <div class="carousel-inner">
-                                                @foreach ($nameImages as $key => $nameImage)
-                                                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                                        <img src="{{ asset('images/images-product/') }}/{{ $slugGender }}/{{ $slugBrand }}/{{ $nameImage }}"
-                                                            class="d-block w-100" alt="...">
-                                                    </div>
-                                                @endforeach
+                                                <div class="carousel-item active">
+                                                    <img src="{{ asset('images/images-product/') }}/{{ $slugGender }}/{{ $slugBrand }}/{{ $product->image_1 }}"
+                                                        class="d-block w-100" alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="{{ asset('images/images-product/') }}/{{ $slugGender }}/{{ $slugBrand }}/{{ $product->image_2 }}"
+                                                        class="d-block w-100" alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="{{ asset('images/images-product/') }}/{{ $slugGender }}/{{ $slugBrand }}/{{ $product->image_3 }}"
+                                                        class="d-block w-100" alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="{{ asset('images/images-product/') }}/{{ $slugGender }}/{{ $slugBrand }}/{{ $product->image_4 }}"
+                                                        class="d-block w-100" alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="{{ asset('images/images-product/') }}/{{ $slugGender }}/{{ $slugBrand }}/{{ $product->image_5 }}"
+                                                        class="d-block w-100" alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="{{ asset('images/images-product/') }}/{{ $slugGender }}/{{ $slugBrand }}/{{ $product->image_6 }}"
+                                                        class="d-block w-100" alt="...">
+                                                </div>
                                             </div>
                                             <button class="carousel-control-prev" type="button"
                                                 data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
