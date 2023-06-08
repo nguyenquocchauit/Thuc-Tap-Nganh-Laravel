@@ -687,13 +687,13 @@
                                             <i class="metismenu-icon"></i>Đơn hàng
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="./admin/employee"
-                                            class="{{ request()->segment(2) == 'employee' ? 'mm-active' : '' }}">
-                                            <i class="metismenu-icon"></i>Nhân viên
-                                        </a>
-                                    </li>
                                     @if (auth()->guard('admin')->user()->role == '2')
+                                        <li>
+                                            <a href="./admin/employee"
+                                                class="{{ request()->segment(2) == 'employee' ? 'mm-active' : '' }}">
+                                                <i class="metismenu-icon"></i>Nhân viên
+                                            </a>
+                                        </li>
                                         <li>
                                             <a href="./admin/report"
                                                 class="{{ request()->segment(2) == 'report' ? 'mm-active' : '' }}">

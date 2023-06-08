@@ -1799,3 +1799,53 @@ thead {
         transform: rotate(0) scale(1) skew(1deg);
     }
 }
+.card-profile-customer{
+    padding: 55px;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(63, 63, 68, 0.1);
+    background-color: #ffffff;
+    margin-top: 5px;
+    margin-bottom: 100px;
+}
+.card-customer .image img {
+    width: 100%;
+}
+.card-customer .image {
+    height: 110px !important;
+}
+.card-customer {
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(63, 63, 68, 0.1);
+    background-color: #ffffff;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+.card-customer .image {
+    width: 100%;
+    overflow: hidden;
+    height: 260px;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.card-customer .author {
+    color: #3f6ad8;
+    text-align: center;
+    text-transform: none;
+    margin-top: -70px;
+}
+.card-customer .avatar-customer {
+    width: 124px !important;
+    height: 124px !important;
+    border: 5px solid #ffffff;
+    position: relative;
+    margin-bottom: 15px;
+}
+.card-customer .avatar-customer {
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 5px;
+}
