@@ -82,7 +82,19 @@ $(document).ready(function () {
                         response.msg == "Update quantity successfully"
                     ) {
                         location.reload();
-                    } else {
+                    } else if (
+                        response.status == 422 &&
+                        response.msg == "Out of stock"
+                    ) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Thông báo",
+                            text: "Sản phẩm đã hết hàng!",
+                        });
+                    } else if (
+                        response.status == 500 &&
+                        response.msg == "Update quantity errors"
+                    ) {
                         Swal.fire({
                             icon: "error",
                             title: "Thông báo",

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,11 +23,18 @@ class OrdersController extends Controller
         $filters = [];
         $idOrder = null;
         $infoOrder = null;
+        $time = now()->setTimezone('Asia/Ho_Chi_Minh');
+        $date = Carbon::parse($time);
+        $year = $date->year;
+        $month = $date->month;
+        $time_select[] = ['orders.updated_at', '=',  $year];
+        $time_select[] = ['orders.updated_at', '=',  $month];
         $customerView = $employeerView = $create_atView = $idOrderView = $statusView = $totalView = $phone = $address = $note = null;
         if (!empty($request->time_select)) {
             [$year, $month] = explode("-", $request->time_select);
-            $time_select[] = ['orders.updated_at', '=',  $year];
-            $time_select[] = ['orders.updated_at', '=',  $month];
+            $time_select = [];
+            $time_select[] = ['orders.updated_at', '=',  intval($year)];
+            $time_select[] = ['orders.updated_at', '=', intval($month)];
         }
         if (!empty($request->unconfimred) && $request->unconfimred == "true") {
             $filters[] = ['orders.status', '=', "XN"];
@@ -41,6 +49,7 @@ class OrdersController extends Controller
             $filters[] = ['orders.status', '=', "TB"];
         }
         if (!empty($request->customer)) {
+            $time_select = [];
             $idOrder = $request->customer;
             $infoOrder = DB::table('orders')
                 ->join('users', 'users.id', '=', 'orders.customers')
@@ -72,10 +81,7 @@ class OrdersController extends Controller
         }
 
 
-        $time = now()->setTimezone('Asia/Ho_Chi_Minh');
-        $date = Carbon::parse($time);
-        $year = $date->year;
-        $month = $date->month;
+
         $shipping = Order::where('status', 'DVC')
             ->whereYear('updated_at', '=', $year)
             ->whereMonth('updated_at', '=', $month)
@@ -128,6 +134,17 @@ class OrdersController extends Controller
                     'note' => $status . ", " . $statusOld->note
                 ]
             );
+        if ($request->statusOrder == "TC") {
+            $details = Order::join('order_details', 'orders.id', '=', 'order_details.orders')
+                ->select([
+                    'order_details.product as idProduct',
+                    'order_details.quantity as quantity',
+                ])
+                ->where('orders.id', $id)->get();;
+            foreach ($details as $detail) {
+                Product::where('id', $detail->idProduct)->decrement('quantity', $detail->quantity);
+            }
+        }
         return response()->json([
             'status' => 200,
             'msg' => "Update status successfully",

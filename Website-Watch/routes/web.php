@@ -49,12 +49,12 @@ Route::middleware([Admin::class])->prefix('admin')->group(function () {
     Route::resource('brand', BrandController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('product', AdminProductController::class);
-    Route::resource('employee', EmployeeController::class);
     Route::resource('order', OrdersController::class);
     Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'profile'])->name('edit');
 });
 //Host
 Route::middleware([Host::class])->prefix('admin')->group(function () {
+    Route::resource('employee', EmployeeController::class);
     Route::resource('report', ReportController::class);
 });
 // Customer

@@ -71,8 +71,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <button type="button" class="btn btn-info btn-fill" style="margin: 5px; float: right;"
                                 id="btn-update-customer">Cập nhật</button>
                             <input type="hidden" name="" id="id-customer" value="{{ auth()->user()->id }}">

@@ -25,7 +25,7 @@ class BuyProductController extends Controller
                 if ($request->action == "Buy product from cart") { // Kiểm tra xem hành động được yêu cầu là mua sản phẩm từ giỏ hàng hay không.
                     $cart = session()->get('cart'); // Lấy thông tin giỏ hàng từ session.
                     if (isset($cart)) {
-                        // get total price of cart for insert table order and value for insert table orderdetail
+                       // lấy tổng giá của giỏ hàng khi chèn thứ tự bảng và giá trị cho chi tiết thứ tự bảng chèn
                         $IDOrder = "HD" . (Order::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('HisdmY');
                         $count = OrderDetail::count();
                         foreach ($cart as $id => $product) {
@@ -72,12 +72,7 @@ class BuyProductController extends Controller
                         ]);
                         // thêm data vào bảng order_detail
                         OrderDetail::insert($detail);
-                        // cập nhật số lượng sản phẩm
-                        foreach ($quantityProduct as $item) {
-                            $id = $item['id'];
-                            $quantity = $item['quantity'];
-                            Product::where('id', $id)->update(['quantity' => $quantity]);
-                        }
+
 
                         $request->session()->forget('cart');
                         return response()->json([

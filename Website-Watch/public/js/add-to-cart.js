@@ -97,6 +97,15 @@ $(document).ready(function () {
                                     text: "Khách hàng đặt trên 5 sản phẩm vui lòng trao đổi trực tiếp với tư vấn viên. Cảm ơn!",
                                     footer: '<a href="">Liên hệ</a>',
                                 });
+                            } else if (
+                                response.status == 422 &&
+                                response.msg == "Out of stock"
+                            ) {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Thông báo",
+                                    text: "Sản phẩm đã hết hàng!",
+                                });
                             }
                         },
                     });
@@ -129,11 +138,20 @@ $(document).ready(function () {
                         text: "Khách hàng đặt trên 5 sản phẩm vui lòng trao đổi trực tiếp với tư vấn viên. Cảm ơn!",
                         footer: '<a href="">Liên hệ</a>',
                     });
+                } else if (
+                    response.status == 422 &&
+                    response.msg == "Out of stock"
+                ) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Thông báo",
+                        text: "Sản phẩm đã hết hàng!",
+                    });
                 }
             },
         });
     });
-    $("body").on("click","#buy-all-like-product", function () {
+    $("body").on("click", "#buy-all-like-product", function () {
         var idArr = [];
         // get id produc form list like product
         $(".list-like-product").each(function () {

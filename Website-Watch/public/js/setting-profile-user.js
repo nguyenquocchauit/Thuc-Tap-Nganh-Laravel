@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    setInterval(function () {
+        $("#avatar-customer").animate({ left: "+=10px" }, 200);
+        $("#avatar-customer").animate({ left: "-=10px" }, 200);
+        $("#avatar-customer").animate({ top: "-=10px" }, 200);
+        $("#avatar-customer").animate({ top: "+=10px" }, 200);
+    }, 1000);
     function isEmpty(str) {
         return !str || str.length === 0;
     }

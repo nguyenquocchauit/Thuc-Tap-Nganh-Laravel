@@ -24,7 +24,7 @@ class ShopController extends Controller
         $max_price_range = $max_price + 140000;
         $products = new Product();
         $products = $this->filter($products, $request);
-        $products = $this->sortAndPagination($products, $sortBy, $perPage);
+        //$products = $this->sortAndPagination($products, $sortBy, $perPage);
 
 
         return view('product.shop', compact('brands', 'products', 'min_price', 'max_price'));
