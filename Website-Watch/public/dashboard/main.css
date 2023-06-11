@@ -36,6 +36,10 @@
     width: calc(100% / 4);
     text-align: center !important;
 }
+.nav-report-customer .md-tabs .nav-item {
+    width: calc(100% / 3);
+    text-align: center !important;
+}
 .nav-report .md-tabs li:hover {
     border: none;
 }
@@ -67,6 +71,14 @@
     border-radius: 0;
 }
 .nav-order .nav-tabs .slide {
+    background: #4099ff;
+    width: calc(100% / 3.1);
+    height: 4px;
+    position: absolute;
+    -webkit-transition: left 0.3s ease-out;
+    transition: left 0.3s ease-out;
+}
+.nav-report-customer .nav-tabs .slide {
     background: #4099ff;
     width: calc(100% / 3.1);
     height: 4px;

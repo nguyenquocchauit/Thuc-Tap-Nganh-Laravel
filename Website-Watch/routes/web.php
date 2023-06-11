@@ -51,11 +51,15 @@ Route::middleware([Admin::class])->prefix('admin')->group(function () {
     Route::resource('product', AdminProductController::class);
     Route::resource('order', OrdersController::class);
     Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'profile'])->name('edit');
+
 });
 //Host
 Route::middleware([Host::class])->prefix('admin')->group(function () {
     Route::resource('employee', EmployeeController::class);
-    Route::resource('report', ReportController::class);
+    Route::get('/report/customer', [ReportController::class, 'reportCustomer'])->name('reportCustomer');
+    Route::get('/report/order', [ReportController::class, 'reportOrder'])->name('reportOrder');
+    Route::get('/report/revenue', [ReportController::class, 'reportRevenue'])->name('reportRevenue');
+
 });
 // Customer
 Route::middleware([User::class])->group(function () {

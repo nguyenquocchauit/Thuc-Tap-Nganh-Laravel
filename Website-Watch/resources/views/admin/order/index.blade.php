@@ -4,7 +4,7 @@
         <div class="container-fluid mt-3">
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
-                    <a href="./admin/order?time_select={{ request()->time_select }}&unconfimred=true"
+                    <a href="./admin/order?start_day={{ request()->start_day }}&end_day={{ request()->end_day }}&unconfimred=true"
                         style="text-decoration: none;">
                         <div class="card gradient-6 unconfimred">
                             <div class="card-body">
@@ -22,7 +22,7 @@
                     </a>
                 </div>
                 <div class="col-lg-3 col-sm-6">
-                    <a href="./admin/order?time_select={{ request()->time_select }}&received=true"
+                    <a href="./admin/order?start_day={{ request()->start_day }}&end_day={{ request()->end_day }}&received=true"
                         style="text-decoration: none;">
 
                         <div class="card gradient-1 received">
@@ -39,7 +39,7 @@
                     </a>
                 </div>
                 <div class="col-lg-3 col-sm-6">
-                    <a href="./admin/order?time_select={{ request()->time_select }}&shipping=true"
+                    <a href="./admin/order?start_day={{ request()->start_day }}&end_day={{ request()->end_day }}&shipping=true"
                         style="text-decoration: none;">
 
                         <div class="card gradient-4 shipping">
@@ -58,7 +58,7 @@
                     </a>
                 </div>
                 <div class="col-lg-3 col-sm-6">
-                    <a href="./admin/order?time_select={{ request()->time_select }}&fail=true"
+                    <a href="./admin/order?start_day={{ request()->start_day }}&end_day={{ request()->end_day }}&fail=true"
                         style="text-decoration: none;">
                         <div class="card gradient-2 fail">
                             <div class="card-body">
@@ -98,9 +98,10 @@
                                     <form id="time-report" action="" method="GET">
                                         <div class="row">
                                             <div class="col-6 d-flex justify-content-end">
-                                                <input type="month" class="form-control" id="time_select"
-                                                    name="time_select" lang="vi" onchange="this.form.submit()"
-                                                    value="{{ request()->time_select }}" />
+                                                <input type="date" class="form-control" id="start_day" name="start_day"
+                                                    lang="vi" value="{{ request()->start_day }}" />
+                                                <input type="date" class="form-control" id="end_day" name="end_day"
+                                                    lang="vi" value="{{ request()->end_day }}" />
                                             </div>
                                             <div class="col-6 input-group d-flex justify-content-center"
                                                 style="padding-right: 35px;">
@@ -357,7 +358,19 @@
     <script>
         $(document).ready(function() {
             var docTien = new DocTienBangChu();
-            $("#dang-chu").html("Dạng chữ: "+docTien.doc({{ $totalView }}));
+            $("#dang-chu").html("Dạng chữ: " + docTien.doc({{ $totalView }}));
+            var urlParams = new URLSearchParams(window.location.search);
+            if (((urlParams.has("start_day") && urlParams.get("start_day") == "") && (urlParams.has("end_day") &&
+                    urlParams.get("end_day") == "")) || !urlParams.has("start_day") && !urlParams.has("end_day")) {
+                var now = new Date();
+                var day = ("0" + now.getDate()).slice(-2);
+                var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                var today = now.getFullYear() + "-" + (month) + "-" + (day);
+                $("#end_day").val(today);
+                var today = new Date();
+                var firstDay = new Date(today.getFullYear(), today.getMonth(), 2);
+                $("#start_day").val(firstDay.toISOString().slice(0, 10));
+            }
         });
     </script>
 @endsection

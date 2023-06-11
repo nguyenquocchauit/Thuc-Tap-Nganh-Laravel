@@ -697,10 +697,31 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="./admin/report"
-                                                class="{{ request()->segment(2) == 'report' ? 'mm-active' : '' }}">
-                                                <i class="metismenu-icon"></i>Thống kê
+                                            <a style="cursor: pointer;" {{ request()->segment(2) == 'report' ? 'aria-expanded="true"' : '' }}>
+                                                Thống kê
+                                                <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                             </a>
+                                            <ul class="{{ request()->segment(2) == 'report' ? 'mm-show' : '' }}">
+                                                <li>
+                                                    <a href="./admin/report/customer"
+                                                        class="{{ (request()->segment(2) == 'report' && request()->segment(3) == 'customer') ? 'mm-active' : '' }}" >
+                                                        <i class="metismenu-icon"></i>Khách hàng
+
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="./admin/report/order"
+                                                    class="{{ (request()->segment(2) == 'report' && request()->segment(3) == 'order') ? 'mm-active' : '' }}" >
+                                                        <i class="metismenu-icon"></i>Đơn hàng
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="./admin/report/revenue"
+                                                    class="{{ (request()->segment(2) == 'report' && request()->segment(3) == 'revenue') ? 'mm-active' : '' }}" >
+                                                        <i class="metismenu-icon"></i>Doanh thu
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </li>
                                     @endif
                                 </ul>

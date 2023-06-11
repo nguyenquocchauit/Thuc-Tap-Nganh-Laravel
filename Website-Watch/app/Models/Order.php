@@ -26,7 +26,7 @@ class Order extends Model
         $currentTime = Carbon::now('Asia/Ho_Chi_Minh');
         return $currentTime->toDateTimeString();
     }
-    public function getAllOrder($filters = [], $time_select = [], $id = null)
+    public function getAllOrder($filters = [], $start_day = null, $end_day = null, $id = null)
     {
         $orders = Order::join('users', 'orders.customers', '=', 'users.id')
             ->join('administrator', 'orders.employee', '=', 'administrator.id')
@@ -57,19 +57,13 @@ class Order extends Model
                 $query->orWhere('orders.employee', auth()->guard("admin")->user()->id);
             });
         }
-        if (!empty($time_select)) {
-            /*
-            $time_select[1][0]: updated_at
-            $time_select[1][1]: =
-            $time_select[1][2]: month( is number )
-             */
-            $orders = $orders->whereYear($time_select[0][0], $time_select[0][1], $time_select[0][2]);
-            $orders = $orders->whereMonth($time_select[1][0], $time_select[1][1], $time_select[1][2]);
+        if (!empty($start_day) && !empty($end_day)) {
+            $orders = $orders->whereBetween('orders.updated_at', [$start_day, $end_day]);
         }
         $orders = $orders->paginate(10);
         return $orders;
     }
-    public function getAllOrderDetail($filters = [], $time_select = [], $id = null)
+    public function getAllOrderDetail($filters = [], $start_day = null, $end_day = null, $id = null)
     {
         $details = Order::join('order_details', 'orders.id', '=', 'order_details.orders')
             ->join('users', 'orders.customers', '=', 'users.id')
@@ -106,19 +100,13 @@ class Order extends Model
             });
         }
 
-        if (!empty($time_select)) {
-            /*
-            $time_select[1][0]: updated_at
-            $time_select[1][1]: =
-            $time_select[1][2]: month( is number )
-             */
-            $details->whereYear($time_select[0][0], $time_select[0][1], $time_select[0][2]);
-            $details->whereMonth($time_select[1][0], $time_select[1][1], $time_select[1][2]);
+        if (!empty($start_day) && !empty($end_day)) {
+            $details = $details->whereBetween('orders.updated_at', [$start_day, $end_day]);
         }
         $details = $details->paginate(10);
         return $details;
     }
-    public function revenueBrand($filters = [], $time_select = [], $id = null)
+    public function revenueBrand($start_day = null, $end_day = null, $search = null)
     {
         $revenue = Order::join('order_details', 'orders.id', '=', 'order_details.orders')
             ->join('products', 'order_details.product', '=', 'products.id')
@@ -131,18 +119,18 @@ class Order extends Model
                 DB::raw('SUM(CASE WHEN orders.status = "TC" THEN 1 ELSE 0 END) AS TC'),
                 DB::raw('SUM(CASE WHEN orders.status = "TB" THEN 1 ELSE 0 END) AS TB'),
             ])
+            ->where("orders.status", "TC")
             ->groupBy('brands.name', 'products.gender')
-            ->orderBy('products.gender');
-
-        if (!empty($time_select)) {
-            /*
-                $time_select[1][0]: updated_at
-                $time_select[1][1]: =
-                $time_select[1][2]: month( is number )
-                 */
-            $revenue->whereYear($time_select[0][0], $time_select[0][1], $time_select[0][2]);
-            $revenue->whereMonth($time_select[1][0], $time_select[1][1], $time_select[1][2]);
+            ->orderByDesc('brands.name'); // Sắp xếp giảm dần theo tên thương hiệu
+        if (!empty($search)) {
+            $revenue = $revenue->where(function ($query) use ($search) {
+                $query->orWhere('brands.name', $search);
+            });
         }
+        if (!empty($start_day) && !empty($end_day)) {
+            $revenue = $revenue->whereBetween('orders.updated_at', [$start_day, $end_day]);
+        }
+
         $revenue = $revenue->paginate(10);
         return $revenue;
     }

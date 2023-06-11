@@ -19,7 +19,6 @@ class OrdersController extends Controller
     public function index(Request $request)
     {
         $title = 'Đơn hàng';
-        $time_select = [];
         $filters = [];
         $idOrder = null;
         $infoOrder = null;
@@ -27,14 +26,15 @@ class OrdersController extends Controller
         $date = Carbon::parse($time);
         $year = $date->year;
         $month = $date->month;
-        $time_select[] = ['orders.updated_at', '=',  $year];
-        $time_select[] = ['orders.updated_at', '=',  $month];
         $customerView = $employeerView = $create_atView = $idOrderView = $statusView = $totalView = $phone = $address = $note = null;
-        if (!empty($request->time_select)) {
-            [$year, $month] = explode("-", $request->time_select);
-            $time_select = [];
-            $time_select[] = ['orders.updated_at', '=',  intval($year)];
-            $time_select[] = ['orders.updated_at', '=', intval($month)];
+        $start_day = now()->startOfMonth()->setTimezone('Asia/Ho_Chi_Minh')->format('Y-m-d 00:00:00');
+        $end_day = now()->setTimezone('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+        if (!empty($request->start_day)) {
+            $start_day = date('Y-m-d H:i:s', strtotime($request->start_day));
+        }
+        if (!empty($request->end_day)) {
+            $end_day = date('Y-m-d', strtotime($request->end_day));
+            $end_day .= ' 23:59:59';
         }
         if (!empty($request->unconfimred) && $request->unconfimred == "true") {
             $filters[] = ['orders.status', '=', "XN"];
@@ -49,7 +49,8 @@ class OrdersController extends Controller
             $filters[] = ['orders.status', '=', "TB"];
         }
         if (!empty($request->customer)) {
-            $time_select = [];
+            $start_day = null;
+            $end_day = null;
             $idOrder = $request->customer;
             $infoOrder = DB::table('orders')
                 ->join('users', 'users.id', '=', 'orders.customers')
@@ -103,8 +104,8 @@ class OrdersController extends Controller
             ->whereYear('updated_at', '=', $year)
             ->whereMonth('updated_at', '=', $month)
             ->count();
-        $orders = $this->orders->getAllOrder($filters, $time_select, $idOrder);
-        $details = $this->orders->getAllOrderDetail($filters, $time_select, $idOrder);
+        $orders = $this->orders->getAllOrder($filters, $start_day, $end_day, $idOrder);
+        $details = $this->orders->getAllOrderDetail($filters,  $start_day, $end_day, $idOrder);
         return view('admin.order.index', compact('title', 'orders', 'details', 'unconfirmed', 'received', 'fail', 'revenue', 'shipping', 'year', 'month', 'time', 'customerView', 'employeerView', 'create_atView', 'idOrderView', 'statusView', 'totalView', 'phone', 'address', 'note'));
     }
     public function updateStatus(Request $request, $id)

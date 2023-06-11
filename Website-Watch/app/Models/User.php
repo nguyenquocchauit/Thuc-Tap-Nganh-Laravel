@@ -58,7 +58,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(User::class, 'customers', 'id');
     }
-    public function getAllUsers($search = null, $times = [])
+    public function getAllUsers($search = null, $start_day = null, $end_day = null)
     {
         $users = User::leftJoin('orders', 'orders.customers', '=', 'users.id')
             ->select([
@@ -78,9 +78,8 @@ class User extends Authenticatable
                 $query->orWhere('users.phone_number', 'like', '%' . $search . '%');
             });
         }
-        if (!empty($times)) {
-            $users = $users->whereYear('users.created_at', '=', $times[0]);
-            $users = $users->whereMonth('users.created_at', '=', $times[1]);
+        if (!empty($start_day) && !empty($end_day)) {
+            $users = $users->whereBetween('users.created_at', [$start_day, $end_day]);
         }
         $users = $users->paginate(10);
         return $users;

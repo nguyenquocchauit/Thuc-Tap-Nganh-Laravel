@@ -19,29 +19,60 @@ class ReportController extends Controller
     {
         $this->orders = new Order();
     }
-    public function index(Request $request)
+    public function reportRevenue(Request $request)
     {
         $title = 'Báo cáo';
-        $time_select = [];
         $filters = [];
-        $search = [];
-        $times = [];
+        $search = null;
+
         $time = now()->setTimezone('Asia/Ho_Chi_Minh');
         $date = Carbon::parse($time);
         $year = $date->year;
-        $month = $date->month;
-        $times[0] =  $year;
-        $times[1] =  $month;
-        if (!empty($request->time_select)) {
-            $time_select = explode("-", $request->time_select);
-            $year = $time_select[0];
-            $month = $time_select[1];
-            $time_select[0] = ['orders.updated_at', '=',  $year];
-            $time_select[1] = ['orders.updated_at', '=',  $month];
-            $times[0] =  $year;
-            $times[1] =  $month;
+        $start_day = now()->startOfMonth()->setTimezone('Asia/Ho_Chi_Minh')->format('Y-m-d 00:00:00');
+        $end_day = now()->setTimezone('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+        if (!empty($request->start_day)) {
+            $start_day = date('Y-m-d H:i:s', strtotime($request->start_day));
         }
-        if (!empty($request->unconfimred) && $request->unconfimred == "true") {
+        if (!empty($request->end_day)) {
+            $end_day = date('Y-m-d', strtotime($request->end_day));
+            $end_day .= ' 23:59:59';
+        }
+        if (!empty($request->search)) {
+            $search = $request->search;
+        }
+        $received = Order::where('status', 'TC')
+            ->whereBetween('updated_at', [$start_day, $end_day])
+            ->count();
+        $revenue = Order::where('status', 'TC')
+            ->whereBetween('updated_at', [$start_day, $end_day])
+            ->sum('total');
+        $fail = Order::where('status', 'TB')
+            ->whereBetween('updated_at', [$start_day, $end_day])
+            ->count();
+        $totalOrder = Order::whereBetween('updated_at', [$start_day, $end_day])
+            ->count();
+        $revenueBrands = $this->orders->revenueBrand($start_day, $end_day, $search);
+
+        return view('admin.reporting.revenue', compact('title', 'revenueBrands', 'totalOrder', 'revenue', 'received', 'fail','year'));
+    }
+    public function reportOrder(Request $request)
+    {
+        $title = 'Thống kê đơn hàng';
+        $search = [];
+        $filters = [];
+        $start_day = now()->startOfMonth()->setTimezone('Asia/Ho_Chi_Minh')->format('Y-m-d 00:00:00');
+        $end_day = now()->setTimezone('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+        if (!empty($request->start_day)) {
+            $start_day = date('Y-m-d H:i:s', strtotime($request->start_day));
+        }
+        if (!empty($request->end_day)) {
+            $end_day = date('Y-m-d', strtotime($request->end_day));
+            $end_day .= ' 23:59:59';
+        }
+        if (!empty($request->search)) {
+            $search = $request->search;
+        }
+        if (!empty($request->unconfirmed) && $request->unconfirmed == "true") {
             $filters[] = ['orders.status', '=', "XN"];
         }
         if (!empty($request->received) && $request->received == "true") {
@@ -53,41 +84,43 @@ class ReportController extends Controller
         if (!empty($request->fail) && $request->fail == "true") {
             $filters[] = ['orders.status', '=', "TB"];
         }
-        // if (!empty($request->search)) {
-        //     $search = $request->search;
-        // }
         $shipping = Order::where('status', 'DVC')
-            ->whereYear('updated_at', '=', $year)
-            ->whereMonth('updated_at', '=', $month)
+            ->whereBetween('updated_at', [$start_day, $end_day])
             ->count();
         $received = Order::where('status', 'TC')
-            ->whereYear('updated_at', '=', $year)
-            ->whereMonth('updated_at', '=', $month)
-            ->count();
-        $newbie = ModelsUser::whereYear('created_at', '=', $times[0])
-            ->whereMonth('created_at', '=', $times[1])
+            ->whereBetween('updated_at', [$start_day, $end_day])
             ->count();
         $revenue = Order::where('status', 'TC')
-            ->whereYear('updated_at', '=', $year)
-            ->whereMonth('updated_at', '=', $month)
+            ->whereBetween('updated_at', [$start_day, $end_day])
             ->sum('total');
-        $unconfimred = Order::where('status', 'XN')
-            ->whereYear('updated_at', '=', $year)
-            ->whereMonth('updated_at', '=', $month)
+        $unconfirmed = Order::where('status', 'XN')
+            ->whereBetween('updated_at', [$start_day, $end_day])
             ->count();
         $fail = Order::where('status', 'TB')
-            ->whereYear('updated_at', '=', $year)
-            ->whereMonth('updated_at', '=', $month)
+            ->whereBetween('updated_at', [$start_day, $end_day])
             ->count();
-        $totalOrder = Order::whereYear('updated_at', '=', $year)
-            ->whereMonth('updated_at', '=', $month)
-            ->count();
-        $orders = $this->orders->getAllOrder($filters, $time_select, $search);
+        $orders = $this->orders->getAllOrder($filters, $start_day, $end_day, $search);
+        return view('admin.reporting.order', compact('title', 'orders', 'shipping', 'received', 'revenue', 'unconfirmed', 'fail'));
+    }
+    public function reportCustomer(Request $request)
+    {
+        $title = 'Thống kê khách hàng';
+        $search = [];
+        $start_day = now()->startOfMonth()->setTimezone('Asia/Ho_Chi_Minh')->format('Y-m-d 00:00:00');
+        $end_day = now()->setTimezone('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+        if (!empty($request->start_day)) {
+            $start_day = date('Y-m-d H:i:s', strtotime($request->start_day));
+        }
+        if (!empty($request->end_day)) {
+            $end_day = date('Y-m-d', strtotime($request->end_day));
+            $end_day .= ' 23:59:59';
+        }
+        if (!empty($request->search)) {
+            $search = $request->search;
+        }
         $customers = new ModelsUser();
-        $customers = $customers->getAllUsers($search, $times);
-        $revenueBrands = $this->orders->revenueBrand($filters, $time_select, $search);
-
-        return view('admin.reporting.index', compact('title', 'orders', 'customers', 'revenueBrands','totalOrder', 'fail', 'shipping', 'received', 'time', 'year', 'month', 'newbie', 'revenue', 'unconfimred'));
+        $customers = $customers->getAllUsers($search, $start_day, $end_day);
+        return view('admin.reporting.customer', compact('title', 'customers'));
     }
     public function dataChart(Request $request)
     {
