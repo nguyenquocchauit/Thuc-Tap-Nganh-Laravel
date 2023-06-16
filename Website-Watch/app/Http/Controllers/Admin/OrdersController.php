@@ -26,7 +26,7 @@ class OrdersController extends Controller
         $date = Carbon::parse($time);
         $year = $date->year;
         $month = $date->month;
-        $customerView = $employeerView = $create_atView = $idOrderView = $statusView = $totalView = $phone = $address = $note = null;
+        $customerView = $employeerView = $create_atView = $idOrderView = $statusView = $totalView = $phone = $delivery_address = $status_payment = $order_notes = $note = null;
         $start_day = now()->startOfMonth()->setTimezone('Asia/Ho_Chi_Minh')->format('Y-m-d 00:00:00');
         $end_day = now()->setTimezone('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
         if (!empty($request->start_day)) {
@@ -60,7 +60,6 @@ class OrdersController extends Controller
                     'orders.*',
                     'users.name as user_name',
                     'users.phone_number as phone_number',
-                    'users.address as user_address',
                     'administrator.name as admin_name',
                     DB::raw("DATE_FORMAT(orders.created_at,'%H:%i:%s %d-%m-%Y') as created_at")
                 )
@@ -72,8 +71,10 @@ class OrdersController extends Controller
                 'idOrderView' => $infoOrder->id,
                 'statusView' => $infoOrder->status,
                 'totalView' => $infoOrder->total,
+                'order_notes' => $infoOrder->order_notes,
+                'status_payment' => $infoOrder->status_payment,
                 'phone' => $infoOrder->phone_number,
-                'address' => $infoOrder->user_address,
+                'delivery_address' => $infoOrder->delivery_address,
                 'note' => $infoOrder->note
             ]);
         }
@@ -106,11 +107,12 @@ class OrdersController extends Controller
             ->count();
         $orders = $this->orders->getAllOrder($filters, $start_day, $end_day, $idOrder);
         $details = $this->orders->getAllOrderDetail($filters,  $start_day, $end_day, $idOrder);
-        return view('admin.order.index', compact('title', 'orders', 'details', 'unconfirmed', 'received', 'fail', 'revenue', 'shipping', 'year', 'month', 'time', 'customerView', 'employeerView', 'create_atView', 'idOrderView', 'statusView', 'totalView', 'phone', 'address', 'note'));
+        return view('admin.order.index', compact('title', 'orders', 'details', 'unconfirmed', 'received', 'fail', 'revenue', 'shipping', 'year', 'month', 'time', 'customerView', 'employeerView', 'create_atView', 'idOrderView', 'statusView', 'totalView', 'phone', 'delivery_address', 'note', 'order_notes', 'status_payment'));
     }
     public function updateStatus(Request $request, $id)
     {
         $status = null;
+        $status_payment = 0;
         switch ($request->statusOrder) {
             case "TC":
                 $status = auth()->guard("admin")->user()->id . " status: Thành công - " . now()->setTimezone('Asia/Ho_Chi_Minh')->format('H:i:s d-m-Y');
@@ -126,13 +128,16 @@ class OrdersController extends Controller
                 break;
         }
         $statusOld = Order::where('id', $id)->first();
+        if ($request->statusOrder == "TC")
+            $status_payment = 1;
         DB::table('orders')->where('id', $id)
             ->update(
                 [
                     'status' => $request->statusOrder,
                     'employee' => auth()->guard("admin")->user()->id,
                     'updated_at' => now()->setTimezone('Asia/Ho_Chi_Minh'),
-                    'note' => $status . ", " . $statusOld->note
+                    'note' => $status . ", " . $statusOld->note,
+                    'status_payment' => $status_payment,
                 ]
             );
         $details = Order::join('order_details', 'orders.id', '=', 'order_details.orders')

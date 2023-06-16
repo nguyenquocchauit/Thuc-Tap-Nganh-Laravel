@@ -167,7 +167,7 @@
                             @foreach ($products as $product)
                                 <li>
                                     <div class="product">
-                                        <a href="#" class="product-image product-item-img">
+                                        <a href="/chi-tiet-san-pham/{{ $product->id }}"  target="_blank" class="product-image product-item-img">
                                             <img src="/images/image_products_home/{{ $product->image_1 }}"
                                                 alt="Product">
                                         </a>

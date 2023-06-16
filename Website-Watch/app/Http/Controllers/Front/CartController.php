@@ -12,8 +12,8 @@ class CartController extends Controller
     public function cart()
     {
         // add estimated delivery time (+3 days from current date)
-        $time = new Product();
-        $time = $time->currentTime();
+        $time = now()->setTimezone('Asia/Ho_Chi_Minh');
+
         return view('product.cart', compact('time'));
     }
     public function addToCart(Request $request)

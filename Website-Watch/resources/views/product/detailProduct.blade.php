@@ -186,10 +186,10 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <input type="hidden" value="{{ $comment->id }}"
-                                                            id="IDComment">
+                                                            class="IDComment">
                                                         @if (Auth::check())
                                                             @if ($comment->customers == Auth::user()->id)
-                                                                <span class="d-flex justify-content-end "><i
+                                                                <span class="d-flex justify-content-end " style="cursor: pointer"><i
                                                                         class="fas fa-trash-alt delete-comment-product"></i></span>
                                                             @endif
                                                         @endif

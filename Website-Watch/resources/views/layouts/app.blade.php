@@ -44,6 +44,7 @@
         });
         let _token = $('meta[name="csrf-token"]').attr("content");
     </script>
+     <script type="text/javascript" src="{{ asset('js/doctien.js') }}"></script>
     {{-- Add file handling user login  --}}
     <script type="text/javascript" src="{{ asset('js/Customer/login-user.js') }}"></script>
     {{-- Add file to handle user registration  --}}

@@ -64,15 +64,49 @@ class UserController extends Controller
             'msg' => 'Update password successfully',
         ]);
     }
-    public function purchaseHistory()
+    public function orderHistory()
     {
-
-        $orders = OrderDetail::query()
-            ->selectRaw('products.*,order_details.created_at as bought, order_details.quantity as quantity,
-            order_details.price as priceOrderDetail,order_details.total as totalOrderDetail')
+        $orders = Order::join('users', 'orders.customers', '=', 'users.id')
+            ->select([
+                'orders.id as idOrder',
+                'orders.status as status',
+                'orders.total as total',
+                DB::raw("DATE_FORMAT(orders.created_at,'%H:%i:%s %d-%m-%Y') as created_at")
+            ])
+            ->where("orders.customers", auth()->user()->id)
+            ->orderBy('orders.created_at', 'desc')->get();
+        return view('user.order_history', compact('orders'));
+    }
+    public function detailOrderHistory($id)
+    {
+        $orders = Order::where("orders.customers", auth()->user()->id)
+            ->where("orders.id", $id)->get();
+        $details = Order::join('order_details', 'order_details.orders', '=', 'orders.id')
             ->join('products', 'order_details.product', '=', 'products.id')
-            ->join('orders', 'order_details.orders', '=', 'orders.id')
-            ->where("orders.customers", auth()->user()->id);
-        return view('user.purchaseHistory', compact('orders'));
+            ->join('users', 'orders.customers', '=', 'users.id')
+            ->select([
+                'products.id as product_id',
+                'products.image_1 as image_1',
+                'products.name as product_name',
+                'order_details.quantity as detail_quantity',
+                'order_details.total as detail_total',
+                DB::raw(" (order_details.price - ( order_details.price* order_details.discount)/100) as detail_price")
+            ])
+            ->where("orders.customers", auth()->user()->id)
+            ->where("orders.id", $id)
+            ->orderBy('orders.created_at', 'desc')->get();
+        return view('user.detail_order', compact('details', 'id', 'orders'));
+    }
+    public function cancelOrder($id)
+    {
+        $statusOld = Order::where('id', $id)->first();
+        DB::table('orders')->where('id', $id)
+            ->where("customers", auth()->user()->id)
+            ->where("status", "XN")
+            ->update(['status' => "TB", 'note' => "kh cancel - " . $statusOld->note,]);
+        return response()->json([
+            'status' => 200,
+            'msg' => "Cancel order successfully",
+        ]);
     }
 }

@@ -213,7 +213,7 @@
                         </div>
                         <div class="tab-pane " id="order-detail" data-id="a-order-detail"role="tabpanel">
                             <div class="row">
-                                <div class="@if (request()->customer == null) col-sm-12 @else col-sm-9 @endif">
+                                <div class="@if (request()->customer == null) col-sm-12 @else col-sm-8 @endif">
                                     <div class="table-responsive text-center">
                                         <table class="table">
                                             <thead>
@@ -255,7 +255,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="col-sm-3" @if (request()->customer == null) style="display:none" @endif>
+                                <div class="col-sm-4" @if (request()->customer == null) style="display:none" @endif>
                                     <div class="card card-user">
                                         <div class="image">
                                             <img src="{{ asset('images/banner-profile-dashboard.png') }}" alt="...">
@@ -272,7 +272,12 @@
                                             </div>
                                             <div class="row text-center">
                                                 <div class="col-md-12">
-                                                    <p>Địa chỉ: <strong>{{ $address }}</strong></p>
+                                                    <p>Địa chỉ giao: <strong>{{ $delivery_address }}</strong></p>
+                                                </div>
+                                            </div>
+                                            <div class="row text-center">
+                                                <div class="col-md-12">
+                                                    <p>Ghi chú: <strong>{{ $order_notes }}</strong></p>
                                                 </div>
                                             </div>
                                             <div class="row text-center">
@@ -322,9 +327,24 @@
                                             </div>
                                             <div class="row text-center">
                                                 <div class="col-md-12">
-                                                    <textarea name="" id="" cols="40" rows="2">{{ $note }}</textarea>
+                                                    <p>Thanh toán:
+                                                        @if ($status_payment == 0)
+                                                            <strong>Chưa thanh toán</strong>
+                                                        @endif
+                                                        @if ($status_payment == 1)
+                                                            <strong style="color: green">Đã thanh toán</strong>
+                                                        @endif
+                                                        @if ($status_payment == 2)
+                                                            <strong style="color: red">Thanh toán thất bại</strong>
+                                                        @endif
+                                                    </p>
                                                 </div>
                                             </div>
+                                            {{-- <div class="row text-center">
+                                                <div class="col-md-12">
+                                                    <textarea name="" id="" cols="40" rows="2">{{ $note }}</textarea>
+                                                </div>
+                                            </div> --}}
                                             <br>
                                             <hr>
                                             <div class="row text-center">

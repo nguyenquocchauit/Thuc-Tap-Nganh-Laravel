@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\LoginAdminController;
+use App\Http\Controllers\Front\BuyProductController;
 use App\Http\Controllers\User\UserController as UserUserController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Host;
@@ -36,6 +37,7 @@ Route::get('/', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/chi-tiet-san-pham/{id}', [ProductController::class, 'detailProduct'])->name('detail-product');
 Route::get('/gio-hang', [CartController::class, 'cart'])->name('view-cart');
+Route::get('/thanh-toan', [BuyProductController::class, 'viewbuy'])->name('viewbuy');
 Route::get('/admin/login', [LoginAdminController::class, 'index'])->name('login-admin');
 
 Route::prefix('shop')->group(function () {
@@ -64,5 +66,7 @@ Route::middleware([Host::class])->prefix('admin')->group(function () {
 // Customer
 Route::middleware([User::class])->group(function () {
     Route::get('/thong-tin-ca-nhan', [UserUserController::class, 'profile'])->name('profile');
-    Route::get('/lich-su-dat-hang', [UserUserController::class, 'purchaseHistory'])->name('purchaseHistory');
+    Route::get('/lich-su-dat-hang', [UserUserController::class, 'orderHistory'])->name('orderHistory');
+    Route::get('/lich-su-dat-hang/{id}', [UserUserController::class, 'detailOrderHistory'])->name('detailOrderHistory');
+    Route::get('/thanks', [BuyProductController::class, 'Payment'])->name('Payment');
 });

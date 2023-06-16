@@ -127,7 +127,9 @@
                                             <th>Trạng thái</th>
                                             <th>Cập nhật</th>
                                             <th>Tổng tiền</th>
+                                            <th>Thanh toán</th>
                                             <th>Nhân viên</th>
+                                            <th>Ghi chú</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -169,6 +171,17 @@
                                                 </td>
                                                 <td>{{ $order->updated_at }}</td>
                                                 <td>{{ number_format($order->total) . ' VNĐ' }}</td>
+                                                <td>
+                                                    @if ($order->status_payment == 0)
+                                                        <strong>Chưa thanh toán</strong>
+                                                    @endif
+                                                    @if ($order->status_payment == 1)
+                                                        <strong style="color: green">Đã thanh toán</strong>
+                                                    @endif
+                                                    @if ($order->status_payment == 2)
+                                                        <strong style="color: red">Thanh toán thất bại</strong>
+                                                    @endif
+                                                </td>
                                                 @if (
                                                     $order->id_employee ==
                                                         auth()->guard('admin')->user()->id)
@@ -180,7 +193,7 @@
                                                             target="_blank">{{ $order->name_employee }}</a>
                                                     </td>
                                                 @endif
-
+                                                <td> <textarea cols="20" rows="2">{{ $order->note }}</textarea></td>
                                             </tr>
                                         @endforeach
                                     </tbody>

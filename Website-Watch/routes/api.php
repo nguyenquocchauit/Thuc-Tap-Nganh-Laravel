@@ -40,11 +40,13 @@ Route::middleware([User::class])->group(function () {
     Route::get('/profile/edit/{id}', [UserController::class, 'editCustomer'])->name('edit-profile-customer');
     Route::post('/profile-customer/update/{id}', [UserController::class, 'updateCustomer'])->name('update-profile-customer');
     Route::post('/profile-customer/update-password/{id}', [UserController::class, 'updatePassword'])->name('update-password-dashboard');
-    Route::post('/buy-product-from-cart', [BuyProductController::class, 'buyProductCart'])->name('buy-product-from-cart');
+    Route::post('/checkout/{method}', [BuyProductController::class, 'Order'])->name('checkout');
+    Route::post('/cancel-order/{id}', [UserController::class, 'cancelOrder'])->name('cancelOrder');
     Route::post('/comment-product', [ProductController::class, 'writeComment'])->name('comment-product');
     Route::post('/delete-comment', [ProductController::class, 'deleteComment'])->name('delete-comment');
     Route::post('/like-product', [ProductController::class, 'likeProduct'])->name('like-product');
     Route::post('/clear-like', [ProductController::class, 'removeLikeProduct'])->name('clear-like');
+
 });
 //middleware for employee
 Route::middleware([Admin::class])->group(function () {

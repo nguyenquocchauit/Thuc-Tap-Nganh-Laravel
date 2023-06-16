@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\LikeProduct;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
@@ -26,9 +27,8 @@ class ProductController extends Controller
             ]);
         } else {
             return response()->json([
-                'status' => 200,
+                'status' => 422,
                 'msg' => 'No products found',
-                'data' => $data,
             ]);
         }
     }
@@ -68,38 +68,50 @@ class ProductController extends Controller
 
     public function writeComment(Request $request)
     {
-        if ($request->action == "Write comment product") {
-            $content = null;
-            if (empty($request->textComment)) {
-                $content = "";
-            } else {
-                $content = $request->textComment;
-            }
-            $comment = new Comment();
-            $comment->id  = "cm" . (Comment::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY');
-            $comment->customers  = $request->user;
-            $comment->product  = $request->product;
-            $comment->content = $content;
-            $comment->star = $request->rating;
-            $comment->created_at = now()->setTimezone('Asia/Ho_Chi_Minh');
-            $comment->save();
-            $name = User::find($request->user);
+        $check = Order::join('order_details', 'order_details.orders', '=', 'orders.id')
+            ->where('order_details.product', $request->product)
+            ->where('orders.customers', $request->user)
+            ->where('orders.status', "TC")
+            ->exists();
+        if ($check == false) {
             return response()->json([
-                'status' => 200,
-                'msg' => 'Write comment successfully',
-                'id' => "cm" . (Comment::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY'),
-                'data' =>  [
-                    'star' => $request->rating,
-                    'created_at' => now()->setTimezone('Asia/Ho_Chi_Minh')->format('H:i:s d-m-Y'),
-                    'content' => $content,
-                ],
-                'author' => $name,
+                'status' => 422,
+                'msg' => 'Have not bought yet',
             ]);
-        } else
-            return response()->json([
-                'status' => 500,
-                'msg' => 'Write comment error',
-            ]);
+        } else {
+            if ($request->action == "Write comment product") {
+                $content = null;
+                if (empty($request->textComment)) {
+                    $content = "";
+                } else {
+                    $content = $request->textComment;
+                }
+                $comment = new Comment();
+                $comment->id  = "cm" . (Comment::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY');
+                $comment->customers  = $request->user;
+                $comment->product  = $request->product;
+                $comment->content = $content;
+                $comment->star = $request->rating;
+                $comment->created_at = now()->setTimezone('Asia/Ho_Chi_Minh');
+                $comment->save();
+                $name = User::find($request->user);
+                return response()->json([
+                    'status' => 200,
+                    'msg' => 'Write comment successfully',
+                    'id' => "cm" . (Comment::count()) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY'),
+                    'data' =>  [
+                        'star' => $request->rating,
+                        'created_at' => now()->setTimezone('Asia/Ho_Chi_Minh')->format('H:i:s d-m-Y'),
+                        'content' => $content,
+                    ],
+                    'author' => $name,
+                ]);
+            } else
+                return response()->json([
+                    'status' => 500,
+                    'msg' => 'Write comment error',
+                ]);
+        }
     }
     public function deleteComment(Request $request)
     {

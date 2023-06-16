@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-6 d-flex justify-content-start">
                                 <h5 class="mb-0"><a href="/shop"><i class="fas fa-long-arrow-alt-left"></i></a> Giỏ
-                                    hàng - 2 sản phẩm</h5>
+                                    hàng</h5>
                             </div>
                             <div class="col-6 d-flex justify-content-end"><button type="button" id="remove-all-cart"
                                     style="border: none; background-color: #f7f7f7;">xóa giỏ hàng <i style="color: red;"
@@ -84,29 +84,7 @@
 
                     </div>
                 </div>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <p><strong>Giao hàng dự kiến</strong></p>
-                        {{-- giao hàng trong vòng 4 ngày  --}}
-                        <p class="mb-0">
-                            {{ date('d/m/Y', strtotime($time)) . ' - ' . date('d/m/Y', strtotime($time . ' +4 days')) }}
-                        </p>
-                    </div>
-                </div>
-                <div class="card mb-4 mb-lg-0">
-                    <div class="card-body">
-                        <p><strong>Phương thức thanh toán trực tuyến</strong></p>
-                        <img class="me-2" width="45px"
-                            src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-                            alt="Visa" />
-                        <img class="me-2" width="45px"
-                            src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-                            alt="American Express" />
-                        <img class="me-2" width="45px"
-                            src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-                            alt="Mastercard" />
-                    </div>
-                </div>
+
             </div>
             <div class="col-md-4">
                 <div class="card mb-4">
@@ -135,10 +113,11 @@
                                 <span><strong>@php $totalVAT = $total + ($total * 0.08);   @endphp {{ number_format($totalVAT) . ' VNĐ' }}</strong></span>
                             </li>
                         </ul>
-
-                        <button type="button" class="btn btn-primary btn-lg btn-block " id="buy-product">
-                            Thanh toán
-                        </button>
+                        <a href="/thanh-toan">
+                            <button type="button" class="btn btn-primary btn-lg btn-block " id="add-buy"
+                                style="margin-top:40px ">
+                                Tiến hành đặt hàng
+                            </button></a>
                     </div>
                 </div>
             </div>
