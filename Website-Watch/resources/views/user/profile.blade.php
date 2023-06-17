@@ -134,15 +134,27 @@
                             <label class="form-label" for="confirm-password">Xác Nhận Mật Khẩu</label>
                             <input class="form-control" id="confirm-password" type="password"
                                 placeholder="Xác nhận mật khẩu">
+
                         </div>
-                        <button type="button" class="btn btn-primary btn-block" id="bth-update-pass-profile-customer">
-                            Đổi Mật Khẩu </button>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="button" class="btn btn-primary btn-block"
+                                    id="bth-update-pass-profile-customer">
+                                    Đổi Mật Khẩu </button>
+                            </div>
+                            <div class="col-6 d-flex justify-content-end">
+                                <a href="#" data-bs-target="#myModal_Forgotten_password" data-bs-toggle="modal"
+                                    data-bs-dismiss="modal">Quên mật khẩu?</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
         var citiss = document.getElementById("cityy");

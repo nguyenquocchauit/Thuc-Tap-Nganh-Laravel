@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2023 at 06:35 PM
+-- Generation Time: Jun 17, 2023 at 12:29 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -35,6 +35,7 @@ CREATE TABLE `administrator` (
   `phone_number` varchar(11) NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `token` varchar(100) DEFAULT NULL,
   `create_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `role` tinyint(1) NOT NULL
@@ -44,11 +45,11 @@ CREATE TABLE `administrator` (
 -- Dumping data for table `administrator`
 --
 
-INSERT INTO `administrator` (`id`, `name`, `avt`, `address`, `phone_number`, `email`, `password`, `create_at`, `updated_at`, `role`) VALUES
-('nv105122022', 'Nguyễn Quốc Châu', 'nguyen-quoc-chau.png', '074 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', '0386888829', 'chauquocnguyen.cun1@gmail.com', '$2y$10$hzTq/HDrl69S/kXnpf2SIuhBy2rkHQAqca3zNMHaaV0QTIV6Hb/J6', '2022-12-05 17:58:39', '2023-05-30 20:26:31', 2),
-('nv226052023', 'Nguyễn Khánh Nam', 'nguyen-khanh-nam.png', '25 Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', '0386888888', 'nguyenkhanhnam@gmail.com', '$2y$10$/nMeQirGpmQwSI.XG24aCeVEbpF3BLpMfQ0.JEshDf/ROn.cSOYou', '2023-05-23 15:21:32', '2023-06-07 22:57:13', 1),
-('nv323052023', 'Nguyễn Trần Hoàn Kim', 'nguyen-tran-hoan-kim3.png', '100 Nguyễn Thiện Thuật, Phường Trưng Trắc, Thành phố Phúc Yên, Tỉnh Vĩnh Phúc', '0926266666', 'hoankim.nguyentran@gmail.com', '$2y$10$8kb3RBJ5boVYZ2WDyIcvPuL', '2023-04-05 01:36:13', '2023-05-30 20:21:30', 1),
-('nv426052023', 'Lê Thị Mỹ Huyền', 'le-thi-my-huyen4.png', 'Địa chỉ 1c, Phường Quang Trung, Thành phố Hà Giang, Tỉnh Hà Giang', '0926383585', 'lethimyhuyen@gmail.com', '$2y$10$1ubzOIQEJok63jCNWdH1euS', '2023-05-26 19:41:36', '2023-05-26 19:41:36', 1);
+INSERT INTO `administrator` (`id`, `name`, `avt`, `address`, `phone_number`, `email`, `password`, `token`, `create_at`, `updated_at`, `role`) VALUES
+('nv105122022', 'Nguyễn Quốc Châu', 'nguyen-quoc-chau.png', '074 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', '0386888829', 'chauquocnguyen.cun1@gmail.com', '$2y$10$btLjHt8eVhebOQNdTSMHcuxlKJ74yWjju1PkqhqaWXnWHqndPePrG', '', '2022-12-05 17:58:39', '2023-05-30 20:26:31', 2),
+('nv226052023', 'Nguyễn Khánh Nam', 'nguyen-khanh-nam.png', '25 Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', '0386888888', 'nguyenkhanhnam@gmail.com', '$2y$10$/nMeQirGpmQwSI.XG24aCeVEbpF3BLpMfQ0.JEshDf/ROn.cSOYou', NULL, '2023-05-23 15:21:32', '2023-06-07 22:57:13', 1),
+('nv323052023', 'Nguyễn Trần Hoàn Kim', 'nguyen-tran-hoan-kim3.png', '100 Nguyễn Thiện Thuật, Phường Trưng Trắc, Thành phố Phúc Yên, Tỉnh Vĩnh Phúc', '0926266666', 'hoankim.nguyentran@gmail.com', '$2y$10$8kb3RBJ5boVYZ2WDyIcvPuL', NULL, '2023-04-05 01:36:13', '2023-05-30 20:21:30', 1),
+('nv426052023', 'Lê Thị Mỹ Huyền', 'le-thi-my-huyen4.png', 'Địa chỉ 1c, Phường Quang Trung, Thành phố Hà Giang, Tỉnh Hà Giang', '0926383585', 'lethimyhuyen@gmail.com', '$2y$10$1ubzOIQEJok63jCNWdH1euS', NULL, '2023-05-26 19:41:36', '2023-05-26 19:41:36', 1);
 
 -- --------------------------------------------------------
 
@@ -383,6 +384,7 @@ CREATE TABLE `users` (
   `address` text DEFAULT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `token` varchar(100) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `role` tinyint(1) NOT NULL
@@ -392,18 +394,18 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `phone_number`, `address`, `email`, `password`, `created_at`, `updated_at`, `role`) VALUES
-('kh1026052023', 'Nguyen Quoc Chau', '0926383006', '20 Nha Trang Khanh Hoa, Xã Lũng Táo, Huyện Đồng Văn, Tỉnh Hà Giang', 'chauquocnguyen.cun1@gmail.com', '$2y$10$/nMeQirGpmQwSI.XG24aCeVEbpF3BLpMfQ0.JEshDf/ROn.cSOYou', '2023-05-26 19:27:26', '2023-05-26 19:32:58', 0),
-('kh105122022', 'Nguyễn Quốc Châu', '0386888889', '12 Nguyễn Tất Thành, Xã Nghĩa Hiệp, Huyện Yên Mỹ, Tỉnh Hưng Yên', 'chau.nq.61cntt@ntu.edu.vn', '$2y$10$/nMeQirGpmQwSI.XG24aCeVEbpF3BLpMfQ0.JEshDf/ROn.cSOYou', '2022-12-05 18:15:54', '2023-05-19 09:31:46', 0),
-('kh1130052023', 'Nguyen Quoc Chauit', '0926383006', 'Địa chỉ 1a, Phường Ngọc Hà, Thành phố Hà Giang, Tỉnh Hà Giang', 'chauquocnguyen.cun@gmail.com', '$2y$10$dliQSs9iz8LTEu1hJJdsdOc2UeCfrJaoIcwYti4cAW7MpNrJYA.Ju', '2023-05-30 11:14:51', '2023-06-16 22:53:47', 0),
-('kh26122022', 'Phan Thị Huyền Trâm', '0926858585', '02 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', 'phanthihuyentram@gmail.com', '$2y$10$zVkefGONz.3kvfgb1DpwHOT', '2022-12-26 16:01:25', '2023-05-22 09:27:59', 0),
-('kh312122022', 'Lê Thị E', '0926355076', '03 Hưng, Phường Quang Trung, Quận Đống Đa, Thành phố Hà Nội', 'lethie@gmail.com', '$2y$10$huFy/caUfNuL2S52nYiwJu6', '2022-12-12 17:23:17', '2023-05-24 08:32:04', 0),
-('kh412122022', 'Trần Văn D', '0926383006', 'Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', 'tranvand@gmail.com', '$2y$10$CM9tvkv48v4u0HzfgFLeceE', '2022-12-12 16:36:59', '2023-05-24 08:30:32', 0),
-('kh523052023', 'Nguyễn Trần Hoàn Kim', '0966666666', '20 Phùng Hưng, Phường Cửa Ông, Thành phố Cẩm Phả, Tỉnh Quảng Ninh', 'nguyentranhoankim@gmail.com', '$2y$10$ns0/RvgnHeKBw0jR7rrA3.k', '2023-06-02 08:21:44', '2023-06-07 08:12:11', 0),
-('kh624052023', 'Trần Văn AB', '0826666666', 'Địa chỉ 2, Xã Lý Bôn, Huyện Bảo Lâm, Tỉnh Cao Bằng', 'tranvanab@gmail.com', '$2y$10$A3Rd6DuaT5z52LtU5Mz3CeW', '2023-05-24 08:29:05', '2023-05-24 16:19:12', 0),
-('kh724052023', 'Trần Văn B', '0826666668', 'Địa chỉ 2, Xã Hồng Trị, Huyện Bảo Lạc, Tỉnh Cao Bằng', 'tranvanb@gmail.com', '$2y$10$XBEr.WZumGnh3H3mOZH0T.T', '2023-05-24 08:29:32', '2023-05-24 08:29:32', 0),
-('kh824052023', 'Trần Văn C', '0866666668', 'Địa chỉ 2, Xã Tân Tri, Huyện Bắc Sơn, Tỉnh Lạng Sơn', 'tranvanc@gmail.com', '$2y$10$ns0/RvgnHeKBw0jR7rrA3.k', '2023-05-24 08:29:48', '2023-05-24 08:29:48', 0),
-('kh924052023', 'Nguyễn Yến Nhi', '0386888881', 'Địa chỉ 1c, Thị trấn Pác Miầu, Huyện Bảo Lâm, Tỉnh Cao Bằng', 'nguyenyennhi@gmail.com', '$2y$10$/IyXglucDzCGHbDHRhnbfew', '2023-05-24 17:54:22', '2023-05-25 01:57:09', 0);
+INSERT INTO `users` (`id`, `name`, `phone_number`, `address`, `email`, `password`, `token`, `created_at`, `updated_at`, `role`) VALUES
+('kh1026052023', 'Nguyen Quoc Chau', '0926383006', '20 Nha Trang Khanh Hoa, Xã Lũng Táo, Huyện Đồng Văn, Tỉnh Hà Giang', 'chauquocnguyen.cun1@gmail.com', '$2y$10$/nMeQirGpmQwSI.XG24aCeVEbpF3BLpMfQ0.JEshDf/ROn.cSOYou', 'Oye7lzaUnvb9XgxDjxxxC09c8cEcYFXAWc4bcwDiEVlxHekSXFsVv4oo3G0mO0L5bvzwad4y1qZRfh3UIiUY7wf0jCgpnrvj192p', '2023-05-26 19:27:26', '2023-05-26 19:32:58', 0),
+('kh105122022', 'Nguyễn Quốc Châu', '0386888889', '12 Nguyễn Tất Thành, Xã Nghĩa Hiệp, Huyện Yên Mỹ, Tỉnh Hưng Yên', 'chau.nq.61cntt@ntu.edu.vn', '$2y$10$/nMeQirGpmQwSI.XG24aCeVEbpF3BLpMfQ0.JEshDf/ROn.cSOYou', NULL, '2022-12-05 18:15:54', '2023-05-19 09:31:46', 0),
+('kh1130052023', 'Nguyen Quoc Chauit', '0926383006', 'Địa chỉ 1a, Phường Ngọc Hà, Thành phố Hà Giang, Tỉnh Hà Giang', 'chauquocnguyen.cun@gmail.com', '$2y$10$yUZLAzXNzj91Zh5vAr8DHuFHglNYuoriPtOLJJhhfDcGuKrj6xyYa', '', '2023-05-30 11:14:51', '2023-06-16 22:53:47', 0),
+('kh26122022', 'Phan Thị Huyền Trâm', '0926858585', '02 Nguyễn Tất Thành, Xã Phước Đồng, Thành phố Nha Trang, Tỉnh Khánh Hòa', 'phanthihuyentram@gmail.com', '$2y$10$zVkefGONz.3kvfgb1DpwHOT', NULL, '2022-12-26 16:01:25', '2023-05-22 09:27:59', 0),
+('kh312122022', 'Lê Thị E', '0926355076', '03 Hưng, Phường Quang Trung, Quận Đống Đa, Thành phố Hà Nội', 'lethie@gmail.com', '$2y$10$huFy/caUfNuL2S52nYiwJu6', NULL, '2022-12-12 17:23:17', '2023-05-24 08:32:04', 0),
+('kh412122022', 'Trần Văn D', '0926383006', 'Nguyễn Trung Trực, Thị trấn Kép, Huyện Lạng Giang, Tỉnh Bắc Giang', 'tranvand@gmail.com', '$2y$10$CM9tvkv48v4u0HzfgFLeceE', NULL, '2022-12-12 16:36:59', '2023-05-24 08:30:32', 0),
+('kh523052023', 'Nguyễn Trần Hoàn Kim', '0966666666', '20 Phùng Hưng, Phường Cửa Ông, Thành phố Cẩm Phả, Tỉnh Quảng Ninh', 'nguyentranhoankim@gmail.com', '$2y$10$ns0/RvgnHeKBw0jR7rrA3.k', NULL, '2023-06-02 08:21:44', '2023-06-07 08:12:11', 0),
+('kh624052023', 'Trần Văn AB', '0826666666', 'Địa chỉ 2, Xã Lý Bôn, Huyện Bảo Lâm, Tỉnh Cao Bằng', 'tranvanab@gmail.com', '$2y$10$A3Rd6DuaT5z52LtU5Mz3CeW', NULL, '2023-05-24 08:29:05', '2023-05-24 16:19:12', 0),
+('kh724052023', 'Trần Văn B', '0826666668', 'Địa chỉ 2, Xã Hồng Trị, Huyện Bảo Lạc, Tỉnh Cao Bằng', 'tranvanb@gmail.com', '$2y$10$XBEr.WZumGnh3H3mOZH0T.T', NULL, '2023-05-24 08:29:32', '2023-05-24 08:29:32', 0),
+('kh824052023', 'Trần Văn C', '0866666668', 'Địa chỉ 2, Xã Tân Tri, Huyện Bắc Sơn, Tỉnh Lạng Sơn', 'tranvanc@gmail.com', '$2y$10$ns0/RvgnHeKBw0jR7rrA3.k', NULL, '2023-05-24 08:29:48', '2023-05-24 08:29:48', 0),
+('kh924052023', 'Nguyễn Yến Nhi', '0386888881', 'Địa chỉ 1c, Thị trấn Pác Miầu, Huyện Bảo Lâm, Tỉnh Cao Bằng', 'nguyenyennhi@gmail.com', '$2y$10$/IyXglucDzCGHbDHRhnbfew', NULL, '2023-05-24 17:54:22', '2023-05-25 01:57:09', 0);
 
 --
 -- Indexes for dumped tables

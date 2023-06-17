@@ -47,8 +47,10 @@
      <script type="text/javascript" src="{{ asset('js/doctien.js') }}"></script>
     {{-- Add file handling user login  --}}
     <script type="text/javascript" src="{{ asset('js/Customer/login-user.js') }}"></script>
-    {{-- Add file to handle user registration  --}}
+    {{-- Add file to handle user register  --}}
     <script type="text/javascript" src="{{ asset('js/Customer/register-user.js') }}"></script>
+     {{-- Add file to handle recover password customer  --}}
+     <script type="text/javascript" src="{{ asset('js/Customer/recover-pass.js') }}"></script>
     {{-- Add a file to hide or show the password --}}
     <script type="text/javascript" src="{{ asset('js/Customer/hidden-show-pass.js') }}"></script>
     {{-- Add product search processing file --}}

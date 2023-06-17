@@ -57,6 +57,56 @@ $(document).ready(function () {
             });
         }
     });
+    // forget password profile dashboard
+    $("#forget-password").on("click", function () {
+        Swal.fire({
+            title: "Nhập Email cần khôi phục mật khẩu",
+            input: "text",
+            inputAttributes: {
+                autocapitalize: "off",
+            },
+            showCancelButton: true,
+            confirmButtonText: "Gửi",
+            cancelButtonText: "Hủy",
+            showLoaderOnConfirm: true,
+            preConfirm: (email) => {
+                return fetch(`/api/recover-password-employee/${email}`)
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .catch((error) => {
+                        Swal.showValidationMessage(`Request failed: ${error}`);
+                    });
+            },
+            allowOutsideClick: () => !Swal.isLoading(),
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (
+                    result.value.status == 200 &&
+                    result.value.msg == "Check mail"
+                ) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Vui lòng kiểm tra Email!",
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                } else if (
+                    result.value.status == 422 &&
+                    result.value.msg == "Email is not registered"
+                ) {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Email chưa đăng ký!",
+                        timerProgressBar: true,
+                    });
+                }
+            }
+        });
+    });
     // update password profile dashboard
     $("#bth-update-pass-profile-dashboard").on("click", function () {
         var oldPass = $("#old-password").val();

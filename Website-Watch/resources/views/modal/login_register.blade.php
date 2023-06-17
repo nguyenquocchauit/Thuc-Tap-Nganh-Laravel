@@ -78,8 +78,8 @@
                             <label class="form-label">
                                 <h5>Số di động <strong style="color: red">*</strong></h5>
                             </label>
-                            <input class="w-100 form-control" type="text" placeholder="Số di động" name="phone_number"
-                                id="phoneRegister">
+                            <input class="w-100 form-control" type="text" placeholder="Số di động"
+                                name="phone_number" id="phoneRegister">
                         </div>
                     </div>
                     <div class="row">
@@ -154,24 +154,16 @@
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form">
                     <div>
-                        <label class="form-label">
-                            <h5>Tên đăng nhập</h5>
-                        </label>
-                        <input class="w-100 form-control" type="text" placeholder="Tên đăng nhập">
+                        <input class="w-100 form-control" type="text" placeholder="Nhập Email" id="email_recover" value="">
                     </div>
-                    <div>
-                        <label class="form-label" style="padding-top: 10px;">
-                            <h5>Số di động hoặc Email</h5>
-                        </label>
-                        <input class="w-100 form-control" type="text" placeholder="Số di động hoặc Email">
-                    </div>
-                    <div>
-                        Liên hệ Page Shop <a href="https://www.facebook.com/NguyenQuocChau.NhaTrang"
+                    <div class="modal-footer">
+                        <button href="#" class="btn btn-primary btn-block mt-3 w-100 "
+                            id="btn-recover-password">Gửi</button>
+                        Liên hệ Facebook <a href="https://www.facebook.com/NguyenQuocChau.NhaTrang"
                             style="text-decoration: none;">Tại đây</a>
+
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <p>Đã có tài khoản? <a href="#" style="text-decoration: none;" data-bs-target="#login"

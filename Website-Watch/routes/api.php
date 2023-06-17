@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\PasswordEmployeeController;
 use App\Http\Controllers\Auth\LoginAdminController;
 use App\Http\Controllers\Auth\LoginUserController;
 use App\Http\Controllers\Auth\RegisterUserController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\User\PasswordController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Host;
@@ -46,6 +48,7 @@ Route::middleware([User::class])->group(function () {
     Route::post('/delete-comment', [ProductController::class, 'deleteComment'])->name('delete-comment');
     Route::post('/like-product', [ProductController::class, 'likeProduct'])->name('like-product');
     Route::post('/clear-like', [ProductController::class, 'removeLikeProduct'])->name('clear-like');
+
 
 });
 //middleware for employee
@@ -83,10 +86,15 @@ Route::middleware([Host::class])->group(function () {
 // login and register of user
 Route::post('/login-user', [LoginUserController::class, 'login'])->name('login-user');
 Route::get('/logout-user', [LoginUserController::class, 'logout'])->name('logout-user');
+Route::post('/recover-password', [PasswordController::class, 'recover_password'])->name('recover_password');
+Route::post('/update-new-password', [PasswordController::class, 'update_password'])->name('update_password');
 Route::post('/register-user', [RegisterUserController::class, 'register'])->name('register-user');
 // login of admin
 Route::post('/login-admin', [LoginAdminController::class, 'login'])->name('login-admin');
 Route::get('/logout-admin', [LoginAdminController::class, 'logout'])->name('logout-admin');
+Route::get('/recover-password-employee/{email}', [PasswordEmployeeController::class, 'recover_password'])->name('recover_password_employee');
+Route::post('/update-new-password-employee', [PasswordEmployeeController::class, 'update_password'])->name('update_password-employee');
+
 
 
 Route::get('/search-product/{search}', [ProductController::class, 'searchProduct'])->name('search-product');

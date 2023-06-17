@@ -9,11 +9,13 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\PasswordEmployeeController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\LoginAdminController;
 use App\Http\Controllers\Front\BuyProductController;
+use App\Http\Controllers\User\PasswordController;
 use App\Http\Controllers\User\UserController as UserUserController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Host;
@@ -39,7 +41,8 @@ Route::get('/chi-tiet-san-pham/{id}', [ProductController::class, 'detailProduct'
 Route::get('/gio-hang', [CartController::class, 'cart'])->name('view-cart');
 Route::get('/thanh-toan', [BuyProductController::class, 'viewbuy'])->name('viewbuy');
 Route::get('/admin/login', [LoginAdminController::class, 'index'])->name('login-admin');
-
+Route::get('/update-new-password', [PasswordController::class, 'reset_password'])->name('reset_password');
+Route::get('/update-new-password-employee', [PasswordEmployeeController::class, 'reset_password'])->name('reset_password-employee');
 Route::prefix('shop')->group(function () {
     Route::get('/', [ShopController::class, 'index'])->name('shop-index');
     // Route::get('/{categoryName}', [ShopController::class, 'category']);

@@ -58,8 +58,8 @@ class LoginUserController extends Controller
     }
     public function logout()
     {
-        Session::flush();
-        Auth::logout();
+        //Session::flush();
+        Auth::guard('web')->logout();
         return Redirect('/');
     }
 }

@@ -150,9 +150,13 @@
                                 <input class="form-control" id="confirm-password" type="password"
                                     placeholder="Xác nhận mật khẩu">
                             </div>
+
                             <button type="button" class="btn btn-primary btn-block"
                                 id="bth-update-pass-profile-dashboard">
                                 Đổi Mật Khẩu </button>
+
+                            <a style="color: blue; cursor: pointer;" id="forget-password" data-bs-target="#myModal_forgotten_password"
+                                data-bs-toggle="modal" data-bs-dismiss="modal">Quên mật khẩu?</a>
                         </div>
                     </div>
                 </div>
@@ -160,6 +164,7 @@
             </div>
         </form>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
         var citis = document.getElementById("city");
