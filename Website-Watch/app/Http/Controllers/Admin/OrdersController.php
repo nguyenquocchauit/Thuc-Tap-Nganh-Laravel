@@ -34,19 +34,19 @@ class OrdersController extends Controller
         }
         if (!empty($request->end_day)) {
             $end_day = date('Y-m-d', strtotime($request->end_day));
-            $end_day .= ' 23:59:59';
+            $end_day .= '23:59:59';
         }
-        if (!empty($request->unconfimred) && $request->unconfimred == "true") {
-            $filters[] = ['orders.status', '=', "XN"];
-        }
-        if (!empty($request->received) && $request->received == "true") {
-            $filters[] = ['orders.status', '=', "TC"];
-        }
-        if (!empty($request->shipping) && $request->shipping == "true") {
-            $filters[] = ['orders.status', '=', "DVC"];
-        }
-        if (!empty($request->fail) && $request->fail == "true") {
-            $filters[] = ['orders.status', '=', "TB"];
+        $statuses = [
+            'unconfimred' => 'XN',
+            'received' => 'TC',
+            'shipping' => 'DVC',
+            'fail' => 'TB'
+        ];
+
+        foreach ($statuses as $key => $value) {
+            if (!empty($request->$key) && $request->$key == "true") {
+                $filters[] = ['orders.status', '=', $value];
+            }
         }
         if (!empty($request->customer)) {
             $start_day = null;
@@ -111,22 +111,23 @@ class OrdersController extends Controller
     }
     public function updateStatus(Request $request, $id)
     {
-        $status = null;
         $status_payment = 0;
+        $status = auth()->guard("admin")->user()->id . " status: ";
         switch ($request->statusOrder) {
             case "TC":
-                $status = auth()->guard("admin")->user()->id . " status: Thành công - " . now()->setTimezone('Asia/Ho_Chi_Minh')->format('H:i:s d-m-Y');
+                $status .= "Thành công";
                 break;
             case "XN":
-                $status = auth()->guard("admin")->user()->id . " status: Chưa xác nhận - " . now()->setTimezone('Asia/Ho_Chi_Minh')->format('H:i:s d-m-Y');
+                $status .= "Chưa xác nhận";
                 break;
             case "TB":
-                $status = auth()->guard("admin")->user()->id . " status: Thất bại - " . now()->setTimezone('Asia/Ho_Chi_Minh')->format('H:i:s d-m-Y');
+                $status .= "Thất bại";
                 break;
             case "DVC":
-                $status = auth()->guard("admin")->user()->id . " status: Đang vận chuyển - " . now()->setTimezone('Asia/Ho_Chi_Minh')->format('H:i:s d-m-Y');
+                $status .= "Đang vận chuyển";
                 break;
         }
+        $status .= " - " . now()->setTimezone('Asia/Ho_Chi_Minh')->format('H:i:s d-m-Y');
         $statusOld = Order::where('id', $id)->first();
         if ($request->statusOrder == "TC")
             $status_payment = 1;

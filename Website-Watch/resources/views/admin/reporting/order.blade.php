@@ -2,6 +2,23 @@
 @section('body')
     <div class="content-body">
         <div class="container-fluid mt-3">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-ticket icon-gradient bg-mean-fruit"></i>
+                        </div>
+                        <div>
+                            Thống kê
+                            <div class="page-title-subheading">
+                               Khách hàng, <strong>đơn hàng</strong>, doanh thu.
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
                     <a href="./admin/report/order?start_day={{ request()->start_day }}&end_day={{ request()->end_day }}&unconfimred=true&search="

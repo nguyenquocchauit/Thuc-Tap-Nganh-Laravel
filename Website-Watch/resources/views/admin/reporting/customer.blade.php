@@ -2,6 +2,23 @@
 @section('body')
     <div class="content-body">
         <div class="col-sm-12">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-ticket icon-gradient bg-mean-fruit"></i>
+                        </div>
+                        <div>
+                            Thống kê
+                            <div class="page-title-subheading">
+                               <strong>Khách hàng</strong>, đơn hàng, doanh thu.
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
             <div class="card tabs-card">
                 <div class="card-block p-0">
                     <!-- Nav tabs -->

@@ -1,9 +1,25 @@
 @extends('admin.layout.master')
 @section('body')
     <div class="content-body">
-        <div class="container-fluid mt-3">
-            <div class="row">
 
+
+        <div class="container-fluid mt-3">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-ticket icon-gradient bg-mean-fruit"></i>
+                        </div>
+                        <div>
+                            Thống kê
+                            <div class="page-title-subheading">
+                               Khách hàng, đơn hàng, <strong>doanh thu.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-4 col-sm-4">
                     <div class="card gradient-5">
                         <div class="card-body">
@@ -73,7 +89,7 @@
                                                     <th>STT</th>
                                                     <th>Hãng</th>
                                                     <th>Loại</th>
-                                                    <th>Số lượng</th>
+                                                    <th>Số lượng bán</th>
                                                     <th>Tổng tiền</th>
                                                 </tr>
                                             </thead>

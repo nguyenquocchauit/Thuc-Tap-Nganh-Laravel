@@ -16,6 +16,7 @@ $(document).ready(function () {
                 }
             });
         } else {
+
             $.ajax({
                 type: "POST",
                 url: "/api/like-product",
@@ -39,6 +40,7 @@ $(document).ready(function () {
                             response.status == 200 &&
                             response.msg == "Like product successfully"
                         ) {
+
                             var _image = response.image;
                             var _price =
                                 response.data.price -

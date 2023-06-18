@@ -53,7 +53,7 @@ class ReportController extends Controller
             ->count();
         $revenueBrands = $this->orders->revenueBrand($start_day, $end_day, $search);
 
-        return view('admin.reporting.revenue', compact('title', 'revenueBrands', 'totalOrder', 'revenue', 'received', 'fail','year'));
+        return view('admin.reporting.revenue', compact('title', 'revenueBrands', 'totalOrder', 'revenue', 'received', 'fail', 'year'));
     }
     public function reportOrder(Request $request)
     {
@@ -72,17 +72,17 @@ class ReportController extends Controller
         if (!empty($request->search)) {
             $search = $request->search;
         }
-        if (!empty($request->unconfirmed) && $request->unconfirmed == "true") {
-            $filters[] = ['orders.status', '=', "XN"];
-        }
-        if (!empty($request->received) && $request->received == "true") {
-            $filters[] = ['orders.status', '=', "TC"];
-        }
-        if (!empty($request->shipping) && $request->shipping == "true") {
-            $filters[] = ['orders.status', '=', "DVC"];
-        }
-        if (!empty($request->fail) && $request->fail == "true") {
-            $filters[] = ['orders.status', '=', "TB"];
+        $statuses = [
+            'unconfimred' => 'XN',
+            'received' => 'TC',
+            'shipping' => 'DVC',
+            'fail' => 'TB'
+        ];
+
+        foreach ($statuses as $key => $value) {
+            if (!empty($request->$key) && $request->$key == "true") {
+                $filters[] = ['orders.status', '=', $value];
+            }
         }
         $shipping = Order::where('status', 'DVC')
             ->whereBetween('updated_at', [$start_day, $end_day])

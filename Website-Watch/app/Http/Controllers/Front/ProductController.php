@@ -17,7 +17,8 @@ class ProductController extends Controller
 
     public function searchProduct($search)
     {
-        // get product by parameter $search
+       // lấy sản phẩm theo tham số $search
+
         $data = Product::where('name', 'like', "$search%")->get();
         if (count($data) > 0) {
             return response()->json([
@@ -86,14 +87,15 @@ class ProductController extends Controller
                 } else {
                     $content = $request->textComment;
                 }
-                $comment = new Comment();
-                $comment->id  = "cm" . (Comment::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY');
-                $comment->customers  = $request->user;
-                $comment->product  = $request->product;
-                $comment->content = $content;
-                $comment->star = $request->rating;
-                $comment->created_at = now()->setTimezone('Asia/Ho_Chi_Minh');
-                $comment->save();
+                $comment = Comment::create([
+                    'id' => "cm" . (Comment::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY'),
+                    'customers' => $request->user,
+                    'product' => $request->product,
+                    'content' => $content,
+                    'star' => $request->rating,
+                    'created_at' => now()->setTimezone('Asia/Ho_Chi_Minh')
+                ]);
+
                 $name = User::find($request->user);
                 return response()->json([
                     'status' => 200,
@@ -141,54 +143,64 @@ class ProductController extends Controller
 
     public function likeProduct(Request $request)
     {
-        if ($request->action == "Like product") {
-            $like = LikeProduct::where('customers', $request->user)->where('product', $request->product)->get();
-            // >0 is customer have been liked product , else none like product
-            if (count($like) > 0) {
-                if ($like[0]->status == 'like') {
-                    LikeProduct::where('id', $like[0]->id)->update(array(
-                        'status' => 'none',
-                    ));
-                    return response()->json([
-                        'status' => 200,
-                        'msg' => 'Unlike product successfully',
-                        'data' => $like,
-                    ]);
-                } else {
-                    if ($like[0]->status == 'none') {
-                        LikeProduct::where('id', $like[0]->id)->update(array(
-                            'status' => 'like',
-                        ));
-                        return response()->json([
-                            'status' => 200,
-                            'msg' => 'Like product successfully',
-                            'data' =>  $like[0]->products,
-                            'image' => $like[0]->products->productImage['image_1'],
-                        ]);
-                    }
-                }
-            } else {
+        // Tìm kiếm bản ghi trong bảng LikeProduct với điều kiện customers = $request->user và product = $request->product
+        $like = LikeProduct::where('customers', $request->user)->where('product', $request->product)->get();
 
-                $like = new likeProduct();
-                $like->id  = "like" . (LikeProduct::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY');
-                $like->customers = $request->user;
-                $like->product = $request->product;
-                $like->status = 'like';
-                $like->created_at = now()->setTimezone('Asia/Ho_Chi_Minh');
-                $like->save();
+        // Nếu bản ghi đã tồn tại
+        if (count($like) > 0) {
+            // Nếu trạng thái của bản ghi là "like"
+            if ($like[0]->status == 'like') {
+                // Cập nhật trạng thái của bản ghi thành "none"
+                LikeProduct::where('id', $like[0]->id)->update(array(
+                    'status' => 'none',
+                ));
+
+                // Trả về kết quả
                 return response()->json([
                     'status' => 200,
-                    'msg' => 'Like product successfully',
-                    'data' =>  $like->products,
-                    'image' => $like->products->productImage['image_1'],
+                    'msg' => 'Unlike product successfully',
+                    'data' => $like,
                 ]);
+            } else {
+                // Nếu trạng thái của bản ghi là "none"
+                if ($like[0]->status == 'none') {
+                    // Cập nhật trạng thái của bản ghi thành "like"
+                    LikeProduct::where('id', $like[0]->id)->update(array(
+                        'status' => 'like',
+                    ));
+
+                    // Trả về kết quả
+                    return response()->json([
+                        'status' => 200,
+                        'msg' => 'Like product successfully',
+                        'data' =>  $like[0]->products,
+                        'image' => $like[0]->products->image_1,
+                    ]);
+                }
             }
-        } else
-            return response()->json([
-                'status' => 500,
-                'msg' => 'Like comment error',
+        } else {
+            // Nếu bản ghi chưa tồn tại, tạo mới một bản ghi với trạng thái là "like"
+            $like = new likeProduct([
+                'id' => "like" . (LikeProduct::count() + 1) . now()->setTimezone('Asia/Ho_Chi_Minh')->format('dmY'),
+                'customers' => $request->user,
+                'product' => $request->product,
+                'status' => 'like',
+                'created_at' => now()->setTimezone('Asia/Ho_Chi_Minh')
             ]);
+            $like->save();
+
+
+            // Trả về kết quả
+            return response()->json([
+                'status' => 200,
+                'msg' => 'Like product successfully',
+                'data' =>  $like->products,
+                'image' => $like->products->image_1,
+            ]);
+        }
     }
+
+
     public function removeLikeProduct(Request $request)
     {
         if ($request->action == "Clear like product") {
